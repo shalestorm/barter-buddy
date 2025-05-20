@@ -1,12 +1,11 @@
-from .db import SessionLocal
+from fastapi import FastAPI
+from server.db.database import engine, Base
+from server.routers import users, skills, connections
 
-# from fastapi import Depends
-# from sqlalchemy.orm import Session
 
+app = FastAPI()
+Base.metadata.create_all(bind=engine)
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+app.include_router(users.router)
+app.include_router(skills.router)
+app.include_router(connections.router)
