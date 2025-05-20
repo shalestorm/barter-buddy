@@ -121,4 +121,5 @@ This folder includes:
 
 - README.md : Initial app concept and user stories
 - ERDs for key models and relationships
-- Wireframes for how the app was initially meant to look
+
+## ![Wireframe](capstone.png)
