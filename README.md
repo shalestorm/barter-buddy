@@ -4,13 +4,15 @@
 
 User stories:
 
-- A user can create an account with a profile that lists the skills they are willing to teach and their proficiency, and what they are looking to learn (optional).
-- A user can view others users based on their skills and proficiency (or at random), and request to "connect".
+- A user can create an account with a profile that lists the skills they are willing to teach, and what skills category they are interested in.
+- A user can view others users based on their skills (filter by skills category) or at random, and request to "connect".
 - A user can see connect requests, which displays requester's offered skills, and choose to accept or decline the request.
-- Connected users can send each-other messages once connected (simple messaging).
-- Users should be able to disconnect (one-way).
-- A user should be able to rate others (after being connected) (stretch).
-- Users should be able to specify availability (stretch?).
+- Connected users can send each-other messages once connected (simple messaging, messages dashboard).
+- Users will be able to disconnect (one-way).
+- A user will be able to rate others (after being connected) (stretch).
+- Users will be able to specify availability (stretch?).
+- Users will be able to reset password (stretch).
+- Users will be able to filter others based on proximity, or choose online-only communication (stretch).
 
 ## Setup
 
