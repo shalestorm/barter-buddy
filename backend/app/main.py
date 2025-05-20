@@ -1,6 +1,7 @@
 from .db import SessionLocal
-from fastapi import Depends
-from sqlalchemy.orm import Session
+
+# from fastapi import Depends
+# from sqlalchemy.orm import Session
 
 
 def get_db():
