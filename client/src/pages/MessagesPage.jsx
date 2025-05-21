@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import ConversationList from './ConversationList'
-import ChatWindow from './ChatWindow'
+import ConversationList from '../components/ConversationList'
+import ChatWindow from '../components/ChatWindow'
 
 const MessagesPage = () => {
     const [conversations, setConversations] = useState([]);
