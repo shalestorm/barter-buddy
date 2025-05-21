@@ -1,30 +1,17 @@
-version: '3.9'
-
 services:
-  db:
-    image: postgres:15
-    container_name: barter-buuddy-db
-    restart: always
+  postgres:
+    image: postgres:16
+    container_name: capstone
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: capstone
+      POSTGRES_DB: barterbuddy
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./data:/data
     ports:
       - "5432:5432"
 
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: capstone_pgadmin
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@capstone.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "5050:80"
-    depends_on:
-      - db
-
 volumes:
   postgres_data:
+    external: false

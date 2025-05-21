@@ -13,7 +13,7 @@ CREATE TABLE users (
     last_name VARCHAR(32) NOT NULL,
     username VARCHAR(16) NOT NULL,
     email VARCHAR(64) NOT NULL,
-    password_hash TEXT NOT NULL, --???
+    password_hash TEXT NOT NULL,
     bio VARCHAR(255),
     rating int,
     profile_pic TEXT,
@@ -74,18 +74,18 @@ VALUES
     ('Cayla', 'Jayson', 'buggyeyed95', 'caylaleann26@gmail.com', '12345678', '', '', '', '2025-05-20');
 
 INSERT INTO categories (name) VALUES
-    ('Music & Performing Arts'), --1
-    ('Creative Crafts'), --2
-    ('Trades & Technical'), --3
-    ('Culinary & Baking'), --4
-    ('Fitness & Sports'), --5
-    ('Language & Communication'), --6
-    ('Academic & Tutoring'), --7
-    ('Gaming & Digital'), --8
-    ('Wellness & Lifestyle'), --9
-    ('Automotive & Mechanics'), --10
-    ('Outdoor & Survival'), --11
-    ('Other'); --12
+    ('Music & Performing Arts'),
+    ('Creative Crafts'),
+    ('Trades & Technical'),
+    ('Culinary & Baking'),
+    ('Fitness & Sports'),
+    ('Language & Communication'),
+    ('Academic & Tutoring'),
+    ('Gaming & Digital'),
+    ('Wellness & Lifestyle'),
+    ('Automotive & Mechanics'),
+    ('Outdoor & Survival'),
+    ('Other');
 
 INSERT INTO skills (name, category_id) VALUES
     ('Guitar', 1),

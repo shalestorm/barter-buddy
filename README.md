@@ -40,7 +40,7 @@ docker system prune -af
 To connect to the psql shell on the database server:
 
 ```bash
-docker exec -it postgres_db psql -U postgres
+docker exec -it capstone psql -U postgres
 ```
 
 Create a new database for this project:
@@ -58,7 +58,7 @@ postgres=# \c barterbuddy
 Load the database schema:
 
 ```bash
-barterbuddy=# \i data/barterbuddy.sql;
+barterbuddy=# \i server/db/schemas.sql;
 ```
 
 ### The FastAPI app (/backend)
@@ -121,7 +121,7 @@ This will start a local server that serves the files in the dist folder, and you
 
 This folder includes:
 
-- README.md : Initial app concept and user stories
+- capstone.png :Initial Wireframes
 - ERDs for key models and relationships
 
-## ![Wireframe](capstone.png)
+## ![Wireframe](docs/capstone.png)
