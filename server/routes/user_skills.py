@@ -23,7 +23,7 @@ def get_db():
 
 @router.post("/", response_model=UserSkillOut)
 def assign_skill(user_skill: UserSkillCreate, db: Session = Depends(get_db)):
-    db_link = UserSkill(**user_skill.dict())
+    db_link = UserSkill(**user_skill.model_dump())
     db.add(db_link)
     db.commit()
     db.refresh(db_link)
