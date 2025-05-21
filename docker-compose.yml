@@ -1,14 +1,14 @@
 services:
   postgres:
     image: postgres:16
-    container_name: capstone
+    container_name: postgres_db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: barterbuddy
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./data:/data
+      - ./server/db/schemas.sql:/docker-entrypoint-initdb.d/schemas.sql
     ports:
       - "5432:5432"
 
