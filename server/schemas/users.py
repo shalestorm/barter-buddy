@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional
-from datetime import datetime
+from datetime import date
 
 
 class UserBase(BaseModel):
@@ -16,10 +16,18 @@ class UserCreate(UserBase):
     password: str
 
 
-class UserRead(UserBase):
+class UserOut(UserBase):
     id: int
-    rating: Optional[float]
-    creation_date: datetime
+    rating: Optional[int] = None
+    create_date: Optional[date]
 
     class Config:
         orm_mode = True
+
+
+class UpdateBio(BaseModel):
+    bio: Optional[str]
+
+
+class UpdateProfilePic(BaseModel):
+    profile_pic: Optional[str]
