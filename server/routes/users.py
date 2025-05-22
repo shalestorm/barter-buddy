@@ -5,13 +5,21 @@ from typing import List, Optional
 from server.db.database import SessionLocal
 from server.models.users import User
 from server.schemas.users import UserCreate, UserOut, UpdateBio, UpdateProfilePic
+from passlib.context import CryptContext
 
 
-SECRET_KET = "user_secret_key"
+SECRET_KEY = "user_secret_key"
 ALGORITHM = "HS256"
 
 
 router = APIRouter(prefix="/users", tags=["Users"])
+
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+
+def hash_password(password: str) -> str:
+    return pwd_context.hash(password)
 
 
 def get_db():
@@ -34,7 +42,7 @@ def get_current_user(
             detail="Not authenticated"
         )
     try:
-        payload = jwt.decode(access_token, SECRET_KET, algorithms=[ALGORITHM])
+        payload = jwt.decode(access_token, SECRET_KEY, algorithms=[ALGORITHM])
         username: Optional[str] = payload.get("sub")
         if username is None:
             raise HTTPException(
@@ -56,10 +64,17 @@ def get_current_user(
 
 @router.post("/", response_model=UserOut)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
+    existing_user = db.query(User).filter(
+        (User.username == user.username) | (User.email == user.email)
+    ).first()
+    if existing_user:
+        raise HTTPException(
+            status_code=400, detail="Username or email already registered"
+        )
     db_user = User(
         username=user.username,
         email=user.email,
-        password_hash=user.password,
+        password_hash=hash_password(user.password),
         firstName=user.firstName,
         lastName=user.lastName,
         bio=user.bio,
@@ -99,11 +114,10 @@ def update_user_profile_pic(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
-    user = db.query(User).filter(User.id == current_user.id).first()
-    user.profile_pic = update.profile_pic  # type: ignore
+    current_user.profile_pic = update.profile_pic  # type: ignore
     db.commit()
-    db.refresh(user)
-    return user
+    db.refresh(current_user)
+    return current_user
 
 
 # update user bio
@@ -111,8 +125,7 @@ def update_user_profile_pic(
 
 @router.put("/me/bio", response_model=UserOut)
 def update_user_bio(update: UpdateBio, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    user = db.query(User).filter(User.id == current_user.id).first()
-    user.bio = update.bio  # type: ignore
+    current_user.bio = update.bio  # type: ignore
     db.commit()
-    db.refresh(user)
-    return user
+    db.refresh(current_user)
+    return current_user
