@@ -22,11 +22,15 @@ body {
 
 .header-logo {
   display: block;
-  max-width: 175px; /* adjust as needed */
+  max-width: 175px;
+  /* adjust as needed */
   height: auto;
-  margin: 25px auto 10px; /* centers it with spacing */
-  border-radius: 10px; /* optional: smooth corners */
-  box-shadow: 0 0 20px rgba(255, 204, 0, 0.3); /* magical glow */
+  margin: 25px auto 10px;
+  /* centers it with spacing */
+  border-radius: 10px;
+  /* optional: smooth corners */
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+  /* magical glow */
 }
 
 
@@ -41,9 +45,11 @@ body {
   0% {
     filter: brightness(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
   }
+
   50% {
     filter: brightness(1.2) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
   }
+
   100% {
     filter: brightness(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
   }
@@ -58,17 +64,29 @@ body {
   margin-top: 20px;
 }
 
+.magic-subtitle {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  font-family: 'Cinzel', serif;
+  margin-top: 10px;
+  text-shadow: 0 0 2px #d4af37, 0 0 4px #f5e1a4;
+}
+
 @keyframes pulseGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     text-shadow: 0 0 5px #ffeb3b, 0 0 15px #ffc107, 0 0 30px #ff9800;
   }
+
   50% {
     text-shadow: 0 0 10px #fff176, 0 0 25px #ffca28, 0 0 50px #ff5722;
   }
 }
 
 .magic-button {
-  font-family: 'Cinzel', serif; /* Gothic flair (Google Font, optional) */
+  font-family: 'Cinzel', serif;
+  /* Gothic flair (Google Font, optional) */
   font-size: 18px;
   padding: 12px 28px;
   margin: 20px;
