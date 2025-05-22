@@ -18,17 +18,17 @@ body {
 
 .centered-header {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .header-logo {
   display: block;
-  max-width: 175px; /* adjust as needed */
+  max-width: 175px;
   height: auto;
-  margin: 25px auto 10px; /* centers it with spacing */
-  border-radius: 10px; /* optional: smooth corners */
-  box-shadow: 0 0 20px rgba(255, 204, 0, 0.3); /* magical glow */
+  margin: 25px auto 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
 }
-
 
 .header-logo:hover {
   animation: shimmer 2s infinite;
@@ -55,7 +55,14 @@ body {
   font-family: 'Cinzel Decorative', cursive;
   text-shadow: 0 0 5px #ffeb3b, 0 0 15px #ffc107, 0 0 30px #ff9800;
   animation: pulseGlow 3s infinite;
-  margin-top: 20px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+h2.magic-title {
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
 @keyframes pulseGlow {
@@ -67,11 +74,49 @@ body {
   }
 }
 
+/* New container for login inputs and button */
+.login-form-container {
+  display: flex; /* Make it a flex container */
+  flex-direction: row; /* Arrange children horizontally */
+  align-items: flex-end; /* Align items to the bottom (inputs and button) */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.input-fields {
+  display: flex;
+  flex-direction: column; /* Stack username and password vertically */
+  align-items: center; /* Center inputs horizontally within this column */
+  margin-right: 15px; /* Space between input fields and login button */
+}
+
+.magic-input {
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  padding: 10px 15px;
+  margin: 5px 0; /* Reduced vertical margin to stack closer */
+  width: 260px;
+  border: 2px solid #ffcc00;
+  border-radius: 6px;
+  background-color: #1a1a1a;
+  color: #fff2d9;
+  box-shadow: inset 0 0 5px #000, 0 0 8px rgba(255, 204, 0, 0.4);
+  outline: none;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.magic-input:focus {
+  border-color: #ffe066;
+  box-shadow: 0 0 12px rgba(255, 204, 0, 0.8), inset 0 0 6px #333;
+  background-color: #2b2b2b;
+}
+
+/* General button styles */
 .magic-button {
-  font-family: 'Cinzel', serif; /* Gothic flair (Google Font, optional) */
-  font-size: 18px;
-  padding: 12px 28px;
-  margin: 20px;
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  padding: 10px 20px;
   color: #fff2d9;
   background: linear-gradient(145deg, #8b5e3c, #3e2e1e);
   border: 2px solid #ffcc00;
@@ -83,53 +128,42 @@ body {
 }
 
 .magic-button:hover {
-  background-color: #ffe066;
-  color: #1a1a1a;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-}
-
-.magic-button {
-  font-family: 'Cinzel', serif;
-  font-size: 16px;
-  padding: 10px 20px;
-  background-color: #333;
+  background: linear-gradient(145deg, #a1704e, #5a422e);
   color: #ffe066;
-  border: 2px solid #ffe066;
-  border-radius: 6px;
-  box-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
-  cursor: pointer;
-  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
 }
 
-.magic-input {
-  font-family: 'Cinzel', serif;
-  font-size: 16px;
-  padding: 10px 15px;
-  margin: 10px;
-  width: 260px;
-  border: 2px solid #ffcc00;
-  border-radius: 6px;
-  background-color: #1a1a1a;
-  color: #fff2d9;
-  box-shadow: inset 0 0 5px #000, 0 0 8px rgba(255, 204, 0, 0.4);
-  outline: none;
-  transition: all 0.3s ease;
+/* Specific styling for the LOGIN button */
+.login-button {
+  height: 98px; /* Match the combined height of the two input fields plus their margins */
+  width: 100px; /* Adjust width as needed for the login button */
+  margin-top: 5px; /* Align with the top input's margin */
 }
 
-.magic-input:focus {
-  border-color: #ffe066;
-  box-shadow: 0 0 12px rgba(255, 204, 0, 0.8), inset 0 0 6px #333;
-  background-color: #2b2b2b;
-}
-
-.button-container {
-  width: 100%;
+/* Styles for the action buttons container (New to Barter Buddy, Forgot Password) */
+.action-buttons-container {
   display: flex;
-  justify-content: space-between;
-  padding: 20px 50px;
-  box-sizing: border-box;
-  position: absolute;
-  top: 20px; /* Adjust as needed */
-  left: 0;
-  right: 0;
+  justify-content: space-between; /* Pushes buttons to the extreme left and right */
+  width: 80%; /* Make this container wide enough to span almost the whole page */
+  max-width: 900px; /* Limit max width for larger screens */
+  margin-top: 20px;
+  padding: 0 20px; /* Add some padding on the sides to prevent buttons touching edges */
+  box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.left-button, .right-button {
+  font-size: 14px;
+  padding: 8px 15px;
+  width: auto; /* Allow buttons to size based on content */
+  min-width: 160px; /* Ensure a minimum width for readability */
+  margin: 0; /* Remove any default margins that might interfere */
+}
+
+.left-button {
+  /* No specific text-align needed as justify-content handles positioning */
+}
+
+.right-button {
+  /* No specific text-align needed as justify-content handles positioning */
 }

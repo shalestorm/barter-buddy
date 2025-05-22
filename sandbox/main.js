@@ -1,13 +1,13 @@
 var colors = new Array(
   [25, 65, 130],
-  [255, 204, 0],
+  [61, 47, 34],
   [25, 65, 130],
-  [255, 204, 0]
+  [195, 154, 28]
 );
 
 var step = 0;
 var colorIndices = [0, 1, 2, 3];
-var gradientSpeed = 0.002;
+var gradientSpeed = 0.0032;
 
 function updateGradient() {
   if ($ === undefined) return;
