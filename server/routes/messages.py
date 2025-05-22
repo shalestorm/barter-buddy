@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from typing import List
 from server.db.database import SessionLocal
@@ -32,11 +32,18 @@ def send_Message(mes: MessageCreate, db: Session = Depends(get_db)):
 
 
 @router.get("/connection/{connection_id}", response_model=List[MessageOut])
-def get_user_messages(connection_id: int, db: Session = Depends(get_db)):
+def get_user_messages(
+    connection_id: int,
+    skip: int = 0,
+    limit: int = 5,
+    db: Session = Depends(get_db)
+):
     messages = (
         db.query(Message)
         .filter(Message.connection_id == connection_id)
-        .order_by(Message.timestamp)
+        .order_by(Message.id.desc())
+        .offset(skip)
+        .limit(limit)
         .all()
     )
     return messages

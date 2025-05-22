@@ -6,7 +6,7 @@ from server.db.database import SessionLocal
 from server.models.users import User
 from server.schemas.users import UserCreate, UserOut, UpdateBio, UpdateProfilePic
 from passlib.context import CryptContext
-
+from datetime import date
 
 SECRET_KEY = "user_secret_key"
 ALGORITHM = "HS256"
@@ -75,10 +75,11 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
         username=user.username,
         email=user.email,
         password_hash=hash_password(user.password),
-        firstName=user.firstName,
-        lastName=user.lastName,
+        first_name=user.first_name,
+        last_name=user.last_name,
         bio=user.bio,
         profile_pic=user.profile_pic,
+        create_date=date.today(),
     )
     db.add(db_user)
     db.commit()

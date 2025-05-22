@@ -1,22 +1,30 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from server.db.database import engine, Base
-from server.routes import users, skills, connections, auth_routes, messages, categories, connection_requests, user_skills
-
+from server.routes import (
+    users,
+    skills,
+    connections,
+    auth_routes,
+    messages,
+    categories,
+    connection_requests,
+    user_skills,
+)
 
 app = FastAPI()
+
 Base.metadata.create_all(bind=engine)
 
-ORIGINS = ["http://localhost:5173"]
+origins = ["http://localhost:5173", "http://localhost:8000"]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ORIGINS,
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 app.include_router(users.router)
 app.include_router(skills.router)
