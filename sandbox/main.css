@@ -1,0 +1,94 @@
+body {
+  background-color: #000000;
+  padding: 0;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#gradient {
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.centered-header {
+  text-align: center;
+}
+
+.header-logo {
+  display: block;
+  max-width: 175px; /* adjust as needed */
+  height: auto;
+  margin: 25px auto 10px; /* centers it with spacing */
+  border-radius: 10px; /* optional: smooth corners */
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.3); /* magical glow */
+}
+
+
+.header-logo:hover {
+  animation: shimmer 2s infinite;
+  box-shadow: 0 0 40px 10px rgba(255, 255, 255, 0.3);
+  transform: scale(1.03);
+  transition: all 0.3s ease-in-out;
+}
+
+@keyframes shimmer {
+  0% {
+    filter: brightness(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+  }
+  50% {
+    filter: brightness(1.2) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+  }
+  100% {
+    filter: brightness(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+  }
+}
+
+.magic-title {
+  font-size: 3rem;
+  color: #f0e6d2;
+  font-family: 'Cinzel Decorative', cursive;
+  text-shadow: 0 0 5px #ffeb3b, 0 0 15px #ffc107, 0 0 30px #ff9800;
+  animation: pulseGlow 3s infinite;
+  margin-top: 20px;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    text-shadow: 0 0 5px #ffeb3b, 0 0 15px #ffc107, 0 0 30px #ff9800;
+  }
+  50% {
+    text-shadow: 0 0 10px #fff176, 0 0 25px #ffca28, 0 0 50px #ff5722;
+  }
+}
+
+.magic-button {
+  font-family: 'Cinzel', serif; /* Gothic flair (Google Font, optional) */
+  font-size: 18px;
+  padding: 12px 28px;
+  margin: 20px;
+  color: #fff2d9;
+  background: linear-gradient(145deg, #8b5e3c, #3e2e1e);
+  border: 2px solid #ffcc00;
+  border-radius: 8px;
+  text-shadow: 1px 1px 2px #000;
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.5), inset 0 0 5px #000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.magic-button:hover {
+  background: linear-gradient(145deg, #a67844, #5e3d26);
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.8), inset 0 0 5px #222;
+  transform: scale(1.05);
+}
+
+.magic-button:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
