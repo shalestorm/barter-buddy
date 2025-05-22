@@ -1,11 +1,25 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Cookie, status
 from sqlalchemy.orm import Session
-from typing import List
+from jose import jwt, JWTError
+from typing import List, Optional
 from server.db.database import SessionLocal
 from server.models.users import User
 from server.schemas.users import UserCreate, UserOut, UpdateBio, UpdateProfilePic
+from passlib.context import CryptContext
+from datetime import date
+
+SECRET_KEY = "user_secret_key"
+ALGORITHM = "HS256"
+
 
 router = APIRouter(prefix="/users", tags=["Users"])
+
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+
+def hash_password(password: str) -> str:
+    return pwd_context.hash(password)
 
 
 def get_db():
@@ -16,19 +30,56 @@ def get_db():
         db.close()
 
 
+# get the current user using the JWT
+
+def get_current_user(
+        access_token: Optional[str] = Cookie(None),
+        db: Session = Depends(get_db)
+) -> User:
+    if not access_token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authenticated"
+        )
+    try:
+        payload = jwt.decode(access_token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: Optional[str] = payload.get("sub")
+        if username is None:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid Token"
+            )
+    except JWTError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not validate credentials"
+        )
+    user = db.query(User).filter(User.username == username).first()
+    if user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
+
 # create a new user
 
 
 @router.post("/", response_model=UserOut)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
+    existing_user = db.query(User).filter(
+        (User.username == user.username) | (User.email == user.email)
+    ).first()
+    if existing_user:
+        raise HTTPException(
+            status_code=400, detail="Username or email already registered"
+        )
     db_user = User(
         username=user.username,
         email=user.email,
-        password_hash=user.password,
-        firstName=user.firstName,
-        lastName=user.lastName,
+        password_hash=hash_password(user.password),
+        first_name=user.first_name,
+        last_name=user.last_name,
         bio=user.bio,
         profile_pic=user.profile_pic,
+        create_date=date.today(),
     )
     db.add(db_user)
     db.commit()
@@ -58,26 +109,24 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
 
 # update user profile pic
 
-@router.put("/{user_id}/profile_pic", response_model=UserOut)
-def update_user_profile_pic(user_id: int, update: UpdateProfilePic, db: Session = Depends(get_db)):
-    user = db.query(User).filter(User.id == user_id).first()
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    user.profile_pic = update.profile_pic  # type: ignore
+@router.put("/me/profile_pic", response_model=UserOut)
+def update_user_profile_pic(
+    update: UpdateProfilePic,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    current_user.profile_pic = update.profile_pic  # type: ignore
     db.commit()
-    db.refresh(user)
-    return user
+    db.refresh(current_user)
+    return current_user
 
 
 # update user bio
 
 
-@router.put("/{user_id}/bio", response_model=UserOut)
-def update_user_bio(user_id: int, update: UpdateBio, db: Session = Depends(get_db)):
-    user = db.query(User).filter(User.id == user_id).first()
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    user.bio = update.bio  # type: ignore
+@router.put("/me/bio", response_model=UserOut)
+def update_user_bio(update: UpdateBio, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    current_user.bio = update.bio  # type: ignore
     db.commit()
-    db.refresh(user)
-    return user
+    db.refresh(current_user)
+    return current_user
