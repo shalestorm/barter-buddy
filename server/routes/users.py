@@ -130,3 +130,12 @@ def update_user_bio(update: UpdateBio, current_user: User = Depends(get_current_
     db.commit()
     db.refresh(current_user)
     return current_user
+
+
+# /me
+
+
+@router.get("/me", response_model=UserOut, name="auth:me")
+@router.get("/auth/me", response_model=UserOut)
+def read_current_user(current_user: User = Depends(get_current_user)):
+    return current_user
