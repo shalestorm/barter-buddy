@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 
 export default function ProtectedRoute({ children }) {
     const [isAuthed, setIsAuthed] = useState(null);
@@ -7,11 +7,12 @@ export default function ProtectedRoute({ children }) {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const res = await fetch("/auth/me", {
+                const res = await fetch("/users/me", {
                     credentials: "include",
                 });
                 setIsAuthed(res.ok);
             } catch (err) {
+                console.error("Auth check failed:", err);
                 setIsAuthed(false);
             }
         };
