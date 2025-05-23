@@ -5,12 +5,6 @@ import App from './App.jsx'
 import ReactDOM from 'react-dom/client'  // for react router
 import { BrowserRouter } from 'react-router' // for react router
 
-// createRoot(document.getElementById('root')).render(
-//   <StrictMode>
-//     <App />
-//   </StrictMode>,
-// )
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>

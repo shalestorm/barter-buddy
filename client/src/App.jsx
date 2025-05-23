@@ -15,7 +15,6 @@ function App() {
   return (
     <>
       <div>
-        Hello!
         <Routes>
           <Route path='/' element={<WelcomePage />} />
           <Route path='/login' element={<LoginPage />} />
