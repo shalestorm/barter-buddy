@@ -30,7 +30,7 @@ html, body {
 #gradient .overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(255, 255, 255, 0.1); /* adjust alpha for transparency */
+  background-color: rgba(255, 255, 255, 0.1);
   z-index: 0;
 }
 
@@ -73,15 +73,12 @@ html, body {
   }
 }
 
-/* Ensure all your content elements are positioned above the overlay */
 .centered-header,
 .login-form-container,
 .action-buttons-container {
   position: relative;
-  z-index: 1; /* Place above the overlay */
+  z-index: 1;
 }
-
-/* --- Your existing styles below, ensure they align with the new structure --- */
 
 .centered-header {
   text-align: center;
