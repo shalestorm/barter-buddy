@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import logo from '../assets/bb_new.png';
+import backgroundcastle from '../assets/background.jpeg';
+import { useNavigate } from 'react-router';
 
 const WelcomePage = () => {
+    const navigate = useNavigate();
+
     useEffect(() => {
         const colors = [
             [25, 65, 130],
@@ -52,18 +56,36 @@ const WelcomePage = () => {
         updateGradient();
     }, []);
 
+    const handleLoginButton = () => {
+        navigate('/login');
+    }
+
+
     return (
-        <div id="gradient" className="fade-in">
-            <img src={logo} alt="Barter Buddy Logo" className="header-logo" />
-            <h1 className="magic-title">Welcome to Barter Buddy!</h1>
-            <p className="magic-subtitle">The Free Exchange of Knowledge</p>
+        // <div id="gradient" className="fade-in">
+        //     <img src={logo} alt="Barter Buddy Logo" className="header-logo" />
+        //     <h1 className="magic-title">Welcome to Barter Buddy!</h1>
+        //     <p className="magic-subtitle">The Free Exchange of Knowledge</p>
 
 
-            <div className="button-container">
-                <button className="magic-button">New to Barter Buddy?</button>
-                <button className="magic-button">Log In</button>
-                <button className="magic-button">Forgot Password?</button>
+        //     <div className="button-container">
+        //         <button className="magic-button">New to Barter Buddy?</button>
+        //         <button className="magic-button">Log In</button>
+        //         {/* <button className="magic-button">Forgot Password?</button> */}
+        //     </div>
+        // </div>
+        <div className="gradient">
+            <div className="background-overlay"></div>
+            <header className="centered-header">
+                <img src={logo} alt="Barter Buddy Logo" className="header-logo" />
+                <h1 className="magic-title">Welcome to Barter Buddy!</h1>
+                <h2 className="magic-title">The Free Exchange of Knowledge</h2>
+            </header>
+            <div className="action-buttons-container">
+                <button className="magic-button left-button">NEW TO BARTER BUDDY?</button>
+                <button className="magic-button login-button" onClick={handleLoginButton}>LOGIN</button>
             </div>
+
         </div>
     );
 
