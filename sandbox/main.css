@@ -3,18 +3,85 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 #gradient {
   width: 100%;
   height: 100vh;
-  padding: 0;
-  margin: 0;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-image: url('background.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
+
+#gradient .overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.1); /* adjust alpha for transparency */
+  z-index: 0;
+}
+
+#gradient > *:not(.overlay) {
+  position: relative;
+  z-index: 1;
+}
+
+
+#gradient .background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(75deg,
+      rgba(174, 0, 1, 0.3),
+      rgba(255, 205, 0, 0.3),
+      rgba(25, 89, 5, 0.3),
+      rgba(192, 192, 192, 0.3),
+      rgba(0, 38, 84, 0.3)
+  );
+  background-size: 400% 400%;
+  animation: gradientAnimation 18s ease infinite;
+  z-index: 1;
+}
+
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Ensure all your content elements are positioned above the overlay */
+.centered-header,
+.login-form-container,
+.action-buttons-container {
+  position: relative;
+  z-index: 1; /* Place above the overlay */
+}
+
+/* --- Your existing styles below, ensure they align with the new structure --- */
 
 .centered-header {
   text-align: center;
@@ -31,7 +98,7 @@ body {
 }
 
 .header-logo:hover {
-  animation: shimmer 2s infinite;
+  animation: shimmer 1.5s infinite;
   box-shadow: 0 0 40px 10px rgba(255, 255, 255, 0.3);
   transform: scale(1.03);
   transition: all 0.3s ease-in-out;
@@ -39,13 +106,13 @@ body {
 
 @keyframes shimmer {
   0% {
-    filter: brightness(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+    filter: brightness(2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
   }
   50% {
     filter: brightness(1.2) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
   }
   100% {
-    filter: brightness(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+    filter: brightness(2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
   }
 }
 
@@ -74,27 +141,26 @@ h2.magic-title {
   }
 }
 
-/* New container for login inputs and button */
 .login-form-container {
-  display: flex; /* Make it a flex container */
-  flex-direction: row; /* Arrange children horizontally */
-  align-items: flex-end; /* Align items to the bottom (inputs and button) */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
 .input-fields {
   display: flex;
-  flex-direction: column; /* Stack username and password vertically */
-  align-items: center; /* Center inputs horizontally within this column */
-  margin-right: 15px; /* Space between input fields and login button */
+  flex-direction: column;
+  align-items: center;
+  margin-right: 15px;
 }
 
 .magic-input {
   font-family: 'Cinzel', serif;
   font-size: 16px;
   padding: 10px 15px;
-  margin: 5px 0; /* Reduced vertical margin to stack closer */
+  margin: 5px 0;
   width: 260px;
   border: 2px solid #ffcc00;
   border-radius: 6px;
@@ -112,7 +178,6 @@ h2.magic-title {
   background-color: #2b2b2b;
 }
 
-/* General button styles */
 .magic-button {
   font-family: 'Cinzel', serif;
   font-size: 16px;
@@ -134,36 +199,26 @@ h2.magic-title {
   transform: translateY(-2px);
 }
 
-/* Specific styling for the LOGIN button */
 .login-button {
-  height: 98px; /* Match the combined height of the two input fields plus their margins */
-  width: 100px; /* Adjust width as needed for the login button */
-  margin-top: 5px; /* Align with the top input's margin */
+  height: 98px;
+  width: 100px;
+  margin-top: 5px;
 }
 
-/* Styles for the action buttons container (New to Barter Buddy, Forgot Password) */
 .action-buttons-container {
   display: flex;
-  justify-content: space-between; /* Pushes buttons to the extreme left and right */
-  width: 80%; /* Make this container wide enough to span almost the whole page */
-  max-width: 900px; /* Limit max width for larger screens */
+  justify-content: space-between;
+  width: 80%;
+  max-width: 900px;
   margin-top: 20px;
-  padding: 0 20px; /* Add some padding on the sides to prevent buttons touching edges */
-  box-sizing: border-box; /* Include padding in the width calculation */
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .left-button, .right-button {
   font-size: 14px;
   padding: 8px 15px;
-  width: auto; /* Allow buttons to size based on content */
-  min-width: 160px; /* Ensure a minimum width for readability */
-  margin: 0; /* Remove any default margins that might interfere */
-}
-
-.left-button {
-  /* No specific text-align needed as justify-content handles positioning */
-}
-
-.right-button {
-  /* No specific text-align needed as justify-content handles positioning */
+  width: auto;
+  min-width: 160px;
+  margin: 0;
 }
