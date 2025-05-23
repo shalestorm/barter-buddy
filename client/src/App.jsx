@@ -6,7 +6,7 @@ import ChatPage from './pages/ChatPage'
 import LoginPage from './pages/LoginPage'
 import ProfilePage from './pages/ProfilePage'
 import MessagesPage from './pages/MessagesPage'
-// import SignupForm from './pages/SignupForm'
+import SignupPage from './pages/SignupPage'
 import WelcomePage from './pages/WelcomePage'
 import FoundersLogPage from './pages/FoundersLogPage'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route path='/' element={<WelcomePage />} />
           <Route path='/login' element={<LoginPage />} />
-          {/* <Route path='/signup' element={<SignupForm />} /> */}
+          <Route path='/signup' element={<SignupPage />} />
           <Route path='/dashboard' element={<ProtectedRoute><BrowsePage /></ProtectedRoute>} />
           <Route path='/chat/:userId' element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />
           <Route path='/founders' element={<FoundersLogPage />} />
