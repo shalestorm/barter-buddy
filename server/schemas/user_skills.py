@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class UserSkillBase(BaseModel):
-    user_id: str
+    user_id: int
     skill_id: int
 
 
