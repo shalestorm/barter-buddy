@@ -1,23 +1,23 @@
-import React, {useState, useEffect} from "react";
-import ConversationList from '../components/ConversationList'
+import React, { useState, useEffect } from "react";
+// import ConversationList from '../components/ConversationList'
 import ChatWindow from '../components/ChatWindow'
 
 const MessagesPage = () => {
-    const [conversations, setConversations] = useState([]);
-    const [activeConversation, setActiveConversation] = useState(Null);
+  const [conversations, setConversations] = useState([]);
+  const [activeConversation, setActiveConversation] = useState(Null);
 
-    useEffect(() => {
-        fetch('api/conversations')
-            .then(res => res.json())
-            .then(setConversations);
-    }, []);
+  useEffect(() => {
+    fetch('api/conversations')
+      .then(res => res.json())
+      .then(setConversations);
+  }, []);
 
-return (
+  return (
     <div className="messages-page grid grid-cols-[300px_1fr] h-screen">
-      <ConversationList
+      {/* <ConversationList
         conversations={conversations}
         onSelect={setActiveConversation}
-      />
+      /> */}
       <ChatWindow conversation={activeConversation} />
     </div>
   );

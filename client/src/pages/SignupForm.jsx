@@ -11,7 +11,9 @@ const handleSubmit = async (e) => {
 
   if (res.ok) {
     console.log(`Welcome to Barter-Buddy ${username}!`);
-} else {
-  console.error(`OOPS Error: ${data.message}`);
+  } else {
+    console.error(`OOPS Error: ${data.message}`);
   }
 };
+
+export default;
