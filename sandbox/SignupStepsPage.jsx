@@ -32,9 +32,6 @@ export default function SignupPage() {
         //     return;
         // };
 
-        const trimmedNewUsername = newUsername.trim().toLowerCase();
-        const trimmedNewEmail = newEmail.trim().toLowerCase();
-
         // RIC: Check if username or email exist
         try {
             const response = await fetch("http://localhost:8000/users");
@@ -44,6 +41,9 @@ export default function SignupPage() {
             }
 
             const users = await response.json();
+
+            const trimmedNewUsername = newUsername.trim().toLowerCase();
+            const trimmedNewEmail = newEmail.trim().toLowerCase();
 
             // RIC: check if username or email match in users (returns bool)
             const usernameTaken = users.some((u) => u.username.toLowerCase() === trimmedNewUsername); // RIC: {use toLowerCase()?}
@@ -91,7 +91,7 @@ export default function SignupPage() {
     };
 
     // RIC: Signup Step 3: first and last names + final submit (create account)
-    const handleSignupStep3 = (e) => {
+    const handleSignupStep3 = async (e) => {
         e.preventDefault();
         setError(null);
         setLoading(true);
@@ -133,6 +133,7 @@ export default function SignupPage() {
         <div className="signup-page">
             <h2>New Account</h2>
             {/*RIC: Display form based on current step*/}
+            <p>Step {signupStep} of 3</p>
             <form onSubmit={signupStep === 1 ? handleSignupStep1 : signupStep === 2 ? handleSignupStep2 : handleSignupStep3}>
                 {/*RIC: Step 1: username and email*/}
                 {signupStep === 1 && (
@@ -212,7 +213,18 @@ export default function SignupPage() {
                         </label>
                     </>
                 )}
-
+                <br />
+                {/*RIC: previous step button*/}
+                {step > 1 && (
+                    <button
+                        type="button"
+                        onClick={() => setStep(step - 1)}
+                        disabled={loading}
+                    >
+                        Back
+                    </button>
+                )}
+                {/*RIC: submit (or next step) button*/}
                 <button type="submit" disabled={loading}>
                     {loading ? "Loading..." : signupStep === 3 ? "Submit" : "Next"}
                 </button>
@@ -224,7 +236,7 @@ export default function SignupPage() {
                 {/*RIC: {We should add a similar link to Login page that navigates to Signup (and home?)}*/}
             </div>
 
-            {error && <p>{error}</p>}
+            {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
     );
 
