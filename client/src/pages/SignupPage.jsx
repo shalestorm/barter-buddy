@@ -100,7 +100,7 @@ export default function SignupPage() {
             // });
 
 
-            // RIC: On Signup success, navigate to Dashboard page (or protected route?)
+            // RIC: On Signup success, navigate to Login page (user must log in with new account)
             navigate('/login');
 
         } catch (err) {
