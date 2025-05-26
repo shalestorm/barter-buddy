@@ -50,7 +50,7 @@ export default function SignupPage() {
             password: newPassword.trim(),
         };
 
-        // RIC: Check if username or email exists
+        // RIC: Check if username or email exist
         try {
             const response = await fetch("http://localhost:8000/users");
 
@@ -59,20 +59,22 @@ export default function SignupPage() {
             }
 
             const users = await response.json();
-            const trimmedUsername = newUsername.trim().toLowerCase();
-            const trimmedEmail = newEmail.trim().toLowerCase();
 
-            // RIC: Check db for either username or email
-            const existingUser = users.find((u) => u.username.toLowerCase() === trimmedUsername || u.email.toLowerCase() === trimmedEmail);
+            const trimmedNewUsername = newUsername.trim().toLowerCase(); // RIC: {use toLowerCase()?}
+            const trimmedNewEmail = newEmail.trim().toLowerCase(); // RIC: {use toLowerCase()?}
 
-            // RIC: If either username or email exists
-            if (existingUser) {
-                if (existingUser.username.toLowerCase() === trimmedUsername) {
-                    setError("That username is taken. Try another.");
+            // RIC: check if username or email match in users (returns bool)
+            const usernameTaken = users.some((u) => u.username.toLowerCase() === trimmedNewUsername); // RIC: {use toLowerCase()?}
+            const emailTaken = users.some((u) => u.email.toLowerCase() === trimmedNewEmail); // RIC: {use toLowerCase()?}
+
+            if (usernameTaken || emailTaken) {
+                if (usernameTaken && emailTaken) {
+                    setError("Username and email already in use. Try other.");
+                } else if (usernameTaken) {
+                    setError("Username taken. Try another.");
                 } else {
-                    setError("That email is already in use. Try another.");
+                    setError("Email already in use. Try another.");
                 }
-                // RIC: Here is where/when we could apply "Forgot password?"
                 return;
             }
 
