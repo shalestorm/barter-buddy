@@ -19,23 +19,23 @@ export default function SignupPage() {
         setLoading(true);
         setError(null);
 
-        if (!newUsername.trim()) {
-            setError("A valid username is required.");
-            setLoading(false);
-            return;
-        };
+        // if (!newUsername.trim()) {
+        //     setError("A valid username is required.");
+        //     setLoading(false);
+        //     return;
+        // };
 
-        if (!newEmail.trim()) {
-            setError("A valid email is required.");
-            setLoading(false);
-            return;
-        };
+        // if (!newEmail.trim()) {
+        //     setError("A valid email is required.");
+        //     setLoading(false);
+        //     return;
+        // };
 
-        if (!newPassword.trim()) {
-            setError("A password is required.");
-            setLoading(false);
-            return;
-        };
+        // if (!newPassword.trim()) {
+        //     setError("A password is required.");
+        //     setLoading(false);
+        //     return;
+        // };
 
         if (newPassword !== confirmPassword) {
             setError("Password does not match.");
@@ -105,7 +105,7 @@ export default function SignupPage() {
 
         } catch (err) {
             console.error(err);
-            setError("Something went wrong. Please try again."); // Ric: {too general?}        }
+            setError("Something went wrong. Please try again."); // Ric: {too general?}
         } finally {
             setLoading(false);
         }
