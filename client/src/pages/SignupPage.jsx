@@ -10,14 +10,15 @@ export default function SignupPage() {
     const [lastName, setLastName] = useState("");
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [signupStep, setSignupStep] = useState(1); // RIC: step-by-step signup
 
     const navigate = useNavigate()
 
-
-    const handleSubmit = async (e) => {
+    // RIC: Signup Step 1: check username and email
+    const handleSignupStep1 = async (e) => {
         e.preventDefault();
-        setLoading(true);
         setError(null);
+        setLoading(true);
 
         // if (!newUsername.trim()) {
         //     setError("A valid username is required."); // RIC: We could use this to validate length etc (according to schema)
@@ -31,28 +32,6 @@ export default function SignupPage() {
         //     return;
         // };
 
-        // if (!newPassword.trim()) {
-        //     setError("A password is required."); // RIC: We could use this to validate length etc (according to schema)
-        //     setLoading(false);
-        //     return;
-        // };
-
-        if (newPassword !== confirmPassword) {
-            setError("Password does not match.");
-            setLoading(false);
-            return;
-        };
-
-        const formData = {
-            username: newUsername.trim(),
-            email: newEmail.trim(),
-            first_name: firstName.trim(),
-            last_name: lastName.trim(),
-            // bio: "", // RIC: {Necessary?}
-            // profile_pic: "", // RIC: {Necessary?}
-            password: newPassword.trim(),
-        };
-
         // RIC: Check if username or email exist
         try {
             const response = await fetch("http://localhost:8000/users");
@@ -63,8 +42,8 @@ export default function SignupPage() {
 
             const users = await response.json();
 
-            const trimmedNewUsername = newUsername.trim().toLowerCase(); // RIC: {use toLowerCase()?}
-            const trimmedNewEmail = newEmail.trim().toLowerCase(); // RIC: {use toLowerCase()?}
+            const trimmedNewUsername = newUsername.trim().toLowerCase();
+            const trimmedNewEmail = newEmail.trim().toLowerCase();
 
             // RIC: check if username or email match in users (returns bool)
             const usernameTaken = users.some((u) => u.username.toLowerCase() === trimmedNewUsername); // RIC: {use toLowerCase()?}
@@ -81,10 +60,57 @@ export default function SignupPage() {
                 return;
             }
 
-            // RIC: create new user
+            setSignupStep(2);
+
+        } catch (err) {
+            console.error(err);
+            setError("Something went wrong. Try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // RIC: Signup Step 2: check password
+    const handleSignupStep2 = (e) => {
+        e.preventDefault();
+        setError(null);
+
+        // if (!newPassword.trim()) {
+        //     setError("A password is required."); // RIC: We could use this to validate length etc (according to schema)
+        //     setLoading(false);
+        //     return;
+        // };
+
+        if (newPassword !== confirmPassword) {
+            setError("Passwords do not match.");
+            setLoading(false);
+            return;
+        };
+
+        setSignupStep(3);
+    };
+
+    // RIC: Signup Step 3: first and last names + final submit (create account)
+    const handleSignupStep3 = async (e) => {
+        e.preventDefault();
+        setError(null);
+        setLoading(true);
+
+        const formData = {
+            username: newUsername.trim(),
+            email: newEmail.trim(),
+            first_name: firstName.trim(),
+            last_name: lastName.trim(),
+            // bio: "", // RIC: {Necessary?}
+            // profile_pic: "", // RIC: {Necessary?}
+            password: newPassword.trim(),
+        };
+
+        // RIC: create new user
+        try {
             const signupResponse = await fetch('http://localhost:8000/users/', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' }, // RIC: {CHECK WITH SKYLER HEADERS & HOW TO HANDLE CREDENTIALS}
+                headers: { 'Content-Type': 'application/json' }, // RIC: {Check headers vs LoginPage}
                 body: JSON.stringify(formData), // RIC: {Is this correct?}
             });
 
@@ -92,119 +118,124 @@ export default function SignupPage() {
                 throw new Error('Failed to create user.');
             }
 
-// RIC: Brought this from previous project, pending see if necessary:
-            // const newUser = await signupResponse.json()
-            // setUser({
-            //     id: newUser.id,
-            //     username: newUser.username,
-            // });
-
-
             // RIC: On Signup success, navigate to Login page (user must log in with new account)
             navigate('/login');
-
-        } catch (err) {
+        } catch(err) {
             console.error(err);
-            setError("Something went wrong. Please try again."); // Ric: {too general?}
+            setError("Signup failed. Try again.");
         } finally {
             setLoading(false);
         }
-
-
-// RIC: This is Cayla's existing boilerplate code:
-        // const res = await fetch('/api/register', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ username, password }),
-        // });
-
-        // const data = await res.json();
-
-        // if (res.ok) {
-        //     console.log(`Welcome to Barter-Buddy ${username}!`);
-        // } else {
-        //     console.error(`OOPS Error: ${data.message}`);
-        // }
-
     };
+
 
     return (
         <div className="signup-page">
             <h2>New Account</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Username:
-                    <input
-                        type="text"
-                        value={newUsername}
-                        onChange={(e) => setNewUsername(e.target.value)}
-                        required
-                        placeholder="username"
-                    />
-                </label>
+            {/*RIC: Display form based on current step*/}
+            <p>Step {signupStep} of 3</p>
+            <form onSubmit={signupStep === 1 ? handleSignupStep1 : signupStep === 2 ? handleSignupStep2 : handleSignupStep3}>
+                {/*RIC: Step 1: username and email*/}
+                {signupStep === 1 && (
+                    <>
+                        <label>
+                            Username:
+                            <input
+                                type="text"
+                                value={newUsername}
+                                onChange={(e) => setNewUsername(e.target.value)}
+                                required
+                                placeholder="username"
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            Email:
+                            <input
+                                type="email"
+                                value={newEmail}
+                                onChange={(e) => setNewEmail(e.target.value)}
+                                required
+                                placeholder="example@domain.com"
+                            />
+                        </label>
+                    </>
+                )}
+                {/*RIC: Step 2: password*/}
+                {signupStep === 2 && (
+                    <>
+                        <label>
+                            Password:
+                            <input
+                                type="password"
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                                required
+                                placeholder="password"
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            Confirm Password:
+                            <input
+                                type="password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                                placeholder="confirm password"
+                            />
+                        </label>
+                    </>
+                )}
+                {/*RIC: Step 3 (final): first and last name + submit*/}
+                {signupStep === 3 && (
+                    <>
+                        <label>
+                            First Name:
+                            <input
+                                type="text"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                                required
+                                placeholder="first name"
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            Last Name:
+                            <input
+                                type="text"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                                required
+                                placeholder="last name"
+                            />
+                        </label>
+                    </>
+                )}
                 <br />
-                <label>
-                    Email:
-                    <input
-                        type="email"
-                        value={newEmail}
-                        onChange={(e) => setNewEmail(e.target.value)}
-                        required
-                        placeholder="example@domain.com"
-                    />
-                </label>
-                <br />
-                <label>
-                    Password:
-                    <input
-                        type="password"
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                        required
-                        placeholder="password"
-                    />
-                </label>
-                <br />
-                <label>
-                    Confirm Password:
-                    <input
-                        type="password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                        placeholder="confirm password"
-                    />
-                </label>
-                <br />
-                <label>
-                    First & Last Name:
-                    <input
-                        type="text"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        required
-                        placeholder="first name"
-                    />
-                    <input
-                        type="text"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        required
-                        placeholder="last name"
-                    />
-                </label>
-                <br />
-
+                {/*RIC: previous step button*/}
+                {signupStep > 1 && (
+                    <button
+                        type="button"
+                        onClick={() => setSignupStep(signupStep - 1)}
+                        disabled={loading}
+                    >
+                        Back
+                    </button>
+                )}
+                {/*RIC: submit (or next step) button*/}
                 <button type="submit" disabled={loading}>
-                    {loading ? "Creating and Logging In" : "Create and Log In"}
+                    {loading ? "Loading..." : signupStep === 3 ? "Submit" : "Next"}
                 </button>
+
             </form>
+
             <div className="login-link">
-                Already have an account? <Link to="/login">Return to login page</Link>
-                {/*RIC: {We should add a similar link to Login page that navigates to Signup (and home?)}*/}
+                Already have an account? <Link to="/login">Log In</Link>
             </div>
 
-            {error && <p>{error}</p>}
+            {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
     );
 

@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 
 export default function LoginPage() {
@@ -40,7 +40,7 @@ export default function LoginPage() {
                         autoComplete="username"
                     />
                 </label>
-
+                <br />
                 <label>
                     Password:
                     <input
@@ -51,13 +51,16 @@ export default function LoginPage() {
                         autoComplete="current-password"
                     />
                 </label>
-
+                <br />
                 <button type="submit" disabled={loading}>
                     {loading ? "Logging in" : "Log In"}
                 </button>
             </form>
 
-            {error && <p>{error}</p>}
+            <div className="signup-link">
+                Don't have an account? <Link to="/signup">Sign Up</Link>
+            </div>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
     );
 }
