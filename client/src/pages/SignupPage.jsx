@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function SignupPage() {
     const [newUsername, setNewUsername] = useState("");
@@ -22,21 +21,25 @@ export default function SignupPage() {
 
         if (!newUsername.trim()) {
             setError("A valid username is required.");
+            setLoading(false);
             return;
         };
 
         if (!newEmail.trim()) {
             setError("A valid email is required.");
+            setLoading(false);
             return;
         };
 
         if (!newPassword.trim()) {
             setError("A password is required.");
+            setLoading(false);
             return;
         };
 
         if (newPassword !== confirmPassword) {
-            setError("Password confirm does not match.");
+            setError("Password does not match.");
+            setLoading(false);
             return;
         };
 
@@ -98,17 +101,14 @@ export default function SignupPage() {
 
 
             // RIC: On Signup success, navigate to Dashboard page (or protected route?)
-            navigate('/dashboard');
+            navigate('/login');
 
         } catch (err) {
             console.error(err);
-            setError("Network or server error"); // Ric: {too general?}
+            setError("Something went wrong. Please try again."); // Ric: {too general?}        }
         } finally {
             setLoading(false);
         }
-
-        // setLoading(false); // RIC: {redundant?}
-
 
 
 // RIC: This is Cayla's existing boilerplate code:
@@ -201,6 +201,7 @@ export default function SignupPage() {
             </form>
             <div className="login-link">
                 Already have an account? <Link to="/login">Return to login page</Link>
+                {/*RIC: {We should add a similar link to Login page that navigates to Signup (and home?)}*/}
             </div>
 
             {error && <p>{error}</p>}
