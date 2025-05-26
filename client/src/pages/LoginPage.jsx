@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../context/AuthContext";
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");
@@ -7,35 +8,19 @@ export default function LoginPage() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
-
-
+    const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
-        const formData = new URLSearchParams();
-        formData.append("username", username)
-        formData.append("password", password)
 
-        try {
-            const res = await fetch("http://localhost:8000/auth/login", {
-                method: "POST",
-                headers: { "Accept": "application/json" },
-                credentials: "include",
-                body: formData,
-            });
-
-            if (res.ok) {
-                // Login success, redirect to dashboard or protected route
-                navigate("/dashboard");
-            } else {
-                const data = await res.json();
-                setError(data.detail || "Login failed");
-            }
-        } catch (err) {
-            setError("Network error, please try again.");
+        const success = await login(username, password);
+        if (success) {
+            navigate("/dashboard");
+        } else {
+            setError("Invalid username or password");
         }
 
         setLoading(false);

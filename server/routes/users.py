@@ -36,7 +36,7 @@ def get_current_user(
         access_token: Optional[str] = Cookie(None),
         db: Session = Depends(get_db)
 ) -> User:
-    print("Access token from cookie:", access_token)
+
     if not access_token:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
