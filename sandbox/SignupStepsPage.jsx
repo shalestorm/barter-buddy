@@ -215,10 +215,10 @@ export default function SignupPage() {
                 )}
                 <br />
                 {/*RIC: previous step button*/}
-                {step > 1 && (
+                {signupStep > 1 && (
                     <button
                         type="button"
-                        onClick={() => setStep(step - 1)}
+                        onClick={() => setSignupStep(signupStep - 1)}
                         disabled={loading}
                     >
                         Back
