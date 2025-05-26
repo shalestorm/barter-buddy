@@ -56,6 +56,10 @@ const WelcomePage = () => {
         updateGradient();
     }, []);
 
+    const handleSignupButton = () => {
+        navigate('/signup');
+    }
+
     const handleLoginButton = () => {
         navigate('/login');
     }
@@ -82,7 +86,7 @@ const WelcomePage = () => {
                 <h2 className="magic-title">The Free Exchange of Knowledge</h2>
             </header>
             <div className="action-buttons-container">
-                <button className="magic-button left-button">NEW TO BARTER BUDDY?</button>
+                <button className="magic-button left-button" onClick={handleSignupButton}>NEW TO BARTER BUDDY?</button>
                 <button className="magic-button login-button" onClick={handleLoginButton}>LOGIN</button>
             </div>
 
