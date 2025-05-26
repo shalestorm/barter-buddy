@@ -20,19 +20,19 @@ export default function SignupPage() {
         setError(null);
 
         // if (!newUsername.trim()) {
-        //     setError("A valid username is required.");
+        //     setError("A valid username is required."); // RIC: We could use this to validate length etc (according to schema)
         //     setLoading(false);
         //     return;
         // };
 
         // if (!newEmail.trim()) {
-        //     setError("A valid email is required.");
+        //     setError("A valid email is required."); // RIC: We could use this to validate length etc (according to schema)
         //     setLoading(false);
         //     return;
         // };
 
         // if (!newPassword.trim()) {
-        //     setError("A password is required.");
+        //     setError("A password is required."); // RIC: We could use this to validate length etc (according to schema)
         //     setLoading(false);
         //     return;
         // };
