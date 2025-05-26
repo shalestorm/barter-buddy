@@ -1,0 +1,109 @@
+/* .founders-body {
+    width: 100vw;
+    min-height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 40px;
+    padding-bottom: 80px;
+    background: linear-gradient(to bottom, #1e1e1e, #000);
+    color: #fffbe6;
+    text-align: center;
+    cursor: url('/src/assets/wand-cursor.png'), auto;
+    box-sizing: border-box;
+} */
+
+.founders-body {
+    min-height: 100vh;
+    width: 100%;
+    padding: 60px 20px 120px;
+    background: linear-gradient(to bottom, #1e1e1e, #000);
+    color: #fffbe6;
+    text-align: center;
+    cursor: url('/src/assets/wand-cursor.png'), auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    /* ✅ prevent horizontal scroll */
+}
+
+.founders-header {
+    font-size: 2.4rem;
+    font-family: 'Cinzel', serif;
+    color: #ffe066;
+    text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffec99;
+    margin-bottom: 40px;
+    animation: pulseGlow 3s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffec99;
+    }
+
+    50% {
+        text-shadow: 0 0 15px #fff176, 0 0 30px #ffd700;
+    }
+}
+
+/* .devs-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    max-width: 100%;
+} */
+
+
+.devs-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 40px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+
+
+
+/* .founders-outro {
+    margin-top: 50px;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #ffeb99;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
+    animation: pulseGlow 4s infinite ease-in-out;
+} */
+
+.founders-outro {
+    margin-top: 60px;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #ffeb99;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
+    animation: pulseGlow 4s infinite ease-in-out;
+}
+
+.founders-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
