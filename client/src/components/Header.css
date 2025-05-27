@@ -1,0 +1,29 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background-color: white;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    text-align: left;
+}
+
+.header-center {
+
+}
+
+.header-right {
+
+}
+
+.header-nav-buttons {
+
+}
