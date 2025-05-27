@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from 'react-router';
 import './Header.css'
 import logo from '../assets/bb_new.png';
+import background from '..assets/background.jpeg'
 
 export default function Header() {
     const [loading, setLoading] = useState(false);
@@ -26,7 +27,7 @@ export default function Header() {
             <div className="header-left">
                 <h2>Hello, {user.first_name}!</h2>
                 <Link to={`/profile/${user.id}`}><img src={user.profile_pic} alt="User Profile Pic" className="profile-pic" /></Link>
-                <div className="header-nav-buttons">
+                <div className="magic-header-nav-buttons">
                     <button onClick={() => navigate(`/profile/${user.id}`)} disabled={loading}>My Profile</button>
                     <button onClick={() => navigate(`/messages/${user.id}`)} disabled={loading}>Messages</button>
                 </div>

@@ -42,7 +42,7 @@
     margin-bottom: 1.5rem;
 }
 
-.magic-button {
+/* TI .magic-button {
     background-color: #643f1c;
     color: #fff7e6;
     border: 2px solid #d8b97a;
@@ -57,7 +57,7 @@
 .magic-button:hover {
     background-color: #7a5527;
     box-shadow: 0 0 12px #ffd26a;
-}
+}  TI  */
 
 .edit-form label {
     display: block;
