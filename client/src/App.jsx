@@ -10,11 +10,13 @@ import SignupPage from './pages/SignupPage'
 import WelcomePage from './pages/WelcomePage'
 import FoundersLogPage from './pages/FoundersLogPage'
 import ProtectedRoute from './components/ProtectedRoute'
+import Header from "./components/Header";
 
 function App() {
 
   return (
     <>
+      <Header />
       <div>
         <Routes>
           <Route path='/' element={<WelcomePage />} />

@@ -1,0 +1,99 @@
+.profile-container {
+    background-image: url('/images/scroll-background.png');
+    /* optional bg image */
+    background-color: #f5f2e9;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.profile-scroll-card {
+    background-color: rgba(255, 253, 240, 0.96);
+    border: 2px solid #d8b97a;
+    border-radius: 16px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 0 20px rgba(255, 223, 110, 0.4);
+    font-family: 'Cinzel', serif;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #d8b97a;
+    box-shadow: 0 0 10px rgba(255, 217, 102, 0.8);
+    margin-bottom: 1rem;
+}
+
+.profile-name {
+    font-size: 2rem;
+    color: #5c432d;
+    margin-bottom: 0.25rem;
+}
+
+.profile-bio {
+    font-style: italic;
+    color: #3e2e1c;
+    margin-bottom: 1.5rem;
+}
+
+.magic-button {
+    background-color: #643f1c;
+    color: #fff7e6;
+    border: 2px solid #d8b97a;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0.5rem 0;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.magic-button:hover {
+    background-color: #7a5527;
+    box-shadow: 0 0 12px #ffd26a;
+}
+
+.edit-form label {
+    display: block;
+    margin-top: 1rem;
+    color: #5c432d;
+    font-weight: bold;
+}
+
+.edit-form input,
+.edit-form textarea {
+    width: 100%;
+    margin-top: 0.25rem;
+    padding: 0.5rem;
+    border: 1px solid #c9b18c;
+    border-radius: 6px;
+    font-family: serif;
+    background-color: #fffef9;
+}
+
+.edit-form input,
+.edit-form textarea {
+    width: 100%;
+    margin-top: 0.25rem;
+    padding: 0.5rem;
+    border: 2px solid #d8b97a;
+    border-radius: 8px;
+    font-family: 'Cinzel', serif;
+    background-color: #fffef9;
+    color: #3e2e1c;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit-form input:focus,
+.edit-form textarea:focus {
+    outline: none;
+    border-color: #ffd26a;
+    box-shadow: 0 0 8px #ffd26a;
+}
