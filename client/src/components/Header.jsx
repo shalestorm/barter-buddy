@@ -24,15 +24,15 @@ export default function Header() {
     return (
         <div className="header">
             <div className="header-left">
-                <p>Logged in as: {user.username}</p>
-                <img src={logo} alt="User Profile Pic" className="profile-pic" />
+                <h2>Hello, {user.first_name}!</h2>
+                <Link to={`/profile/${user.id}`}><img src={user.profile_pic} alt="User Profile Pic" className="profile-pic" /></Link>
                 <div className="header-nav-buttons">
                     <button onClick={() => navigate(`/profile/${user.id}`)} disabled={loading}>My Profile</button>
                     <button onClick={() => navigate(`/messages/${user.id}`)} disabled={loading}>Messages</button>
                 </div>
             </div>
             <div className="header-center">
-                <img src={logo} alt="Barter Buddy Logo" className="bb-logo" />
+                <Link to='/dashboard'><img src={logo} alt="Barter Buddy Logo" className="bb-logo" /></Link>
             </div>
             <div className="header-right">
                 <button onClick={handleLogout} disabled={loading}>Log Out</button>
