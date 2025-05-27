@@ -1,0 +1,42 @@
+import React, { useState } from 'react';
+import { useAuth } from "../context/AuthContext";
+import { Link, useNavigate } from 'react-router';
+import './Header.css'
+import logo from '../assets/bb_new.png';
+
+export default function Header() {
+    const [loading, setLoading] = useState(false);
+
+    const { user, logout } = useAuth();
+
+    const navigate = useNavigate();
+
+
+    const handleLogout = async (e) => {
+        setLoading(true);
+        const success = await logout();
+        if (success) {
+            navigate('/login');
+        }
+    };
+
+
+    return (
+        <div className="header">
+            <div className="header-left">
+                <p>Logged in as: {user.username}</p>
+                <img src={logo} alt="User Profile Pic" className="profile-pic" />
+                <div className="header-nav-buttons">
+                    <button onClick={() => navigate(`/profile/${user.id}`)} disabled={loading}>My Profile</button>
+                    <button onClick={() => navigate(`/messages/${user.id}`)} disabled={loading}>Messages</button>
+                </div>
+            </div>
+            <div className="header-center">
+                <img src={logo} alt="Barter Buddy Logo" className="bb-logo" />
+            </div>
+            <div className="header-right">
+                <button onClick={handleLogout} disabled={loading}>Log Out</button>
+            </div>
+        </div>
+    );
+};
