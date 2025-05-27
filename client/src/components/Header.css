@@ -17,13 +17,19 @@
 }
 
 .header-center {
-
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
 }
 
 .header-right {
-
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
 }
 
 .header-nav-buttons {
-
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
