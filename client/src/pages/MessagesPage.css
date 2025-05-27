@@ -1,0 +1,28 @@
+.chat-page {
+    display: flex;
+    flex-direction: row;
+    background: white;
+}
+
+.chat-list {
+    display: flex;
+    flex-direction: column;
+    border: 2px;
+    border-style: solid;
+    border-color: brown;
+    border-radius: 16px;
+}
+
+.request-card {
+    border: 2px;
+    border-style: solid;
+    border-color: brown;
+    border-radius: 16px;
+}
+
+.message-card {
+    border: 2px;
+    border-style: solid;
+    border-color: brown;
+    border-radius: 16px;
+}
