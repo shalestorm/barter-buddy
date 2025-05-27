@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
+import background_login from "../assets/background_login.png";
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");
@@ -27,40 +28,55 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="login-page">
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Username:
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                        autoComplete="username"
-                    />
-                </label>
-                <br />
-                <label>
-                    Password:
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        autoComplete="current-password"
-                    />
-                </label>
-                <br />
-                <button type="submit" disabled={loading}>
-                    {loading ? "Logging in" : "Log In"}
-                </button>
-            </form>
-
-            <div className="signup-link">
-                Don't have an account? <Link to="/signup">Sign Up</Link>
+        <div className="page-container">
+            <div className="gradient" style={{ backgroundImage: `url(${background_login})` }}>
+                <div className="background-overlay"></div>
             </div>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+
+            <div className="login-page">
+    <h2>Login</h2>
+    <form onSubmit={handleSubmit}>
+        <label>
+            Username:
+            <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                autoComplete="username"
+            />
+        </label>
+        <br />
+        <label>
+            Password:
+            <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                autoComplete="current-password"
+            />
+        </label>
+        <br />
+        <div className="action-buttons-container">
+            <button
+                className="magic-button login-button"
+                type="submit"
+                disabled={loading}
+            >
+                {loading ? "Logging in..." : "Login"}
+            </button>
         </div>
-    );
+    </form>
+
+    <div className="action-buttons-container">
+        <Link to="/signup" className="magic-button signup-link">
+            Don’t have an account? Sign Up
+        </Link>
+    </div>
+
+  {error && <p style={{ color: 'red' }}>{error}</p>}
+</div>
+</div>
+);
 }
