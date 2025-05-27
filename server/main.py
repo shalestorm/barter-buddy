@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from server.db.database import engine, Base
 from server.routes import (
     users,
@@ -11,11 +12,16 @@ from server.routes import (
     connection_requests,
     user_skills,
 )
+import os
+
 
 app = FastAPI()
 
 Base.metadata.create_all(bind=engine)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, "static")
 
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 app.add_middleware(
     CORSMiddleware,

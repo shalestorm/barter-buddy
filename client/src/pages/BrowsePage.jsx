@@ -43,6 +43,11 @@ const BrowsePage = () => {
                     >
                         {user.username} - {user.name} (You)
                     </div>
+                    <img
+                        src={user.profile_pic}
+                        alt={`${user.username}'s profile`}
+                        style={{ width: "150px", height: "150px", borderRadius: "50%" }}
+                    />
                 </>
             ) : (
                 <p>Not logged in</p>

@@ -1,15 +1,18 @@
-from fastapi import APIRouter, Depends, HTTPException, Cookie, status
+from fastapi import APIRouter, Depends, HTTPException, Cookie, status, UploadFile, File
 from sqlalchemy.orm import Session
 from jose import jwt, JWTError
 from typing import List, Optional
 from server.db.database import SessionLocal
 from server.models.users import User
-from server.schemas.users import UserCreate, UserOut, UpdateBio, UpdateProfilePic
+from server.schemas.users import UserCreate, UserOut, UpdateBio
 from passlib.context import CryptContext
 from datetime import date
+import shutil
+import os
 
 SECRET_KEY = "user_secret_key"
 ALGORITHM = "HS256"
+DEFAULT_PROFILE_PIC = "http://localhost:8000/static/profile_pics/default.png"
 
 
 router = APIRouter(prefix="/users", tags=["Users"])
@@ -79,7 +82,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
         first_name=user.first_name,
         last_name=user.last_name,
         bio=user.bio,
-        profile_pic=user.profile_pic,
+        profile_pic=DEFAULT_PROFILE_PIC,
         create_date=date.today(),
     )
     db.add(db_user)
@@ -111,12 +114,24 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
 # update user profile pic
 
 @router.put("/me/profile_pic", response_model=UserOut)
-def update_user_profile_pic(
-    update: UpdateProfilePic,
+async def update_user_profile_pic(
+    profile_pic: UploadFile = File(...),
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
-    current_user.profile_pic = update.profile_pic  # type: ignore
+    if not profile_pic.filename:
+        raise HTTPException(status_code=400, detail="Invalid file upload.")
+
+    extension = os.path.splitext(profile_pic.filename)[-1]
+    filename = f"profile_{current_user.username}{extension}"
+    file_path = f"static/profile_pics/{filename}"
+
+    # Save the file
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(profile_pic.file, buffer)
+
+    # Update profile pic path in DB
+    current_user.profile_pic = f"http://localhost:8000/{file_path}"  # type: ignore
     db.commit()
     db.refresh(current_user)
     return current_user

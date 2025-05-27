@@ -63,15 +63,15 @@ CREATE TABLE messages (
 
 INSERT INTO users (first_name, last_name, username, email, password_hash, bio, rating, profile_pic, create_date)
 VALUES
-    ('Cayla', 'Thompson', 'blueeyed95', 'caylaleann18@gmail.com', '12345678', 'Looking for piano lessons!', NULL, '', '2025-05-20'),
-    ('Cayla', 'Johnson', 'greeneyed95', 'caylaleann19@gmail.com', '12345678', 'Looking for rollerblading lessons, please', NULL, '', '2025-05-20'),
-    ('Cayla', 'Wilson', 'greyeyed95', 'caylaleann20@gmail.com', '12345678', 'I like turtles.', NULL, '', '2025-05-20'),
-    ('Cayla', 'Davidson', 'yelloweyed95', 'caylaleann21@gmail.com', '12345678', 'What?', NULL, '', '2025-05-20'),
-    ('Cayla', 'Simpson', 'redeyed95', 'caylaleann22@gmail.com', '12345678', '', NULL, '', '2025-05-20'),
-    ('Cayla', 'Dawson', 'pinkeyed95', 'caylaleann23@gmail.com', '12345678', '', NULL, '', '2025-05-20'),
-    ('Cayla', 'Bobbyson', 'beigeeyed95', 'caylaleann24@gmail.com', '12345678', '', NULL, '', '2025-05-20'),
-    ('Cayla', 'Billyson', 'wideeyed95', 'caylaleann25@gmail.com', '12345678', '', NULL, '', '2025-05-20'),
-    ('Cayla', 'Jayson', 'buggyeyed95', 'caylaleann26@gmail.com', '12345678', '', NULL, '', '2025-05-20');
+    ('Cayla', 'Thompson', 'blueeyed95', 'caylaleann18@gmail.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Looking for piano lessons!', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-20'),
+    ('Cayla', 'Johnson', 'greeneyed95', 'caylaleann19@gmail.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Looking for rollerblading lessons, please', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-20'),
+    ('Cayla', 'Wilson', 'greyeyed95', 'caylaleann20@gmail.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'I like turtles.', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-20'),
+    ('Cayla', 'Davidson', 'yelloweyed95', 'caylaleann21@gmail.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'What?', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-20'),
+    ('Cayla', 'Simpson', 'redeyed95', 'caylaleann22@gmail.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', '', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-20'),
+    ('Cayla', 'Dawson', 'pinkeyed95', 'caylaleann23@gmail.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', '', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-20'),
+    ('Cayla', 'Bobbyson', 'beigeeyed95', 'caylaleann24@gmail.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', '', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-20'),
+    ('Cayla', 'Billyson', 'wideeyed95', 'caylaleann25@gmail.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', '', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-20'),
+    ('Cayla', 'Jayson', 'buggyeyed95', 'caylaleann26@gmail.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', '', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-20');
 
 INSERT INTO categories (name) VALUES
     ('Music & Performing Arts'), --1
