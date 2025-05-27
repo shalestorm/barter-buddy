@@ -13,6 +13,13 @@ const ProfilePage = () => {
     const viewedIdNum = parseInt(viewedUserId);
     const currentIdNum = currentUser?.id;
 
+    {/* TI BRANCH START */}
+
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedProfile, setEditedProfile] = useState({ name: "", bio: ""});
+
+    {/* TI BRANCH END */}
+
     useEffect(() => {
         const fetchUserProfileAndConnection = async () => {
             try {
@@ -102,7 +109,67 @@ const ProfilePage = () => {
             <h1>{profileData.name}</h1>
             <p>{profileData.bio || "No bio available"}</p>
 
-            {connectionStatus === "self" && <button disabled>Edit Your Profile</button>}
+
+{/* TI BRANCH START */}
+            {isEditing && (
+    <form
+        onSubmit={async (e) => {
+            e.preventDefault();
+            try {
+                const res = await fetch(`/users/${currentIdNum}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(editedProfile),
+                });
+
+                if (!res.ok) throw new Error("Update failed");
+                const updated = await res.json();
+                setProfileData(updated);
+                setIsEditing(false);
+            } catch (err) {
+                console.error("Failed to update profile:", err);
+                alert("Update failed.");
+            }
+        }}
+    >
+        <label>
+            Name:{" "}
+            <input
+                type="text"
+                value={editedProfile.name}
+                onChange={(e) => setEditedProfile({ ...editedProfile, name: e.target.value })}
+            />
+        </label>
+        <br />
+        <label>
+            Bio:{" "}
+            <textarea
+                value={editedProfile.bio}
+                onChange={(e) => setEditedProfile({ ...editedProfile, bio: e.target.value })}
+            />
+        </label>
+        <br />
+        <button type="submit">Save</button>
+        <button type="button" onClick={() => setIsEditing(false)}>
+            Cancel
+        </button>
+    </form>
+)}
+
+
+
+            {connectionStatus === "self" && !isEditing && (
+                <button onClick={() => {
+                    setEditedProfile({ name: profileData.name, bio: profileData.bio || "" });
+                    setIsEditing(true);
+                }}>
+                    Edit Your Profile
+                </button>
+            )}
+
+{/* TI BRANCH END */}
             {connectionStatus === "connected" && <button disabled>Connected</button>}
             {connectionStatus === "pending" && <button disabled>Request Pending</button>}
             {connectionStatus === "none" && (
