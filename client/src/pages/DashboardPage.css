@@ -1,0 +1,39 @@
+.dashboard-container {
+    /* background-image: url('/images/scroll-background.png');  RIC: what dis? */
+    /* optional bg image */
+    background-color: #f5f2e9;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.browse-container {
+    background-color: rgba(255, 253, 240, 0.96);
+    border: 2px solid #d8b97a;
+    border-radius: 16px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 90%;
+    box-shadow: 0 0 20px rgba(255, 223, 110, 0.4);
+    font-family: 'Cinzel', serif;
+}
+
+.card-scroll-container {
+    display: flex;
+    /* flex-direction: column; */
+    overflow-x: auto;
+    gap: 12px;
+    scrollbar-color: white;
+    max-width: 100%;
+}
+
+.user-card {
+    /* display: flex; */
+    border: 2px solid #d8b97a;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(255, 223, 110, 0.4);
+}
