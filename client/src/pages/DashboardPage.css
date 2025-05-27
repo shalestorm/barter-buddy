@@ -3,7 +3,7 @@
     /* optional bg image */
     background-color: #f5f2e9;
     padding: 2rem;
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     justify-content: center;
     min-height: 100vh;
@@ -36,4 +36,16 @@
     border: 2px solid #d8b97a;
     border-radius: 16px;
     box-shadow: 0 0 20px rgba(255, 223, 110, 0.4);
+    margin: 8px;
+    padding: 5px;
+    min-width: 210.531px;
+    cursor: pointer;
+}
+
+.card-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+    margin: .2rem;
 }

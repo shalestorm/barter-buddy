@@ -25,7 +25,7 @@ export default function Header() {
     return (
         <div className="header">
             <div className="header-left">
-                <h2>Hello, {user.first_name}!</h2>
+                <h2 className="greet">Hello, {user.first_name} {user.last_name.charAt(0)}. !</h2>
                 <Link to={`/profile/${user.id}`}><img src={user.profile_pic} alt="User Profile Pic" className="profile-pic" /></Link>
                 <div className="magic-header-nav-buttons">
                     <button onClick={() => navigate(`/profile/${user.id}`)} disabled={loading}>My Profile</button>

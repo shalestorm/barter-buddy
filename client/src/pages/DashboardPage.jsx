@@ -8,9 +8,27 @@ const DashboardPage = () => {
     const { user, loading } = useAuth();
     const [users, setUsers] = useState([]);
     const [excludedUserIds, setExcludedUserIds] = useState(new Set());
+    const [categories, setCategories] = useState([]); // RIC: check
     const navigate = useNavigate();
 
     const API_BASE = "http://localhost:8000";
+
+    const fetchSkillCategories = async () => {
+        try {
+            const categoriesRes = await fetch(`${API_BASE}/categories`);
+
+            if (!categoriesRes) {
+                throw new Error("Failed to fetch skill categories");
+            }
+
+            const catData = await categoriesRes.json();
+
+            setCategories(catData.name);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     const fetchUsersAndSkills = async () => {
         try {
@@ -76,6 +94,11 @@ const DashboardPage = () => {
         }
     }, [user]);
 
+    useEffect(() => {
+        fetchSkillCategories();
+        console.log(categories);
+    }, [])
+
     if (loading) return <div>Loading...</div>;
 
     return (
@@ -98,9 +121,9 @@ const DashboardPage = () => {
                                     key={u.id}
                                     className="user-card"
                                     onClick={() => navigate(`/profile/${u.id}`)}
-                                    style={{ border: "solid white 1px", margin: "8px", padding: "5px", minWidth: "210.531px" }}
+                                    // style={{ border: "solid white 1px", margin: "8px", padding: "5px", minWidth: "210.531px" }}
                                 >
-                                    <img src={u.profile_pic} alt={u.username} style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
+                                    <img src={u.profile_pic} alt={u.username} className="card-pic" />
                                     <div className="user-info">
                                         <h4>
                                             {u.first_name} {u.last_name.charAt(0)}.
