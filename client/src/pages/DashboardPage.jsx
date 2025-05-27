@@ -79,7 +79,7 @@ const DashboardPage = () => {
 
     return (
         <>
-            <Header></Header>
+            <Header />
             <div className="testing-browse">
                 <h2>Browse Knowledge Sharers</h2>
                 {user ? (
@@ -123,7 +123,7 @@ const DashboardPage = () => {
                         cursor: "pointer",
                         borderRadius: "4px",
                     }}
-                    >
+                >
                     Log Out
                 </button>
 

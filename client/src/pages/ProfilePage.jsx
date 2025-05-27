@@ -189,6 +189,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import "./profilePage.css";
+import Header from "../components/Header";
 
 const ProfilePage = () => {
     const { userId: viewedUserId } = useParams();
@@ -291,117 +292,120 @@ const ProfilePage = () => {
     if (connectionStatus === "error") return <div>Error loading profile.</div>;
 
     return (
-        <div className="profile-container">
-            <div className="profile-scroll-card">
-                <div style={{ textAlign: "center" }}>
-                    <img
-                        src={profileData.profile_pic || "/default-avatar.png"}
-                        alt="User avatar"
-                        className="profile-avatar"
-                    />
-                    <h1 className="profile-name">{profileData.first_name} {profileData.last_name}</h1>
-                    <p className="profile-bio">
-                        {profileData.bio || "A wizard of many talents..."}
-                    </p>
-                </div>
+        <>
+            < Header />
+            <div className="profile-container">
+                <div className="profile-scroll-card">
+                    <div style={{ textAlign: "center" }}>
+                        <img
+                            src={profileData.profile_pic || "/default-avatar.png"}
+                            alt="User avatar"
+                            className="profile-avatar"
+                        />
+                        <h1 className="profile-name">{profileData.first_name} {profileData.last_name}</h1>
+                        <p className="profile-bio">
+                            {profileData.bio || "A wizard of many talents..."}
+                        </p>
+                    </div>
 
-                {isEditing && (
-                    <form
-                        onSubmit={async (e) => {
-                            e.preventDefault();
-                            try {
-                                const res = await fetch(`/users/${currentIdNum}`, {
-                                    method: "PUT",
-                                    headers: { "Content-Type": "application/json" },
-                                    body: JSON.stringify(editedProfile),
-                                });
-                                if (!res.ok) throw new Error("Update failed");
-                                const updated = await res.json();
-                                setProfileData(updated);
-                                setIsEditing(false);
-                            } catch (err) {
-                                console.error("Failed to update profile:", err);
-                                alert("Update failed.");
-                            }
-                        }}
-                        className="edit-form"
-                    >
-                        <label>Name:</label>
-                        <input
-                            type="text"
-                            value={editedProfile.name}
-                            onChange={(e) =>
-                                setEditedProfile({ ...editedProfile, name: e.target.value })
-                            }
-                        />
-                        <label>Bio:</label>
-                        <textarea
-                            value={editedProfile.bio}
-                            onChange={(e) =>
-                                setEditedProfile({ ...editedProfile, bio: e.target.value })
-                            }
-                        />
-                        <label>Profile Picture URL:</label>
-                        <input
-                            type="text"
-                            value={editedProfile.profile_pic}
-                            onChange={(e) =>
-                                setEditedProfile({ ...editedProfile, profile_pic: e.target.value })
-                            }
-                        />
-                        <button type="submit" className="magic-button">
-                            Save
-                        </button>
-                        <button
-                            type="button"
-                            className="magic-button"
-                            onClick={() => setIsEditing(false)}
+                    {isEditing && (
+                        <form
+                            onSubmit={async (e) => {
+                                e.preventDefault();
+                                try {
+                                    const res = await fetch(`/users/${currentIdNum}`, {
+                                        method: "PUT",
+                                        headers: { "Content-Type": "application/json" },
+                                        body: JSON.stringify(editedProfile),
+                                    });
+                                    if (!res.ok) throw new Error("Update failed");
+                                    const updated = await res.json();
+                                    setProfileData(updated);
+                                    setIsEditing(false);
+                                } catch (err) {
+                                    console.error("Failed to update profile:", err);
+                                    alert("Update failed.");
+                                }
+                            }}
+                            className="edit-form"
                         >
-                            Cancel
-                        </button>
-                    </form>
-                )}
-
-                {!isEditing && connectionStatus === "self" && (
-                    <button
-                        className="magic-button"
-                        onClick={() => {
-                            setEditedProfile({
-                                name: `${profileData.first_name ?? ""} ${profileData.last_name ?? ""}`,
-                                bio: profileData.bio ?? "",
-                                profile_pic: profileData.profile_pic ?? "",
-                            });
-                            setIsEditing(true);
-                        }}
-                    >
-                        Edit Profile
-                    </button>
-                )}
-
-                {!isEditing && connectionStatus !== "self" && (
-                    <>
-                        {connectionStatus === "connected" && (
-                            <button className="magic-button" disabled>
-                                Connected
+                            <label>Name:</label>
+                            <input
+                                type="text"
+                                value={editedProfile.name}
+                                onChange={(e) =>
+                                    setEditedProfile({ ...editedProfile, name: e.target.value })
+                                }
+                            />
+                            <label>Bio:</label>
+                            <textarea
+                                value={editedProfile.bio}
+                                onChange={(e) =>
+                                    setEditedProfile({ ...editedProfile, bio: e.target.value })
+                                }
+                            />
+                            <label>Profile Picture URL:</label>
+                            <input
+                                type="text"
+                                value={editedProfile.profile_pic}
+                                onChange={(e) =>
+                                    setEditedProfile({ ...editedProfile, profile_pic: e.target.value })
+                                }
+                            />
+                            <button type="submit" className="magic-button">
+                                Save
                             </button>
-                        )}
-                        {connectionStatus === "pending" && (
-                            <button className="magic-button" disabled>
-                                Request Pending
-                            </button>
-                        )}
-                        {connectionStatus === "none" && (
                             <button
+                                type="button"
                                 className="magic-button"
-                                onClick={sendConnectionRequest}
+                                onClick={() => setIsEditing(false)}
                             >
-                                Send Connection Request
+                                Cancel
                             </button>
-                        )}
-                    </>
-                )}
+                        </form>
+                    )}
+
+                    {!isEditing && connectionStatus === "self" && (
+                        <button
+                            className="magic-button"
+                            onClick={() => {
+                                setEditedProfile({
+                                    name: `${profileData.first_name ?? ""} ${profileData.last_name ?? ""}`,
+                                    bio: profileData.bio ?? "",
+                                    profile_pic: profileData.profile_pic ?? "",
+                                });
+                                setIsEditing(true);
+                            }}
+                        >
+                            Edit Profile
+                        </button>
+                    )}
+
+                    {!isEditing && connectionStatus !== "self" && (
+                        <>
+                            {connectionStatus === "connected" && (
+                                <button className="magic-button" disabled>
+                                    Connected
+                                </button>
+                            )}
+                            {connectionStatus === "pending" && (
+                                <button className="magic-button" disabled>
+                                    Request Pending
+                                </button>
+                            )}
+                            {connectionStatus === "none" && (
+                                <button
+                                    className="magic-button"
+                                    onClick={sendConnectionRequest}
+                                >
+                                    Send Connection Request
+                                </button>
+                            )}
+                        </>
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
