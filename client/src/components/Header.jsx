@@ -1,19 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from 'react-router';
 import './Header.css'
 import logo from '../assets/bb_new.png';
 
 export default function Header() {
+    const [loading, setLoading] = useState(false);
+
     const { user, logout } = useAuth();
+
     const navigate = useNavigate();
 
+
     const handleLogout = async (e) => {
+        setLoading(true);
         const success = await logout();
         if (success) {
             navigate('/login');
         }
     };
+
 
     return (
         <div className="header">
