@@ -13,5 +13,5 @@ class User(Base):
     password_hash = Column(String)
     bio = Column(Text, nullable=True)
     rating = Column(Integer, nullable=True)
-    profile_pic = Column(String, nullable=True)
+    profile_pic = Column(String, nullable=True, default="static/profile_pics/default.png")
     create_date = Column(Date)

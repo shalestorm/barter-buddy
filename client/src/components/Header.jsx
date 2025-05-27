@@ -1,36 +1,42 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { useState } from 'react';
 import { useAuth } from "../context/AuthContext";
-import "./Header.css"; // optional, for styling
-import logo from "../assets/bb_new.png"; // update path based on your project structure
+import { Link, useNavigate } from 'react-router';
+import './Header.css'
+import logo from '../assets/bb_new.png';
 
-const Header = () => {
+export default function Header() {
+    const [loading, setLoading] = useState(false);
+
     const { user, logout } = useAuth();
 
-    if (!user) return null;
+    const navigate = useNavigate();
+
+
+    const handleLogout = async (e) => {
+        setLoading(true);
+        const success = await logout();
+        if (success) {
+            navigate('/login');
+        }
+    };
+
 
     return (
-        <header className="header">
-            {/* Left: Logged in as */}
+        <div className="header">
             <div className="header-left">
-                <p className="logged-in-text">Logged in as: {user.username}</p>
-                <Link to={`/profile/${user.id}`} className="nav-button">Profile</Link>
-                <Link to="/messages" className="nav-button">Messages</Link>
+                <h2>Hello, {user.first_name}!</h2>
+                <Link to={`/profile/${user.id}`}><img src={user.profile_pic} alt="User Profile Pic" className="profile-pic" /></Link>
+                <div className="header-nav-buttons">
+                    <button onClick={() => navigate(`/profile/${user.id}`)} disabled={loading}>My Profile</button>
+                    <button onClick={() => navigate(`/messages/${user.id}`)} disabled={loading}>Messages</button>
+                </div>
             </div>
-
-            {/* Center: Logo */}
             <div className="header-center">
-                <Link to="/welcome">
-                    <img src={logo} alt="Barter Buddy Logo" className="header-logo" />
-                </Link>
+                <Link to='/dashboard'><img src={logo} alt="Barter Buddy Logo" className="bb-logo" /></Link>
             </div>
-
-            {/* Right: Logout */}
             <div className="header-right">
-                <button onClick={logout} className="nav-button logout">Log Out</button>
+                <button onClick={handleLogout} disabled={loading}>Log Out</button>
             </div>
-        </header>
+        </div>
     );
 };
-
-export default Header;
