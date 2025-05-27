@@ -48,6 +48,29 @@ const BrowsePage = () => {
                 <p>Not logged in</p>
             )}
 
+            {/* TI BRANCH START */}
+
+            <button
+                onClick={async () => {
+                    const success = await logout();
+                    if (success) navigate("/login");
+                }}
+                style={{
+                    marginBottom: "20px",
+                    padding: "6px 12px",
+                    backgroundColor: "#444",
+                    color: "white",
+                    border: "none",
+                    cursor: "pointer",
+                    borderRadius: "4px",
+                }}
+                >
+                Log Out
+            </button>
+
+            {/* TI BRANCH END */}
+
+
             <p>Explore users who are offering and looking to learn new skills.</p>
 
             <h3>FOR TESTING PURPOSES: Click profiles below</h3>
