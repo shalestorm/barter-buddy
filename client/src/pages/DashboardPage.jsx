@@ -82,9 +82,7 @@ const DashboardPage = () => {
                         return { ...u, skills: [] };
                     }
                     const skills = await skillsRes.json();
-                    // const skillNames = skills.map((skill) => skill.name);
-                    // return { ...u, skills: skillNames };
-                    return { ...u, skills }; // RIC: refactoring for filtering based on selectedCategory
+                    return { ...u, skills };
                 })
             );
 
@@ -156,7 +154,7 @@ const DashboardPage = () => {
                         className="card-scroll-container"
                     >
                         {filteredUsers
-                            .sort(() => Math.random()-0.5)
+                            .sort(() => Math.random()-0.5) // Randomize users results
                             .slice(((currentPage - 1) * usersPerPage), (currentPage * usersPerPage))
                             .map((u) => (
                                 <div
@@ -174,8 +172,8 @@ const DashboardPage = () => {
                                         {(selectedCategory
                                             ? u.skills.filter((s) => s.category_id === Number(selectedCategory))
                                             : u.skills).slice(0, 5).map((skill, index) => (
-                                            <li key={index}>{skill.name}</li> // RIC: refactoring for filtering based on selectedCategory
-                                        ))}
+                                            <li key={index}>{skill.name}</li>
+                                        ))} {/* Display skills that match selected category*/}
                                     </ul>
                                 </div>
                             ))}
