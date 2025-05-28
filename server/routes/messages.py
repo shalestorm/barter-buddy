@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Body, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 from server.db.database import SessionLocal
@@ -16,19 +16,14 @@ def get_db():
         db.close()
 
 
-# create a new message
-
-
 @router.post("/", response_model=MessageOut)
-def send_Message(mes: MessageCreate, db: Session = Depends(get_db)):
-    db_message = Message(**mes.model_dump())
+def send_message(mes: MessageCreate = Body(...), db: Session = Depends(get_db)):
+    # Optional: validate connection exists or users exist here
+    db_message = Message(**mes.dict())
     db.add(db_message)
     db.commit()
     db.refresh(db_message)
     return db_message
-
-
-# get all messages by user
 
 
 @router.get("/connection/{connection_id}", response_model=List[MessageOut])
@@ -49,12 +44,11 @@ def get_user_messages(
     return messages
 
 
-# mark message as read
-
-
 @router.patch("/{message_id}/read", response_model=MessageOut)
 def mark_read(message_id: int, db: Session = Depends(get_db)):
     db_message = db.query(Message).filter(Message.id == message_id).first()
+    if not db_message:
+        raise HTTPException(status_code=404, detail="Message not found")
     db_message.is_read = True  # type: ignore
     db.commit()
     db.refresh(db_message)

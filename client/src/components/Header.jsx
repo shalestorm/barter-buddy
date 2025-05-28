@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from 'react-router';
 import './Header.css'
 import logo from '../assets/bb_new.png';
-import background from '..assets/background.jpeg'
+
 
 export default function Header() {
     const [loading, setLoading] = useState(false);
