@@ -122,9 +122,7 @@ const DashboardPage = () => {
             <div className="dashboard-container">
                 <div className="browse-container">
                     <h2>Browse Knowledge Sharers</h2>
-                    <p>Explore users who are offering and looking to learn new skills.</p>
-
-                    <h3>FOR TESTING PURPOSES: Click profiles below</h3>
+                    <h3>Explore users who are offering and looking to learn new skills.</h3>
                     <div>
                         <label htmlFor="category-select">Filter results by skill category: </label>
                         <select
