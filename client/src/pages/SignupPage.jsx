@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import background_signup from '../assets/background_signup.png';
+import logo from '../assets/bb_new.png';
 
 export default function SignupPage() {
     const [newUsername, setNewUsername] = useState("");
@@ -107,6 +108,9 @@ export default function SignupPage() {
         <div className="signup-background" style={{ backgroundImage: `url(${background_signup})` }}>
             <div className="signup-overlay"></div>
             <div className="signup-container">
+                <Link to='/'>
+                    <img src={logo} alt="Barter Buddy Logo" className="bb-logo" />
+                </Link>
                 <h2>New Account</h2>
                 <p>Step {signupStep} of 3</p>
                 <form

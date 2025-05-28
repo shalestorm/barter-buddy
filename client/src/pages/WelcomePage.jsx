@@ -66,22 +66,11 @@ const WelcomePage = () => {
 
 
     return (
-        // <div id="gradient" className="fade-in">
-        //     <img src={logo} alt="Barter Buddy Logo" className="header-logo" />
-        //     <h1 className="magic-title">Welcome to Barter Buddy!</h1>
-        //     <p className="magic-subtitle">The Free Exchange of Knowledge</p>
-
-
-        //     <div className="button-container">
-        //         <button className="magic-button">New to Barter Buddy?</button>
-        //         <button className="magic-button">Log In</button>
-        //         {/* <button className="magic-button">Forgot Password?</button> */}
-        //     </div>
-        // </div>
         <div className="gradient">
             <div className="background-overlay"></div>
             <header className="centered-header">
                 <img src={logo} alt="Barter Buddy Logo" className="header-logo" />
+                <br />
                 <h1 className="magic-title">Welcome to Barter Buddy!</h1>
                 <h2 className="magic-title">The Free Exchange of Knowledge</h2>
             </header>

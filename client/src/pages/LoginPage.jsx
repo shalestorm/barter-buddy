@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import background_login from "../assets/background_login.png";
+import logo from '../assets/bb_new.png';
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");
@@ -32,56 +33,57 @@ export default function LoginPage() {
             <div className="gradient" style={{ backgroundImage: `url(${background_login})` }}>
                 <div className="background-overlay"></div>
             </div>
-
             <div className="login-page">
-    <h2>Login</h2>
-    <form
-        className="login-form"
-        onSubmit={handleSubmit}
-    >
-        <div className="form-group">
-            <label htmlFor="username">Username: </label>
-            <input
-                id="username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                placeholder="username"
-                autoComplete="username"
-            />
+                <Link to='/'>
+                    <img src={logo} alt="Barter Buddy Logo" className="bb-logo" />
+                </Link>
+                <h2>Login</h2>
+                <form
+                    className="login-form"
+                    onSubmit={handleSubmit}
+                >
+                    <div className="form-group">
+                        <label htmlFor="username">Username: </label>
+                        <input
+                            id="username"
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                            placeholder="username"
+                            autoComplete="username"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password: </label>
+                            <input
+                                id="password"
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                placeholder="password"
+                                autoComplete="current-password"
+                            />
+                    </div>
+                    <div className="action-buttons-container">
+                        <button
+                            className="magic-button"
+                            type="submit"
+                            disabled={loading}
+                        >
+                            {loading ? "Logging in..." : "Login"}
+                        </button>
+                    </div>
+                </form>
+                <br />
+                <div className="action-buttons-container">
+                    <button className="magic-button" onClick={() => navigate("/signup")}>
+                        Don’t have an account? Sign Up
+                    </button>
+                </div>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
+            </div>
         </div>
-        <div className="form-group">
-            <label htmlFor="password">Password: </label>
-                <input
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    placeholder="password"
-                    autoComplete="current-password"
-                />
-        </div>
-        <div className="action-buttons-container">
-            <button
-                className="magic-button"
-                type="submit"
-                disabled={loading}
-            >
-                {loading ? "Logging in..." : "Login"}
-            </button>
-        </div>
-    </form>
-    <br />
-    <div className="action-buttons-container">
-        <button className="magic-button" onClick={() => navigate("/signup")}>
-            Don’t have an account? Sign Up
-        </button>
-    </div>
-
-  {error && <p style={{ color: 'red' }}>{error}</p>}
-</div>
-</div>
-);
+    );
 }
