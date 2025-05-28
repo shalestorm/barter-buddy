@@ -2,14 +2,35 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 import Header from "../components/Header";
+import "./DashboardPage.css"
 
 const DashboardPage = () => {
     const { user, loading } = useAuth();
     const [users, setUsers] = useState([]);
     const [excludedUserIds, setExcludedUserIds] = useState(new Set());
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState("");
     const navigate = useNavigate();
 
     const API_BASE = "http://localhost:8000";
+
+    const fetchSkillCategories = async () => {
+        try {
+            // RIC: fetch skill categories
+            const categoriesRes = await fetch(`${API_BASE}/categories`);
+
+            if (!categoriesRes.ok) {
+                throw new Error("Failed to fetch skill categories");
+            }
+
+            const catData = await categoriesRes.json();
+
+            setCategories(catData);
+
+        } catch (error) {
+            console.error("Error fetching categories:", error);
+        }
+    }
 
     const fetchUsersAndSkills = async () => {
         try {
@@ -58,8 +79,9 @@ const DashboardPage = () => {
                         return { ...u, skills: [] };
                     }
                     const skills = await skillsRes.json();
-                    const skillNames = skills.map((skill) => skill.name);
-                    return { ...u, skills: skillNames };
+                    // const skillNames = skills.map((skill) => skill.name);
+                    // return { ...u, skills: skillNames };
+                    return { ...u, skills }; // RIC: refactoring for filtering based on selectedCategory
                 })
             );
 
@@ -75,90 +97,78 @@ const DashboardPage = () => {
         }
     }, [user]);
 
+    // RIC: fetch categories on load
+    useEffect(() => {
+        fetchSkillCategories();
+    }, [])
+
+    //RIC: console log to confirm selected category in state (REMOVE)
+    useEffect(() => {
+        console.log(selectedCategory);
+    }, [selectedCategory])
+
     if (loading) return <div>Loading...</div>;
 
     return (
         <>
             <Header />
-            <div className="testing-browse">
-                <h2>Browse Knowledge Sharers</h2>
-                {user ? (
-                    <>
-                        <p>Logged in as: {user.username}</p>
-                        <div
-                            onClick={() => navigate(`/profile/${user.id}`)}
-                            style={{
-                                border: "1px solid white",
-                                padding: "8px",
-                                marginBottom: "12px",
-                                cursor: "pointer",
-                                maxWidth: "300px",
-                            }}
+            <div className="dashboard-container">
+                <div className="browse-container">
+                    <h2>Browse Knowledge Sharers</h2>
+                    <p>Explore users who are offering and looking to learn new skills.</p>
+
+                    <h3>FOR TESTING PURPOSES: Click profiles below</h3>
+                    <div>
+                        <label htmlFor="category-select">Filter results by skill category: </label>
+                        <select
+                            id="category-select"
+                            name="category"
+                            value={selectedCategory}
+                            onChange={(e) => setSelectedCategory(e.target.value)}
                         >
-                            {user.username} - {user.name} (You)
-                            <img
-                                src={user.profile_pic}
-                                alt={`${user.username}'s profile`}
-                                style={{ width: "50px", height: "50px", borderRadius: "50%" }}
-                            />
-                        </div>
-                    </>
-                ) : (
-                    <p>Not logged in</p>
-                )}
-
-                {/* TI BRANCH START
-
-                <button
-                    onClick={async () => {
-                        const success = await logout();
-                        if (success) navigate("/login");
-                    }}
-                    style={{
-                        marginBottom: "20px",
-                        padding: "6px 12px",
-                        backgroundColor: "#444",
-                        color: "white",
-                        border: "none",
-                        cursor: "pointer",
-                        borderRadius: "4px",
-                    }}
-                >
-                    Log Out
-                </button>
-
-                {/* TI BRANCH END */}
-
-
-                <p>Explore users who are offering and looking to learn new skills.</p>
-
-                <h3>FOR TESTING PURPOSES: Click profiles below</h3>
-                <div
-                    className="card-scroll-container"
-                    style={{ display: "flex", overflowX: "auto", gap: "12px", scrollbarColor: "white", maxWidth: "800px" }}
-                >
-                    {users
-                        .filter((u) => !excludedUserIds.has(u.id)) // exclude connected/requested users & self
-                        .map((u) => (
-                            <div
-                                key={u.id}
-                                className="user-card"
-                                onClick={() => navigate(`/profile/${u.id}`)}
-                                style={{ border: "solid white 1px", margin: "8px", padding: "5px", minWidth: "210.531px" }}
-                            >
-                                <img src={u.profile_pic} alt={u.username} style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
-                                <div className="user-info">
-                                    <h4>
-                                        {u.first_name} {u.last_name.charAt(0)}.
-                                    </h4>
-                                    <ul style={{ textAlign: "left" }}>
+                            <option value="">-- Select Skill Category --</option>
+                            {categories.map((cat) => (
+                                <option key={cat.id} value={cat.id}>
+                                    {cat.name}
+                                </option>
+                            ))}
+                            {/*RIC: Not necessary? Should any be displayed by default? Any way to randomize? */}
+                            <option value="13">Surprise Me!</option>
+                        </select>
+                    </div>
+                    <br />
+                    <div
+                        className="card-scroll-container"
+                        // style={{ display: "flex", overflowX: "auto", gap: "12px", scrollbarColor: "white", maxWidth: "800px" }} RIC: all styling moved to CSS
+                    >
+                        {users
+                            .filter((u) => !excludedUserIds.has(u.id)) // exclude connected/requested users & self
+                            .filter((u) => // RIC: filtering based on selectedCategory
+                                selectedCategory === "" ||
+                                u.skills.some((skill) => skill.category_id === Number(selectedCategory))
+                            )
+                            .map((u) => (
+                                <div
+                                    key={u.id}
+                                    className="user-card"
+                                    onClick={() => navigate(`/profile/${u.id}`)}
+                                    // style={{ border: "solid white 1px", margin: "8px", padding: "5px", minWidth: "210.531px" }} RIC: all styling moved to CSS
+                                >
+                                    <div className="user-header">
+                                        <img src={u.profile_pic} alt={u.username} className="card-pic" />
+                                        <h4>
+                                            {u.first_name} {u.last_name.charAt(0)}.
+                                        </h4>
+                                    </div>
+                                    <ul className="card-ul">
                                         {(u.skills || []).slice(0, 5).map((skill, index) => (
-                                            <li key={index}>{skill}</li>
+                                            // <li key={index}>{skill}</li>
+                                            <li key={index}>{skill.name}</li> // RIC: refactoring for filtering based on selectedCategory
                                         ))}
                                     </ul>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                    </div>
                 </div>
             </div>
         </>
