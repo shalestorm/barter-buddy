@@ -37,7 +37,7 @@ export default function LoginPage() {
     <h2>Login</h2>
     <form onSubmit={handleSubmit}>
         <label>
-            Username:
+            Username: <> </>
             <input
                 type="text"
                 value={username}
@@ -48,7 +48,7 @@ export default function LoginPage() {
         </label>
         <br />
         <label>
-            Password:
+            Password: <> </>
             <input
                 type="password"
                 value={password}
@@ -60,7 +60,7 @@ export default function LoginPage() {
         <br />
         <div className="action-buttons-container">
             <button
-                className="magic-button login-button"
+                className="magic-button"
                 type="submit"
                 disabled={loading}
             >
@@ -70,9 +70,9 @@ export default function LoginPage() {
     </form>
 
     <div className="action-buttons-container">
-        <Link to="/signup" className="magic-button signup-link">
+        <button className="magic-button" onClick={() => navigate("/signup")}>
             Don’t have an account? Sign Up
-        </Link>
+        </button>
     </div>
 
   {error && <p style={{ color: 'red' }}>{error}</p>}

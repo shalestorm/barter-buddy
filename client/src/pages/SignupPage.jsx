@@ -214,9 +214,8 @@ export default function SignupPage() {
                 </form>
 
                 <div className="login-redirect">
-                    <span>Already have an account?</span>
-                    <button className="magic-button login-button" onClick={() => navigate('/login')}>
-                        LOGIN
+                    <button className="magic-button" onClick={() => navigate('/login')}>
+                       Already have an account?
                     </button>
                 </div>
 
