@@ -128,7 +128,7 @@ const DashboardPage = () => {
                                     {cat.name}
                                 </option>
                             ))}
-                            <option value="13">Surprise Me!</option>
+                            <option value="13">Surprise Me!</option> {/*RIC: Not necessary? Should any be displayed by default? */}
                         </select>
                     </div>
                     <br />
@@ -145,17 +145,17 @@ const DashboardPage = () => {
                                     onClick={() => navigate(`/profile/${u.id}`)}
                                     // style={{ border: "solid white 1px", margin: "8px", padding: "5px", minWidth: "210.531px" }}
                                 >
-                                    <img src={u.profile_pic} alt={u.username} className="card-pic" />
-                                    <div className="user-info">
+                                    <div className="user-header">
+                                        <img src={u.profile_pic} alt={u.username} className="card-pic" />
                                         <h4>
                                             {u.first_name} {u.last_name.charAt(0)}.
                                         </h4>
-                                        <ul style={{ textAlign: "left" }}>
-                                            {(u.skills || []).slice(0, 5).map((skill, index) => (
-                                                <li key={index}>{skill}</li>
-                                            ))}
-                                        </ul>
                                     </div>
+                                    <ul className="card-ul">
+                                        {(u.skills || []).slice(0, 5).map((skill, index) => (
+                                            <li key={index}>{skill}</li>
+                                        ))}
+                                    </ul>
                                 </div>
                             ))}
                     </div>
