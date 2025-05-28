@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 from server.db.database import SessionLocal
@@ -55,3 +55,16 @@ def get_sent_requests(user_id: int, db: Session = Depends(get_db)):
         db.query(ConnectionRequest).filter(ConnectionRequest.sender_id == user_id).all()
     )
     return sent
+
+
+# delete conneciton request
+
+
+@router.delete("/{request_id}")
+def delete_connection_request(request_id: int, db: Session = Depends(get_db)):
+    request = db.query(ConnectionRequest).filter(ConnectionRequest.id == request_id).first()
+    if not request:
+        raise HTTPException(status_code=404, detail="Request not found")
+    db.delete(request)
+    db.commit()
+    return {"message": "Request deleted"}
