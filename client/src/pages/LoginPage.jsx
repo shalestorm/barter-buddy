@@ -35,29 +35,34 @@ export default function LoginPage() {
 
             <div className="login-page">
     <h2>Login</h2>
-    <form onSubmit={handleSubmit}>
-        <label>
-            Username: <> </>
+    <form
+        className="login-form"
+        onSubmit={handleSubmit}
+    >
+        <div className="form-group">
+            <label htmlFor="username">Username: </label>
             <input
+                id="username"
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
+                placeholder="username"
                 autoComplete="username"
             />
-        </label>
-        <br />
-        <label>
-            Password: <> </>
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                autoComplete="current-password"
-            />
-        </label>
-        <br />
+        </div>
+        <div className="form-group">
+            <label htmlFor="password">Password: </label>
+                <input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    placeholder="password"
+                    autoComplete="current-password"
+                />
+        </div>
         <div className="action-buttons-container">
             <button
                 className="magic-button"
@@ -68,7 +73,7 @@ export default function LoginPage() {
             </button>
         </div>
     </form>
-
+    <br />
     <div className="action-buttons-container">
         <button className="magic-button" onClick={() => navigate("/signup")}>
             Don’t have an account? Sign Up

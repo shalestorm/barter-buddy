@@ -65,7 +65,7 @@ button {
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: #6e0f77;
 }
 
 button:focus,
@@ -363,12 +363,6 @@ h2.magic-title {
   transform: translateY(-2px);
 }
 
-/*.login-button {
-  height: 50px;
-  width: 100px;
-  margin-top: 5px;
-} */
-
 .signup-button {
   height: 50px;
   width: 100px;
@@ -496,6 +490,24 @@ body,
 }
 
 .signup-form input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.login-form .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.login-form label {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.login-form input {
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid #ccc;
