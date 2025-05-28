@@ -5,6 +5,7 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [profilePicUrl, setProfilePicUrl] = useState("")
 
     // Check if user is authenticated
     async function checkAuth() {
@@ -15,17 +16,20 @@ export function AuthProvider({ children }) {
 
             if (!res.ok) {
                 setUser(null);
+                setProfilePicUrl("");
                 setLoading(false);
                 return false;
             }
 
             const userData = await res.json();
             setUser(userData);
+            setProfilePicUrl(`${userData.profile_pic}?t=${Date.now()}`)
             setLoading(false);
             return true;
         } catch (error) {
             console.error("Auth check failed:", error);
             setUser(null);
+            setProfilePicUrl("");
             setLoading(false);
             return false;
         }
@@ -82,7 +86,7 @@ export function AuthProvider({ children }) {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, loading, login, logout, checkAuth }}>
+        <AuthContext.Provider value={{ user, loading, login, logout, checkAuth, profilePicUrl, setProfilePicUrl }}>
             {children}
         </AuthContext.Provider>
     );

@@ -7,6 +7,7 @@ import logo from '../assets/bb_new.png';
 
 export default function Header() {
     const [loading, setLoading] = useState(false);
+    const { profilePicUrl } = useAuth()
 
     const { user, logout } = useAuth();
 
@@ -26,7 +27,7 @@ export default function Header() {
         <div className="header">
             <div className="header-left">
                 <h2 className="greet">Hello, {user.first_name} {user.last_name.charAt(0)}. !</h2>
-                <Link to={`/profile/${user.id}`}><img src={user.profile_pic} alt="User Profile Pic" className="profile-pic" /></Link>
+                <Link to={`/profile/${user.id}`}><img src={profilePicUrl || "/default.png"} alt="User Profile Pic" className="profile-pic" /></Link>
                 <div className="magic-header-nav-buttons">
                     <button onClick={() => navigate(`/profile/${user.id}`)} disabled={loading}>My Profile</button>
                     <button onClick={() => navigate(`/messages/${user.id}`)} disabled={loading}>Messages</button>

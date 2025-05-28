@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Cookie, status, UploadFile, File
 from sqlalchemy.orm import Session
+import pathlib
 from jose import jwt, JWTError
 from typing import List, Optional
 from server.db.database import SessionLocal
@@ -14,9 +15,7 @@ SECRET_KEY = "user_secret_key"
 ALGORITHM = "HS256"
 DEFAULT_PROFILE_PIC = "http://localhost:8000/static/profile_pics/default.png"
 
-
 router = APIRouter(prefix="/users", tags=["Users"])
-
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -34,12 +33,10 @@ def get_db():
 
 
 # get the current user using the JWT
-
 def get_current_user(
-        access_token: Optional[str] = Cookie(None),
-        db: Session = Depends(get_db)
+    access_token: Optional[str] = Cookie(None),
+    db: Session = Depends(get_db)
 ) -> User:
-
     if not access_token:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -63,9 +60,8 @@ def get_current_user(
         raise HTTPException(status_code=404, detail="User not found")
     return user
 
+
 # create a new user
-
-
 @router.post("/", response_model=UserOut)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
     existing_user = db.query(User).filter(
@@ -92,8 +88,6 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
 
 
 # get all users
-
-
 @router.get("/", response_model=List[UserOut])
 def get_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users = db.query(User).offset(skip).limit(limit).all()
@@ -101,8 +95,6 @@ def get_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 
 # get user by id
-
-
 @router.get("/{user_id}", response_model=UserOut)
 def get_user(user_id: int, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.id == user_id).first()
@@ -112,7 +104,6 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
 
 
 # update user profile pic
-
 @router.put("/me/profile_pic", response_model=UserOut)
 async def update_user_profile_pic(
     profile_pic: UploadFile = File(...),
@@ -122,35 +113,43 @@ async def update_user_profile_pic(
     if not profile_pic.filename:
         raise HTTPException(status_code=400, detail="Invalid file upload.")
 
-    extension = os.path.splitext(profile_pic.filename)[-1]
-    filename = f"profile_{current_user.username}{extension}"
-    file_path = f"static/profile_pics/{filename}"
+    extension = os.path.splitext(profile_pic.filename)[-1].lower()
+    if extension not in [".png", ".jpg", ".jpeg", ".gif"]:
+        raise HTTPException(status_code=400, detail="Unsupported file type.")
 
-    # Save the file
+    # Ensure uploads don't overwrite default.png or other user's pics
+    filename = f"profile_{current_user.username}{extension}"
+    BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+    media_path = BASE_DIR / "static" / "profile_pics"
+    media_path.mkdir(parents=True, exist_ok=True)
+
+    file_path = media_path / filename
+
+    # Save the uploaded file
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(profile_pic.file, buffer)
 
-    # Update profile pic path in DB
-    current_user.profile_pic = f"http://localhost:8000/{file_path}"  # type: ignore
+    # Update user's profile pic URL
+    current_user.profile_pic = f"http://localhost:8000/static/profile_pics/{filename}"
     db.commit()
     db.refresh(current_user)
     return current_user
 
 
 # update user bio
-
-
 @router.put("/me/bio", response_model=UserOut)
-def update_user_bio(update: UpdateBio, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+def update_user_bio(
+    update: UpdateBio,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
     current_user.bio = update.bio  # type: ignore
     db.commit()
     db.refresh(current_user)
     return current_user
 
 
-# /me
-
-
+# get current user info
 @router.get("/me", response_model=UserOut, name="auth:me")
 @router.get("/auth/me", response_model=UserOut)
 def read_current_user(current_user: User = Depends(get_current_user)):
