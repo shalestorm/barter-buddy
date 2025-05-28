@@ -10,7 +10,10 @@ const DashboardPage = () => {
     const [excludedUserIds, setExcludedUserIds] = useState(new Set());
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
+
+    const usersPerPage = 5;
 
     const API_BASE = "http://localhost:8000";
 
@@ -79,9 +82,7 @@ const DashboardPage = () => {
                         return { ...u, skills: [] };
                     }
                     const skills = await skillsRes.json();
-                    // const skillNames = skills.map((skill) => skill.name);
-                    // return { ...u, skills: skillNames };
-                    return { ...u, skills }; // RIC: refactoring for filtering based on selectedCategory
+                    return { ...u, skills };
                 })
             );
 
@@ -100,14 +101,20 @@ const DashboardPage = () => {
     // RIC: fetch categories on load
     useEffect(() => {
         fetchSkillCategories();
-    }, [])
-
-    //RIC: console log to confirm selected category in state (REMOVE)
-    useEffect(() => {
-        console.log(selectedCategory);
-    }, [selectedCategory])
+    }, []);
 
     if (loading) return <div>Loading...</div>;
+
+    const filteredUsers = users
+        .filter((u) => !excludedUserIds.has(u.id)) // exclude connected/requested users & self
+        .filter((u) => // RIC: filtering based on selectedCategory
+            selectedCategory === "" ||
+            u.skills.some((skill) => skill.category_id === Number(selectedCategory))
+        )
+
+    useEffect(() => {
+        setCurrentPage(1)
+    }, [selectedCategory]);
 
     return (
         <>
@@ -115,9 +122,7 @@ const DashboardPage = () => {
             <div className="dashboard-container">
                 <div className="browse-container">
                     <h2>Browse Knowledge Sharers</h2>
-                    <p>Explore users who are offering and looking to learn new skills.</p>
-
-                    <h3>FOR TESTING PURPOSES: Click profiles below</h3>
+                    <h3>Explore users who are offering and looking to learn new skills.</h3>
                     <div>
                         <label htmlFor="category-select">Filter results by skill category: </label>
                         <select
@@ -126,33 +131,34 @@ const DashboardPage = () => {
                             value={selectedCategory}
                             onChange={(e) => setSelectedCategory(e.target.value)}
                         >
-                            <option value="">-- Select Skill Category --</option>
+                            <option value="">-- Random --</option>
                             {categories.map((cat) => (
                                 <option key={cat.id} value={cat.id}>
                                     {cat.name}
                                 </option>
                             ))}
                             {/*RIC: Not necessary? Should any be displayed by default? Any way to randomize? */}
-                            <option value="13">Surprise Me!</option>
+                            {/* <option value="13">Surprise Me!</option> */}
                         </select>
                     </div>
                     <br />
+                    <div className="browse-buttons">
+                        <button onClick={(e) => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+                        <button onClick={(e) => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(
+                            filteredUsers.length/usersPerPage
+                        )}>Next</button>
+                    </div>
                     <div
                         className="card-scroll-container"
-                        // style={{ display: "flex", overflowX: "auto", gap: "12px", scrollbarColor: "white", maxWidth: "800px" }} RIC: all styling moved to CSS
                     >
-                        {users
-                            .filter((u) => !excludedUserIds.has(u.id)) // exclude connected/requested users & self
-                            .filter((u) => // RIC: filtering based on selectedCategory
-                                selectedCategory === "" ||
-                                u.skills.some((skill) => skill.category_id === Number(selectedCategory))
-                            )
+                        {filteredUsers
+                            .sort(() => Math.random()-0.5) // Randomize users results
+                            .slice(((currentPage - 1) * usersPerPage), (currentPage * usersPerPage))
                             .map((u) => (
                                 <div
                                     key={u.id}
                                     className="user-card"
                                     onClick={() => navigate(`/profile/${u.id}`)}
-                                    // style={{ border: "solid white 1px", margin: "8px", padding: "5px", minWidth: "210.531px" }} RIC: all styling moved to CSS
                                 >
                                     <div className="user-header">
                                         <img src={u.profile_pic} alt={u.username} className="card-pic" />
@@ -161,10 +167,11 @@ const DashboardPage = () => {
                                         </h4>
                                     </div>
                                     <ul className="card-ul">
-                                        {(u.skills || []).slice(0, 5).map((skill, index) => (
-                                            // <li key={index}>{skill}</li>
-                                            <li key={index}>{skill.name}</li> // RIC: refactoring for filtering based on selectedCategory
-                                        ))}
+                                        {(selectedCategory
+                                            ? u.skills.filter((s) => s.category_id === Number(selectedCategory))
+                                            : u.skills).slice(0, 5).map((skill, index) => (
+                                            <li key={index}>{skill.name}</li>
+                                        ))} {/* Display skills that match selected category*/}
                                     </ul>
                                 </div>
                             ))}

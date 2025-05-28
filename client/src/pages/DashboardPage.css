@@ -29,6 +29,7 @@
     gap: 12px;
     scrollbar-color: white;
     max-width: 100%;
+    justify-content: space-evenly;
 }
 
 .user-card {
@@ -67,4 +68,9 @@
     text-align: left;
     margin-top: 12px;
     margin-bottom: 8px;
+}
+
+.browse-buttons {
+    display: flex;
+    justify-content: space-between;
 }
