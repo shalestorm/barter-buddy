@@ -16,6 +16,7 @@ const DashboardPage = () => {
 
     const fetchSkillCategories = async () => {
         try {
+            // RIC: fetch skill categories
             const categoriesRes = await fetch(`${API_BASE}/categories`);
 
             if (!categoriesRes.ok) {
@@ -78,8 +79,9 @@ const DashboardPage = () => {
                         return { ...u, skills: [] };
                     }
                     const skills = await skillsRes.json();
-                    const skillNames = skills.map((skill) => skill.name);
-                    return { ...u, skills: skillNames };
+                    // const skillNames = skills.map((skill) => skill.name);
+                    // return { ...u, skills: skillNames };
+                    return { ...u, skills }; // RIC: refactoring for filtering based on selectedCategory
                 })
             );
 
@@ -95,10 +97,12 @@ const DashboardPage = () => {
         }
     }, [user]);
 
+    // RIC: fetch categories on load
     useEffect(() => {
         fetchSkillCategories();
     }, [])
 
+    //RIC: console log to confirm selected category in state (REMOVE)
     useEffect(() => {
         console.log(selectedCategory);
     }, [selectedCategory])
@@ -128,22 +132,27 @@ const DashboardPage = () => {
                                     {cat.name}
                                 </option>
                             ))}
-                            <option value="13">Surprise Me!</option> {/*RIC: Not necessary? Should any be displayed by default? */}
+                            {/*RIC: Not necessary? Should any be displayed by default? Any way to randomize? */}
+                            <option value="13">Surprise Me!</option>
                         </select>
                     </div>
                     <br />
                     <div
                         className="card-scroll-container"
-                        // style={{ display: "flex", overflowX: "auto", gap: "12px", scrollbarColor: "white", maxWidth: "800px" }}
+                        // style={{ display: "flex", overflowX: "auto", gap: "12px", scrollbarColor: "white", maxWidth: "800px" }} RIC: all styling moved to CSS
                     >
                         {users
                             .filter((u) => !excludedUserIds.has(u.id)) // exclude connected/requested users & self
+                            .filter((u) => // RIC: filtering based on selectedCategory
+                                selectedCategory === "" ||
+                                u.skills.some((skill) => skill.category_id === Number(selectedCategory))
+                            )
                             .map((u) => (
                                 <div
                                     key={u.id}
                                     className="user-card"
                                     onClick={() => navigate(`/profile/${u.id}`)}
-                                    // style={{ border: "solid white 1px", margin: "8px", padding: "5px", minWidth: "210.531px" }}
+                                    // style={{ border: "solid white 1px", margin: "8px", padding: "5px", minWidth: "210.531px" }} RIC: all styling moved to CSS
                                 >
                                     <div className="user-header">
                                         <img src={u.profile_pic} alt={u.username} className="card-pic" />
@@ -153,7 +162,8 @@ const DashboardPage = () => {
                                     </div>
                                     <ul className="card-ul">
                                         {(u.skills || []).slice(0, 5).map((skill, index) => (
-                                            <li key={index}>{skill}</li>
+                                            // <li key={index}>{skill}</li>
+                                            <li key={index}>{skill.name}</li> // RIC: refactoring for filtering based on selectedCategory
                                         ))}
                                     </ul>
                                 </div>
