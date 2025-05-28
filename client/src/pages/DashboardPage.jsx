@@ -8,7 +8,8 @@ const DashboardPage = () => {
     const { user, loading } = useAuth();
     const [users, setUsers] = useState([]);
     const [excludedUserIds, setExcludedUserIds] = useState(new Set());
-    const [categories, setCategories] = useState([]); // RIC: check
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState("");
     const navigate = useNavigate();
 
     const API_BASE = "http://localhost:8000";
@@ -17,16 +18,16 @@ const DashboardPage = () => {
         try {
             const categoriesRes = await fetch(`${API_BASE}/categories`);
 
-            if (!categoriesRes) {
+            if (!categoriesRes.ok) {
                 throw new Error("Failed to fetch skill categories");
             }
 
             const catData = await categoriesRes.json();
 
-            setCategories(catData.name);
+            setCategories(catData);
 
         } catch (error) {
-            console.error(error);
+            console.error("Error fetching categories:", error);
         }
     }
 
@@ -96,8 +97,11 @@ const DashboardPage = () => {
 
     useEffect(() => {
         fetchSkillCategories();
-        console.log(categories);
     }, [])
+
+    useEffect(() => {
+        console.log(selectedCategory);
+    }, [selectedCategory])
 
     if (loading) return <div>Loading...</div>;
 
@@ -110,6 +114,24 @@ const DashboardPage = () => {
                     <p>Explore users who are offering and looking to learn new skills.</p>
 
                     <h3>FOR TESTING PURPOSES: Click profiles below</h3>
+                    <div>
+                        <label htmlFor="category-select">Filter results by skill category: </label>
+                        <select
+                            id="category-select"
+                            name="category"
+                            value={selectedCategory}
+                            onChange={(e) => setSelectedCategory(e.target.value)}
+                        >
+                            <option value="">-- Select Skill Category --</option>
+                            {categories.map((cat) => (
+                                <option key={cat.id} value={cat.id}>
+                                    {cat.name}
+                                </option>
+                            ))}
+                            <option value="13">Surprise Me!</option>
+                        </select>
+                    </div>
+                    <br />
                     <div
                         className="card-scroll-container"
                         // style={{ display: "flex", overflowX: "auto", gap: "12px", scrollbarColor: "white", maxWidth: "800px" }}
