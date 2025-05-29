@@ -250,7 +250,7 @@ body {
   margin-bottom: 20px;
 }
 
-.header-logo {
+.welcome-logo {
   display: block;
   max-width: 175px;
   height: auto;
@@ -259,11 +259,27 @@ body {
   box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
 }
 
-.header-logo:hover {
+.welcome-logo:hover {
   animation: shimmer 1.5s infinite;
   box-shadow: 0 0 40px 10px rgba(255, 255, 255, 0.3);
   transform: scale(1.03);
   transition: all 0.3s ease-in-out;
+}
+
+.bb-logo {
+    display: block;
+    max-width: 140px;
+    height: auto;
+    margin: 25px auto 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+}
+
+.bb-logo:hover {
+    animation: shimmer 1.5s infinite;
+    box-shadow: 0 0 40px 10px rgba(255, 255, 255, 0.3);
+    transform: scale(1.03);
+    transition: all 0.3s ease-in-out;
 }
 
 @keyframes shimmer {
