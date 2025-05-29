@@ -141,109 +141,116 @@ export default function MessagesPage() {
   };
 
   return (
-    <><Header /><div className="chat-page">
-      <aside className="chat-list">
-        <h3>Connection Requests</h3>
-        {requests.length === 0 ? (
-          <p>nobody wants to be your buddy</p>
-        ) : (
-          requests.map(req => (
-            <div
-              key={`req-${req.id}`}
-              className="request-card"
-              onClick={() => {
-                setSelectedRequest(req);
-                setSelectedConnection(null);
-              }}
-            >
-              <p>
-                Request from{" "}
-                {userDetails[req.sender_id]
-                  ? `${userDetails[req.sender_id].first_name} ${userDetails[req.sender_id].last_name}`
-                  : "unknown user"}
-              </p>
-              <button onClick={() => handleAcceptRequest(req)}>Accept</button>
-              <button onClick={() => handleDenyRequest(req)}>Deny</button>
-            </div>
-          ))
-        )}
-
-        <h3>Conversations</h3>
-        {connections
-          .filter(con => con.is_active)
-          .map(con => {
-            const otherUserId = getOtherUserId(con);
-            const otherUser = userDetails[otherUserId];
-
-            return (
+    <>
+      <Header />
+      <div className="chat-page">
+        <aside className="chat-list">
+          <h3>Connection Requests</h3>
+          {requests.length === 0 ? (
+            <p>You have no pending requests</p>
+          ) : (
+            requests.map(req => (
               <div
-                key={`con-${con.id}`}
-                className="connection-card"
+                key={`req-${req.id}`}
+                className="request-card"
                 onClick={() => {
-                  setSelectedConnection(con);
-                  setSelectedRequest(null);
+                  setSelectedRequest(req);
+                  setSelectedConnection(null);
                 }}
               >
-                {otherUser ? (
-                  <p>
-                    Chat with {otherUser.first_name} {otherUser.last_name}
-                  </p>
-                ) : (
-                  <p>Loading user info...</p>
-                )}
+                <p>
+                  Request from{" "}
+                  {userDetails[req.sender_id]
+                    ? `${userDetails[req.sender_id].first_name} ${userDetails[req.sender_id].last_name}`
+                    : "unknown user"}
+                </p>
+                {/*Ric Add Profile Pic?*/}
+                <img className="req-avatar" src={userDetails[req.sender_id].profile_pic}/>
+                <div className="request-buttons">
+                  <button className="magic-button" onClick={() => handleAcceptRequest(req)}>Accept</button>
+                  <button className="magic-button" onClick={() => handleDenyRequest(req)}>Deny</button>
+                </div>
               </div>
-            );
-          })}
-      </aside>
+            ))
+          )}
 
-      <main className="chat-window">
-        {selectedConnection ? (
-          <>
-            <h2>
-              Chatting with{" "}
-              {userDetails[getOtherUserId(selectedConnection)]
-                ? `${userDetails[getOtherUserId(selectedConnection)].first_name} ${userDetails[getOtherUserId(selectedConnection)].last_name}`
-                : "someone"}
-            </h2>
-            <div className="messages">
-              {messages.map((msg, index) => {
-                const senderName = msg.sender_id === currentUser.id
-                  ? "You"
-                  : userDetails[msg.sender_id]
-                    ? `${userDetails[msg.sender_id].first_name}`
-                    : "Someone";
+          <h3>Conversations</h3>
+          {connections
+            .filter(con => con.is_active)
+            .map(con => {
+              const otherUserId = getOtherUserId(con);
+              const otherUser = userDetails[otherUserId];
 
-                return (
-                  <p key={index}>
-                    <strong>{senderName}:</strong> {msg.content}
-                  </p>
-                );
-              })}
+              return (
+                <div
+                  key={`con-${con.id}`}
+                  className="connection-card"
+                  onClick={() => {
+                    setSelectedConnection(con);
+                    setSelectedRequest(null);
+                  }}
+                >
+                  {otherUser ? (
+                    <p>
+                      Chat with {otherUser.first_name} {otherUser.last_name}
+                    </p>
+                  ) : (
+                    <p>Loading user info...</p>
+                  )}
+                </div>
+              );
+            })}
+        </aside>
+
+        <main className="chat-window">
+          {selectedConnection ? (
+            <>
+              <h2>
+                Chatting with{" "}
+                {userDetails[getOtherUserId(selectedConnection)]
+                  ? `${userDetails[getOtherUserId(selectedConnection)].first_name} ${userDetails[getOtherUserId(selectedConnection)].last_name}`
+                  : "someone"}
+              </h2>
+              <div className="messages">
+                {messages.map((msg, index) => {
+                  const senderName = msg.sender_id === currentUser.id
+                    ? "You"
+                    : userDetails[msg.sender_id]
+                      ? `${userDetails[msg.sender_id].first_name}`
+                      : "Someone";
+
+                  return (
+                    <p key={index}>
+                      <strong>{senderName}:</strong> {msg.content}
+                    </p>
+                  );
+                })}
+              </div>
+              <input
+                type="text"
+                value={messageText}
+                onChange={(e) => setMessageText(e.target.value)}
+                placeholder="Type your message..." />
+              <button onClick={handleSend}>Send</button>
+            </>
+          ) : selectedRequest ? (
+            <div className="request-info">
+              <p>
+                Pending connection request from{" "}
+                {userDetails[selectedRequest.sender_id]
+                  ? `${userDetails[selectedRequest.sender_id].first_name} ${userDetails[selectedRequest.sender_id].last_name}`
+                  : "unknown user"}
+
+              </p>
+              <p>
+                {selectedRequest.message}
+              </p>
             </div>
-            <input
-              type="text"
-              value={messageText}
-              onChange={(e) => setMessageText(e.target.value)}
-              placeholder="Type your message..." />
-            <button onClick={handleSend}>Send</button>
-          </>
-        ) : selectedRequest ? (
-          <div className="request-info">
-            <p>
-              Pending connection request from{" "}
-              {userDetails[selectedRequest.sender_id]
-                ? `${userDetails[selectedRequest.sender_id].first_name} ${userDetails[selectedRequest.sender_id].last_name}`
-                : "unknown user"}
-
-            </p>
-            <p>
-              {selectedRequest.message}
-            </p>
-          </div>
-        ) : (
-          <p>Select a conversation or request</p>
-        )}
-      </main>
-    </div></>
+          ) : (
+            <p>Select a conversation or request</p>
+          )}
+        </main>
+    </div>
+    </>
   );
 }
