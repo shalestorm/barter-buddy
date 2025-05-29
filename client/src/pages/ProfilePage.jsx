@@ -5,6 +5,7 @@ import "./profilePage.css";
 import Header from "../components/Header";
 import { useNavigate } from "react-router";
 import SendConnectionModal from "../components/SendConnectionModal";
+import DeleteSkillModal from "../components/DeleteSkillModal";
 
 const ProfilePage = () => {
     const { userId: viewedUserId } = useParams();
@@ -26,6 +27,8 @@ const ProfilePage = () => {
     const [connectedUsers, setConnectedUsers] = useState([]);
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [skillToDelete, setSkillToDelete] = useState(null);
 
 
     useEffect(() => {
@@ -206,6 +209,23 @@ const ProfilePage = () => {
             setConnectionStatus("pending");
         } catch (err) {
             console.error(err);
+        }
+    };
+
+
+    const handleDeleteSkill = async (skillId) => {
+        try {
+            const res = await fetch(`/user-skills/user/${currentIdNum}/skill/${skillId}`, {
+                method: "DELETE",
+            });
+            if (!res.ok) throw new Error("Failed to delete skill");
+
+            setSkills(skills.filter((s) => s.id !== skillId));
+        } catch (err) {
+            console.error("Delete failed:", err);
+        } finally {
+            setShowDeleteModal(false);
+            setSkillToDelete(null);
         }
     };
 
@@ -393,21 +413,9 @@ const ProfilePage = () => {
                                 {isSelf && (
                                     <button
                                         className="magic-button delete-skill"
-                                        onClick={async () => {
-                                            const confirmed = window.confirm(`Are you sure you want to delete the skill "${skill.name}"?`);
-                                            if (!confirmed) return;
-
-                                            try {
-                                                const res = await fetch(`/user-skills/user/${currentIdNum}/skill/${skill.id}`, {
-                                                    method: "DELETE",
-                                                });
-                                                if (!res.ok) throw new Error("Failed to delete skill");
-
-                                                // delete skill from state after deletion
-                                                setSkills(skills.filter((s) => s.id !== skill.id));
-                                            } catch (err) {
-                                                console.error("Delete failed:", err);
-                                            }
+                                        onClick={() => {
+                                            setSkillToDelete(skill);
+                                            setShowDeleteModal(true);
                                         }}
                                     >
                                         Delete
@@ -416,6 +424,16 @@ const ProfilePage = () => {
                             </div>
                         ))}
                     </ul>
+
+                    <DeleteSkillModal
+                        isOpen={showDeleteModal}
+                        onClose={() => {
+                            setShowDeleteModal(false);
+                            setSkillToDelete(null);
+                        }}
+                        onConfirm={handleDeleteSkill}
+                        skill={skillToDelete}
+                    />
                     {isSelf && (
                         <div className="connected-users-section">
                             <h2>Connected Users</h2>
