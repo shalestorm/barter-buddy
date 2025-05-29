@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import "./profilePage.css";
 import Header from "../components/Header";
+import { useNavigate } from "react-router";
 
 const ProfilePage = () => {
     const { userId: viewedUserId } = useParams();
@@ -22,7 +23,7 @@ const ProfilePage = () => {
     const isSelf = viewedIdNum === currentIdNum;
     const [isAddingSkill, setIsAddingSkill] = useState(false);
     const [connectedUsers, setConnectedUsers] = useState([]);
-    const [conUserNames, setConUserNames] = useState([])
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -50,7 +51,7 @@ const ProfilePage = () => {
                     const isConnected = connections.some(
                         (con) =>
                             (con.user_a_id === viewedIdNum && con.user_b_id === currentIdNum) ||
-                            (con.user_b_id === viewedUserId && con.user_a_id === currentIdNum)
+                            (con.user_b_id === viewedIdNum && con.user_a_id === currentIdNum)
                     );
 
                     if (isConnected) {
@@ -377,7 +378,7 @@ const ProfilePage = () => {
                     <ul className="skill-list">
                         {skills.map((skill) => (
                             <div key={skill.id} className="skill-item">
-                                <span>{skill.name}</span>
+                                <span>{skill.name} ({skill.category?.name})</span>
                                 {isSelf && (
                                     <button
                                         className="magic-button delete-skill"
@@ -391,7 +392,7 @@ const ProfilePage = () => {
                                                 });
                                                 if (!res.ok) throw new Error("Failed to delete skill");
 
-                                                // Remove skill from state after deletion
+                                                // delete skill from state after deletion
                                                 setSkills(skills.filter((s) => s.id !== skill.id));
                                             } catch (err) {
                                                 console.error("Delete failed:", err);
@@ -412,7 +413,7 @@ const ProfilePage = () => {
                             ) : (
                                 <ul className="connected-user-list">
                                     {connectedUsers.map((user) => (
-                                        <li key={user.id} className="connected-user-card">
+                                        <li key={user.id} className="user-card" onClick={() => navigate(`/profile/${user.id}`)}>
                                             <img
                                                 src={user.profile_pic || "/default-avatar.png"}
                                                 alt={`${user.first_name} ${user.last_name}`}
