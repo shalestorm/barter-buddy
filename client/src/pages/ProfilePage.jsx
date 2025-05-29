@@ -7,23 +7,23 @@ import Header from "../components/Header";
 const ProfilePage = () => {
     const { userId: viewedUserId } = useParams();
     const { user: currentUser, profilePicUrl, setProfilePicUrl } = useAuth();
-
     const [profileData, setProfileData] = useState(null);
     const [connectionStatus, setConnectionStatus] = useState("loading");
     const [loading, setLoading] = useState(true);
     const [editingBio, setEditingBio] = useState(false);
     const [bioInput, setBioInput] = useState("");
     const fileInputRef = useRef();
-
     const [skills, setSkills] = useState([]);
-    const [addingSkill, setAddingSkill] = useState(false);
     const [newSkill, setNewSkill] = useState("");
-
-
+    const [categories, setCategories] = useState([]);
+    const [selectedCategoryId, setSelectedCategoryId] = useState(null);
     const viewedIdNum = parseInt(viewedUserId);
     const currentIdNum = currentUser?.id;
-
     const isSelf = viewedIdNum === currentIdNum;
+    const [isAddingSkill, setIsAddingSkill] = useState(false);
+    const [connectedUsers, setConnectedUsers] = useState([]);
+    const [conUserNames, setConUserNames] = useState([])
+
 
     useEffect(() => {
         const fetchProfileData = async () => {
@@ -50,7 +50,7 @@ const ProfilePage = () => {
                     const isConnected = connections.some(
                         (con) =>
                             (con.user_a_id === viewedIdNum && con.user_b_id === currentIdNum) ||
-                            (con.user_b_id === viewedIdNum && con.user_a_id === currentIdNum)
+                            (con.user_b_id === viewedUserId && con.user_a_id === currentIdNum)
                     );
 
                     if (isConnected) {
@@ -74,7 +74,46 @@ const ProfilePage = () => {
         if (viewedUserId && currentIdNum != null) {
             fetchProfileData();
         }
-    }, [viewedUserId, currentIdNum]);
+    }, [viewedUserId, currentIdNum, isSelf]);
+
+    useEffect(() => {
+        if (isSelf && profileData?.profile_pic) {
+            setProfilePicUrl(`${profileData.profile_pic}?t=${Date.now()}`);
+        }
+    }, [profileData?.profile_pic, isSelf, setProfilePicUrl]);
+
+    useEffect(() => {
+        const fetchSkills = async () => {
+            try {
+                const res = await fetch(`/user-skills/user/${viewedUserId}/skills`);
+                if (!res.ok) throw new Error("Failed to fetch skills");
+                const skillData = await res.json();
+                setSkills(skillData);
+            } catch (err) {
+                console.error("Failed to fetch skills:", err);
+            }
+        };
+
+        if (viewedUserId) {
+            fetchSkills();
+        }
+    }, [viewedUserId]);
+
+    // gets categories and set default to Other which is id 11 in the db
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const res = await fetch("http://localhost:8000/categories/");
+                if (!res.ok) throw new Error("Failed to fetch categories");
+                const cats = await res.json();
+                setCategories(cats);
+                setSelectedCategoryId(cats[11].id);
+            } catch (err) {
+                console.error("Error loading categories:", err);
+            }
+        };
+        fetchCategories();
+    }, []);
 
     const handleProfilePicUpload = async (e) => {
         const file = e.target.files[0];
@@ -120,11 +159,35 @@ const ProfilePage = () => {
         }
     };
 
+    // fetch for connected users
     useEffect(() => {
-        if (isSelf && profileData?.profile_pic) {
-            setProfilePicUrl(`${profileData.profile_pic}?t=${Date.now()}`);
+        const fetchConnectedUsersWithProfiles = async () => {
+            try {
+                const res = await fetch(`/connections/user/${viewedUserId}`);
+                if (!res.ok) throw new Error("Failed to fetch connected users");
+                const connections = await res.json();
+
+                const otherUserIds = connections.map(con =>
+                    con.user_a_id === parseInt(viewedUserId) ? con.user_b_id : con.user_a_id
+                );
+
+                const userFetches = otherUserIds.map(id =>
+                    fetch(`/users/${id}`).then(res => res.json())
+                );
+
+                const fullUserProfiles = await Promise.all(userFetches);
+                setConnectedUsers(fullUserProfiles);
+            } catch (err) {
+                console.error("Error loading connected users with profiles:", err);
+            }
+        };
+
+        if (viewedUserId) {
+            fetchConnectedUsersWithProfiles();
         }
-    }, [profileData?.profile_pic, isSelf]);
+    }, [viewedUserId]);
+
+
 
     if (loading) return <div>Loading...</div>;
     if (!profileData) return <div>Profile not found.</div>;
@@ -156,7 +219,6 @@ const ProfilePage = () => {
                     </div>
 
                     <h1 className="profile-name">{profileData.first_name} {profileData.last_name}</h1>
-
 
                     {connectionStatus !== "self" && (
                         <>
@@ -190,6 +252,7 @@ const ProfilePage = () => {
                         </>
                     )}
                 </div>
+
                 <div className="profile-bio">
                     {isSelf ? (
                         editingBio ? (
@@ -228,8 +291,140 @@ const ProfilePage = () => {
                         <p>{profileData.bio || "A wizard of many talents..."}</p>
                     )}
                 </div>
-                <div className="user-skill-list">
 
+                <div className="user-skill-list">
+                    <h2>Skills</h2>
+
+                    {isSelf && (
+                        <>
+                            {!isAddingSkill ? (
+                                <button className="magic-button" onClick={() => setIsAddingSkill(true)}>
+                                    Add Skill
+                                </button>
+                            ) : (
+                                <div className="add-skill-section">
+                                    <input
+                                        type="text"
+                                        value={newSkill}
+                                        onChange={(e) => setNewSkill(e.target.value)}
+                                        placeholder="Enter a new skill"
+                                    />
+                                    <select
+                                        value={selectedCategoryId || ""}
+                                        onChange={(e) => setSelectedCategoryId(parseInt(e.target.value))}
+                                    >
+                                        {categories.map((cat) => (
+                                            <option key={cat.id} value={cat.id}>
+                                                {cat.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <button
+                                        className="magic-button"
+                                        onClick={async () => {
+                                            if (!newSkill.trim()) return;
+                                            if (!selectedCategoryId) {
+                                                alert("Please select a category for the skill.");
+                                                return;
+                                            }
+                                            try {
+                                                const createSkillRes = await fetch("http://localhost:8000/skills/", {
+                                                    method: "POST",
+                                                    headers: { "Content-Type": "application/json" },
+                                                    body: JSON.stringify({
+                                                        name: newSkill.trim(),
+                                                        category_id: selectedCategoryId,
+                                                    }),
+                                                });
+                                                if (!createSkillRes.ok) throw new Error("Skill creation failed");
+                                                const createdSkill = await createSkillRes.json();
+
+                                                const assignRes = await fetch("/user-skills/", {
+                                                    method: "POST",
+                                                    headers: { "Content-Type": "application/json" },
+                                                    body: JSON.stringify({
+                                                        user_id: currentIdNum,
+                                                        skill_id: createdSkill.id,
+                                                    }),
+                                                });
+                                                if (!assignRes.ok) throw new Error("Skill assignment failed");
+
+                                                setSkills((prev) => [...prev, createdSkill]);
+                                                setNewSkill("");
+                                                setIsAddingSkill(false);
+                                            } catch (err) {
+                                                console.error("Error adding skill:", err);
+                                            }
+                                        }}
+                                    >
+                                        Submit
+                                    </button>
+                                    <button
+                                        className="magic-button"
+                                        onClick={() => {
+                                            setIsAddingSkill(false);
+                                            setNewSkill("");
+                                        }}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            )}
+                        </>
+                    )}
+
+
+                    <ul className="skill-list">
+                        {skills.map((skill) => (
+                            <div key={skill.id} className="skill-item">
+                                <span>{skill.name}</span>
+                                {isSelf && (
+                                    <button
+                                        className="magic-button delete-skill"
+                                        onClick={async () => {
+                                            const confirmed = window.confirm(`Are you sure you want to delete the skill "${skill.name}"?`);
+                                            if (!confirmed) return;
+
+                                            try {
+                                                const res = await fetch(`/user-skills/user/${currentIdNum}/skill/${skill.id}`, {
+                                                    method: "DELETE",
+                                                });
+                                                if (!res.ok) throw new Error("Failed to delete skill");
+
+                                                // Remove skill from state after deletion
+                                                setSkills(skills.filter((s) => s.id !== skill.id));
+                                            } catch (err) {
+                                                console.error("Delete failed:", err);
+                                            }
+                                        }}
+                                    >
+                                        Delete
+                                    </button>
+                                )}
+                            </div>
+                        ))}
+                    </ul>
+                    {isSelf && (
+                        <div className="connected-users-section">
+                            <h2>Connected Users</h2>
+                            {connectedUsers.length === 0 ? (
+                                <p>No connections yet.</p>
+                            ) : (
+                                <ul className="connected-user-list">
+                                    {connectedUsers.map((user) => (
+                                        <li key={user.id} className="connected-user-card">
+                                            <img
+                                                src={user.profile_pic || "/default-avatar.png"}
+                                                alt={`${user.first_name} ${user.last_name}`}
+                                                className="profile-avatar"
+                                            />
+                                            <span>{user.first_name} {user.last_name}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
         </>

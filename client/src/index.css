@@ -1,14 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
 
 
-body, button, select, textarea {
+body,
+button,
+select,
+textarea {
   font-family: 'Cinzel Decorative', cursive;
   font-weight: bold;
 }
 
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif, 'Cinzel Decorative', cursive;;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif, 'Cinzel Decorative', cursive;
+  ;
   line-height: 1.5;
   font-weight: 400;
 
@@ -416,118 +420,137 @@ body,
 
 /* TI */
 .signup-page {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    background-color: rgba(0, 0, 0, 0); /* black box with slight transparency */
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0);
+  /* black box with slight transparency */
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
 }
 
 .login-page {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0);
-    color:  rgb(255, 255, 255);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
-    z-index: 10;
-    max-width: 400px;
-    width: 90%;
-    text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0);
+  color: rgb(255, 255, 255);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
 }
 
 
 .signup-background {
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .signup-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.345);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.345);
 }
 
 .signup-container {
-    position: relative;
-    z-index: 2;
-    background: rgba(255, 255, 255, 0.020);
-    color:  rgb(255, 255, 255);
-    padding: 2rem;
-    border-radius: 12px;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0);
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.020);
+  color: rgb(255, 255, 255);
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0);
 }
 
 .signup-form .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 
 .signup-form label {
-    font-weight: bold;
-    margin-bottom: 0.3rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
 }
 
 .signup-form input {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 .login-form .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 
 .login-form label {
-    font-weight: bold;
-    margin-bottom: 0.3rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
 }
 
 .login-form input {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 .button-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
 }
 
 .login-redirect {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .error-message {
-    color: red;
-    margin-top: 1rem;
+  color: red;
+  margin-top: 1rem;
+}
+
+
+.connected-user-card {
+  border: solid 3px black;
+  width: fit-content;
+  align-items: center;
+  display: flex;
+}
+
+.connected-user-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+
 }

@@ -9,6 +9,7 @@ export default defineConfig({
       '/users': 'http://localhost:8000',
       '/connections': 'http://localhost:8000',
       '/connection_requests': 'http://localhost:8000',
+      '/user-skills': 'http://localhost:8000',
     }
   }
 })
