@@ -230,7 +230,6 @@ const ProfilePage = () => {
     };
 
 
-
     if (loading) return <div>Loading...</div>;
     if (!profileData) return <div>Profile not found.</div>;
     if (connectionStatus === "error") return <div>Error loading profile.</div>;
