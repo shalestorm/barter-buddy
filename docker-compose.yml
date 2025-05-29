@@ -8,7 +8,7 @@ services:
       POSTGRES_DB: barterbuddy
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./server/db/schemas.sql:/docker-entrypoint-initdb.d/schemas.sql
+      - ./server/db/schemas.sql:/docker-entrypoint-initdb.d/seed.sql
     ports:
       - "5432:5432"
 
