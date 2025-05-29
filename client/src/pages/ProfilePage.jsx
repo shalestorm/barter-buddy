@@ -4,6 +4,8 @@ import { useAuth } from "../context/AuthContext";
 import "./profilePage.css";
 import Header from "../components/Header";
 import { useNavigate } from "react-router";
+import SendConnectionModal from "../components/SendConnectionModal";
+import DeleteSkillModal from "../components/DeleteSkillModal";
 
 const ProfilePage = () => {
     const { userId: viewedUserId } = useParams();
@@ -24,6 +26,9 @@ const ProfilePage = () => {
     const [isAddingSkill, setIsAddingSkill] = useState(false);
     const [connectedUsers, setConnectedUsers] = useState([]);
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [skillToDelete, setSkillToDelete] = useState(null);
 
 
     useEffect(() => {
@@ -189,6 +194,42 @@ const ProfilePage = () => {
     }, [viewedUserId]);
 
 
+    const handleSendRequest = async (message) => {
+        try {
+            const res = await fetch("/connection_requests/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    sender_id: currentIdNum,
+                    receiver_id: viewedIdNum,
+                    message: message || null,
+                }),
+            });
+            if (!res.ok) throw new Error("Failed to send request");
+            setConnectionStatus("pending");
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+
+    const handleDeleteSkill = async (skillId) => {
+        try {
+            const res = await fetch(`/user-skills/user/${currentIdNum}/skill/${skillId}`, {
+                method: "DELETE",
+            });
+            if (!res.ok) throw new Error("Failed to delete skill");
+
+            setSkills(skills.filter((s) => s.id !== skillId));
+        } catch (err) {
+            console.error("Delete failed:", err);
+        } finally {
+            setShowDeleteModal(false);
+            setSkillToDelete(null);
+        }
+    };
+
+
 
     if (loading) return <div>Loading...</div>;
     if (!profileData) return <div>Profile not found.</div>;
@@ -230,26 +271,16 @@ const ProfilePage = () => {
                                 <button className="magic-button" disabled>Request Pending</button>
                             )}
                             {connectionStatus === "none" && (
-                                <button className="magic-button" onClick={async () => {
-                                    try {
-                                        const res = await fetch("/connection_requests/", {
-                                            method: "POST",
-                                            headers: { "Content-Type": "application/json" },
-                                            body: JSON.stringify({
-                                                sender_id: currentIdNum,
-                                                receiver_id: viewedIdNum,
-                                                message: null,
-                                            }),
-                                        });
-                                        if (!res.ok) throw new Error("Failed to send request");
-                                        setConnectionStatus("pending");
-                                    } catch (err) {
-                                        console.error(err);
-                                    }
-                                }}>
+                                <button className="magic-button" onClick={() => setShowModal(true)}>
                                     Send Connection Request
                                 </button>
+
                             )}
+                            <SendConnectionModal
+                                isOpen={showModal}
+                                onClose={() => setShowModal(false)}
+                                onSend={handleSendRequest}
+                            />
                         </>
                     )}
                 </div>
@@ -382,21 +413,9 @@ const ProfilePage = () => {
                                 {isSelf && (
                                     <button
                                         className="magic-button delete-skill"
-                                        onClick={async () => {
-                                            const confirmed = window.confirm(`Are you sure you want to delete the skill "${skill.name}"?`);
-                                            if (!confirmed) return;
-
-                                            try {
-                                                const res = await fetch(`/user-skills/user/${currentIdNum}/skill/${skill.id}`, {
-                                                    method: "DELETE",
-                                                });
-                                                if (!res.ok) throw new Error("Failed to delete skill");
-
-                                                // delete skill from state after deletion
-                                                setSkills(skills.filter((s) => s.id !== skill.id));
-                                            } catch (err) {
-                                                console.error("Delete failed:", err);
-                                            }
+                                        onClick={() => {
+                                            setSkillToDelete(skill);
+                                            setShowDeleteModal(true);
                                         }}
                                     >
                                         Delete
@@ -405,6 +424,16 @@ const ProfilePage = () => {
                             </div>
                         ))}
                     </ul>
+
+                    <DeleteSkillModal
+                        isOpen={showDeleteModal}
+                        onClose={() => {
+                            setShowDeleteModal(false);
+                            setSkillToDelete(null);
+                        }}
+                        onConfirm={handleDeleteSkill}
+                        skill={skillToDelete}
+                    />
                     {isSelf && (
                         <div className="connected-users-section">
                             <h2>Connected Users</h2>
