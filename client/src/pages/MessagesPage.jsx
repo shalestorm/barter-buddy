@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import Header from "../components/Header";
 import '../pages/MessagesPage.css'
@@ -11,6 +12,7 @@ export default function MessagesPage() {
   const [requests, setRequests] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [userDetails, setUserDetails] = useState({});
+  const navigate = useNavigate();
   const { user: currentUser } = useAuth();
 
   const API_BASE = "http://localhost:8000";
@@ -159,17 +161,17 @@ export default function MessagesPage() {
                 }}
               >
                 <p>
-                  Request from{" "}
+                  {/* Request from{" "} */}
                   {userDetails[req.sender_id]
                     ? `${userDetails[req.sender_id].first_name} ${userDetails[req.sender_id].last_name}`
                     : "unknown user"}
                 </p>
-                {/*Ric Add Profile Pic?*/}
-                <img className="req-avatar" src={userDetails[req.sender_id].profile_pic}/>
-                <div className="request-buttons">
+                <h6>- - click for details - -</h6>
+                {/* <img className="req-avatar" src={userDetails[req.sender_id].profile_pic}/> */}
+                {/* <div className="request-buttons">
                   <button className="magic-button" onClick={() => handleAcceptRequest(req)}>Accept</button>
                   <button className="magic-button" onClick={() => handleDenyRequest(req)}>Deny</button>
-                </div>
+                </div> */}
               </div>
             ))
           )}
@@ -205,8 +207,12 @@ export default function MessagesPage() {
         <main className="chat-window">
           {selectedConnection ? (
             <>
+              <p>Chatting with:</p>
+              <img
+                className="req-avatar"
+                src={userDetails[getOtherUserId(selectedConnection)].profile_pic}
+                onClick={() => navigate(`/profile/${userDetails[getOtherUserId(selectedConnection)].id}`)}/>
               <h2>
-                Chatting with{" "}
                 {userDetails[getOtherUserId(selectedConnection)]
                   ? `${userDetails[getOtherUserId(selectedConnection)].first_name} ${userDetails[getOtherUserId(selectedConnection)].last_name}`
                   : "someone"}
@@ -231,23 +237,30 @@ export default function MessagesPage() {
                 value={messageText}
                 onChange={(e) => setMessageText(e.target.value)}
                 placeholder="Type your message..." />
-              <button onClick={handleSend}>Send</button>
+              <button className="magic-button" onClick={handleSend}>Send</button>
             </>
           ) : selectedRequest ? (
             <div className="request-info">
-              <p>
-                Pending connection request from{" "}
+              <p>Pending connection request from:</p>
+              <img
+                className="req-avatar"
+                src={userDetails[selectedRequest.sender_id].profile_pic}
+                onClick={() => navigate(`/profile/${selectedRequest.sender_id}`)}/>
+              <h2>
                 {userDetails[selectedRequest.sender_id]
                   ? `${userDetails[selectedRequest.sender_id].first_name} ${userDetails[selectedRequest.sender_id].last_name}`
                   : "unknown user"}
-
-              </p>
-              <p>
+              </h2>
+              <p className="request-message">
                 {selectedRequest.message}
               </p>
+                <div className="request-buttons">
+                  <button className="magic-button" onClick={() => handleAcceptRequest(req)}>Accept</button>
+                  <button className="magic-button" onClick={() => handleDenyRequest(req)}>Deny</button>
+                </div>
             </div>
           ) : (
-            <p>Select a conversation or request</p>
+            <div>Select a conversation or request</div>
           )}
         </main>
     </div>
