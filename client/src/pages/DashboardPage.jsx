@@ -143,8 +143,8 @@ const DashboardPage = () => {
                     </div>
                     <br />
                     <div className="browse-buttons">
-                        <button onClick={(e) => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-                        <button onClick={(e) => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(
+                        <button className="magic-button" onClick={(e) => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+                        <button className="magic-button" onClick={(e) => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(
                             filteredUsers.length/usersPerPage
                         )}>Next</button>
                     </div>
