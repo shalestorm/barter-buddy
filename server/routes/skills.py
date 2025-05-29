@@ -5,6 +5,7 @@ from server.db.database import SessionLocal
 from server.models.skill import Skill
 from server.schemas.skills import SkillCreate, SkillOut
 
+
 router = APIRouter(prefix="/skills", tags=["Skills"])
 
 
@@ -36,5 +37,4 @@ def create_skill(skill: SkillCreate, db: Session = Depends(get_db)):
 
 @router.get("/", response_model=List[SkillOut])
 def get_skills(db: Session = Depends(get_db)):
-    skills = db.query(Skill).all()
-    return skills
+    return db.query(Skill).all()
