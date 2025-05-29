@@ -7,7 +7,8 @@ const DeleteSkillModal = ({ isOpen, onClose, onConfirm, skill }) => {
         <div className="modal-overlay">
             <div className="modal-content">
                 <h3>Confirm Skill Deletion</h3>
-                <p>Are you sure you want to delete the skill <strong>"{skill.name}"</strong>?</p>
+                <p>Are you sure you want to delete the skill</p>
+                <p> <strong>"{skill.name}"</strong>?</p>
                 <div className="modal-buttons">
                     <button className="magic-button" onClick={() => onConfirm(skill.id)}>Yes, Delete</button>
                     <button className="magic-button" onClick={onClose}>Cancel</button>
