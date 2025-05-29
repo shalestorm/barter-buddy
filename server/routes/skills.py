@@ -4,7 +4,7 @@ from typing import List
 from server.db.database import SessionLocal
 from server.models.skill import Skill
 from server.schemas.skills import SkillCreate, SkillOut
-from server.models.category import Category
+
 
 router = APIRouter(prefix="/skills", tags=["Skills"])
 
