@@ -238,226 +238,229 @@ const ProfilePage = () => {
         <>
             <Header />
             <div className="profile-container">
-                <div className="profile-scroll-card">
-                    <div className="profile-pic-wrapper">
-                        <img
-                            src={profileData.profile_pic || profilePicUrl || "/default-avatar.png"}
-                            alt="User avatar"
-                            className={`profile-avatar ${isSelf ? "hoverable" : ""}`}
-                            onClick={() => {
-                                if (isSelf) fileInputRef.current?.click();
-                            }}
-                        />
-                        {isSelf && (
-                            <input
-                                type="file"
-                                accept="image/*"
-                                style={{ display: "none" }}
-                                ref={fileInputRef}
-                                onChange={handleProfilePicUpload}
+                {/* LEFT COLUMN */}
+                <div className="profile-left">
+                    <div className="profile-scroll-card">
+                        <div className="profile-pic-wrapper">
+                            <img
+                                src={profileData.profile_pic || profilePicUrl || "/default-avatar.png"}
+                                alt="User avatar"
+                                className={`profile-avatar ${isSelf ? "hoverable" : ""}`}
+                                onClick={() => {
+                                    if (isSelf) fileInputRef.current?.click();
+                                }}
                             />
+                            {isSelf && (
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    style={{ display: "none" }}
+                                    ref={fileInputRef}
+                                    onChange={handleProfilePicUpload}
+                                />
+                            )}
+                        </div>
+                        <h1 className="profile-name">{profileData.first_name} {profileData.last_name}</h1>
+
+                        {connectionStatus !== "self" && (
+                            <>
+                                {connectionStatus === "connected" && (
+                                    <button className="magic-button" disabled>Connected</button>
+                                )}
+                                {connectionStatus === "pending" && (
+                                    <button className="magic-button" disabled>Request Pending</button>
+                                )}
+                                {connectionStatus === "none" && (
+                                    <button className="magic-button" onClick={() => setShowModal(true)}>
+                                        Send Connection Request
+                                    </button>
+                                )}
+                                <SendConnectionModal
+                                    isOpen={showModal}
+                                    onClose={() => setShowModal(false)}
+                                    onSend={handleSendRequest}
+                                />
+                            </>
                         )}
                     </div>
 
-                    <h1 className="profile-name">{profileData.first_name} {profileData.last_name}</h1>
+                    <div className="skills-box">
+                        <h2>Skills</h2>
 
-                    {connectionStatus !== "self" && (
-                        <>
-                            {connectionStatus === "connected" && (
-                                <button className="magic-button" disabled>Connected</button>
-                            )}
-                            {connectionStatus === "pending" && (
-                                <button className="magic-button" disabled>Request Pending</button>
-                            )}
-                            {connectionStatus === "none" && (
-                                <button className="magic-button" onClick={() => setShowModal(true)}>
-                                    Send Connection Request
-                                </button>
-
-                            )}
-                            <SendConnectionModal
-                                isOpen={showModal}
-                                onClose={() => setShowModal(false)}
-                                onSend={handleSendRequest}
-                            />
-                        </>
-                    )}
-                </div>
-
-                <div className="profile-bio">
-                    {isSelf ? (
-                        editingBio ? (
+                        {isSelf && (
                             <>
-                                <textarea
-                                    value={bioInput}
-                                    onChange={(e) => setBioInput(e.target.value)}
-                                    rows={3}
-                                />
-                                <div style={{ marginTop: "0.5rem" }}>
-                                    <button className="magic-button" onClick={handleBioSubmit}>Save</button>
-                                    <button
-                                        className="magic-button"
-                                        onClick={() => {
-                                            setEditingBio(false);
-                                            setBioInput(profileData.bio ?? "");
-                                        }}
-                                    >
-                                        Cancel
+                                {!isAddingSkill ? (
+                                    <button className="magic-button" onClick={() => setIsAddingSkill(true)}>
+                                        Add Skill
                                     </button>
-                                </div>
+                                ) : (
+                                    <div className="add-skill-section">
+                                        <input
+                                            type="text"
+                                            value={newSkill}
+                                            onChange={(e) => setNewSkill(e.target.value)}
+                                            placeholder="Enter a new skill"
+                                        />
+                                        <select
+                                            value={selectedCategoryId || ""}
+                                            onChange={(e) => setSelectedCategoryId(parseInt(e.target.value))}
+                                        >
+                                            {categories.map((cat) => (
+                                                <option key={cat.id} value={cat.id}>
+                                                    {cat.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        <button
+                                            className="magic-button"
+                                            onClick={async () => {
+                                                if (!newSkill.trim()) return;
+                                                if (!selectedCategoryId) {
+                                                    alert("Please select a category for the skill.");
+                                                    return;
+                                                }
+                                                try {
+                                                    const createSkillRes = await fetch("http://localhost:8000/skills/", {
+                                                        method: "POST",
+                                                        headers: { "Content-Type": "application/json" },
+                                                        body: JSON.stringify({
+                                                            name: newSkill.trim(),
+                                                            category_id: selectedCategoryId,
+                                                        }),
+                                                    });
+                                                    if (!createSkillRes.ok) throw new Error("Skill creation failed");
+                                                    const createdSkill = await createSkillRes.json();
+
+                                                    const assignRes = await fetch("/user-skills/", {
+                                                        method: "POST",
+                                                        headers: { "Content-Type": "application/json" },
+                                                        body: JSON.stringify({
+                                                            user_id: currentIdNum,
+                                                            skill_id: createdSkill.id,
+                                                        }),
+                                                    });
+                                                    if (!assignRes.ok) throw new Error("Skill assignment failed");
+
+                                                    setSkills((prev) => [...prev, createdSkill]);
+                                                    setNewSkill("");
+                                                    setIsAddingSkill(false);
+                                                } catch (err) {
+                                                    console.error("Error adding skill:", err);
+                                                }
+                                            }}
+                                        >
+                                            Submit
+                                        </button>
+                                        <button
+                                            className="magic-button"
+                                            onClick={() => {
+                                                setIsAddingSkill(false);
+                                                setNewSkill("");
+                                            }}
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                )}
                             </>
-                        ) : (
-                            <p
-                                onClick={() => {
-                                    setBioInput(profileData.bio ?? "");
-                                    setEditingBio(true);
-                                }}
-                                className="editable-bio"
-                                title="Click to edit bio"
-                            >
-                                {profileData.bio || "Click to add a bio..."}
-                            </p>
-                        )
-                    ) : (
-                        <p>{profileData.bio || "A wizard of many talents..."}</p>
-                    )}
+                        )}
+
+                        <ul className="skill-list">
+                            {skills.map((skill) => (
+                                <div key={skill.id} className="skill-item">
+                                    <span>{skill.name} ({skill.category?.name})</span>
+                                    {isSelf && (
+                                        <button
+                                            className="magic-button delete-skill"
+                                            onClick={() => {
+                                                setSkillToDelete(skill);
+                                                setShowDeleteModal(true);
+                                            }}
+                                        >
+                                            Delete
+                                        </button>
+                                    )}
+                                </div>
+                            ))}
+                        </ul>
+
+                        <DeleteSkillModal
+                            isOpen={showDeleteModal}
+                            onClose={() => {
+                                setShowDeleteModal(false);
+                                setSkillToDelete(null);
+                            }}
+                            onConfirm={handleDeleteSkill}
+                            skill={skillToDelete}
+                        />
+                    </div>
                 </div>
 
-                <div className="user-skill-list">
-                    <h2>Skills</h2>
-
-                    {isSelf && (
-                        <>
-                            {!isAddingSkill ? (
-                                <button className="magic-button" onClick={() => setIsAddingSkill(true)}>
-                                    Add Skill
-                                </button>
-                            ) : (
-                                <div className="add-skill-section">
-                                    <input
-                                        type="text"
-                                        value={newSkill}
-                                        onChange={(e) => setNewSkill(e.target.value)}
-                                        placeholder="Enter a new skill"
+                {/* RIGHT COLUMN */}
+                <div className="profile-right">
+                    <div className="bio-box">
+                        {isSelf ? (
+                            editingBio ? (
+                                <>
+                                    <textarea
+                                        value={bioInput}
+                                        onChange={(e) => setBioInput(e.target.value)}
+                                        rows={3}
                                     />
-                                    <select
-                                        value={selectedCategoryId || ""}
-                                        onChange={(e) => setSelectedCategoryId(parseInt(e.target.value))}
-                                    >
-                                        {categories.map((cat) => (
-                                            <option key={cat.id} value={cat.id}>
-                                                {cat.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <button
-                                        className="magic-button"
-                                        onClick={async () => {
-                                            if (!newSkill.trim()) return;
-                                            if (!selectedCategoryId) {
-                                                alert("Please select a category for the skill.");
-                                                return;
-                                            }
-                                            try {
-                                                const createSkillRes = await fetch("http://localhost:8000/skills/", {
-                                                    method: "POST",
-                                                    headers: { "Content-Type": "application/json" },
-                                                    body: JSON.stringify({
-                                                        name: newSkill.trim(),
-                                                        category_id: selectedCategoryId,
-                                                    }),
-                                                });
-                                                if (!createSkillRes.ok) throw new Error("Skill creation failed");
-                                                const createdSkill = await createSkillRes.json();
-
-                                                const assignRes = await fetch("/user-skills/", {
-                                                    method: "POST",
-                                                    headers: { "Content-Type": "application/json" },
-                                                    body: JSON.stringify({
-                                                        user_id: currentIdNum,
-                                                        skill_id: createdSkill.id,
-                                                    }),
-                                                });
-                                                if (!assignRes.ok) throw new Error("Skill assignment failed");
-
-                                                setSkills((prev) => [...prev, createdSkill]);
-                                                setNewSkill("");
-                                                setIsAddingSkill(false);
-                                            } catch (err) {
-                                                console.error("Error adding skill:", err);
-                                            }
-                                        }}
-                                    >
-                                        Submit
-                                    </button>
-                                    <button
-                                        className="magic-button"
-                                        onClick={() => {
-                                            setIsAddingSkill(false);
-                                            setNewSkill("");
-                                        }}
-                                    >
-                                        Cancel
-                                    </button>
-                                </div>
-                            )}
-                        </>
-                    )}
-
-
-                    <ul className="skill-list">
-                        {skills.map((skill) => (
-                            <div key={skill.id} className="skill-item">
-                                <span>{skill.name} ({skill.category?.name})</span>
-                                {isSelf && (
-                                    <button
-                                        className="magic-button delete-skill"
-                                        onClick={() => {
-                                            setSkillToDelete(skill);
-                                            setShowDeleteModal(true);
-                                        }}
-                                    >
-                                        Delete
-                                    </button>
-                                )}
-                            </div>
-                        ))}
-                    </ul>
-
-                    <DeleteSkillModal
-                        isOpen={showDeleteModal}
-                        onClose={() => {
-                            setShowDeleteModal(false);
-                            setSkillToDelete(null);
-                        }}
-                        onConfirm={handleDeleteSkill}
-                        skill={skillToDelete}
-                    />
-                    {isSelf && (
-                        <div className="connected-users-section">
-                            <h2>Connected Users</h2>
-                            {connectedUsers.length === 0 ? (
-                                <p>No connections yet.</p>
+                                    <div style={{ marginTop: "0.5rem" }}>
+                                        <button className="magic-button" onClick={handleBioSubmit}>Save</button>
+                                        <button
+                                            className="magic-button"
+                                            onClick={() => {
+                                                setEditingBio(false);
+                                                setBioInput(profileData.bio ?? "");
+                                            }}
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </>
                             ) : (
-                                <ul className="connected-user-list">
-                                    {connectedUsers.map((user) => (
-                                        <li key={user.id} className="user-card" onClick={() => navigate(`/profile/${user.id}`)}>
-                                            <img
-                                                src={user.profile_pic || "/default-avatar.png"}
-                                                alt={`${user.first_name} ${user.last_name}`}
-                                                className="profile-avatar"
-                                            />
-                                            <span>{user.first_name} {user.last_name}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </div>
-                    )}
+                                <p
+                                    onClick={() => {
+                                        setBioInput(profileData.bio ?? "");
+                                        setEditingBio(true);
+                                    }}
+                                    className="editable-bio"
+                                    title="Click to edit bio"
+                                >
+                                    {profileData.bio || "Click to add a bio..."}
+                                </p>
+                            )
+                        ) : (
+                            <p>{profileData.bio || "A wizard of many talents..."}</p>
+                        )}
+                    </div>
+
+                    <div className="connections-box">
+                        <h2>Connected Users</h2>
+                        {connectedUsers.length === 0 ? (
+                            <p>No connections yet.</p>
+                        ) : (
+                            <ul className="connected-user-list">
+                                {connectedUsers.map((user) => (
+                                    <li key={user.id} className="user-card" onClick={() => navigate(`/profile/${user.id}`)}>
+                                        <img
+                                            src={user.profile_pic || "/default-avatar.png"}
+                                            alt={`${user.first_name} ${user.last_name}`}
+                                            className="profile-avatar"
+                                        />
+                                        <span>{user.first_name} {user.last_name}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
                 </div>
             </div>
         </>
     );
+
 };
 
 export default ProfilePage;
