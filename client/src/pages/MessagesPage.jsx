@@ -130,22 +130,9 @@ export default function MessagesPage() {
   };
 
   const handleDenyRequest = (req) => {
-    fetch(`${API_BASE}/connections`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        user_a_id: req.sender_id,
-        user_b_id: req.receiver_id,
-        is_active: false
-      })
+    fetch(`${API_BASE}/connection_requests/${req.id}`, {
+      method: "DELETE"
     })
-      .then(res => res.json())
-      .then(() => {
-        // Now delete the connection request
-        return fetch(`${API_BASE}/connection_requests/${req.id}`, {
-          method: "DELETE"
-        });
-      })
       .then(() => {
         setRequests(prev => prev.filter(r => r.id !== req.id));
         setSelectedRequest(null);
@@ -154,7 +141,7 @@ export default function MessagesPage() {
   };
 
   return (
-      <><Header /><div className="chat-page">
+    <><Header /><div className="chat-page">
       <aside className="chat-list">
         <h3>Connection Requests</h3>
         {requests.length === 0 ? (
@@ -167,7 +154,7 @@ export default function MessagesPage() {
               onClick={() => {
                 setSelectedRequest(req);
                 setSelectedConnection(null);
-              } }
+              }}
             >
               <p>
                 Request from{" "}
@@ -195,7 +182,7 @@ export default function MessagesPage() {
                 onClick={() => {
                   setSelectedConnection(con);
                   setSelectedRequest(null);
-                } }
+                }}
               >
                 {otherUser ? (
                   <p>
@@ -247,6 +234,10 @@ export default function MessagesPage() {
               {userDetails[selectedRequest.sender_id]
                 ? `${userDetails[selectedRequest.sender_id].first_name} ${userDetails[selectedRequest.sender_id].last_name}`
                 : "unknown user"}
+
+            </p>
+            <p>
+              {selectedRequest.message}
             </p>
           </div>
         ) : (
