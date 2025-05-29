@@ -27,17 +27,21 @@ export default function Header() {
         <div className="header">
             <div className="header-left">
                 <h2 className="greet">Hello, {user.first_name} {user.last_name.charAt(0)}. !</h2>
-                <Link to={`/profile/${user.id}`}><img src={profilePicUrl || "/default.png"} alt="User Profile Pic" className="profile-pic" /></Link>
-                <div className="magic-header-nav-buttons">
-                    <button onClick={() => navigate(`/profile/${user.id}`)} disabled={loading}>My Profile</button>
-                    <button onClick={() => navigate(`/messages/${user.id}`)} disabled={loading}>Messages</button>
+                <Link to={`/profile/${user.id}`}>
+                    <img src={profilePicUrl || "/default.png"} alt="User Profile Pic" className="header-prof-pic" />
+                </Link>
+                <div className="header-nav-buttons">
+                    <button className='magic-button' onClick={() => navigate(`/profile/${user.id}`)} disabled={loading}>My Profile</button>
+                    <button className='magic-button' onClick={() => navigate(`/messages/${user.id}`)} disabled={loading}>Messages</button>
                 </div>
             </div>
             <div className="header-center">
-                <Link to='/dashboard'><img src={logo} alt="Barter Buddy Logo" className="bb-logo" /></Link>
+                <Link to='/dashboard'>
+                    <img src={logo} alt="Barter Buddy Logo" className="header-logo" />
+                </Link>
             </div>
             <div className="header-right">
-                <button onClick={handleLogout} disabled={loading}>Log Out</button>
+                <button className='magic-button' onClick={handleLogout} disabled={loading}>Log Out</button>
             </div>
         </div>
     );

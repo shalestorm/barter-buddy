@@ -69,7 +69,7 @@ const WelcomePage = () => {
         <div className="gradient">
             <div className="background-overlay"></div>
             <header className="centered-header">
-                <img src={logo} alt="Barter Buddy Logo" className="header-logo" />
+                <img src={logo} alt="Barter Buddy Logo" className="welcome-logo" />
                 <br />
                 <h1 className="magic-title">Welcome to Barter Buddy!</h1>
                 <h2 className="magic-title">The Free Exchange of Knowledge</h2>
