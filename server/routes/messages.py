@@ -30,13 +30,12 @@ def send_message(mes: MessageCreate = Body(...), db: Session = Depends(get_db)):
 def get_user_messages(
     connection_id: int,
     skip: int = 0,
-    limit: int = 5,
+    limit: int = 500,
     db: Session = Depends(get_db)
 ):
     messages = (
         db.query(Message)
         .filter(Message.connection_id == connection_id)
-        .order_by(Message.id.desc())
         .offset(skip)
         .limit(limit)
         .all()
