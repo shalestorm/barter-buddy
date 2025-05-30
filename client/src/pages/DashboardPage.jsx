@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 import Header from "../components/Header";
-import "./DashboardPage.css"
+import "../styles/DashboardPage.css"
 
 const DashboardPage = () => {
     const { user, loading } = useAuth();
@@ -145,14 +145,14 @@ const DashboardPage = () => {
                     <div className="browse-buttons">
                         <button className="magic-button" onClick={(e) => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
                         <button className="magic-button" onClick={(e) => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(
-                            filteredUsers.length/usersPerPage
+                            filteredUsers.length / usersPerPage
                         )}>Next</button>
                     </div>
                     <div
                         className="card-scroll-container"
                     >
                         {filteredUsers
-                            .sort(() => Math.random()-0.5) // Randomize users results
+                            .sort(() => Math.random() - 0.5) // Randomize users results
                             .slice(((currentPage - 1) * usersPerPage), (currentPage * usersPerPage))
                             .map((u) => (
                                 <div
@@ -170,8 +170,8 @@ const DashboardPage = () => {
                                         {(selectedCategory
                                             ? u.skills.filter((s) => s.category_id === Number(selectedCategory))
                                             : u.skills).slice(0, 5).map((skill, index) => (
-                                            <li key={index}>{skill.name}</li>
-                                        ))} {/* Display skills that match selected category*/}
+                                                <li key={index}>{skill.name}</li>
+                                            ))} {/* Display skills that match selected category*/}
                                     </ul>
                                 </div>
                             ))}

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import gsap from 'gsap';
-import './DevCard.css';
+import '../styles/DevCard.css';
 
 const DevCard = ({ name, title, roleTitle, roleSubtitle, roleDescription, house, photo, cartoon }) => {
     const [flipped, setFlipped] = useState(false);
