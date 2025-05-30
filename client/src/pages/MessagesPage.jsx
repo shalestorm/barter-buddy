@@ -221,7 +221,7 @@ export default function MessagesPage() {
                     : "someone"}
                 </h2>
               </div>
-              <div className="chat-box">
+              <div className="chat-container">
                 <div className="messages">
                   {messages.map((msg, index) => {
                     const senderName = msg.sender_id === currentUser.id
