@@ -60,6 +60,26 @@
     overflow-y: auto;
 }
 
+.my-message {
+    text-align: right;
+    color: red;
+    border-radius: 4px;
+    margin-block: 8px;
+    padding: 8px;
+    padding-right: 16px;
+    background-color: #d8b97a5b;
+}
+
+.their-message {
+    text-align: left;
+    color: blue;
+    border-radius: 4px;
+    margin-block: 8px;
+    padding: 8px;
+    padding-left: 16px;
+    background-color: #7a80d85b;
+}
+
 .chat-form {
     display: flex;
     flex-direction: column;
@@ -72,6 +92,7 @@
     border-radius: 4px;
     margin-bottom: 6px;
 }
+
 
 .request-card {
     background-color: rgba(255, 253, 240, 0.96);

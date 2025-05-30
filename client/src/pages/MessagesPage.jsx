@@ -74,22 +74,24 @@ export default function MessagesPage() {
           if (!res.ok) throw new Error("Failed to find messages");
           return res.json();
         })
-        .then(setMessages)
-        .then(messages.forEach(message => {
-          console.log(message);
-          if (message.sender_id !== currentUser.id) {
-            fetch(`${API_BASE}/messages/${message.id}/read`, {
-              method: "PATCH",
-              headers: {"Content-Type": "application/json"},
-              body: JSON.stringify(message.id)
-            })
-          }
+        .then(msg => {
+          setMessages(msg);
+
+          msg.forEach(message => {
+            console.log(message);
+            if (message.sender_id !== currentUser.id) {
+              fetch(`${API_BASE}/messages/${message.id}/read`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(message.id)
+              });
+            }
+          });
         })
-      )
-      .catch(console.error);
+        .catch(console.error);
     };
     messageFetch();
-    const intervalId = setInterval(messageFetch, 3000);
+    const intervalId = setInterval(messageFetch, 1000);
     return () => clearInterval(intervalId);
   }, [selectedConnection]);
 
@@ -242,15 +244,19 @@ export default function MessagesPage() {
               <div className="chat-container">
                 <div className="messages">
                   {messages.map((msg, index) => {
-                    const senderName = msg.sender_id === currentUser.id
+                    const isMe = msg.sender_id === currentUser.id
+                    const senderName = isMe
                       ? "You"
                       : userDetails[msg.sender_id]
                         ? `${userDetails[msg.sender_id].first_name}`
                         : "Someone";
 
                     return (
-                      <p key={index}>
-                        <strong>{senderName}:</strong> {msg.content} ({msg.is_read ? 'tru' : 'fols'})
+                      <p
+                        key={index}
+                        className={isMe ? "my-message" : "their-message"}
+                      >
+                        {msg.content}
                       </p>
                     );
                   })}
