@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import Header from "../components/Header";
@@ -14,6 +14,7 @@ export default function MessagesPage() {
   const [userDetails, setUserDetails] = useState({});
   const navigate = useNavigate();
   const { user: currentUser } = useAuth();
+  const bottomRef = useRef(null)
 
   const API_BASE = "http://localhost:8000";
 
@@ -144,6 +145,12 @@ export default function MessagesPage() {
       .catch(console.error);
   };
 
+  useEffect(() => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: "auto" })
+    }
+  }, [messages])
+
   return (
     <>
       <Header />
@@ -214,7 +221,7 @@ export default function MessagesPage() {
                 <img
                   className="req-avatar"
                   src={userDetails[getOtherUserId(selectedConnection)].profile_pic}
-                  onClick={() => navigate(`/profile/${userDetails[getOtherUserId(selectedConnection)].id}`)}/>
+                  onClick={() => navigate(`/profile/${userDetails[getOtherUserId(selectedConnection)].id}`)} />
                 <h2>
                   {userDetails[getOtherUserId(selectedConnection)]
                     ? `${userDetails[getOtherUserId(selectedConnection)].first_name} ${userDetails[getOtherUserId(selectedConnection)].last_name}`
@@ -236,6 +243,7 @@ export default function MessagesPage() {
                       </p>
                     );
                   })}
+                  <div ref={bottomRef} />
                 </div>
                 <form
                   className="chat-form"
@@ -251,7 +259,7 @@ export default function MessagesPage() {
                     className="magic-button"
                     type="submit"
                   >
-                      Send
+                    Send
                   </button>
                 </form>
               </div>
@@ -262,7 +270,7 @@ export default function MessagesPage() {
               <img
                 className="req-avatar"
                 src={userDetails[selectedRequest.sender_id].profile_pic}
-                onClick={() => navigate(`/profile/${selectedRequest.sender_id}`)}/>
+                onClick={() => navigate(`/profile/${selectedRequest.sender_id}`)} />
               <h2>
                 {userDetails[selectedRequest.sender_id]
                   ? `${userDetails[selectedRequest.sender_id].first_name} ${userDetails[selectedRequest.sender_id].last_name}`
@@ -271,16 +279,16 @@ export default function MessagesPage() {
               <p className="request-message">
                 {selectedRequest.message}
               </p>
-                <div className="request-buttons">
-                  <button className="magic-button" onClick={() => handleAcceptRequest(selectedRequest)}>Accept</button>
-                  <button className="magic-button" onClick={() => handleDenyRequest(selectedRequest)}>Deny</button>
-                </div>
+              <div className="request-buttons">
+                <button className="magic-button" onClick={() => handleAcceptRequest(selectedRequest)}>Accept</button>
+                <button className="magic-button" onClick={() => handleDenyRequest(selectedRequest)}>Deny</button>
+              </div>
             </div>
           ) : (
             <div>{"<--"} Select a conversation or request</div>
           )}
         </main>
-    </div>
+      </div>
     </>
   );
 }
