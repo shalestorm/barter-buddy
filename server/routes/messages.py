@@ -52,3 +52,17 @@ def mark_read(message_id: int, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_message)
     return db_message
+
+
+@router.get("/user/{user_id}/unread", response_model=List[int])
+def get_unread_connection_ids(user_id: int, db: Session = Depends(get_db)):
+    unread_messages = (
+        db.query(Message.connection_id)
+        .filter(
+            Message.receiver_id == user_id,
+            Message.is_read.is_(False)
+        )
+        .distinct()
+        .all()
+    )
+    return [cid[0] for cid in unread_messages]
