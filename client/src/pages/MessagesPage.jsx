@@ -15,6 +15,7 @@ export default function MessagesPage() {
   const navigate = useNavigate();
   const { user: currentUser } = useAuth();
   const bottomRef = useRef(null)
+  const [unreadMap, setUnreadMap] = useState({})
 
   const API_BASE = "http://localhost:8000";
 
@@ -74,22 +75,24 @@ export default function MessagesPage() {
           if (!res.ok) throw new Error("Failed to find messages");
           return res.json();
         })
-        .then(setMessages)
-        .then(messages.forEach(message => {
-          console.log(message);
-          if (message.sender_id !== currentUser.id) {
-            fetch(`${API_BASE}/messages/${message.id}/read`, {
-              method: "PATCH",
-              headers: {"Content-Type": "application/json"},
-              body: JSON.stringify(message.id)
-            })
-          }
+        .then(msg => {
+          setMessages(msg);
+
+          msg.forEach(message => {
+            console.log(message);
+            if (message.sender_id !== currentUser.id) {
+              fetch(`${API_BASE}/messages/${message.id}/read`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(message.id)
+              });
+            }
+          });
         })
-      )
-      .catch(console.error);
+        .catch(console.error);
     };
     messageFetch();
-    const intervalId = setInterval(messageFetch, 3000);
+    const intervalId = setInterval(messageFetch, 1000);
     return () => clearInterval(intervalId);
   }, [selectedConnection]);
 
@@ -162,6 +165,27 @@ export default function MessagesPage() {
       .catch(console.error);
   };
 
+
+  // for checking for any unread msgs received - used only for the conversation cards
+  useEffect(() => {
+    const fetchUnread = () => {
+      fetch(`${API_BASE}/messages/user/${currentUser.id}/unread`)
+        .then(res => res.json())
+        .then(unreadConnectionIds => {
+          const unread = {};
+          unreadConnectionIds.forEach(connId => {
+            unread[connId] = true;
+          });
+          setUnreadMap(unread);
+        })
+        .catch(console.error);
+    };
+
+    fetchUnread();
+    const interval = setInterval(fetchUnread, 1000);
+    return () => clearInterval(interval);
+  }, [currentUser.id]);
+
   // useEffect(() => {
   //   if (bottomRef.current) {
   //     bottomRef.current.scrollIntoView({ behavior: "auto" })
@@ -202,11 +226,12 @@ export default function MessagesPage() {
             .map(con => {
               const otherUserId = getOtherUserId(con);
               const otherUser = userDetails[otherUserId];
+              const hasUnread = unreadMap[con.id];
 
               return (
                 <div
                   key={`con-${con.id}`}
-                  className="connection-card"
+                  className={hasUnread ? "unread-connection-card" : "connection-card"}
                   onClick={() => {
                     setSelectedConnection(con);
                     setSelectedRequest(null);
@@ -214,7 +239,8 @@ export default function MessagesPage() {
                 >
                   {otherUser ? (
                     <p>
-                      Chat with {otherUser.first_name} {otherUser.last_name}
+                      Chat with {otherUser.first_name} {otherUser.last_name}{" "}
+                      {hasUnread ? "🦉!" : ""}
                     </p>
                   ) : (
                     <p>Loading user info...</p>
@@ -230,9 +256,11 @@ export default function MessagesPage() {
               <div className="chat-info">
                 <p>Chatting with:</p>
                 <img
-                  className="req-avatar"
+                  title="See profile"
+                  className="chat-avatar"
                   src={userDetails[getOtherUserId(selectedConnection)].profile_pic}
                   onClick={() => navigate(`/profile/${userDetails[getOtherUserId(selectedConnection)].id}`)} />
+
                 <h2>
                   {userDetails[getOtherUserId(selectedConnection)]
                     ? `${userDetails[getOtherUserId(selectedConnection)].first_name} ${userDetails[getOtherUserId(selectedConnection)].last_name}`
@@ -242,16 +270,14 @@ export default function MessagesPage() {
               <div className="chat-container">
                 <div className="messages">
                   {messages.map((msg, index) => {
-                    const senderName = msg.sender_id === currentUser.id
-                      ? "You"
-                      : userDetails[msg.sender_id]
-                        ? `${userDetails[msg.sender_id].first_name}`
-                        : "Someone";
-
+                    const isMe = msg.sender_id === currentUser.id
                     return (
-                      <p key={index}>
-                        <strong>{senderName}:</strong> {msg.content} ({msg.is_read ? 'tru' : 'fols'})
-                      </p>
+                      <div
+                        key={index}
+                        className={isMe ? "my-message" : "their-message"}
+                      >
+                        {msg.content}
+                      </div>
                     );
                   })}
                   <div ref={bottomRef} />
@@ -279,6 +305,7 @@ export default function MessagesPage() {
             <div className="request-info">
               <p>Pending connection request from:</p>
               <img
+                title="See profile"
                 className="req-avatar"
                 src={userDetails[selectedRequest.sender_id].profile_pic}
                 onClick={() => navigate(`/profile/${selectedRequest.sender_id}`)} />
