@@ -27,7 +27,3 @@ class UserOut(UserBase):
 
 class UpdateBio(BaseModel):
     bio: Optional[str]
-
-
-class UpdateProfilePic(BaseModel):
-    profile_pic: Optional[str]

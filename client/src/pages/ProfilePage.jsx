@@ -29,6 +29,7 @@ const ProfilePage = () => {
     const [showModal, setShowModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [skillToDelete, setSkillToDelete] = useState(null);
+    const [refreshCategories, setRefreshCategories] = useState(false);
 
 
     useEffect(() => {
@@ -119,7 +120,7 @@ const ProfilePage = () => {
             }
         };
         fetchCategories();
-    }, []);
+    }, [refreshCategories]);
 
     const handleProfilePicUpload = async (e) => {
         const file = e.target.files[0];
@@ -344,6 +345,7 @@ const ProfilePage = () => {
                                                     setSkills((prev) => [...prev, createdSkill]);
                                                     setNewSkill("");
                                                     setIsAddingSkill(false);
+                                                    setRefreshCategories((prev) => !prev);
                                                 } catch (err) {
                                                     console.error("Error adding skill:", err);
                                                 }
