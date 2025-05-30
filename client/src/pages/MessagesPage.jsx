@@ -80,7 +80,9 @@ export default function MessagesPage() {
     return con.user_a_id === currentUser.id ? con.user_b_id : con.user_a_id;
   };
 
-  const handleSend = () => {
+  const handleSend = (e) => {
+    e.preventDefault();
+
     if (!messageText.trim() || !selectedConnection) return;
 
     fetch(`${API_BASE}/messages`, {
@@ -207,37 +209,52 @@ export default function MessagesPage() {
         <main className="chat-window">
           {selectedConnection ? (
             <>
-              <p>Chatting with:</p>
-              <img
-                className="req-avatar"
-                src={userDetails[getOtherUserId(selectedConnection)].profile_pic}
-                onClick={() => navigate(`/profile/${userDetails[getOtherUserId(selectedConnection)].id}`)}/>
-              <h2>
-                {userDetails[getOtherUserId(selectedConnection)]
-                  ? `${userDetails[getOtherUserId(selectedConnection)].first_name} ${userDetails[getOtherUserId(selectedConnection)].last_name}`
-                  : "someone"}
-              </h2>
-              <div className="messages">
-                {messages.map((msg, index) => {
-                  const senderName = msg.sender_id === currentUser.id
-                    ? "You"
-                    : userDetails[msg.sender_id]
-                      ? `${userDetails[msg.sender_id].first_name}`
-                      : "Someone";
-
-                  return (
-                    <p key={index}>
-                      <strong>{senderName}:</strong> {msg.content}
-                    </p>
-                  );
-                })}
+              <div className="chat-info">
+                <p>Chatting with:</p>
+                <img
+                  className="req-avatar"
+                  src={userDetails[getOtherUserId(selectedConnection)].profile_pic}
+                  onClick={() => navigate(`/profile/${userDetails[getOtherUserId(selectedConnection)].id}`)}/>
+                <h2>
+                  {userDetails[getOtherUserId(selectedConnection)]
+                    ? `${userDetails[getOtherUserId(selectedConnection)].first_name} ${userDetails[getOtherUserId(selectedConnection)].last_name}`
+                    : "someone"}
+                </h2>
               </div>
-              <input
-                type="text"
-                value={messageText}
-                onChange={(e) => setMessageText(e.target.value)}
-                placeholder="Type your message..." />
-              <button className="magic-button" onClick={handleSend}>Send</button>
+              <div className="chat-container">
+                <div className="messages">
+                  {messages.map((msg, index) => {
+                    const senderName = msg.sender_id === currentUser.id
+                      ? "You"
+                      : userDetails[msg.sender_id]
+                        ? `${userDetails[msg.sender_id].first_name}`
+                        : "Someone";
+
+                    return (
+                      <p key={index}>
+                        <strong>{senderName}:</strong> {msg.content}
+                      </p>
+                    );
+                  })}
+                </div>
+                <form
+                  className="chat-form"
+                  onSubmit={handleSend}
+                >
+                  <input
+                    type="text"
+                    value={messageText}
+                    onChange={(e) => setMessageText(e.target.value)}
+                    placeholder="Type your message..."
+                  />
+                  <button
+                    className="magic-button"
+                    type="submit"
+                  >
+                      Send
+                  </button>
+                </form>
+              </div>
             </>
           ) : selectedRequest ? (
             <div className="request-info">
@@ -260,7 +277,7 @@ export default function MessagesPage() {
                 </div>
             </div>
           ) : (
-            <div>Select a conversation or request</div>
+            <div>{"<--"} Select a conversation or request</div>
           )}
         </main>
     </div>

@@ -22,6 +22,9 @@
     min-width: 300px;
 }
 
+.chat-list h3 {
+    color: rgb(138, 108, 59);
+}
 .chat-window {
     display: flex;
     flex-direction: column;
@@ -29,9 +32,35 @@
     border: 2px solid #d8b97a;
     border-radius: 16px;
     padding: 1rem;
+    padding-bottom: 4rem;
     margin-right: 1rem;
     box-shadow: 0 0 20px rgba(255, 223, 110, 0.4);
     width: 800px;
+}
+
+.chat-info h2 {
+    color: rgb(138, 108, 59);
+    margin-top: 0;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.messages {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #d8b97a;
+    border-radius: 8px;
+    margin: 0.2rem 0;
+    padding: 1rem;
+    box-shadow: 0 0 6px rgba(255, 217, 102, 0.3);
+    height: 400px;
+}
+
+.chat-form {
+    display: flex;
+    flex-direction: column;
 }
 
 .request-card {
@@ -75,8 +104,8 @@
 }
 
 .request-info h2 {
-    margin-top: 0
-    ;
+    color: rgb(138, 108, 59);
+    margin-top: 0;
 }
 
 .request-message {
@@ -103,17 +132,6 @@
 
 .connection-card:hover {
     box-shadow: 0 0 16px rgba(255, 217, 102, 0.5);
-}
-
-.messages {
-    background-color: rgb(255, 255, 255);
-    border: 1px solid #d8b97a;
-    border-radius: 8px;
-    margin: 0.2rem 0;
-    padding: 1rem;
-    box-shadow: 0 0 6px rgba(255, 217, 102, 0.3);
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
 }
 
 /* .message-card {
