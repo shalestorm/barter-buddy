@@ -64,28 +64,35 @@ export default function MessagesPage() {
       .catch(console.error);
   }, [currentUser.id]);
 
+
   // Fetch messages for selected connection
   useEffect(() => {
-    if (selectedConnection) {
+    if (!selectedConnection) return
+    const messageFetch = () => {
       fetch(`${API_BASE}/messages/connection/${selectedConnection.id}`)
         .then(res => {
           if (!res.ok) throw new Error("Failed to find messages");
           return res.json();
         })
         .then(setMessages)
-        //NEW:
         .then(messages.forEach(message => {
           console.log(message);
           if (message.sender_id !== currentUser.id) {
             fetch(`${API_BASE}/messages/${message.id}/read`, {
               method: "PATCH",
+              headers: {"Content-Type": "application/json"},
+              body: JSON.stringify(message.id)
             })
           }
         })
       )
       .catch(console.error);
-    }
+    };
+    messageFetch();
+    const intervalId = setInterval(messageFetch, 3000);
+    return () => clearInterval(intervalId);
   }, [selectedConnection]);
+
 
   const getOtherUserId = (con) => {
     return con.user_a_id === currentUser.id ? con.user_b_id : con.user_a_id;
@@ -155,11 +162,11 @@ export default function MessagesPage() {
       .catch(console.error);
   };
 
-  useEffect(() => {
-    if (bottomRef.current) {
-      bottomRef.current.scrollIntoView({ behavior: "auto" })
-    }
-  }, [messages])
+  // useEffect(() => {
+  //   if (bottomRef.current) {
+  //     bottomRef.current.scrollIntoView({ behavior: "auto" })
+  //   }
+  // }, [messages])
 
   return (
     <>
@@ -243,7 +250,7 @@ export default function MessagesPage() {
 
                     return (
                       <p key={index}>
-                        <strong>{senderName}:</strong> {msg.content}
+                        <strong>{senderName}:</strong> {msg.content} ({msg.is_read ? 'tru' : 'fols'})
                       </p>
                     );
                   })}

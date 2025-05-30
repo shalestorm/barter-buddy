@@ -66,11 +66,11 @@
 }
 
 .chat-form input {
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 6px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 6px;
 }
 
 .request-card {
