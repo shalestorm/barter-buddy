@@ -37,7 +37,7 @@ export default function Header() {
             </div>
             <div className="header-center">
                 <Link to='/dashboard'>
-                    <img src={logo} alt="Barter Buddy Logo" className="header-logo" />
+                    <img src={logo} alt="Barter Buddy Logo" className="header-logo" title="Browse more Buddies!"/>
                 </Link>
             </div>
             <div className="header-right">

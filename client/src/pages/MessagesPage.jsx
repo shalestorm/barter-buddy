@@ -73,7 +73,17 @@ export default function MessagesPage() {
           return res.json();
         })
         .then(setMessages)
-        .catch(console.error);
+        //NEW:
+        .then(messages.forEach(message => {
+          console.log(message);
+          if (message.sender_id !== currentUser.id) {
+            fetch(`${API_BASE}/messages/${message.id}/read`, {
+              method: "PATCH",
+            })
+          }
+        })
+      )
+      .catch(console.error);
     }
   }, [selectedConnection]);
 
@@ -170,17 +180,11 @@ export default function MessagesPage() {
                 }}
               >
                 <p>
-                  {/* Request from{" "} */}
                   {userDetails[req.sender_id]
                     ? `${userDetails[req.sender_id].first_name} ${userDetails[req.sender_id].last_name}`
                     : "unknown user"}
                 </p>
                 <h6>- - click for details - -</h6>
-                {/* <img className="req-avatar" src={userDetails[req.sender_id].profile_pic}/> */}
-                {/* <div className="request-buttons">
-                  <button className="magic-button" onClick={() => handleAcceptRequest(req)}>Accept</button>
-                  <button className="magic-button" onClick={() => handleDenyRequest(req)}>Deny</button>
-                </div> */}
               </div>
             ))
           )}
