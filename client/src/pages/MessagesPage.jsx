@@ -252,12 +252,12 @@ export default function MessagesPage() {
                         : "Someone";
 
                     return (
-                      <p
+                      <div
                         key={index}
                         className={isMe ? "my-message" : "their-message"}
                       >
                         {msg.content}
-                      </p>
+                      </div>
                     );
                   })}
                   <div ref={bottomRef} />

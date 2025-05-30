@@ -68,6 +68,7 @@
     padding: 8px;
     padding-right: 16px;
     background-color: #d8b97a5b;
+    width: fit-content;
 }
 
 .their-message {
