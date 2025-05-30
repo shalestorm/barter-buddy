@@ -130,7 +130,7 @@ async def update_user_profile_pic(
         shutil.copyfileobj(profile_pic.file, buffer)
 
     # Update user's profile pic URL
-    current_user.profile_pic = f"http://localhost:8000/static/profile_pics/{filename}"
+    current_user.profile_pic = f"http://localhost:8000/static/profile_pics/{filename}"  # type: ignore
     db.commit()
     db.refresh(current_user)
     return current_user
