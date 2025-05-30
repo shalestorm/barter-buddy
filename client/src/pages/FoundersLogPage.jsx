@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import DevCard from '../components/DevCard';
-import './FoundersLogPage.css';
+import '../styles/FoundersLogPage.css';
 import gsap from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 
