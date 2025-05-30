@@ -63,7 +63,7 @@ CREATE TABLE messages (
 
 INSERT INTO users (first_name, last_name, username, email, password_hash, bio, rating, profile_pic, create_date)
 VALUES
-	('Cayla', 'Thompson', 'blueeyed95', 'caylaleann18@gmail.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Looking for piano lessons!', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-20'),
+	('Cayla', 'Thompson', 'blueeyed95', 'caylaleann18@gmail.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Looking for piano lessons!', NULL, 'http://localhost:8000/static/profile_pics/cayla2.jpg', '2025-05-20'),
   ('Liam', 'Bennett', 'liamben001', 'liamben001@example.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Love teaching guitar!', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-29'),
   ('Emma', 'Clark', 'emmaclark002', 'emmaclark002@example.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', '', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-29'),
   ('Noah', 'Garcia', 'noahg003', 'noahg003@example.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Learning jazz piano.', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-29'),
@@ -83,8 +83,10 @@ VALUES
   ('Daniel', 'Perez', 'danp017', 'danp017@example.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Music theory nerd.', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-29'),
   ('Evelyn', 'Roberts', 'evelynr018', 'evelynr018@example.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', '', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-29'),
   ('Matthew', 'Turner', 'mattt019', 'mattt019@example.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Gigging every weekend.', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-29'),
-  ('Abigail', 'Phillips', 'abip020', 'abip020@example.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', '', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-29');
-
+  ('Abigail', 'Phillips', 'abip020', 'abip020@example.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', '', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-29'),
+  ('Tiberius', 'James', 'tiorion', 'tjames@orionrising.dev', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Can teach coding. Looking to learn how to read music.', NULL, '/http://localhost:8000/static/profile_pics/ti.png', '2025-05-30'),
+  ('Skyler', 'McLain', 'shale', 'allhailtheshale@shale.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'I want to learn how to drive a tractor', NULL, 'http://localhost:8000/static/profile_pics/skyler.png', '2025-05-30'),
+  ('Ricardo', 'Tizón', 'pakoh', 'pakoh@pakoh.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'I can teach you Spanish.', NULL, 'http://localhost:8000/static/profile_pics/ric.png', '2025-05-30');
 INSERT INTO categories (name) VALUES
     ('Music & Performing Arts'), --1
     ('Creative Crafts'), --2
@@ -225,15 +227,15 @@ VALUES
 
 INSERT INTO messages (sender_id, receiver_id, content, timestamp, is_read, connection_id)
 VALUES
-    -- log examples for users 1 and 3 also set latest msg to unread
-    (1, 3, 'Hey! How’s it going?', NOW(), TRUE, 1),
-    (3, 1, 'Good! fiddlin with my sick af guitar.', NOW(), TRUE, 1),
-    (1, 3, 'Awesome, lets boogie bro - mind teaching me?', NOW(), FALSE, 1),
+    -- log examples for users 1 (blueeyed95) and 3 (emmaclark002) also set latest msg to unread
+    (1, 3, 'Hey! How’s it going?', NOW(), TRUE, 2),
+    (3, 1, 'Good! fiddlin with my sick af guitar.', NOW(), TRUE, 2),
+    (1, 3, 'Awesome, lets boogie bro - mind teaching me?', NOW(), FALSE, 2),
 
-    -- 2 and 4
-    (2, 4, 'Hey, are you free on the weekends for showing me a thing or two about chess?', NOW(), TRUE, 2),
-    (4, 2, 'Sure! How about this weekend? maybe next weekend you could teach me how to twiddle my toes :O', NOW(), TRUE, 2),
+    -- 2 (liamben001) and 4(noahg003)
+    (2, 4, 'Hey, are you free on the weekends for showing me a thing or two about chess?', NOW(), TRUE, 5),
+    (4, 2, 'Sure! How about this weekend? maybe next weekend you could teach me how to twiddle my toes :O', NOW(), TRUE, 5),
 
-    -- 6 and 9
-    (6, 9, 'Yo dude, i noticed in your bio you listed 40 years of yo-yo trick experience?', NOW(), TRUE, 3),
-    (9, 6, 'Haha, you know it, would you want me to show you a few, really been meaning to start learning french again!', NOW(), TRUE, 3);
+    -- 6 (elijahlee005) and 9 (sofiaa008)
+    (6, 9, 'Yo dude, i noticed in your bio you listed 40 years of yo-yo trick experience?', NOW(), TRUE, 7),
+    (9, 6, 'Haha, you know it, would you want me to show you a few, really been meaning to start learning french again!', NOW(), TRUE, 7);
