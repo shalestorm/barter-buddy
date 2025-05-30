@@ -399,8 +399,10 @@ const ProfilePage = () => {
                 </div>
 
                 {/* RIGHT COLUMN */}
+
                 <div className="profile-right">
                     <div className="bio-box">
+                        <h2>Biography</h2>
                         {isSelf ? (
                             editingBio ? (
                                 <>
@@ -444,7 +446,8 @@ const ProfilePage = () => {
                         {connectedUsers.length === 0 ? (
                             <p>No connections yet.</p>
                         ) : (
-                            <ul className="connected-user-list">
+                            <ul className="connected-user-list two-columns">
+
                                 {connectedUsers.map((user) => (
                                     <li key={user.id} className="user-card" onClick={() => navigate(`/profile/${user.id}`)}>
                                         <img
