@@ -186,11 +186,19 @@ export default function MessagesPage() {
     return () => clearInterval(interval);
   }, [currentUser.id]);
 
+  // RIC: Keep chat scroll at bottom:
   // useEffect(() => {
   //   if (bottomRef.current) {
   //     bottomRef.current.scrollIntoView({ behavior: "auto" })
   //   }
   // }, [messages])
+  const chatRef = useRef(null);
+
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
+  }, messages)
 
   return (
     <>
@@ -268,7 +276,7 @@ export default function MessagesPage() {
                 </h2>
               </div>
               <div className="chat-container">
-                <div className="messages">
+                <div className="messages" ref={chatRef}>
                   {messages.map((msg, index) => {
                     const isMe = msg.sender_id === currentUser.id
                     return (
