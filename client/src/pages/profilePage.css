@@ -18,18 +18,18 @@
 .profile-right {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
     flex: 1;
     min-width: 300px;
 }
 
-/* Optional: only keep this if you want to center items in the left column */
+
 .profile-left {
     align-items: center;
 }
 
 .profile-right {
-    margin-top: 2.5rem;
+    align-items: right;
 }
 
 .profile-scroll-card,
@@ -53,6 +53,7 @@
 .skills-box,
 .connections-box {
     overflow-y: auto;
+    width: calc(3 * auto);
 }
 
 .profile-avatar {
@@ -79,19 +80,29 @@
 .skill-entry {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: #fffef9;
     border: 1px solid #d8b97a;
     border-radius: 8px;
     padding: 0.75rem 1rem;
     margin-bottom: 0.5rem;
     color: #3e2e1c;
-    align-items: center;
-    gap: 1rem;
     font-family: 'Cinzel', serif;
 }
 
+.skill-name {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.skill-actions {
+    display: right;
+    gap: 2rem;
+}
+
+
 .add-skill-section {
-    display: flex;
+    display: right;
     flex-direction: column;
     gap: 0.75rem;
     margin-top: 1rem;
@@ -167,4 +178,79 @@ body {
     .profile-container {
         flex-direction: column;
     }
+}
+
+.connected-user-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0.5rem;
+  background-color: #fffef9;
+  border: 1px solid #d8b97a;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.user-card:hover {
+  transform: scale(1.03);
+}
+
+.user-card img.profile-avatar {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+
+.connected-user-list.two-columns {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+}
+
+.skill-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border-bottom: 1px solid #e0c68a;
+}
+
+.skill-item span {
+  flex: 1;
+  padding-right: 1rem;
+  word-break: break-word;
+}
+
+.delete-button {
+  background-color: #5c3d00;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.delete-button:hover {
+  background-color: #8c5c00;
 }
