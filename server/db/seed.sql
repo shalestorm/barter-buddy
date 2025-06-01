@@ -23,7 +23,7 @@ CREATE TABLE users (
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
     name VARCHAR(32) NOT NULL
-    );
+);
 
 CREATE TABLE skills (
     id SERIAL PRIMARY KEY,
@@ -60,6 +60,7 @@ CREATE TABLE messages (
     is_read BOOLEAN DEFAULT FALSE,
     connection_id INT REFERENCES connections(id)
 );
+
 
 INSERT INTO users (first_name, last_name, username, email, password_hash, bio, rating, profile_pic, create_date)
 VALUES
