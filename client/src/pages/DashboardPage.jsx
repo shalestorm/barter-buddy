@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import "../styles/DashboardPage.css"
 
 const DashboardPage = () => {
@@ -178,6 +179,7 @@ const DashboardPage = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 };

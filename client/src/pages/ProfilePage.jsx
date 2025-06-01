@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router";
 import { useAuth } from "../context/AuthContext";
-import "./profilePage.css";
+import '../styles/ProfilePage.css'
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { useNavigate } from "react-router";
 import SendConnectionModal from "../components/SendConnectionModal";
 import DeleteSkillModal from "../components/DeleteSkillModal";
@@ -463,6 +464,7 @@ const ProfilePage = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 

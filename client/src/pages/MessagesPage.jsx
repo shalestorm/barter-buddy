@@ -2,7 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import Header from "../components/Header";
-import '../pages/MessagesPage.css'
+import Footer from "../components/Footer";
+import '../styles/MessagesPage.css'
 
 export default function MessagesPage() {
   const [connections, setConnections] = useState([]);
@@ -287,7 +288,7 @@ export default function MessagesPage() {
                         {msg.content}
                       </div>
                     );
-                  })}
+                  })} {/*Display "-- no messages yet --" if empty?*/}
                   <div ref={bottomRef} />
                 </div>
                 <form
@@ -335,6 +336,7 @@ export default function MessagesPage() {
           )}
         </main>
       </div>
+      <Footer />
     </>
   );
 }
