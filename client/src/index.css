@@ -608,3 +608,9 @@ body,
 .modal-content p {
   color: blue
 }
+
+.modal-textarea {
+  width: 300px;
+  height: 200px;
+  resize: none;
+}

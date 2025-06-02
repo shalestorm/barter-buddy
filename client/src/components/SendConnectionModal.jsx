@@ -21,6 +21,8 @@ const SendConnectionModal = ({ isOpen, onClose, onSend }) => {
                     placeholder="Add an optional message..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
+                    maxLength={255}
+                    style={{ width: "300px", height: "150px", resize: "none" }}
                 />
                 <div className="modal-buttons">
                     <button className="magic-button" onClick={handleSubmit}>Send</button>
