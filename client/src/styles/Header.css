@@ -1,9 +1,8 @@
 .header {
-    /* position: relative; */
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
+    /* align-items: center; */
+    padding: 0 1rem;
     /* color: rgba(255, 255, 255, 0); */
     z-index: 1;
     overflow: hidden;
@@ -39,6 +38,7 @@
     justify-content: space-between;
     padding: 0.5rem;
     margin: 0.5rem;
+    margin-bottom: 0.8rem;
     text-align: left;
     height: 100%;
     align-items: center;
@@ -63,19 +63,24 @@
     justify-content: center;
     align-items: center;
     flex: 1;
-    margin: 0 1rem;
+    margin: 1rem;
     z-index: 2;
     /* ct */
 }
 
 .header-right {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
+    position: relative;
+    /* flex-direction: column; */
+    /* flex-wrap: nowrap; */
     /* RIC: check for overstacking */
-    justify-content: flex-end;
+    /* justify-content: space-between; */
+    align-items: center;
+    padding: 0.5rem;
+    margin: 0.5rem;
     min-width: 180px;
     flex-shrink: 0;
+    height: 100%;
+    bottom: 0;
 }
 
 .header-nav-buttons {
@@ -84,7 +89,7 @@
     /* RIC: necessary? */
     flex-wrap: nowrap;
     /* RIC: check for overstacking */
-    gap: 10px;
+    gap: 8px;
 }
 
 .header-logo {
@@ -110,12 +115,15 @@
     border-radius: 50%;
     border: 3px solid #d8b97a;
     box-shadow: 0 0 10px rgba(255, 217, 102, 0.8);
+    margin-top: 0.4rem;
     margin-bottom: 1rem;
 }
 
 .greet {
     color: rgb(138, 108, 59);
     font-family: 'Cinzel Decorative';
+    margin-top: 10px;
+    margin-bottom: 0;
 }
 
 @media (max-width: 768px) {
