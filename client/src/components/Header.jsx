@@ -7,6 +7,7 @@ import logo from '../assets/bb_new.png';
 export default function Header() {
     const [loading, setLoading] = useState(false);
     const [ hasUnread, setHasUnread ] = useState(false);
+    const [ hasRequests, setHasRequests ] = useState(false);
     const { profilePicUrl } = useAuth();
     const { user, logout } = useAuth();
     const navigate = useNavigate();
@@ -27,13 +28,25 @@ export default function Header() {
         const newMessageFetch = () => {
             fetch(`${API_BASE}/messages/user/${user.id}/unread`)
                 .then(res => {
-                    if (!res.ok) throw new Error("Failed fetch.");
+                    if (!res.ok) throw new Error("Failed fetch unread messages.");
                     return res.json();
                 })
                 .then(data => setHasUnread(data.length > 0))
                 .catch(console.error);
         };
         newMessageFetch();
+
+        const fetchRequests = () => {
+            fetch(`${API_BASE}/connection_requests/received/${user.id}`)
+                .then(res => {
+                    if (!res.ok) throw new Error("Failed to fetch requests.");
+                    return res.json();
+                })
+                .then(data => setHasRequests(data.length > 0))
+                .catch(console.error);
+        };
+        fetchRequests();
+
         const intervalId = setInterval(newMessageFetch, 1000);
         return () => clearInterval(intervalId);
     }, [user.id]);
@@ -66,7 +79,13 @@ export default function Header() {
                         onClick={() => navigate(`/messages/${user.id}`)}
                         disabled={loading}
                     >
-                        {hasUnread ? "Messages 🦉" : "Messages"}
+                        {hasUnread
+                            ? hasRequests
+                                ? "Messages 🦉! 🧙!"
+                                : "Messages 🦉!"
+                            : hasRequests
+                                ? "Messages 🧙!"
+                                : "Messages"}
                     </button>
                 </div>
             </div>
@@ -76,7 +95,13 @@ export default function Header() {
                 </Link>
             </div>
             <div className="header-right">
-                <button className='magic-button' onClick={handleLogout} disabled={loading}>Log Out</button>
+                <button
+                    className='magic-button'
+                    onClick={handleLogout}
+                    disabled={loading}
+                >
+                    Log Out
+                </button>
             </div>
         </div>
     );
