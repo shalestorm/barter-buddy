@@ -205,14 +205,18 @@ export default function SignupPage() {
                         {signupStep > 1 && (
                             <button
                                 type="button"
+                                className="magic-button"
                                 onClick={() => setSignupStep(signupStep - 1)}
                                 disabled={loading}
                             >
                                 Back
                             </button>
                         )}
-                        <button type="submit" className="magic-button" disabled={loading}>
-                            {loading ? "Loading..." : signupStep === 3 ? "Submit" : "Next"}
+                        <button
+                            type="submit"
+                            className="magic-button"
+                            disabled={loading}>
+                                {loading ? "Loading..." : signupStep === 3 ? "Submit" : "Next"}
                         </button>
                     </div>
                 </form>

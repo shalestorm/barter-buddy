@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from 'react-router';
 import '../styles/Header.css'
 import logo from '../assets/bb_new.png';
-// import background from '..assets/background.jpeg'
 
 export default function Header() {
     const [loading, setLoading] = useState(false);
-    const { profilePicUrl } = useAuth()
-
+    const [ hasUnread, setHasUnread ] = useState(false);
+    const { profilePicUrl } = useAuth();
     const { user, logout } = useAuth();
-
     const navigate = useNavigate();
 
 
@@ -22,6 +20,24 @@ export default function Header() {
         }
     };
 
+    const API_BASE = "http://localhost:8000";
+
+    // RIC: Check for unread messages (should also check for connection requests)
+    useEffect(() => {
+        const newMessageFetch = () => {
+            fetch(`${API_BASE}/messages/user/${user.id}/unread`)
+                .then(res => {
+                    if (!res.ok) throw new Error("Failed fetch.");
+                    return res.json();
+                })
+                .then(data => setHasUnread(data.length > 0))
+                .catch(console.error);
+        };
+        newMessageFetch();
+        const intervalId = setInterval(newMessageFetch, 1000);
+        return () => clearInterval(intervalId);
+    }, [user.id]);
+
 
     return (
         <div className="header">
@@ -31,8 +47,20 @@ export default function Header() {
                     <img src={profilePicUrl || "/default.png"} alt="User Profile Pic" className="header-prof-pic" />
                 </Link>
                 <div className="header-nav-buttons">
-                    <button className='magic-button' onClick={() => navigate(`/profile/${user.id}`)} disabled={loading}>My Profile</button>
-                    <button className='magic-button' onClick={() => navigate(`/messages/${user.id}`)} disabled={loading}>Messages</button>
+                    <button
+                        className='magic-button'
+                        onClick={() => navigate(`/profile/${user.id}`)}
+                        disabled={loading}
+                    >
+                        My Profile
+                    </button>
+                    <button
+                        className='magic-button'
+                        onClick={() => navigate(`/messages/${user.id}`)}
+                        disabled={loading}
+                    >
+                        {hasUnread ? "Messages 🦉" : "Messages"}
+                    </button>
                 </div>
             </div>
             <div className="header-center">

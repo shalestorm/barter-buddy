@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    color: rgba(255, 255, 255, 0);
+    /* color: rgba(255, 255, 255, 0); */
     z-index: 1;
     overflow: hidden;
     border-bottom: 4px solid #d8b97a;
@@ -15,7 +15,6 @@
     gap: 1rem;
     min-height: 160px;
     position: relative;
-
 }
 
 
@@ -116,7 +115,7 @@
 
 .greet {
     color: rgb(138, 108, 59);
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel Decorative';
 }
 
 @media (max-width: 768px) {
