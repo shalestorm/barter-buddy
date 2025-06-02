@@ -36,6 +36,17 @@ const DashboardPage = () => {
         }
     }
 
+
+    //user shuffler
+    function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+
     const fetchUsersAndSkills = async () => {
         try {
             // 1. Fetch connections
@@ -86,8 +97,8 @@ const DashboardPage = () => {
                     return { ...u, skills };
                 })
             );
-
-            setUsers(usersWithSkills);
+            const shuffledUsers = shuffleArray(usersWithSkills);
+            setUsers(shuffledUsers);
         } catch (error) {
             console.error(error);
         }
@@ -116,6 +127,7 @@ const DashboardPage = () => {
     useEffect(() => {
         setCurrentPage(1)
     }, [selectedCategory]);
+
 
     return (
         <>
@@ -153,7 +165,6 @@ const DashboardPage = () => {
                         className="card-scroll-container"
                     >
                         {filteredUsers
-                            .sort(() => Math.random() - 0.5) // Randomize users results
                             .slice(((currentPage - 1) * usersPerPage), (currentPage * usersPerPage))
                             .map((u) => (
                                 <div
