@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import logo from '../assets/bb_new.png';
 import backgroundcastle from '../assets/background.jpeg';
+import '../styles/WelcomePage.css';
+import Carousel from '../components/Carousel';
 import { useNavigate } from 'react-router';
 
 const WelcomePage = () => {
@@ -78,7 +80,7 @@ const WelcomePage = () => {
                 <button className="magic-button left-button" onClick={handleSignupButton}>NEW TO BARTER BUDDY?</button>
                 <button className="magic-button login-button" onClick={handleLoginButton}>LOGIN</button>
             </div>
-
+            <Carousel />
         </div>
     );
 
