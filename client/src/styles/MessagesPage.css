@@ -124,21 +124,6 @@
     transform: scale(1.2);
 }
 
-.magic-button {
-    background-color: #d8b97a;
-    border: none;
-    color: white;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.magic-button:hover {
-    background-color: #c0a85e;
-}
-
 .chat-avatar {
     width: 100px;
     height: 100px;
