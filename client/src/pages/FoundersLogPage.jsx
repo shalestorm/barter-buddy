@@ -5,6 +5,7 @@ import DevCard from '../components/DevCard';
 import '../styles/FoundersLogPage.css';
 import gsap from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
+import { Link } from 'react-router';
 
 gsap.registerPlugin(TextPlugin); // ✅ correct usage
 
@@ -79,6 +80,9 @@ const FoundersLogPage = () => {
                     Thank you for stepping into our world of code, connection, and a little bit of magic. 🪄
                 </p>
             </div>
+                <Link to='/dashboard' className='unstyled-link'>
+                    <h5>--leave--</h5>
+                </Link>
         </div>
     );
 
