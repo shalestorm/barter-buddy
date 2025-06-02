@@ -308,7 +308,7 @@ export default function MessagesPage() {
                     className="emoji-btn"
                     onClick={() => setShowEmojiPicker((prev) => !prev)}
                   >
-                    😊
+                    🪄
                   </button>
 
                   <button className="magic-button" type="submit">
