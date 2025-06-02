@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import EmojiPicker from 'emoji-picker-react';
 import '../styles/MessagesPage.css'
 
 export default function MessagesPage() {
@@ -17,6 +18,8 @@ export default function MessagesPage() {
   const { user: currentUser } = useAuth();
   const bottomRef = useRef(null)
   const [unreadMap, setUnreadMap] = useState({})
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const inputRef = useRef(null);
 
   const API_BASE = "http://localhost:8000";
 
@@ -291,23 +294,49 @@ export default function MessagesPage() {
                   })} {/*Display "-- no messages yet --" if empty?*/}
                   <div ref={bottomRef} />
                 </div>
-                <form
-                  className="chat-form"
-                  onSubmit={handleSend}
-                >
+                <form className="chat-form" onSubmit={handleSend}>
                   <input
                     type="text"
+                    ref={inputRef}
                     value={messageText}
                     onChange={(e) => setMessageText(e.target.value)}
                     placeholder="Type your message..."
                   />
+
                   <button
-                    className="magic-button"
-                    type="submit"
+                    type="button"
+                    className="emoji-btn"
+                    onClick={() => setShowEmojiPicker((prev) => !prev)}
                   >
+                    😊
+                  </button>
+
+                  <button className="magic-button" type="submit">
                     Send
                   </button>
+
+                  {showEmojiPicker && (
+                    <div className="emoji-picker-container">
+                      <EmojiPicker
+                        onEmojiClick={(emojiData) => {
+                          const cursorPos = inputRef.current.selectionStart;
+                          const newText =
+                            messageText.slice(0, cursorPos) +
+                            emojiData.emoji +
+                            messageText.slice(cursorPos);
+                          setMessageText(newText);
+
+                          setTimeout(() => {
+                            inputRef.current.focus();
+                            inputRef.current.selectionStart = cursorPos + emojiData.emoji.length;
+                            inputRef.current.selectionEnd = cursorPos + emojiData.emoji.length;
+                          }, 0);
+                        }}
+                      />
+                    </div>
+                  )}
                 </form>
+
               </div>
             </>
           ) : selectedRequest ? (
