@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import EmojiPicker from 'emoji-picker-react';
+import magicalWandFile from '../assets/magicalWand.wav';
 import '../styles/MessagesPage.css'
 
 export default function MessagesPage() {
@@ -80,7 +81,19 @@ export default function MessagesPage() {
           return res.json();
         })
         .then(msg => {
-          setMessages(msg);
+          setMessages(prev => {
+            const isNew = msg.length > prev.length;
+            if (isNew) {
+              const latest = msg[msg.length - 1];
+              if (latest.sender_id !== currentUser.id) {
+                const receiveSound = new Audio(magicalWandFile);
+                receiveSound.volume = 0.4;
+                receiveSound.play().catch(err => console.error("Receive sound error:", err));
+              }
+            }
+            return msg;
+          });
+          // setMessages(msg);
 
           msg.forEach(message => {
             console.log(message);
@@ -109,6 +122,10 @@ export default function MessagesPage() {
     e.preventDefault();
 
     if (!messageText.trim() || !selectedConnection) return;
+
+    const sendSound = new Audio(magicalWandFile);
+    sendSound.volume = 0.4;
+    sendSound.play().catch(err => console.error("Audio play error:", err));
 
     fetch(`${API_BASE}/messages`, {
       method: "POST",
