@@ -49,6 +49,13 @@ export default function Header() {
                 <div className="header-nav-buttons">
                     <button
                         className='magic-button'
+                        onClick={() => navigate(`/dashboard`)}
+                        disabled={loading}
+                    >
+                        Browse
+                    </button>
+                    <button
+                        className='magic-button'
                         onClick={() => navigate(`/profile/${user.id}`)}
                         disabled={loading}
                     >

@@ -364,8 +364,8 @@ h2.magic-title {
 .magic-button {
   font-family: 'Cinzel Decorative', cursive;
   font-weight: bold;
-  font-size: 16px;
-  padding: 10px 20px;
+  font-size: 11px;
+  padding: 8px 10px;
   color: #fff2d9;
   background: linear-gradient(145deg, #8b5e3c, #3e2e1e);
   border: 2px solid #ffcc00;
