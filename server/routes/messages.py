@@ -18,7 +18,6 @@ def get_db():
 
 @router.post("/", response_model=MessageOut)
 def send_message(mes: MessageCreate = Body(...), db: Session = Depends(get_db)):
-    # Optional: validate connection exists or users exist here
     db_message = Message(**mes.dict())
     db.add(db_message)
     db.commit()

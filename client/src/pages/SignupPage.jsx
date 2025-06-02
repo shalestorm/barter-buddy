@@ -119,8 +119,8 @@ export default function SignupPage() {
                         signupStep === 1
                             ? handleSignupStep1
                             : signupStep === 2
-                            ? handleSignupStep2
-                            : handleSignupStep3
+                                ? handleSignupStep2
+                                : handleSignupStep3
                     }
                 >
                     {signupStep === 1 && (
@@ -216,14 +216,14 @@ export default function SignupPage() {
                             type="submit"
                             className="magic-button"
                             disabled={loading}>
-                                {loading ? "Loading..." : signupStep === 3 ? "Submit" : "Next"}
+                            {loading ? "Loading..." : signupStep === 3 ? "Submit" : "Next"}
                         </button>
                     </div>
                 </form>
                 <br />
                 <div className="login-redirect">
                     <button className="magic-button" onClick={() => navigate('/login')}>
-                       Already have an account?
+                        Already have an account?
                     </button>
                 </div>
 

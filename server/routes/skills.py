@@ -17,9 +17,6 @@ def get_db():
         db.close()
 
 
-# create a new skill
-
-
 @router.post("/", response_model=SkillOut)
 def create_skill(skill: SkillCreate, db: Session = Depends(get_db)):
     db_skill = Skill(
@@ -30,9 +27,6 @@ def create_skill(skill: SkillCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_skill)
     return db_skill
-
-
-# get all skills
 
 
 @router.get("/", response_model=List[SkillOut])

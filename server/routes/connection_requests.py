@@ -19,9 +19,6 @@ def get_db():
         db.close()
 
 
-# create a new connection request
-
-
 @router.post("/", response_model=ConnectionRequestOut)
 def send_connection_request(
     con_req: ConnectionRequestCreate, db: Session = Depends(get_db)
@@ -31,9 +28,6 @@ def send_connection_request(
     db.commit()
     db.refresh(db_con_req)
     return db_con_req
-
-
-# get received requests
 
 
 @router.get("/received/{user_id}", response_model=List[ConnectionRequestOut])
@@ -46,18 +40,12 @@ def get_received_requests(user_id: int, db: Session = Depends(get_db)):
     return received
 
 
-# get sent requests
-
-
 @router.get("/sent/{user_id}", response_model=List[ConnectionRequestOut])
 def get_sent_requests(user_id: int, db: Session = Depends(get_db)):
     sent = (
         db.query(ConnectionRequest).filter(ConnectionRequest.sender_id == user_id).all()
     )
     return sent
-
-
-# delete conneciton request
 
 
 @router.delete("/{request_id}")

@@ -248,7 +248,6 @@ body {
 
 }
 
-/* skill-list scroll on hover */
 .skill-list:hover {
     overflow-y: auto;
 }
@@ -266,8 +265,6 @@ body {
     background: transparent;
 }
 
-
-/* connected users scroll on hover */
 .connected-user-list:hover {
     overflow-y: auto;
 }
@@ -319,8 +316,6 @@ body {
     background-color: #8c5c00;
 }
 
-
-/* overlay styling */
 
 .main-profile-avatarhoverable {
     width: 150px;

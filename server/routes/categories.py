@@ -16,9 +16,6 @@ def get_db():
         db.close()
 
 
-# get all categories
-
-
 @router.get("/", response_model=List[CategoryOut])
 def get_categories(db: Session = Depends(get_db)):
     categories = db.query(Category).all()

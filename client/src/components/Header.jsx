@@ -6,8 +6,8 @@ import logo from '../assets/bb_new.png';
 
 export default function Header() {
     const [loading, setLoading] = useState(false);
-    const [ hasUnread, setHasUnread ] = useState(false);
-    const [ hasRequests, setHasRequests ] = useState(false);
+    const [hasUnread, setHasUnread] = useState(false);
+    const [hasRequests, setHasRequests] = useState(false);
     const { profilePicUrl } = useAuth();
     const { user, logout } = useAuth();
     const navigate = useNavigate();
@@ -47,7 +47,10 @@ export default function Header() {
         };
         fetchRequests();
 
-        const intervalId = setInterval(newMessageFetch, 1000);
+        const intervalId = setInterval(() => {
+            newMessageFetch();
+            fetchRequests();
+        }, 1000)
         return () => clearInterval(intervalId);
     }, [user.id]);
 

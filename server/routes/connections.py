@@ -16,9 +16,6 @@ def get_db():
         db.close()
 
 
-# create a new connection
-
-
 @router.post("/", response_model=ConnectionOut)
 def create_connection(con: ConnectionCreate, db: Session = Depends(get_db)):
     db_connection = Connection(**con.model_dump())
@@ -26,9 +23,6 @@ def create_connection(con: ConnectionCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_connection)
     return db_connection
-
-
-# get all connections by user
 
 
 @router.get("/user/{user_id}", response_model=List[ConnectionOut])
