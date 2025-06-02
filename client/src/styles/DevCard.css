@@ -1,7 +1,7 @@
 .dev-card {
     flex: 1 1 280px;
-    max-width: 300px;
-    min-width: 240px;
+    max-width: 220px;
+    min-width: 220px;
     margin: 10px;
     text-align: center;
     perspective: 1000px;
