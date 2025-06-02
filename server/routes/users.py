@@ -32,7 +32,6 @@ def get_db():
         db.close()
 
 
-# get the current user using the JWT
 def get_current_user(
     access_token: Optional[str] = Cookie(None),
     db: Session = Depends(get_db)
@@ -61,7 +60,6 @@ def get_current_user(
     return user
 
 
-# create a new user
 @router.post("/", response_model=UserOut)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
     existing_user = db.query(User).filter(
@@ -87,14 +85,12 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     return db_user
 
 
-# get all users
 @router.get("/", response_model=List[UserOut])
 def get_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users = db.query(User).offset(skip).limit(limit).all()
     return users
 
 
-# get user by id
 @router.get("/{user_id}", response_model=UserOut)
 def get_user(user_id: int, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.id == user_id).first()
@@ -103,7 +99,6 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
     return user
 
 
-# update user profile pic
 @router.put("/me/profile_pic", response_model=UserOut)
 async def update_user_profile_pic(
     profile_pic: UploadFile = File(...),
@@ -112,31 +107,22 @@ async def update_user_profile_pic(
 ):
     if not profile_pic.filename:
         raise HTTPException(status_code=400, detail="Invalid file upload.")
-
     extension = os.path.splitext(profile_pic.filename)[-1].lower()
     if extension not in [".png", ".jpg", ".jpeg", ".gif"]:
         raise HTTPException(status_code=400, detail="Unsupported file type.")
-
-    # Ensure uploads don't overwrite default.png or other user's pics
     filename = f"profile_{current_user.username}{extension}"
     BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
     media_path = BASE_DIR / "static" / "profile_pics"
     media_path.mkdir(parents=True, exist_ok=True)
-
     file_path = media_path / filename
-
-    # Save the uploaded file
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(profile_pic.file, buffer)
-
-    # Update user's profile pic URL
     current_user.profile_pic = f"http://localhost:8000/static/profile_pics/{filename}"  # type: ignore
     db.commit()
     db.refresh(current_user)
     return current_user
 
 
-# update user bio
 @router.put("/me/bio", response_model=UserOut)
 def update_user_bio(
     update: UpdateBio,
@@ -149,7 +135,6 @@ def update_user_bio(
     return current_user
 
 
-# get current user info
 @router.get("/me", response_model=UserOut, name="auth:me")
 @router.get("/auth/me", response_model=UserOut)
 def read_current_user(current_user: User = Depends(get_current_user)):

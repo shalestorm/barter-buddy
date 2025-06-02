@@ -49,43 +49,31 @@ const DashboardPage = () => {
 
     const fetchUsersAndSkills = async () => {
         try {
-            // 1. Fetch connections
             const connectionsRes = await fetch(`${API_BASE}/connections/user/${user.id}`);
             const connectionsData = connectionsRes.ok ? await connectionsRes.json() : [];
 
-            // Extract connected user ids
             const connectedUserIds = new Set();
             connectionsData.forEach((conn) => {
-                // Each connection has user_a_id and user_b_id, one of which is current user
                 if (conn.user_a_id !== user.id) connectedUserIds.add(conn.user_a_id);
                 if (conn.user_b_id !== user.id) connectedUserIds.add(conn.user_b_id);
             });
-
-            // 2. Fetch sent requests
             const sentReqRes = await fetch(`${API_BASE}/connection_requests/sent/${user.id}`);
             const sentReqData = sentReqRes.ok ? await sentReqRes.json() : [];
             const sentRequestIds = new Set(sentReqData.map((req) => req.receiver_id));
-
-            // 3. Fetch received requests
             const recReqRes = await fetch(`${API_BASE}/connection_requests/received/${user.id}`);
             const recReqData = recReqRes.ok ? await recReqRes.json() : [];
             const receivedRequestIds = new Set(recReqData.map((req) => req.sender_id));
-
-            // Combine all excluded user ids
             const allExcludedIds = new Set([
                 ...connectedUserIds,
                 ...sentRequestIds,
                 ...receivedRequestIds,
-                user.id, // Also exclude self
+                user.id,
             ]);
             setExcludedUserIds(allExcludedIds);
 
-            // 4. Fetch all users
             const usersRes = await fetch(`${API_BASE}/users`);
             if (!usersRes.ok) throw new Error("Failed to fetch users");
             const usersData = await usersRes.json();
-
-            // 5. Fetch skills for each user
             const usersWithSkills = await Promise.all(
                 usersData.map(async (u) => {
                     const skillsRes = await fetch(`${API_BASE}/user-skills/user/${u.id}/skills`);
@@ -118,8 +106,8 @@ const DashboardPage = () => {
     if (loading) return <div>Loading...</div>;
 
     const filteredUsers = users
-        .filter((u) => !excludedUserIds.has(u.id)) // exclude connected/requested users & self
-        .filter((u) => // RIC: filtering based on selectedCategory
+        .filter((u) => !excludedUserIds.has(u.id))
+        .filter((u) =>
             selectedCategory === "" ||
             u.skills.some((skill) => skill.category_id === Number(selectedCategory))
         )

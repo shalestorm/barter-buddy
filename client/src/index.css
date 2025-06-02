@@ -571,10 +571,6 @@ body,
 
 }
 
-
-
-/* modal styles */
-
 .modal-overlay {
   z-index: 1000;
   position: fixed;

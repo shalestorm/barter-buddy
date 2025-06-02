@@ -24,7 +24,7 @@ export default function MessagesPage() {
 
   const API_BASE = "http://localhost:8000";
 
-  // Fetch connections, requests, and user details
+
   useEffect(() => {
     let connectionsData = [];
     let requestsData = [];
@@ -45,7 +45,6 @@ export default function MessagesPage() {
 
     Promise.all([fetchConnections, fetchRequests])
       .then(() => {
-        // Get all unique user IDs from connections and requests
         const connectionUserIds = connectionsData.map(con =>
           con.user_a_id === currentUser.id ? con.user_b_id : con.user_a_id
         );
@@ -53,7 +52,6 @@ export default function MessagesPage() {
 
         const allUserIds = [...new Set([...connectionUserIds, ...requestSenderIds])];
 
-        // Fetch all user details
         return Promise.all(
           allUserIds.map(id =>
             fetch(`${API_BASE}/users/${id}`).then(res => res.json())
@@ -71,7 +69,70 @@ export default function MessagesPage() {
   }, [currentUser.id]);
 
 
-  // Fetch messages for selected connection
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+
+      fetch(`${API_BASE}/connection_requests/received/${currentUser.id}`)
+        .then((res) => res.json())
+        .then((newRequests) => {
+          if (newRequests.length !== requests.length) {
+            setRequests(newRequests);
+
+            const newSenderIds = newRequests
+              .map((req) => req.sender_id)
+              .filter((id) => !(id in userDetails));
+
+            if (newSenderIds.length > 0) {
+              Promise.all(newSenderIds.map((id) => fetch(`${API_BASE}/users/${id}`).then((res) => res.json()))).then(
+                (newUsers) => {
+                  setUserDetails((prev) => {
+                    const updated = { ...prev };
+                    newUsers.forEach((user) => {
+                      updated[user.id] = user;
+                    });
+                    return updated;
+                  });
+                }
+              );
+            }
+          }
+        })
+        .catch(console.error);
+
+
+      fetch(`${API_BASE}/connections/user/${currentUser.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.length !== connections.length) {
+            setConnections(data);
+
+            const newConnectionUserIds = data
+              .map((conn) => (conn.user_a_id === currentUser.id ? conn.user_b_id : conn.user_a_id))
+              .filter((id) => !(id in userDetails));
+
+            if (newConnectionUserIds.length > 0) {
+              Promise.all(
+                newConnectionUserIds.map((id) => fetch(`${API_BASE}/users/${id}`).then((res) => res.json()))
+              ).then((newUsers) => {
+                setUserDetails((prev) => {
+                  const updated = { ...prev };
+                  newUsers.forEach((user) => {
+                    updated[user.id] = user;
+                  });
+                  return updated;
+                });
+              });
+            }
+          }
+        })
+        .catch(console.error);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [currentUser.id, requests.length, connections.length, userDetails]);
+
+
   useEffect(() => {
     if (!selectedConnection) return
     const messageFetch = () => {
@@ -87,13 +148,13 @@ export default function MessagesPage() {
               const latest = msg[msg.length - 1];
               if (latest.sender_id !== currentUser.id) {
                 const receiveSound = new Audio(magicalWandFile);
-                receiveSound.volume = 0.4;
+                receiveSound.volume = 0.08;
                 receiveSound.play().catch(err => console.error("Receive sound error:", err));
               }
             }
             return msg;
           });
-          // setMessages(msg);
+
 
           msg.forEach(message => {
             console.log(message);
@@ -124,7 +185,7 @@ export default function MessagesPage() {
     if (!messageText.trim() || !selectedConnection) return;
 
     const sendSound = new Audio(magicalWandFile);
-    sendSound.volume = 0.4;
+    sendSound.volume = 0.08;
     sendSound.play().catch(err => console.error("Audio play error:", err));
 
     fetch(`${API_BASE}/messages`, {
@@ -162,7 +223,6 @@ export default function MessagesPage() {
     })
       .then(res => res.json())
       .then((newConnection) => {
-        // After making the connection, delete the original request
         return fetch(`${API_BASE}/connection_requests/${req.id}`, {
           method: "DELETE"
         }).then(() => newConnection);
@@ -187,7 +247,6 @@ export default function MessagesPage() {
   };
 
 
-  // for checking for any unread msgs received - used only for the conversation cards
   useEffect(() => {
     const fetchUnread = () => {
       fetch(`${API_BASE}/messages/user/${currentUser.id}/unread`)
@@ -207,12 +266,7 @@ export default function MessagesPage() {
     return () => clearInterval(interval);
   }, [currentUser.id]);
 
-  // RIC: Keep chat scroll at bottom:
-  // useEffect(() => {
-  //   if (bottomRef.current) {
-  //     bottomRef.current.scrollIntoView({ behavior: "auto" })
-  //   }
-  // }, [messages])
+
   const chatRef = useRef(null);
 
   useEffect(() => {

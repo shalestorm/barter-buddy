@@ -18,9 +18,6 @@ def get_db():
         db.close()
 
 
-# assign skill to a user
-
-
 @router.post("/", response_model=UserSkillOut)
 def assign_skill(user_skill: UserSkillCreate, db: Session = Depends(get_db)):
     db_link = UserSkill(**user_skill.model_dump())
@@ -29,8 +26,6 @@ def assign_skill(user_skill: UserSkillCreate, db: Session = Depends(get_db)):
     db.refresh(db_link)
     return db_link
 
-
-# get all user's skills
 
 @router.get("/user/{user_id}/skills", response_model=List[SkillOut])
 def get_user_skills(user_id: int, db: Session = Depends(get_db)):
@@ -42,8 +37,6 @@ def get_user_skills(user_id: int, db: Session = Depends(get_db)):
     )
     return skills
 
-# delete a user's skill link
-
 
 # @router.delete("/{user_skill_id}", status_code=status.HTTP_204_NO_CONTENT)
 # def delete_user_skill(user_skill_id: int, db: Session = Depends(get_db)):
@@ -54,7 +47,6 @@ def get_user_skills(user_id: int, db: Session = Depends(get_db)):
 #     db.delete(link)
 #     db.commit()
 #     return
-
 
 
 @router.delete("/user/{user_id}/skill/{skill_id}", status_code=status.HTTP_204_NO_CONTENT)
