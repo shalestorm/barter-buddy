@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router";
 import SendConnectionModal from "../components/SendConnectionModal";
 import DeleteSkillModal from "../components/DeleteSkillModal";
+import pen from "../assets/edit-pen.png"
 
 const ProfilePage = () => {
     const { userId: viewedUserId } = useParams();
@@ -244,10 +245,18 @@ const ProfilePage = () => {
                 <div className="profile-left">
                     <div className="profile-scroll-card">
                         <div className="profile-pic-wrapper">
+                            {isSelf && (
+                                <img
+                                    src={pen}
+                                    alt="edit pen"
+                                    className="edit-pen"
+                                    onClick={() => fileInputRef.current?.click()}
+                                />
+                            )}
                             <img
                                 src={profileData.profile_pic || profilePicUrl || "/default-avatar.png"}
                                 alt="User avatar"
-                                className={`profile-avatar ${isSelf ? "hoverable" : ""}`}
+                                className={`main-profile-avatar${isSelf ? "hoverable" : ""}`}
                                 onClick={() => {
                                     if (isSelf) fileInputRef.current?.click();
                                 }}
@@ -403,42 +412,34 @@ const ProfilePage = () => {
 
                 <div className="profile-right">
                     <div className="bio-box">
-                        <h2>Biography</h2>
-                        {isSelf ? (
-                            editingBio ? (
-                                <>
-                                    <textarea
-                                        value={bioInput}
-                                        onChange={(e) => setBioInput(e.target.value)}
-                                        rows={3}
-                                    />
-                                    <div style={{ marginTop: "0.5rem" }}>
-                                        <button className="magic-button" onClick={handleBioSubmit}>Save</button>
-                                        <button
-                                            className="magic-button"
-                                            onClick={() => {
-                                                setEditingBio(false);
-                                                setBioInput(profileData.bio ?? "");
-                                            }}
-                                        >
-                                            Cancel
-                                        </button>
-                                    </div>
-                                </>
-                            ) : (
-                                <p
-                                    onClick={() => {
-                                        setBioInput(profileData.bio ?? "");
+                        <h2>Bio</h2>
+                        {!editingBio ? (
+                            <>
+                                <p className="bio-text">{profileData.bio || "No bio yet."}</p>
+                                {isSelf && (
+                                    <button className="magic-button" onClick={() => {
+                                        setBioInput(profileData.bio || "");
                                         setEditingBio(true);
-                                    }}
-                                    className="editable-bio"
-                                    title="Click to edit bio"
-                                >
-                                    {profileData.bio || "Click to add a bio..."}
-                                </p>
-                            )
+                                    }}>
+                                        Edit Bio
+                                    </button>
+                                )}
+                            </>
                         ) : (
-                            <p>{profileData.bio || "A wizard of many talents..."}</p>
+                            <div className="edit-bio-section">
+                                <textarea
+                                    value={bioInput}
+                                    onChange={(e) => setBioInput(e.target.value)}
+                                    className="bio-textarea"
+                                    placeholder="Write something about yourself..."
+                                    maxLength={255}
+                                    style={{ width: "600px", height: "150px", resize: "none" }}
+                                />
+                                <div className="bio-btns">
+                                    <button className="magic-button" onClick={handleBioSubmit}>Save</button>
+                                    <button className="magic-button" onClick={() => setEditingBio(false)}>Cancel</button>
+                                </div>
+                            </div>
                         )}
                     </div>
 
