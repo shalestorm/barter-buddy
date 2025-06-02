@@ -123,8 +123,8 @@ const DashboardPage = () => {
             <div className="dashboard-container">
                 <div className="browse-container">
                     <h2>Browse Knowledge Sharers</h2>
-                    <h3>Explore users who are offering and looking to learn new skills.</h3>
-                    <div>
+                    <h3>Explore users who are offering and looking to learn new skills!</h3>
+                    <div className="category-selection">
                         <label htmlFor="category-select">Filter results by skill category: </label>
                         <select
                             id="category-select"
@@ -138,16 +138,26 @@ const DashboardPage = () => {
                                     {cat.name}
                                 </option>
                             ))}
-                            {/*RIC: Not necessary? Should any be displayed by default? Any way to randomize? */}
-                            {/* <option value="13">Surprise Me!</option> */}
                         </select>
                     </div>
                     <br />
                     <div className="browse-buttons">
-                        <button className="magic-button" onClick={(e) => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-                        <button className="magic-button" onClick={(e) => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(
-                            filteredUsers.length / usersPerPage
-                        )}>Next</button>
+                        <button
+                            className="magic-button"
+                            onClick={(e) => setCurrentPage(currentPage - 1)}
+                            disabled={currentPage === 1}
+                        >
+                            Previous
+                        </button>
+                        <button
+                            className="magic-button"
+                            onClick={(e) => setCurrentPage(currentPage + 1)}
+                            disabled={currentPage === Math.ceil(
+                                filteredUsers.length / usersPerPage
+                            )}
+                        >
+                            Next
+                        </button>
                     </div>
                     <div
                         className="card-scroll-container"
