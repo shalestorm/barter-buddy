@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import logo from '../assets/bb_new.png';
 import backgroundcastle from '../assets/background.jpeg';
 import '../styles/WelcomePage.css';
-import Carousel from '../components/Carousel';
+import Carousel from '../components/Carousel'; // Importing the Carousel component to display scrolling user profiles -CT */
 import { useNavigate } from 'react-router';
 
 const WelcomePage = () => {
@@ -80,6 +80,8 @@ const WelcomePage = () => {
                 <button className="magic-button left-button" onClick={handleSignupButton}>NEW TO BARTER BUDDY?</button>
                 <button className="magic-button login-button" onClick={handleLoginButton}>LOGIN</button>
             </div>
+            {/* Adding the Carousel at the bottom of the page to show sample Barter Buddy users */}
+
             <Carousel />
         </div>
     );
@@ -87,3 +89,13 @@ const WelcomePage = () => {
 };
 
 export default WelcomePage;
+
+// I imported the Carousel component that I built and then added it to the very
+// bottom of the return block inside WelcomePage.jsx. This lets it show up under
+// the logo and buttons so that visitors can see scrolling sample user profiles
+// as part of the homepage. It gives the site a more dynamic, interactive feel
+// and introduces the concept of bartering skills before even logging in. The
+// carousel helps set the tone of the platform by showing fake user cards with
+// the types of skills people might want to trade or learn. It scrolls automatically
+// to keep things visually engaging, and it fits the magical theme by using custom
+// styles from WelcomePage.css. -CT

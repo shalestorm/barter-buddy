@@ -1,60 +1,97 @@
+/* === Main wrapper for the carousel section === */
 .carousel-wrapper {
     margin-top: 3rem;
+    /* Adds space above the carousel */
     padding: 2rem 0;
+    /* Adds space above and below inside the section */
     width: 100%;
+    /* Take up full width of the page */
     max-width: 100vw;
+    /* Prevent going over screen width */
     overflow: hidden;
+    /* Hides anything that spills outside the container */
     position: relative;
+    /* Allows child elements to be positioned relative to this */
 }
 
+/* === The heading above the carousel === */
 .carousel-heading {
     font-size: 1.5rem;
+    /* Slightly larger font */
     color: #fffbe6;
+    /* Creamy white text */
     text-shadow: 2px 2px 4px #000000;
+    /* Adds a subtle dark glow for readability */
     margin-bottom: 1.5rem;
+    /* Space below the heading */
     font-family: 'Cinzel Decorative', cursive;
 }
 
-
+/* === Outer container for the carousel cards === */
 .carousel {
     overflow: hidden;
+    /* Hides the overflow so scrolling is handled manually */
     width: 100%;
+    /* Full width */
 }
 
+/* === The horizontal scrolling strip that holds all the cards === */
 .carousel-track {
     display: flex;
+    /* Layout the cards in a row */
     gap: 1rem;
+    /* Space between each card */
     white-space: nowrap;
+    /* Prevent cards from wrapping to a new line */
     scroll-behavior: smooth;
+    /* Smooth scrolling effect */
     overflow-x: scroll;
+    /* Allows horizontal scrolling */
     scrollbar-width: none;
-    /* Firefox */
+    /* Hides the scrollbar in Firefox */
 }
 
+/* === Hide the scrollbar in Chrome and Safari === */
 .carousel-track::-webkit-scrollbar {
     display: none;
-    /* Chrome/Safari */
+
 }
 
+
+/* === Individual profile card style === */
 .carousel-card {
     display: inline-block;
+    /* Display cards in a row */
     min-width: 280px;
     max-width: 280px;
+    /* Control card width */
     backdrop-filter: blur(6px);
+    /* Adds frosted glass effect */
     background-color: rgba(255, 253, 240, 0.25);
+    /* Soft translucent background */
     border: 2px solid #d8b97a;
+    /* Light gold border */
     border-radius: 12px;
+    /* Rounded corners */
     padding: 1.2rem;
+    /* Padding inside the card */
     text-align: left;
+    /* Align text to the left */
+
     box-shadow: 0 0 15px rgba(255, 215, 110, 0.3);
+    /* Subtle glowing shadow */
     font-family: 'Cinzel', serif;
+    /* Elegant serif font */
     color: #fffbe6;
+    /* Creamy text color */
     flex-shrink: 0;
+    /* Prevent cards from shrinking */
     overflow-wrap: break-word;
+    /* Wrap long words if needed */
     word-wrap: break-word;
     white-space: normal;
+    /* Allow text to wrap inside card */
 }
-
 
 
 
@@ -64,6 +101,8 @@
     color: #7a5c2b;
 } */
 
+
+/* === Style for the user's name on the card === */
 .carousel-card h3 {
     font-size: 1.3rem;
     margin-bottom: 0.75rem;
@@ -78,23 +117,40 @@
 }
 
 
-
+/* === Style for the info text (skills/wants to learn) === */
 .carousel-card p {
     font-size: 0.95rem;
+    /* Slightly smaller font for details */
     line-height: 1.4;
+    /* Line spacing for better readability */
 }
 
+/* === Add a subtle shadow to both name and description for better visibility === */
 .carousel-card h3,
 .carousel-card p {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
+
+/* === Style for the user profile photo in the card === */
 .carousel-user-img {
     width: 80px;
+    /* Make profile images a good size */
     height: 80px;
     border-radius: 50%;
+    /* Makes the image a perfect circle */
     object-fit: cover;
+    /* Ensures the image fills the space nicely */
     margin-bottom: 0.8rem;
+    /* Space below the photo */
     border: 2px solid #d8b97a;
+    /* Golden border to match the theme */
     box-shadow: 0 0 6px rgba(255, 215, 110, 0.6);
+    /* Glow around image */
 }
+
+/* "In the CSS, I styled the carousel container to fit the page and look magical.
+Each card uses a frosted glass effect with a glowing border. I also made the profile
+pictures circular, styled the text to glow for better visibility, and made sure the
+layout scrolls smoothly with no visible scrollbar. I added spacing, text shadows,
+and sizing that matches the magical theme and makes the info easy to read." -CT */
