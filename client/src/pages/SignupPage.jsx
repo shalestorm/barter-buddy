@@ -112,7 +112,7 @@ export default function SignupPage() {
                     <img src={logo} alt="Barter Buddy Logo" className="bb-logo" />
                 </Link>
                 <h2>New Account</h2>
-                <p>Step {signupStep} of 3</p>
+                <h5>Step {signupStep} of 3</h5>
                 <form
                     className="signup-form"
                     onSubmit={
