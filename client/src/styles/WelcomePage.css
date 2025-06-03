@@ -8,10 +8,13 @@
     /* Take up full width of the page */
     max-width: 100vw;
     /* Prevent going over screen width */
-    overflow: hidden;
-    /* Hides anything that spills outside the container */
+    overflow-x: auto;
+    /* allows readjustment */
+    overflow-y: visible;
+    /* allows to grow downward if needed */
     position: relative;
     /* Allows child elements to be positioned relative to this */
+
 }
 
 /* === The heading above the carousel === */
