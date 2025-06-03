@@ -201,8 +201,8 @@ export default function SignupPage() {
                             </div>
                         </>
                     )}
-                    <div className="button-group">
-                        {signupStep > 1 && (
+                    <div className="signup-button-group">
+                        {signupStep > 1 ? (
                             <button
                                 type="button"
                                 className="magic-button"
@@ -211,11 +211,14 @@ export default function SignupPage() {
                             >
                                 Back
                             </button>
+                        ) : (
+                            <div />
                         )}
                         <button
                             type="submit"
                             className="magic-button"
-                            disabled={loading}>
+                            disabled={loading}
+                        >
                             {loading ? "Loading..." : signupStep === 3 ? "Submit" : "Next"}
                         </button>
                     </div>
@@ -223,7 +226,7 @@ export default function SignupPage() {
                 <br />
                 <div className="login-redirect">
                     <button className="magic-button" onClick={() => navigate('/login')}>
-                        Already have an account?
+                        Already have an account? Log in here!
                     </button>
                 </div>
 
