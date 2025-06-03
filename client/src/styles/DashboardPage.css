@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     background-size: cover;
     background-position: center;
 }
@@ -16,8 +16,9 @@
     background-color: rgba(255, 253, 240, 0.96);
     border: 2px solid #d8b97a;
     border-radius: 16px;
+    margin-bottom: 3rem;
     padding: 2rem;
-    padding-bottom: 3rem;
+    padding-bottom: 4rem;
     width: 100%;
     max-width: 90%;
     box-shadow: 0 0 20px rgba(255, 223, 110, 0.4);
@@ -38,6 +39,7 @@
     scrollbar-color: white;
     max-width: 100%;
     justify-content: space-evenly;
+    padding-block: 1rem;
 }
 
 .user-card {

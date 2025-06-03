@@ -84,10 +84,10 @@ export default function Header() {
                     >
                         {hasUnread
                             ? hasRequests
-                                ? "Messages 🦉! 🧙!"
+                                ? "Messages 🦉! 🤝!"
                                 : "Messages 🦉!"
                             : hasRequests
-                                ? "Messages 🧙!"
+                                ? "Messages 🤝!"
                                 : "Messages"}
                     </button>
                 </div>

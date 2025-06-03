@@ -66,20 +66,20 @@ export default function LoginPage() {
                                 autoComplete="current-password"
                             />
                     </div>
-                    <div className="action-buttons-container">
+                    <div className="login-button-group">
                         <button
                             className="magic-button"
                             type="submit"
                             disabled={loading}
                         >
-                            {loading ? "Logging in..." : "Login"}
+                            {loading ? "Logging in..." : "Log In"}
                         </button>
                     </div>
                 </form>
                 <br />
-                <div className="action-buttons-container">
+                <div className="signup-redirect">
                     <button className="magic-button" onClick={() => navigate("/signup")}>
-                        Don’t have an account? Sign Up
+                        Don’t have an account? Sign Up Now!
                     </button>
                 </div>
                 {error && <p style={{ color: 'red' }}>{error}</p>}

@@ -305,33 +305,36 @@ export default function MessagesPage() {
           )}
 
           <h3>Conversations</h3>
-          {connections
-            .filter(con => con.is_active)
-            .map(con => {
-              const otherUserId = getOtherUserId(con);
-              const otherUser = userDetails[otherUserId];
-              const hasUnread = unreadMap[con.id];
+          {connections.length === 0 ? (
+            <p>You have no connections</p>
+          ) : (
+            connections
+              .filter(con => con.is_active)
+              .map(con => {
+                const otherUserId = getOtherUserId(con);
+                const otherUser = userDetails[otherUserId];
+                const hasUnread = unreadMap[con.id];
 
-              return (
-                <div
-                  key={`con-${con.id}`}
-                  className={hasUnread ? "unread-connection-card" : "connection-card"}
-                  onClick={() => {
-                    setSelectedConnection(con);
-                    setSelectedRequest(null);
-                  }}
-                >
-                  {otherUser ? (
-                    <p>
-                      Chat with {otherUser.first_name} {otherUser.last_name}{" "}
-                      {hasUnread ? "🦉!" : ""}
-                    </p>
-                  ) : (
-                    <p>Loading user info...</p>
-                  )}
-                </div>
-              );
-            })}
+                return (
+                  <div
+                    key={`con-${con.id}`}
+                    className={hasUnread ? "unread-connection-card" : "connection-card"}
+                    onClick={() => {
+                      setSelectedConnection(con);
+                      setSelectedRequest(null);
+                    }}
+                  >
+                    {otherUser ? (
+                      <p>
+                        Chat with {otherUser.first_name} {otherUser.last_name}{" "}
+                        {hasUnread ? "🦉!" : ""}
+                      </p>
+                    ) : (
+                      <p>Loading user info...</p>
+                    )}
+                  </div>
+                );
+              }))}
         </aside>
 
         <main className="chat-window">
@@ -353,7 +356,7 @@ export default function MessagesPage() {
               </div>
               <div className="chat-container">
                 <div className="messages" ref={chatRef}>
-                  {messages.map((msg, index) => {
+                  {messages?.length > 0 ? messages.map((msg, index) => {
                     const isMe = msg.sender_id === currentUser.id
                     return (
                       <div
@@ -363,7 +366,7 @@ export default function MessagesPage() {
                         {msg.content}
                       </div>
                     );
-                  })} {/*Display "-- no messages yet --" if empty?*/}
+                  }) : "-- no messages --"}
                   <div ref={bottomRef} />
                 </div>
                 <form className="chat-form" onSubmit={handleSend}>
