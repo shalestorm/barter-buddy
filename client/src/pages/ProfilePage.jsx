@@ -311,6 +311,7 @@ const ProfilePage = () => {
                                             value={newSkill}
                                             onChange={(e) => setNewSkill(e.target.value)}
                                             placeholder="Enter a new skill"
+                                            maxLength={32}
                                         />
                                         <select
                                             value={selectedCategoryId || ""}
