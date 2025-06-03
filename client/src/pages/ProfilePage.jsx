@@ -317,62 +317,65 @@ const ProfilePage = () => {
                                             value={selectedCategoryId || ""}
                                             onChange={(e) => setSelectedCategoryId(parseInt(e.target.value))}
                                         >
+                                            {/* <option value={null}>-- Select a skill category --</option> */}
                                             {categories.map((cat) => (
                                                 <option key={cat.id} value={cat.id}>
                                                     {cat.name}
                                                 </option>
                                             ))}
                                         </select>
-                                        <button
-                                            className="magic-button"
-                                            onClick={async () => {
-                                                if (!newSkill.trim()) return;
-                                                if (!selectedCategoryId) {
-                                                    alert("Please select a category for the skill.");
-                                                    return;
-                                                }
-                                                try {
-                                                    const createSkillRes = await fetch("http://localhost:8000/skills/", {
-                                                        method: "POST",
-                                                        headers: { "Content-Type": "application/json" },
-                                                        body: JSON.stringify({
-                                                            name: newSkill.trim(),
-                                                            category_id: selectedCategoryId,
-                                                        }),
-                                                    });
-                                                    if (!createSkillRes.ok) throw new Error("Skill creation failed");
-                                                    const createdSkill = await createSkillRes.json();
+                                        <div className="add-skill-btns">
+                                            <button
+                                                className="magic-button"
+                                                onClick={async () => {
+                                                    if (!newSkill.trim()) return;
+                                                    if (!selectedCategoryId) {
+                                                        alert("Please select a category for the skill.");
+                                                        return;
+                                                    }
+                                                    try {
+                                                        const createSkillRes = await fetch("http://localhost:8000/skills/", {
+                                                            method: "POST",
+                                                            headers: { "Content-Type": "application/json" },
+                                                            body: JSON.stringify({
+                                                                name: newSkill.trim(),
+                                                                category_id: selectedCategoryId,
+                                                            }),
+                                                        });
+                                                        if (!createSkillRes.ok) throw new Error("Skill creation failed");
+                                                        const createdSkill = await createSkillRes.json();
 
-                                                    const assignRes = await fetch("/user-skills/", {
-                                                        method: "POST",
-                                                        headers: { "Content-Type": "application/json" },
-                                                        body: JSON.stringify({
-                                                            user_id: currentIdNum,
-                                                            skill_id: createdSkill.id,
-                                                        }),
-                                                    });
-                                                    if (!assignRes.ok) throw new Error("Skill assignment failed");
+                                                        const assignRes = await fetch("/user-skills/", {
+                                                            method: "POST",
+                                                            headers: { "Content-Type": "application/json" },
+                                                            body: JSON.stringify({
+                                                                user_id: currentIdNum,
+                                                                skill_id: createdSkill.id,
+                                                            }),
+                                                        });
+                                                        if (!assignRes.ok) throw new Error("Skill assignment failed");
 
-                                                    setSkills((prev) => [...prev, createdSkill]);
-                                                    setNewSkill("");
+                                                        setSkills((prev) => [...prev, createdSkill]);
+                                                        setNewSkill("");
+                                                        setIsAddingSkill(false);
+                                                        setRefreshCategories((prev) => !prev);
+                                                    } catch (err) {
+                                                        console.error("Error adding skill:", err);
+                                                    }
+                                                }}
+                                            >
+                                                Submit
+                                            </button>
+                                            <button
+                                                className="magic-button"
+                                                onClick={() => {
                                                     setIsAddingSkill(false);
-                                                    setRefreshCategories((prev) => !prev);
-                                                } catch (err) {
-                                                    console.error("Error adding skill:", err);
-                                                }
-                                            }}
-                                        >
-                                            Submit
-                                        </button>
-                                        <button
-                                            className="magic-button"
-                                            onClick={() => {
-                                                setIsAddingSkill(false);
-                                                setNewSkill("");
-                                            }}
-                                        >
-                                            Cancel
-                                        </button>
+                                                    setNewSkill("");
+                                                }}
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
                                     </div>
                                 )}
                             </>
@@ -420,7 +423,7 @@ const ProfilePage = () => {
                         {!editingBio ? (
                             <>
                                 <div className="bio-text">
-                                    {profileData.bio || "No bio yet."}
+                                    {profileData.bio || "-- No information --"}
                                 </div>
                                 {isSelf && (
                                     <button className="magic-button" onClick={() => {
@@ -439,7 +442,6 @@ const ProfilePage = () => {
                                     className="bio-textarea"
                                     placeholder="Write something about yourself..."
                                     maxLength={255}
-                                    style={{ width: "600px", height: "150px", resize: "none" }}
                                 />
                                 <div className="bio-btns">
                                     <button className="magic-button" onClick={handleBioSubmit}>Save</button>
@@ -457,7 +459,7 @@ const ProfilePage = () => {
                             <ul className="connected-user-list two-columns">
 
                                 {connectedUsers.map((user) => (
-                                    <li key={user.id} className="user-card" onClick={() => navigate(`/profile/${user.id}`)}>
+                                    <li key={user.id} className="con-user-card" onClick={() => navigate(`/profile/${user.id}`)}>
                                         <img
                                             src={user.profile_pic || "/default-avatar.png"}
                                             alt={`${user.first_name} ${user.last_name}`}

@@ -55,7 +55,7 @@
 .connections-box {
     overflow-y: auto;
     width: calc(3 * auto);
-    height: 400px;
+    height: 500px;
 }
 
 .profile-scroll-card {
@@ -65,7 +65,8 @@
 .bio-box h2,
 .skills-box h2,
 .connections-box h2 {
-    color: #5c432d;
+    color: rgb(138, 108, 59);
+    font-family: 'Cinzel Decorative';
 }
 
 .profile-avatar {
@@ -88,7 +89,8 @@
 
 .profile-name {
     font-size: 2rem;
-    color: #5c432d;
+    font-family: 'Cinzel Decorative';
+    color: rgb(138, 108, 59);
     margin-bottom: 0.5rem;
 }
 
@@ -133,12 +135,14 @@
 .add-skill-section select {
     width: 100%;
     max-width: 400px;
+    margin-bottom: .6rem;
     padding: 0.5rem;
     border: 2px solid #d8b97a;
     border-radius: 8px;
     background-color: #fffef9;
     color: #3e2e1c;
     font-family: 'Cinzel', serif;
+    box-sizing: border-box;
 }
 
 .add-skill-section button {
@@ -186,13 +190,24 @@
 }
 
 .bio-textarea {
+    width: 100%;
+    min-width: 400px;
     max-width: 600px;
-    max-height: 160px;
+    height: 100%;
+    min-height: 160px;
+    max-height: 200px;
+    box-sizing: border-box;
     resize: none;
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-family: system-ui;
+}
+
+.bio-btns,
+.add-skill-btns {
+    display: flex;
+    justify-content: space-around;
 }
 
 .edit-form input:focus,
@@ -228,29 +243,35 @@ body {
     transition: overflow 0.2s ease-in-out;
 }
 
-.user-card {
+.con-user-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     padding: 0.5rem;
+    margin-inline: .2rem;
     background-color: #fffef9;
     border: 1px solid #d8b97a;
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.2s;
+    /* min-width: 120px; */
 }
 
-.user-card:hover {
+.con-user-card:hover {
     transform: scale(1.03);
 }
 
-.user-card img.profile-avatar {
+.con-user-card img.profile-avatar {
     width: 60px;
     height: 60px;
     object-fit: cover;
     border-radius: 50%;
     margin-bottom: 0.5rem;
+}
+
+.con-user-card span {
+    color: rgb(138, 108, 59);
 }
 
 .connected-user-list.two-columns {
