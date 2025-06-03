@@ -381,16 +381,19 @@ const ProfilePage = () => {
                         <ul className="skill-list">
                             {skills.map((skill) => (
                                 <div key={skill.id} className="skill-item">
-                                    <span>{skill.name} ({skill.category?.name})</span>
+                                    <div className="skill-info">
+                                        <span>{skill.name}</span>
+                                        <h5>({skill.category?.name})</h5>
+                                    </div>
                                     {isSelf && (
                                         <button
-                                            className="magic-button delete-skill"
+                                            className="magic-button delete-button"
                                             onClick={() => {
                                                 setSkillToDelete(skill);
                                                 setShowDeleteModal(true);
                                             }}
                                         >
-                                            Delete
+                                            X
                                         </button>
                                     )}
                                 </div>
@@ -416,7 +419,9 @@ const ProfilePage = () => {
                         <h2>Bio</h2>
                         {!editingBio ? (
                             <>
-                                <p className="bio-text">{profileData.bio || "No bio yet."}</p>
+                                <div className="bio-text">
+                                    {profileData.bio || "No bio yet."}
+                                </div>
                                 {isSelf && (
                                     <button className="magic-button" onClick={() => {
                                         setBioInput(profileData.bio || "");
