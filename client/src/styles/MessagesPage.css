@@ -113,15 +113,21 @@
 
 .emoji-btn {
     background: none;
+    /* No default button background */
     border: none;
+    /* No border */
     font-size: 1.5rem;
+    /* Makes the emoji wand icon larger */
     cursor: pointer;
+    /* Cursor changes to pointer on hover */
     padding: 0.4rem 0.6rem;
     transition: transform 0.2s ease;
+    /* Adds a smooth hover effect */
 }
 
 .emoji-btn:hover {
     transform: scale(1.2);
+    /* Grows slightly when hovered for magical effect */
 }
 
 .chat-avatar {
@@ -223,14 +229,22 @@
 
 .emoji-picker-container {
     position: absolute;
+    /* Places it floating above the input */
     bottom: 100%;
+    /* Anchors it above the input bar */
     right: 0;
+    /* Aligns to the right */
     margin-bottom: 10px;
+    /* Spacing above the input */
     z-index: 1000;
+    /* Ensures it's on top of everything else */
     box-shadow: 0 0 15px rgba(255, 223, 110, 0.5);
+    /* Glowing magic shadow */
     border-radius: 12px;
+    /* Smooth, rounded corners */
     /* overflow: hidden; */
     background-color: #fffdf4;
+    /* Light cream background to match theme */
 }
 
 /* .message-card {
@@ -256,3 +270,16 @@
 .message-card::-webkit-scrollbar-track {
     background: #fffdf4;
 } */
+
+
+/* In MessagesPage.css, I added styling to support the new emoji picker
+and give it a magical, consistent look. First, I created a .emoji-btn
+class for the wand emoji button next to the message input. It has a hover
+animation that slightly enlarges the button to give a whimsical, interactive
+feel. Then, I added the .emoji-picker-container style to control the emoji
+picker’s position and appearance. It floats above the chat input bar, has a
+soft shadow glow, and matches our app’s warm, parchment-inspired color palette
+with rounded edges. I also made sure it has a high z-index so it never gets
+hidden behind other content. These styles helped tie the emoji picker into
+the overall magical aesthetic and ensured it works visually with the layout
+across different screen sizes. - CT */

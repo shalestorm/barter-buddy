@@ -3,8 +3,8 @@ import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import EmojiPicker from 'emoji-picker-react';
-import magicalWandFile from '../assets/magicalWand.wav';
+import EmojiPicker from 'emoji-picker-react'; // External emoji picker component -CT
+import magicalWandFile from '../assets/magicalWand.wav'; // Magic wand sound file for send/receive
 import '../styles/MessagesPage.css'
 
 export default function MessagesPage() {
@@ -19,8 +19,9 @@ export default function MessagesPage() {
   const { user: currentUser } = useAuth();
   const bottomRef = useRef(null)
   const [unreadMap, setUnreadMap] = useState({})
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const inputRef = useRef(null);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false); // Controls if emoji picker is visible -CT
+  const inputRef = useRef(null); // Tracks cursor position in the text input
+
 
   const API_BASE = "http://localhost:8000";
 
@@ -148,8 +149,8 @@ export default function MessagesPage() {
               const latest = msg[msg.length - 1];
               if (latest.sender_id !== currentUser.id) {
                 const receiveSound = new Audio(magicalWandFile);
-                receiveSound.volume = 0.08;
-                receiveSound.play().catch(err => console.error("Receive sound error:", err));
+                receiveSound.volume = 0.08; // Keeps volume low
+                receiveSound.play().catch(err => console.error("Receive sound error:", err)); // Plays sound when new incoming message is detected -CT
               }
             }
             return msg;
@@ -186,7 +187,7 @@ export default function MessagesPage() {
 
     const sendSound = new Audio(magicalWandFile);
     sendSound.volume = 0.08;
-    sendSound.play().catch(err => console.error("Audio play error:", err));
+    sendSound.play().catch(err => console.error("Audio play error:", err)); // Plays sound when message is sent -CT
 
     fetch(`${API_BASE}/messages`, {
       method: "POST",
@@ -377,7 +378,7 @@ export default function MessagesPage() {
                   <button
                     type="button"
                     className="emoji-btn"
-                    onClick={() => setShowEmojiPicker((prev) => !prev)}
+                    onClick={() => setShowEmojiPicker((prev) => !prev)} // Toggle emoji picker open/close -CT
                   >
                     🪄
                   </button>
@@ -395,13 +396,13 @@ export default function MessagesPage() {
                             messageText.slice(0, cursorPos) +
                             emojiData.emoji +
                             messageText.slice(cursorPos);
-                          setMessageText(newText);
+                          setMessageText(newText); // Inserts emoji at cursor - CT
 
                           setTimeout(() => {
                             inputRef.current.focus();
                             inputRef.current.selectionStart = cursorPos + emojiData.emoji.length;
                             inputRef.current.selectionEnd = cursorPos + emojiData.emoji.length;
-                          }, 0);
+                          }, 0); // Keeps typing cursor in the right place
                         }}
                       />
                     </div>
@@ -440,3 +441,16 @@ export default function MessagesPage() {
     </>
   );
 }
+
+// In MessagesPage.jsx, I added two new interactive features to enhance
+// the user experience: emoji support and magical sound effects. First,
+// I integrated the emoji-picker-react library so users can click a magic
+// wand button to open a visual emoji picker. When you select an emoji, it
+// inserts directly where your cursor is in the message box. I used useRef
+// to keep track of the cursor position and make sure it doesn't jump after
+// adding an emoji. Second, I added a soft magical chime sound using a .wav
+// file that plays when a message is sent or when a new one is received. This
+// adds some whimsy and feedback for users, helping messages feel more magical
+// and alive. I added this using the Audio object and set a low volume to keep
+// it pleasant. Together, these upgrades make the chat experience feel more fun,
+// engaging, and on-brand with our magical theme. -CT
