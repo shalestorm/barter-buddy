@@ -32,6 +32,7 @@ textarea {
   padding: 2rem;
   text-align: center;
 }
+
 /* Body appears repeatedly */
 body {
   margin: 0;
@@ -57,6 +58,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
 }
+
 /* Body, html appears repeatedly */
 html,
 body {
@@ -65,6 +67,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 /* Check how login and signup handle background */
 /* Check backgrounds when console is open (margin problem?) */
 .gradient {
@@ -75,7 +78,8 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-image: url('assets/background.jpeg'); /* Welcome page only */
+  background-image: url('assets/background.jpeg');
+  /* Welcome page only */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -167,6 +171,7 @@ body,
   padding: 0;
   overflow-x: hidden;
 }
+
 /* Universal */
 .error-message {
   color: red;
@@ -286,6 +291,7 @@ h2.magic-title {
   padding: 0 20px;
   box-sizing: border-box;
 }
+
 /* should refactor? */
 .left-button,
 .right-button {
@@ -489,10 +495,12 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 /* Existing from React+Vite */
 a:hover {
   color: #535bf2;
 }
+
 /* Existing from React+Vite */
 button {
   border-radius: 8px;
@@ -505,11 +513,13 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 /* Existing from React+Vite */
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
 /* Existing from React+Vite (no dark mode) */
 @media (prefers-color-scheme: light) {
   :root {
@@ -590,4 +600,70 @@ button:focus-visible {
   width: fit-content;
   align-items: center;
   display: flex;
+}
+
+/* === Wizard Theme === */
+body[data-theme="wizard"] {
+  background-color: #fff9e6;
+  color: #2d1c0b;
+}
+
+body[data-theme="wizard"] .magic-button {
+  background: linear-gradient(145deg, #8b5e3c, #3e2e1e);
+  color: #fff2d9;
+  border-color: #ffcc00;
+}
+
+body[data-theme="wizard"] .magic-button:hover {
+  background: linear-gradient(145deg, #a1704e, #5a422e);
+  color: #ffe066;
+}
+
+/* === Dark Lord Theme === */
+body[data-theme="dark-lord"] {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+body[data-theme="dark-lord"] .magic-button {
+  background: linear-gradient(145deg, #3a0d0d, #000);
+  border-color: #8a0303;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5), inset 0 0 5px #000;
+  color: #f5e1b9;
+}
+
+body[data-theme="dark-lord"] .magic-button:hover {
+  background: linear-gradient(145deg, #5a1a1a, #1a0000);
+  color: #ff6666;
+  border-color: #ff1a1a;
+}
+
+/* Toggle Button */
+.global-theme-toggle {
+  position: fixed;
+  top: 1.2rem;
+  right: 1rem;
+  z-index: 1000;
+  font-family: 'Cinzel', serif;
+  background-color: #372e29;
+  color: #f5e1b9;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  border: 2px solid #d8b97a;
+  box-shadow: 0 0 10px rgba(216, 185, 122, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.global-theme-toggle:hover {
+  background-color: #1e1e1e;
+  color: #fffbe6;
+  box-shadow: 0 0 15px 4px rgba(255, 204, 0, 0.5);
+}
+
+.theme-toggle-wrapper {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
 }
