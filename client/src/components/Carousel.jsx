@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import '../styles/WelcomePage.css';
-import Ava from '../assets/CarouselUserPhotos/AvaR.png';
+import React, { useEffect, useRef } from 'react'; // Import the tools and files we need for this component
+import '../styles/WelcomePage.css'; // Importing the CSS styles
+import Ava from '../assets/CarouselUserPhotos/AvaR.png'; // Import profile photos from our assets folder
 import Ellie from '../assets/CarouselUserPhotos/EllieM.png';
 import Julian from '../assets/CarouselUserPhotos/JulianR.png';
 import Kira from '../assets/CarouselUserPhotos/KiraT.png';
@@ -10,6 +10,9 @@ import Mila from '../assets/CarouselUserPhotos/MilaS.png';
 import Noah from '../assets/CarouselUserPhotos/NoahP.png';
 import Ronan from '../assets/CarouselUserPhotos/RonanV.png';
 import Ty from '../assets/CarouselUserPhotos/TyM.png';
+
+// This is our list of fake users (placeholder data)
+// Each user has a name, a skill they can teach, something they want to learn, and a photo
 
 const carouselData = [
     {
@@ -74,37 +77,46 @@ const carouselData = [
     }
 ];
 
-
+// This is the main function that builds and displays the carousel
 
 export default function Carousel() {
+    // This gives us a way to directly control the carousel track (the part that scrolls)
     const trackRef = useRef(null);
+
+    // This part runs when the component loads
 
     useEffect(() => {
         const track = trackRef.current;
         if (!track) return;
 
-        // Clone the carousel content once for looping
+        // We duplicate the carousel content to make it scroll in a loop
         track.innerHTML += track.innerHTML;
 
+
+        // How fast the carousel scrolls
         let scrollSpeed = 0.5;
         let animationFrame;
 
+        // This is the function that moves the carousel to the left continuously
         const scroll = () => {
             track.scrollLeft += scrollSpeed;
 
+            // If we scroll to the halfway point, we reset to the beginning so it loops smoothly
             if (track.scrollLeft >= track.scrollWidth / 2) {
                 track.scrollLeft = 0; // seamless reset
             }
-
+            // Keep the scroll animation going
             animationFrame = requestAnimationFrame(scroll);
         };
-
+        // Start the scroll when the page loads
         animationFrame = requestAnimationFrame(scroll);
 
+        // Clean up the animation when the page unloads
         return () => cancelAnimationFrame(animationFrame);
     }, []);
 
 
+    // This is what gets shown on the screen
     return (
         <div className="carousel-wrapper">
             <h2 className="carousel-heading">✨ Meet Your Future Barter Buddies ✨</h2>
@@ -128,3 +140,10 @@ export default function Carousel() {
         </div>
     );
 }
+
+/* I created a carousel that scrolls through sample users who can trade skills.
+It uses fake data for now, like someone who knows photography and wants to learn
+painting. I added images, made it scroll on its own, and duplicated the content
+so it loops without stopping. Each card shows the user’s name, photo, what they
+can teach, and what they want to learn. I also styled the background and text to
+fit the magical theme. - CT */

@@ -1,3 +1,4 @@
+/* Overall card container with sizing, spacing, and 3D effect for flipping */
 .dev-card {
     flex: 1 1 280px;
     max-width: 220px;
@@ -5,23 +6,27 @@
     margin: 10px;
     text-align: center;
     perspective: 1000px;
+    /* Enables 3D flip effect */
     cursor: pointer;
     transition: transform 0.4s;
 }
 
-
+/* Inner part that rotates when flipped */
 .card-inner {
     position: relative;
     width: 100%;
     height: 260px;
     transform-style: preserve-3d;
+    /* Keep 3D space */
     transition: transform 0.6s;
 }
 
+/*  Flip effect on hover (triggered by adding 'flipped' class) */
 .card-inner.flipped {
     transform: rotateY(180deg);
 }
 
+/* Both front and back faces of the card */
 .card-front,
 .card-back {
     position: absolute;
@@ -30,20 +35,26 @@
     border-radius: 12px;
     overflow: hidden;
     backface-visibility: hidden;
+    /* Hides the other side when flipped */
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+    /* Soft glow effect */
 }
 
+/* Images on both sides of the card */
 .card-front img,
 .card-back img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* Keeps image filling card without distortion */
 }
 
+/* Rotates the back face for the flip */
 .card-back {
     transform: rotateY(180deg);
 }
 
+/* Text area under the card */
 .dev-text {
     margin-top: 10px;
     color: #fdf6d3;
@@ -51,6 +62,7 @@
     padding: 0 10px;
 }
 
+/* Developer name text (optional override) */
 .dev-text h3 {
     font-size: 1rem;
     font-family: 'Cinzel', serif;
@@ -80,6 +92,7 @@
     background: #1a472a;
 }
 
+/* Title and role text styles under the image */
 .title {
     font-size: 0.95rem;
     font-weight: 600;
@@ -104,11 +117,12 @@
 .role-description {
     font-size: 0.75rem;
     white-space: pre-line;
-    /* respects \n line breaks */
+    /* Preserves line breaks */
     color: #e6e6e6;
     line-height: 1.4;
 }
 
+/* Animated flip text (name/title switch) */
 .title-flip-text {
     font-size: 1rem;
     font-weight: bold;
@@ -116,3 +130,15 @@
     text-shadow: 0 0 6px rgba(255, 204, 0, 0.5);
     margin-bottom: 6px;
 }
+
+
+/* In DevCard.css, I styled the developer cards to have a clean, polished
+flip effect. Each card has a front side with the real photo and a back side
+with a cartoon version. When you hover, the card flips using a 3D rotation
+thanks to the perspective and transform properties. I added house-specific
+styles—so each card is color-coded based on our Harry Potter house theme,
+like Gryffindor red or Slytherin green. The text area under each card has
+styling for things like our names, roles, subtitles, and magical descriptions.
+There’s also a special glow effect around the animated title text that flips
+between our name/title and our fun role name using GSAP. Overall, this CSS helps
+make our team intros feel interactive, house-themed, and magically detailed. -CT */
