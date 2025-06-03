@@ -52,6 +52,7 @@ export default function LoginPage() {
                             required
                             placeholder="username"
                             autoComplete="username"
+                            maxLength={16}
                         />
                     </div>
                     <div className="form-group">

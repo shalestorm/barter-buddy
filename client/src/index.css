@@ -3,8 +3,7 @@
 
 body,
 button,
-select,
-textarea {
+select {
   font-family: 'Cinzel Decorative', cursive;
   font-weight: bold;
 }
@@ -187,33 +186,43 @@ body,
 }
 
 .modal-content {
-  border: solid 3px black;
-  background-color: rgb(255, 255, 255);
-  padding: 24px;
+  border: solid 3px #d8b97a;
+  background-color: rgba(255, 253, 240, 0.95);
+  padding: 60px;
+  padding-top: 30px;
   border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 223, 110, .6);
 }
 
 .modal-buttons {
   display: flex;
-  gap: 24px;
-  justify-content: center;
+  justify-content: space-between;
+  margin-top: 8px;
 }
 
 
-.modal-content h3 {
-  color: red;
+.modal-content.del-skill-modal h2 {
+  color: rgb(203, 34, 34);
 }
 
-.modal-content p {
-  color: blue
+.modal-content.send-con-modal h2 {
+  color: rgb(138, 108, 59);
+}
+
+.modal-content h4 strong{
+  color: rgb(138, 108, 59);
+  font-size: larger;
 }
 
 .modal-textarea {
   width: 300px;
   height: 200px;
   resize: none;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: system-ui;
 }
-
 
 /******* CSS CLEANUP *******/
 

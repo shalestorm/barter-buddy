@@ -134,6 +134,7 @@ export default function SignupPage() {
                                     onChange={(e) => setNewUsername(e.target.value)}
                                     required
                                     placeholder="username"
+                                    maxLength={16}
                                 />
                             </div>
                             <div className="form-group">
@@ -145,6 +146,7 @@ export default function SignupPage() {
                                     onChange={(e) => setNewEmail(e.target.value)}
                                     required
                                     placeholder="example@domain.com"
+                                    maxLength={64}
                                 />
                             </div>
                         </>
@@ -160,6 +162,7 @@ export default function SignupPage() {
                                     onChange={(e) => setNewPassword(e.target.value)}
                                     required
                                     placeholder="password"
+                                    maxLength={32}
                                 />
                             </div>
                             <div className="form-group">
@@ -171,6 +174,7 @@ export default function SignupPage() {
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                     required
                                     placeholder="confirm password"
+                                    maxLength={32}
                                 />
                             </div>
                         </>
@@ -186,6 +190,7 @@ export default function SignupPage() {
                                     onChange={(e) => setFirstName(e.target.value)}
                                     required
                                     placeholder="first name"
+                                    maxLength={32}
                                 />
                             </div>
                             <div className="form-group">
@@ -197,6 +202,7 @@ export default function SignupPage() {
                                     onChange={(e) => setLastName(e.target.value)}
                                     required
                                     placeholder="last name"
+                                    maxLength={32}
                                 />
                             </div>
                         </>
