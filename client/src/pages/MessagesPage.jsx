@@ -304,33 +304,36 @@ export default function MessagesPage() {
           )}
 
           <h3>Conversations</h3>
-          {connections
-            .filter(con => con.is_active)
-            .map(con => {
-              const otherUserId = getOtherUserId(con);
-              const otherUser = userDetails[otherUserId];
-              const hasUnread = unreadMap[con.id];
+          {connections.length === 0 ? (
+            <p>You have no connections</p>
+          ) : (
+            connections
+              .filter(con => con.is_active)
+              .map(con => {
+                const otherUserId = getOtherUserId(con);
+                const otherUser = userDetails[otherUserId];
+                const hasUnread = unreadMap[con.id];
 
-              return (
-                <div
-                  key={`con-${con.id}`}
-                  className={hasUnread ? "unread-connection-card" : "connection-card"}
-                  onClick={() => {
-                    setSelectedConnection(con);
-                    setSelectedRequest(null);
-                  }}
-                >
-                  {otherUser ? (
-                    <p>
-                      Chat with {otherUser.first_name} {otherUser.last_name}{" "}
-                      {hasUnread ? "🦉!" : ""}
-                    </p>
-                  ) : (
-                    <p>Loading user info...</p>
-                  )}
-                </div>
-              );
-            })}
+                return (
+                  <div
+                    key={`con-${con.id}`}
+                    className={hasUnread ? "unread-connection-card" : "connection-card"}
+                    onClick={() => {
+                      setSelectedConnection(con);
+                      setSelectedRequest(null);
+                    }}
+                  >
+                    {otherUser ? (
+                      <p>
+                        Chat with {otherUser.first_name} {otherUser.last_name}{" "}
+                        {hasUnread ? "🦉!" : ""}
+                      </p>
+                    ) : (
+                      <p>Loading user info...</p>
+                    )}
+                  </div>
+                );
+              }))}
         </aside>
 
         <main className="chat-window">
