@@ -229,22 +229,22 @@
 
 .emoji-picker-container {
     position: absolute;
-    /* Places it floating above the input */
-    bottom: 100%;
-    /* Anchors it above the input bar */
-    right: 0;
-    /* Aligns to the right */
-    margin-bottom: 10px;
-    /* Spacing above the input */
+    bottom: 50px;
+    right: 10px;
     z-index: 1000;
-    /* Ensures it's on top of everything else */
-    box-shadow: 0 0 15px rgba(255, 223, 110, 0.5);
-    /* Glowing magic shadow */
-    border-radius: 12px;
-    /* Smooth, rounded corners */
-    /* overflow: hidden; */
-    background-color: #fffdf4;
-    /* Light cream background to match theme */
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.emoji-picker-container button {
+    padding: 0;
+}
+
+
+.epr-icn-search {
+    visibility: hidden;
 }
 
 /* .message-card {

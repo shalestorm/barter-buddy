@@ -21,6 +21,7 @@ export default function MessagesPage() {
   const [unreadMap, setUnreadMap] = useState({})
   const [showEmojiPicker, setShowEmojiPicker] = useState(false); // Controls if emoji picker is visible -CT
   const inputRef = useRef(null); // Tracks cursor position in the text input
+  const prevMessagesLength = useRef(0);
 
 
   const API_BASE = "http://localhost:8000";
@@ -143,16 +144,19 @@ export default function MessagesPage() {
           return res.json();
         })
         .then(msg => {
+
           setMessages(prev => {
             const isNew = msg.length > prev.length;
-            if (isNew) {
+            if (isNew && chatRef.current) {
               const latest = msg[msg.length - 1];
               if (latest.sender_id !== currentUser.id) {
                 const receiveSound = new Audio(magicalWandFile);
                 receiveSound.volume = 0.08; // Keeps volume low
                 receiveSound.play().catch(err => console.error("Receive sound error:", err)); // Plays sound when new incoming message is detected -CT
+                setTimeout(scrollToBottom, 0);
               }
             }
+            prevMessagesLength.current = msg.length;
             return msg;
           });
 
@@ -208,6 +212,10 @@ export default function MessagesPage() {
       .then(newMsg => {
         setMessages(prev => [...prev, newMsg]);
         setMessageText("");
+        setTimeout(() => {
+          scrollToBottom();
+          setTimeout(scrollToBottom, 50);
+        }, 0);
       })
       .catch(console.error);
   };
@@ -263,6 +271,7 @@ export default function MessagesPage() {
     };
 
     fetchUnread();
+
     const interval = setInterval(fetchUnread, 1000);
     return () => clearInterval(interval);
   }, [currentUser.id]);
@@ -270,11 +279,21 @@ export default function MessagesPage() {
 
   const chatRef = useRef(null);
 
-  useEffect(() => {
+  const scrollToBottom = () => {
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
-  }, messages)
+  };
+
+
+  useEffect(() => {
+    if (selectedConnection) {
+
+      const timeout = setTimeout(scrollToBottom, 100);
+      return () => clearTimeout(timeout);
+    }
+  }, [selectedConnection]);
+
 
   return (
     <>
@@ -321,6 +340,7 @@ export default function MessagesPage() {
                     className={hasUnread ? "unread-connection-card" : "connection-card"}
                     onClick={() => {
                       setSelectedConnection(con);
+                      scrollToBottom();
                       setSelectedRequest(null);
                     }}
                   >
@@ -393,19 +413,19 @@ export default function MessagesPage() {
                   {showEmojiPicker && (
                     <div className="emoji-picker-container">
                       <EmojiPicker
-                        onEmojiClick={(emojiData) => {
+                        onEmojiClick={(event, emojiObject) => {
                           const cursorPos = inputRef.current.selectionStart;
                           const newText =
                             messageText.slice(0, cursorPos) +
-                            emojiData.emoji +
+                            emojiObject.emoji +
                             messageText.slice(cursorPos);
-                          setMessageText(newText); // Inserts emoji at cursor - CT
+                          setMessageText(newText);
 
                           setTimeout(() => {
                             inputRef.current.focus();
-                            inputRef.current.selectionStart = cursorPos + emojiData.emoji.length;
-                            inputRef.current.selectionEnd = cursorPos + emojiData.emoji.length;
-                          }, 0); // Keeps typing cursor in the right place
+                            inputRef.current.selectionStart = cursorPos + emojiObject.emoji.length;
+                            inputRef.current.selectionEnd = cursorPos + emojiObject.emoji.length;
+                          }, 0);
                         }}
                       />
                     </div>
