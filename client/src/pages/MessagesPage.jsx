@@ -352,7 +352,7 @@ export default function MessagesPage() {
               </div>
               <div className="chat-container">
                 <div className="messages" ref={chatRef}>
-                  {messages.map((msg, index) => {
+                  {messages?.length > 0 ? messages.map((msg, index) => {
                     const isMe = msg.sender_id === currentUser.id
                     return (
                       <div
@@ -362,7 +362,7 @@ export default function MessagesPage() {
                         {msg.content}
                       </div>
                     );
-                  })} {/*Display "-- no messages yet --" if empty?*/}
+                  }) : "-- no messages --"}
                   <div ref={bottomRef} />
                 </div>
                 <form className="chat-form" onSubmit={handleSend}>
