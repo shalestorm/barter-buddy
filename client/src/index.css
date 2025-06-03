@@ -3,8 +3,7 @@
 
 body,
 button,
-select,
-textarea {
+select {
   font-family: 'Cinzel Decorative', cursive;
   font-weight: bold;
 }
@@ -198,19 +197,19 @@ body,
 .modal-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 24px;
+  margin-top: 8px;
 }
 
 
 .modal-content.del-skill-modal h2 {
-  color: rgb(255, 0, 0);
+  color: rgb(203, 34, 34);
 }
 
 .modal-content.send-con-modal h2 {
   color: rgb(138, 108, 59);
 }
 
-.modal-content p strong{
+.modal-content h4 strong{
   color: rgb(138, 108, 59);
   font-size: larger;
 }
@@ -219,8 +218,11 @@ body,
   width: 300px;
   height: 200px;
   resize: none;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: system-ui;
 }
-
 
 /******* CSS CLEANUP *******/
 
