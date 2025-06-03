@@ -89,7 +89,7 @@ const FoundersLogPage = () => {
             </div>
             {/* Navigation link to return to dashboard */}
             <Link to='/dashboard' className='unstyled-link'>
-                <h5>--leave--</h5>
+                <h5>--Barter Buddy--</h5>
             </Link>
         </div>
     );
