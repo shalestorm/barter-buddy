@@ -157,3 +157,19 @@ Each card uses a frosted glass effect with a glowing border. I also made the pro
 pictures circular, styled the text to glow for better visibility, and made sure the
 layout scrolls smoothly with no visible scrollbar. I added spacing, text shadows,
 and sizing that matches the magical theme and makes the info easy to read." -CT */
+
+/* === Logo Style Fix for Transparent PNG ===
+.welcome-logo {
+    width: 300px;
+    /* or adjust size if needed */
+/* height: auto; */
+/* background-color: transparent; */
+/* ensure no background */
+/* mix-blend-mode: normal; */
+/* avoid white outlines or color blending */
+/* image-rendering: auto; */
+/* keeps text sharp */
+/* display: block; */
+/* margin: 0 auto; */
+/* center the logo */
+/* }
