@@ -14,7 +14,7 @@ const SendConnectionModal = ({ isOpen, onClose, onSend }) => {
 
     return (
         <div className="modal-overlay">
-            <div className="modal-content">
+            <div className="modal-content send-con-modal">
                 <h2>Send Connection Request</h2>
                 <textarea
                     rows={4}

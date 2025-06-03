@@ -5,8 +5,8 @@ const DeleteSkillModal = ({ isOpen, onClose, onConfirm, skill }) => {
 
     return (
         <div className="modal-overlay">
-            <div className="modal-content">
-                <h3>Confirm Skill Deletion</h3>
+            <div className="modal-content del-skill-modal">
+                <h2>Confirm Skill Deletion</h2>
                 <p>Are you sure you want to delete the skill</p>
                 <p> <strong>"{skill.name}"</strong>?</p>
                 <div className="modal-buttons">
