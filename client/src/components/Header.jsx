@@ -23,7 +23,6 @@ export default function Header() {
 
     const API_BASE = "http://localhost:8000";
 
-    // RIC: Check for unread messages (should also check for connection requests)
     useEffect(() => {
         const newMessageFetch = () => {
             fetch(`${API_BASE}/messages/user/${user.id}/unread`)

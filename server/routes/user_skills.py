@@ -38,17 +38,6 @@ def get_user_skills(user_id: int, db: Session = Depends(get_db)):
     return skills
 
 
-# @router.delete("/{user_skill_id}", status_code=status.HTTP_204_NO_CONTENT)
-# def delete_user_skill(user_skill_id: int, db: Session = Depends(get_db)):
-#     link = db.query(UserSkill).filter(UserSkill.id == user_skill_id).first()
-#     if not link:
-#         raise HTTPException(status_code=404, detail="Skill link not found")
-
-#     db.delete(link)
-#     db.commit()
-#     return
-
-
 @router.delete("/user/{user_id}/skill/{skill_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_user_skill_by_user_and_skill(user_id: int, skill_id: int, db: Session = Depends(get_db)):
     link = (
