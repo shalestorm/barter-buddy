@@ -108,7 +108,6 @@ const ProfilePage = () => {
         }
     }, [viewedUserId]);
 
-    // gets categories and set default to Other which is id 11 in the db
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -168,7 +167,7 @@ const ProfilePage = () => {
         }
     };
 
-    // fetch for connected users
+
     useEffect(() => {
         const fetchConnectedUsersWithProfiles = async () => {
             try {
@@ -317,7 +316,7 @@ const ProfilePage = () => {
                                             value={selectedCategoryId || ""}
                                             onChange={(e) => setSelectedCategoryId(parseInt(e.target.value))}
                                         >
-                                            {/* <option value={null}>-- Select a skill category --</option> */}
+
                                             {categories.map((cat) => (
                                                 <option key={cat.id} value={cat.id}>
                                                     {cat.name}
@@ -415,7 +414,6 @@ const ProfilePage = () => {
                     </div>
                 </div>
 
-                {/* RIGHT COLUMN */}
 
                 <div className="profile-right">
                     <div className="bio-box">

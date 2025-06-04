@@ -256,7 +256,6 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.2s;
-    /* min-width: 120px; */
 }
 
 .con-user-card:hover {
@@ -339,32 +338,14 @@ body {
 
 .skill-info span {
     flex: 1;
-    /* padding-right: 1rem; */
     word-break: break-word;
-    /* align-self: flex-start; */
 }
 
 .skill-info h5 {
     flex: 1;
-    /* padding-right: 1rem; */
     word-break: break-word;
-    /* align-self: flex-start; */
     margin: 0;
 }
-
-/* .delete-button {
-    background-color: #5c3d00;
-    color: white;
-    border: none;
-    padding: 0.4rem 0.75rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.delete-button:hover {
-    background-color: #8c5c00;
-} */
 
 .delete-button {
     margin-left: .8rem;

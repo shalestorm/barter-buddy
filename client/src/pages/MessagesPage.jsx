@@ -3,8 +3,8 @@ import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import EmojiPicker from 'emoji-picker-react'; // External emoji picker component -CT
-import magicalWandFile from '../assets/magicalWand.wav'; // Magic wand sound file for send/receive
+import EmojiPicker from 'emoji-picker-react';
+import magicalWandFile from '../assets/magicalWand.wav';
 import '../styles/MessagesPage.css'
 
 export default function MessagesPage() {
@@ -19,8 +19,8 @@ export default function MessagesPage() {
   const { user: currentUser } = useAuth();
   const bottomRef = useRef(null)
   const [unreadMap, setUnreadMap] = useState({})
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false); // Controls if emoji picker is visible -CT
-  const inputRef = useRef(null); // Tracks cursor position in the text input
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const inputRef = useRef(null);
   const prevMessagesLength = useRef(0);
 
 
@@ -152,7 +152,7 @@ export default function MessagesPage() {
               if (latest.sender_id !== currentUser.id) {
                 const receiveSound = new Audio(magicalWandFile);
                 receiveSound.volume = 0.08; // Keeps volume low
-                receiveSound.play().catch(err => console.error("Receive sound error:", err)); // Plays sound when new incoming message is detected -CT
+                receiveSound.play().catch(err => console.error("Receive sound error:", err));
                 setTimeout(scrollToBottom, 0);
               }
             }
@@ -191,7 +191,7 @@ export default function MessagesPage() {
 
     const sendSound = new Audio(magicalWandFile);
     sendSound.volume = 0.08;
-    sendSound.play().catch(err => console.error("Audio play error:", err)); // Plays sound when message is sent -CT
+    sendSound.play().catch(err => console.error("Audio play error:", err));
 
     fetch(`${API_BASE}/messages`, {
       method: "POST",
@@ -402,7 +402,7 @@ export default function MessagesPage() {
                   <button
                     type="button"
                     className="emoji-btn"
-                    onClick={() => setShowEmojiPicker((prev) => !prev)} // Toggle emoji picker open/close -CT
+                    onClick={() => setShowEmojiPicker((prev) => !prev)}
                   >
                     🪄
                   </button>

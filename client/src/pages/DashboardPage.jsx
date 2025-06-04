@@ -20,7 +20,6 @@ const DashboardPage = () => {
 
     const fetchSkillCategories = async () => {
         try {
-            // RIC: fetch skill categories
             const categoriesRes = await fetch(`${API_BASE}/categories`);
 
             if (!categoriesRes.ok) {
@@ -36,8 +35,6 @@ const DashboardPage = () => {
         }
     }
 
-
-    //user shuffler
     function shuffleArray(array) {
         const shuffled = [...array];
         for (let i = shuffled.length - 1; i > 0; i--) {
@@ -98,7 +95,6 @@ const DashboardPage = () => {
         }
     }, [user]);
 
-    // RIC: fetch categories on load
     useEffect(() => {
         fetchSkillCategories();
     }, []);
@@ -181,7 +177,7 @@ const DashboardPage = () => {
                                             ? u.skills.filter((s) => s.category_id === Number(selectedCategory))
                                             : u.skills).slice(0, 5).map((skill, index) => (
                                                 <li key={index}>{skill.name}</li>
-                                            ))} {/* Display skills that match selected category*/}
+                                            ))}
                                     </ul>
                                 </div>
                             ))}
