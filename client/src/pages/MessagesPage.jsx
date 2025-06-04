@@ -414,19 +414,24 @@ export default function MessagesPage() {
                   {showEmojiPicker && (
                     <div className="emoji-picker-container">
                       <EmojiPicker
-                        onEmojiClick={(event, emojiObject) => {
-                          const cursorPos = inputRef.current.selectionStart;
-                          const newText =
-                            messageText.slice(0, cursorPos) +
-                            emojiObject.emoji +
-                            messageText.slice(cursorPos);
-                          setMessageText(newText);
+                        onEmojiClick={(emojiData) => {
+                          const emoji = emojiData.emoji || emojiData.native || emojiData.unicode;
+                          if (!emoji || !inputRef.current) return;
 
-                          setTimeout(() => {
-                            inputRef.current.focus();
-                            inputRef.current.selectionStart = cursorPos + emojiObject.emoji.length;
-                            inputRef.current.selectionEnd = cursorPos + emojiObject.emoji.length;
-                          }, 0);
+                          const cursorPos = inputRef.current.selectionStart;
+
+                          setMessageText((prev) => {
+                            const newText =
+                              prev.slice(0, cursorPos) + emoji + prev.slice(cursorPos);
+
+                            setTimeout(() => {
+                              inputRef.current?.focus();
+                              inputRef.current.selectionStart = cursorPos + emoji.length;
+                              inputRef.current.selectionEnd = cursorPos + emoji.length;
+                            }, 0);
+
+                            return newText;
+                          });
                         }}
                       />
                     </div>
