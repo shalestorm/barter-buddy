@@ -396,6 +396,7 @@ export default function MessagesPage() {
                     value={messageText}
                     onChange={(e) => setMessageText(e.target.value)}
                     placeholder="Type your message..."
+                    maxLength={255}
                   />
 
                   <button

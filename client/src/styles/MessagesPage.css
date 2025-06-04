@@ -23,7 +23,8 @@
     padding: 1rem;
     margin-right: 1rem;
     box-shadow: 0 0 20px rgba(255, 223, 110, 0.4);
-    min-width: 300px;
+    max-width: 300px;
+    width: 100%;
 }
 
 .chat-list h3 {
@@ -49,6 +50,7 @@
 .chat-info h2 {
     color: rgb(138, 108, 59);
     margin-top: 0;
+    overflow-wrap: anywhere;
 }
 
 .chat-container {
@@ -67,6 +69,7 @@
     box-shadow: 0 0 6px rgba(255, 217, 102, 0.3);
     height: 400px;
     overflow-y: auto;
+    overflow-wrap: anywhere;
 }
 
 .my-message {
@@ -77,6 +80,7 @@
     padding: 8px;
     padding-inline: 16px;
     background-color: #f5ebd75b;
+    margin-left: 24px;
 }
 
 .their-message {
@@ -87,6 +91,7 @@
     padding: 8px;
     padding-inline: 16px;
     background-color: #f5ebd75b;
+    margin-right: 24px;
 }
 
 /* .chat-form {
@@ -149,6 +154,7 @@
     box-shadow: 0 0 6px rgba(255, 217, 102, 0.3);
     cursor: pointer;
     transition: box-shadow 0.3s ease;
+    overflow-wrap: anywhere;
 }
 
 .request-card:hover {
@@ -183,6 +189,7 @@
 .request-info h2 {
     color: rgb(138, 108, 59);
     margin-top: 0;
+    overflow-wrap: anywhere;
 }
 
 .request-message {
@@ -193,6 +200,7 @@
     padding: 1rem;
     box-shadow: 0 0 6px rgba(255, 217, 102, 0.3);
     transition: box-shadow 0.3s ease;
+    overflow-wrap: anywhere;
 }
 
 .connection-card {
@@ -205,6 +213,7 @@
     cursor: pointer;
     transition: box-shadow 0.3s ease;
     margin-bottom: 8px;
+    overflow-wrap: anywhere;
 }
 
 .connection-card:hover {
@@ -221,6 +230,7 @@
     cursor: pointer;
     transition: box-shadow 0.3s ease;
     margin-bottom: 8px;
+    overflow-wrap: anywhere;
 }
 
 .unread-connection-card:hover {

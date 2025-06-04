@@ -146,7 +146,7 @@ export default function SignupPage() {
                                     onChange={(e) => setNewEmail(e.target.value)}
                                     required
                                     placeholder="example@domain.com"
-                                    maxLength={64}
+                                    maxLength={32}
                                 />
                             </div>
                         </>
@@ -190,7 +190,7 @@ export default function SignupPage() {
                                     onChange={(e) => setFirstName(e.target.value)}
                                     required
                                     placeholder="first name"
-                                    maxLength={32}
+                                    maxLength={16}
                                 />
                             </div>
                             <div className="form-group">
@@ -202,7 +202,7 @@ export default function SignupPage() {
                                     onChange={(e) => setLastName(e.target.value)}
                                     required
                                     placeholder="last name"
-                                    maxLength={32}
+                                    maxLength={16}
                                 />
                             </div>
                         </>
