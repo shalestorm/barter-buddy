@@ -70,6 +70,7 @@
 
 .user-header h4 {
     margin-block: 20px;
+    overflow-wrap: anywhere;
 }
 
 .card-pic {
