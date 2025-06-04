@@ -18,6 +18,10 @@ const ProfilePage = () => {
     const [editingBio, setEditingBio] = useState(false);
     const [bioInput, setBioInput] = useState("");
     const fileInputRef = useRef();
+    const nameChangeRef = useRef(); // for name update
+    const [editingName, setEditingName] = useState(false); // for name update
+    const [firstNameInput, setFirstNameInput] = useState(""); // for name update
+    const [lastNameInput, setLastNameInput] = useState(""); // for name update
     const [skills, setSkills] = useState([]);
     const [newSkill, setNewSkill] = useState("");
     const [categories, setCategories] = useState([]);
@@ -147,7 +151,31 @@ const ProfilePage = () => {
             console.error("Failed to upload profile pic:", err);
         }
     };
+    // update name handler
+    const handleNameUpdate = async () => {
+        const nameUpdateData = {
+            first_name: firstNameInput.trim(),
+            last_name: lastNameInput.trim(),
+        };
 
+        try {
+            const res = await fetch("/users/me/names", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(nameUpdateData),
+            });
+            if (!res.ok) throw new Error("Names update failed");
+
+            const updated = await res.json();
+            setProfileData(updated);
+            setEditingName(false);
+        } catch (err) {
+            console.error("Failed to update names:", err);
+        }
+    };
+    // update name handler end
     const handleBioSubmit = async () => {
         try {
             const res = await fetch("/users/me/bio", {
@@ -240,7 +268,7 @@ const ProfilePage = () => {
         <>
             <Header />
             <div className="profile-container">
-                {/* LEFT COLUMN */}
+
                 <div className="profile-left">
                     <div className="profile-scroll-card">
                         <div className="profile-pic-wrapper">
@@ -270,7 +298,58 @@ const ProfilePage = () => {
                                 />
                             )}
                         </div>
-                        <h1 className="profile-name">{profileData.first_name} {profileData.last_name}</h1>
+                        <div className="profile-name-wrapper">
+                            {!editingName ? (
+                                <>
+                                    <h1 className="profile-name">
+                                        {profileData.first_name} {profileData.last_name}
+                                    </h1>
+                                    {isSelf && (
+                                        <button className="magic-button" onClick={() => {
+                                            setFirstNameInput(profileData.first_name || "");
+                                            setLastNameInput(profileData.last_name || "");
+                                            setEditingName(true);
+                                        }}>
+                                            Edit Name
+                                        </button>
+                                    )}
+                                </>
+                            ) : (
+                                <div className="edit-name-section">
+                                    <form
+                                        className="edit-name-form"
+                                        onSubmit={handleNameUpdate}
+                                    >
+                                        <div className="edit-name-inputs">
+                                            <label htmlFor="first-name-input">First Name:</label>
+                                            <input
+                                                id="firstname-input"
+                                                type="text"
+                                                value={firstNameInput}
+                                                onChange={(e) => setFirstNameInput(e.target.value)}
+                                                placeholder="You must have a first name"
+                                                required
+                                                maxLength={16}
+                                            />
+                                            <label htmlFor="last-name-input">Last Name:</label>
+                                            <input
+                                                id="lastname-input"
+                                                type="text"
+                                                value={lastNameInput}
+                                                onChange={(e) => setLastNameInput(e.target.value)}
+                                                placeholder="You must have a last name"
+                                                required
+                                                maxLength={16}
+                                            />
+                                        </div>
+                                        <div className="name-btns">
+                                            <button type="submit" className="magic-button">Save</button>
+                                            <button className="magic-button" onClick={() => setEditingName(false)}>Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            )}
+                        </div>
 
                         {connectionStatus !== "self" && (
                             <>
