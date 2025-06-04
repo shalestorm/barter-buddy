@@ -3,8 +3,8 @@ import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import EmojiPicker from 'emoji-picker-react'; // External emoji picker component -CT
-import magicalWandFile from '../assets/magicalWand.wav'; // Magic wand sound file for send/receive
+import EmojiPicker from 'emoji-picker-react';
+import magicalWandFile from '../assets/magicalWand.wav';
 import '../styles/MessagesPage.css'
 
 export default function MessagesPage() {
@@ -19,8 +19,9 @@ export default function MessagesPage() {
   const { user: currentUser } = useAuth();
   const bottomRef = useRef(null)
   const [unreadMap, setUnreadMap] = useState({})
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false); // Controls if emoji picker is visible -CT
-  const inputRef = useRef(null); // Tracks cursor position in the text input
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const inputRef = useRef(null);
+  const prevMessagesLength = useRef(0);
 
 
   const API_BASE = "http://localhost:8000";
@@ -143,16 +144,19 @@ export default function MessagesPage() {
           return res.json();
         })
         .then(msg => {
+
           setMessages(prev => {
             const isNew = msg.length > prev.length;
-            if (isNew) {
+            if (isNew && chatRef.current) {
               const latest = msg[msg.length - 1];
               if (latest.sender_id !== currentUser.id) {
                 const receiveSound = new Audio(magicalWandFile);
                 receiveSound.volume = 0.08; // Keeps volume low
-                receiveSound.play().catch(err => console.error("Receive sound error:", err)); // Plays sound when new incoming message is detected -CT
+                receiveSound.play().catch(err => console.error("Receive sound error:", err));
+                setTimeout(scrollToBottom, 0);
               }
             }
+            prevMessagesLength.current = msg.length;
             return msg;
           });
 
@@ -187,7 +191,7 @@ export default function MessagesPage() {
 
     const sendSound = new Audio(magicalWandFile);
     sendSound.volume = 0.08;
-    sendSound.play().catch(err => console.error("Audio play error:", err)); // Plays sound when message is sent -CT
+    sendSound.play().catch(err => console.error("Audio play error:", err));
 
     fetch(`${API_BASE}/messages`, {
       method: "POST",
@@ -208,6 +212,10 @@ export default function MessagesPage() {
       .then(newMsg => {
         setMessages(prev => [...prev, newMsg]);
         setMessageText("");
+        setTimeout(() => {
+          scrollToBottom();
+          setTimeout(scrollToBottom, 50);
+        }, 0);
       })
       .catch(console.error);
   };
@@ -263,6 +271,7 @@ export default function MessagesPage() {
     };
 
     fetchUnread();
+
     const interval = setInterval(fetchUnread, 1000);
     return () => clearInterval(interval);
   }, [currentUser.id]);
@@ -270,11 +279,21 @@ export default function MessagesPage() {
 
   const chatRef = useRef(null);
 
-  useEffect(() => {
+  const scrollToBottom = () => {
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
-  }, messages)
+  };
+
+
+  useEffect(() => {
+    if (selectedConnection) {
+
+      const timeout = setTimeout(scrollToBottom, 100);
+      return () => clearTimeout(timeout);
+    }
+  }, [selectedConnection]);
+
 
   return (
     <>
@@ -321,6 +340,7 @@ export default function MessagesPage() {
                     className={hasUnread ? "unread-connection-card" : "connection-card"}
                     onClick={() => {
                       setSelectedConnection(con);
+                      scrollToBottom();
                       setSelectedRequest(null);
                     }}
                   >
@@ -376,12 +396,13 @@ export default function MessagesPage() {
                     value={messageText}
                     onChange={(e) => setMessageText(e.target.value)}
                     placeholder="Type your message..."
+                    maxLength={255}
                   />
 
                   <button
                     type="button"
                     className="emoji-btn"
-                    onClick={() => setShowEmojiPicker((prev) => !prev)} // Toggle emoji picker open/close -CT
+                    onClick={() => setShowEmojiPicker((prev) => !prev)}
                   >
                     🪄
                   </button>
@@ -394,18 +415,23 @@ export default function MessagesPage() {
                     <div className="emoji-picker-container">
                       <EmojiPicker
                         onEmojiClick={(emojiData) => {
-                          const cursorPos = inputRef.current.selectionStart;
-                          const newText =
-                            messageText.slice(0, cursorPos) +
-                            emojiData.emoji +
-                            messageText.slice(cursorPos);
-                          setMessageText(newText); // Inserts emoji at cursor - CT
+                          const emoji = emojiData.emoji || emojiData.native || emojiData.unicode;
+                          if (!emoji || !inputRef.current) return;
 
-                          setTimeout(() => {
-                            inputRef.current.focus();
-                            inputRef.current.selectionStart = cursorPos + emojiData.emoji.length;
-                            inputRef.current.selectionEnd = cursorPos + emojiData.emoji.length;
-                          }, 0); // Keeps typing cursor in the right place
+                          const cursorPos = inputRef.current.selectionStart;
+
+                          setMessageText((prev) => {
+                            const newText =
+                              prev.slice(0, cursorPos) + emoji + prev.slice(cursorPos);
+
+                            setTimeout(() => {
+                              inputRef.current?.focus();
+                              inputRef.current.selectionStart = cursorPos + emoji.length;
+                              inputRef.current.selectionEnd = cursorPos + emoji.length;
+                            }, 0);
+
+                            return newText;
+                          });
                         }}
                       />
                     </div>

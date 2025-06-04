@@ -20,7 +20,7 @@
     flex-direction: column;
     gap: 1.5rem;
     flex: 1;
-    width: 300px;
+    width: 50%;
 }
 
 
@@ -40,7 +40,7 @@
     background-color: rgba(255, 253, 240, 0.96);
     border: 2px solid #d8b97a;
     border-radius: 16px;
-    padding: 2rem;
+    padding: 1.5rem;
     box-shadow: 0 0 20px rgba(255, 223, 110, 0.3);
     display: flex;
     flex-direction: column;
@@ -55,9 +55,19 @@
 .connections-box {
     overflow-y: auto;
     width: calc(3 * auto);
-    height: 400px;
+    height: 500px;
 }
 
+.profile-scroll-card {
+    justify-content: center;
+}
+
+.bio-box h2,
+.skills-box h2,
+.connections-box h2 {
+    color: rgb(138, 108, 59);
+    font-family: 'Cinzel Decorative';
+}
 
 .profile-avatar {
     width: 100px;
@@ -79,8 +89,10 @@
 
 .profile-name {
     font-size: 2rem;
-    color: #5c432d;
-    margin-bottom: 0.25rem;
+    font-family: 'Cinzel Decorative';
+    color: rgb(138, 108, 59);
+    margin-bottom: 16px;
+    overflow-wrap: anywhere;
 }
 
 .profile-bio {
@@ -120,16 +132,19 @@
     margin-top: 1rem;
 }
 
+.edit-name-section input,
 .add-skill-section input,
 .add-skill-section select {
     width: 100%;
     max-width: 400px;
+    margin-bottom: .6rem;
     padding: 0.5rem;
     border: 2px solid #d8b97a;
     border-radius: 8px;
     background-color: #fffef9;
     color: #3e2e1c;
     font-family: 'Cinzel', serif;
+    box-sizing: border-box;
 }
 
 .add-skill-section button {
@@ -171,9 +186,38 @@
     transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
+.edit-name-inputs {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+
+.bio-text {
+    overflow-wrap: anywhere;
+    margin-bottom: 16px;
+}
+
 .bio-textarea {
+    width: 100%;
+    min-width: 400px;
     max-width: 600px;
-    max-height: 160px;
+    height: 100%;
+    min-height: 160px;
+    max-height: 200px;
+    box-sizing: border-box;
+    resize: none;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: system-ui;
+    margin-bottom: 8px;
+}
+
+.name-btns,
+.bio-btns,
+.add-skill-btns {
+    display: flex;
+    justify-content: space-around;
 }
 
 .edit-form input:focus,
@@ -207,14 +251,18 @@ body {
     list-style: none;
     overflow-x: hidden;
     transition: overflow 0.2s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
 }
 
-.user-card {
+.con-user-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     padding: 0.5rem;
+    margin-inline: .2rem;
     background-color: #fffef9;
     border: 1px solid #d8b97a;
     border-radius: 8px;
@@ -222,16 +270,20 @@ body {
     transition: transform 0.2s;
 }
 
-.user-card:hover {
+.con-user-card:hover {
     transform: scale(1.03);
 }
 
-.user-card img.profile-avatar {
+.con-user-card img.profile-avatar {
     width: 60px;
     height: 60px;
     object-fit: cover;
     border-radius: 50%;
     margin-bottom: 0.5rem;
+}
+
+.con-user-card span {
+    color: rgb(138, 108, 59);
 }
 
 .connected-user-list.two-columns {
@@ -240,8 +292,8 @@ body {
 
 .skill-list {
     list-style: none;
-    padding: 0;
-    margin: 0;
+    padding: 8px;
+    margin: 8px;
     max-width: 100%;
     overflow-y: hidden;
     transition: overflow 0.2s ease-in-out;
@@ -283,39 +335,38 @@ body {
 }
 
 
-
-
-
-
-
 .skill-item {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 0.5rem;
+    padding: 0.3rem;
     border-bottom: 1px solid #e0c68a;
 }
 
-.skill-item span {
+.skill-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.skill-info span {
     flex: 1;
-    padding-right: 1rem;
     word-break: break-word;
 }
 
+.skill-info h5 {
+    flex: 1;
+    word-break: break-word;
+    margin: 0;
+}
+
 .delete-button {
-    background-color: #5c3d00;
-    color: white;
-    border: none;
-    padding: 0.4rem 0.75rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+    margin-left: .8rem;
 }
 
 .delete-button:hover {
-    background-color: #8c5c00;
+    margin-left: .8rem;
+    border: 3px solid #c70000;
 }
-
 
 .main-profile-avatarhoverable {
     width: 150px;

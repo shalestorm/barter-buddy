@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import background_login from "../assets/background_login.png";
 import logo from '../assets/bb_new.png';
+import '../styles/LoginSignup.css';
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");
@@ -52,19 +53,21 @@ export default function LoginPage() {
                             required
                             placeholder="username"
                             autoComplete="username"
+                            maxLength={16}
                         />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password: </label>
-                            <input
-                                id="password"
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                                placeholder="password"
-                                autoComplete="current-password"
-                            />
+                        <input
+                            id="password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            placeholder="password"
+                            autoComplete="current-password"
+                            maxLength={32}
+                        />
                     </div>
                     <div className="login-button-group">
                         <button

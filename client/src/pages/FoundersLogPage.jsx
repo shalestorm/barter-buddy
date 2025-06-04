@@ -1,6 +1,6 @@
 // Cayla's Contribution
 
-// Imports core React features, a custom DevCard component, styles, and GSAP for animation
+
 import React, { useEffect, useRef } from 'react';
 import DevCard from '../components/DevCard';
 import '../styles/FoundersLogPage.css';
@@ -9,14 +9,13 @@ import { TextPlugin } from 'gsap/TextPlugin';
 import { Link } from 'react-router';
 
 
-// Registers GSAP TextPlugin to animate text content
+
 gsap.registerPlugin(TextPlugin);
 
 const FoundersLogPage = () => {
-    const titleRef = useRef(); // Used to reference the header element so we can animate it
+    const titleRef = useRef();
 
     useEffect(() => {
-        // Animates the title with a magical text shuffle using GSAP
         gsap.to(titleRef.current, {
             duration: 2.5,
             text: '✨ The Order of the Dev: Behind the Magic ✨',
@@ -24,7 +23,7 @@ const FoundersLogPage = () => {
         });
     }, []);
 
-    // List of developer profiles with names, roles, descriptions, house themes, and image paths
+
     const devs = [
         {
             name: 'Cayla Thompson',
@@ -89,7 +88,7 @@ const FoundersLogPage = () => {
             </div>
             {/* Navigation link to return to dashboard */}
             <Link to='/dashboard' className='unstyled-link'>
-                <h5>--leave--</h5>
+                <h5>--Barter Buddy--</h5>
             </Link>
         </div>
     );

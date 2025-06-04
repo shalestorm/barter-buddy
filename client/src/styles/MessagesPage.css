@@ -7,8 +7,6 @@
     background-color: #f5f2e9;
     padding: 2rem;
     min-height: 100vh;
-    /* background-size: cover; */
-    /* background-position: center; */
     box-sizing: border-box;
     font-family: 'Cinzel', cursive;
 }
@@ -23,7 +21,8 @@
     padding: 1rem;
     margin-right: 1rem;
     box-shadow: 0 0 20px rgba(255, 223, 110, 0.4);
-    min-width: 300px;
+    max-width: 300px;
+    width: 100%;
 }
 
 .chat-list h3 {
@@ -38,17 +37,14 @@
     border-radius: 16px;
     padding: 1rem;
     padding-bottom: 4rem;
-    /* margin-right: 1rem; */
-    /* margin: 0 auto; */
     box-shadow: 0 0 20px rgba(255, 223, 110, 0.4);
-    /* width: 800px; */
     flex: 1;
-    /* max-width: 1000px; */
 }
 
 .chat-info h2 {
     color: rgb(138, 108, 59);
     margin-top: 0;
+    overflow-wrap: anywhere;
 }
 
 .chat-container {
@@ -67,6 +63,7 @@
     box-shadow: 0 0 6px rgba(255, 217, 102, 0.3);
     height: 400px;
     overflow-y: auto;
+    overflow-wrap: anywhere;
 }
 
 .my-message {
@@ -77,6 +74,7 @@
     padding: 8px;
     padding-inline: 16px;
     background-color: #f5ebd75b;
+    margin-left: 24px;
 }
 
 .their-message {
@@ -87,12 +85,10 @@
     padding: 8px;
     padding-inline: 16px;
     background-color: #f5ebd75b;
+    margin-right: 24px;
 }
 
-/* .chat-form {
-    display: flex;
-    flex-direction: column;
-} */
+
 .chat-form {
     display: flex;
     flex-direction: row;
@@ -113,21 +109,15 @@
 
 .emoji-btn {
     background: none;
-    /* No default button background */
     border: none;
-    /* No border */
     font-size: 1.5rem;
-    /* Makes the emoji wand icon larger */
     cursor: pointer;
-    /* Cursor changes to pointer on hover */
     padding: 0.4rem 0.6rem;
     transition: transform 0.2s ease;
-    /* Adds a smooth hover effect */
 }
 
 .emoji-btn:hover {
     transform: scale(1.2);
-    /* Grows slightly when hovered for magical effect */
 }
 
 .chat-avatar {
@@ -149,6 +139,7 @@
     box-shadow: 0 0 6px rgba(255, 217, 102, 0.3);
     cursor: pointer;
     transition: box-shadow 0.3s ease;
+    overflow-wrap: anywhere;
 }
 
 .request-card:hover {
@@ -183,6 +174,7 @@
 .request-info h2 {
     color: rgb(138, 108, 59);
     margin-top: 0;
+    overflow-wrap: anywhere;
 }
 
 .request-message {
@@ -193,6 +185,7 @@
     padding: 1rem;
     box-shadow: 0 0 6px rgba(255, 217, 102, 0.3);
     transition: box-shadow 0.3s ease;
+    overflow-wrap: anywhere;
 }
 
 .connection-card {
@@ -205,6 +198,7 @@
     cursor: pointer;
     transition: box-shadow 0.3s ease;
     margin-bottom: 8px;
+    overflow-wrap: anywhere;
 }
 
 .connection-card:hover {
@@ -221,6 +215,7 @@
     cursor: pointer;
     transition: box-shadow 0.3s ease;
     margin-bottom: 8px;
+    overflow-wrap: anywhere;
 }
 
 .unread-connection-card:hover {
@@ -229,48 +224,23 @@
 
 .emoji-picker-container {
     position: absolute;
-    /* Places it floating above the input */
-    bottom: 100%;
-    /* Anchors it above the input bar */
-    right: 0;
-    /* Aligns to the right */
-    margin-bottom: 10px;
-    /* Spacing above the input */
+    bottom: 50px;
+    right: 10px;
     z-index: 1000;
-    /* Ensures it's on top of everything else */
-    box-shadow: 0 0 15px rgba(255, 223, 110, 0.5);
-    /* Glowing magic shadow */
-    border-radius: 12px;
-    /* Smooth, rounded corners */
-    /* overflow: hidden; */
-    background-color: #fffdf4;
-    /* Light cream background to match theme */
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* .message-card {
-    flex: 1;
-    background-color: rgba(255, 253, 240, 0.96);
-    border: 2px solid #d8b97a;
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 0 20px rgba(255, 223, 110, 0.4);
-    overflow-y: auto;
+.emoji-picker-container button {
+    padding: 0;
 }
 
-.message-card::-webkit-scrollbar {
-    height: 8px;
-    width: 8px;
+
+.epr-icn-search {
+    visibility: hidden;
 }
-
-.message-card::-webkit-scrollbar-thumb {
-    background: #d8b97a;
-    border-radius: 4px;
-}
-
-.message-card::-webkit-scrollbar-track {
-    background: #fffdf4;
-} */
-
 
 /* In MessagesPage.css, I added styling to support the new emoji picker
 and give it a magical, consistent look. First, I created a .emoji-btn

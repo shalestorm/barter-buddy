@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import logo from '../assets/bb_new.png';
 import backgroundcastle from '../assets/background.jpeg';
 import '../styles/WelcomePage.css';
-import Carousel from '../components/Carousel'; // Importing the Carousel component to display scrolling user profiles -CT */
+import Carousel from '../components/Carousel';
 import { useNavigate } from 'react-router';
 
 const WelcomePage = () => {
@@ -76,11 +76,10 @@ const WelcomePage = () => {
                 <h1 className="magic-title">Welcome to Barter Buddy!</h1>
                 <h2 className="magic-title">The Free Exchange of Knowledge</h2>
             </header>
-            <div className="action-buttons-container">
+            <div className="welcome-buttons-container">
                 <button className="magic-button left-button" onClick={handleSignupButton}>NEW TO BARTER BUDDY?</button>
-                <button className="magic-button login-button" onClick={handleLoginButton}>LOGIN</button>
+                <button className="magic-button right-button" onClick={handleLoginButton}>LOG IN</button>
             </div>
-            {/* Adding the Carousel at the bottom of the page to show sample Barter Buddy users */}
 
             <Carousel />
         </div>

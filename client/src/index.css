@@ -3,8 +3,7 @@
 
 body,
 button,
-select,
-textarea {
+select {
   font-family: 'Cinzel Decorative', cursive;
   font-weight: bold;
 }
@@ -33,39 +32,29 @@ textarea {
   text-align: center;
 }
 
-/* Body appears repeatedly */
 body {
-  margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #ffffff7b;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-}
-
-
-/* Barter Buddy CSS (initial, from sandbox) */
-
-/* Body appears repeatedly */
-body {
-  background-color: #ffffff7b;
-  padding: 0;
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow: hidden;
-}
-
-/* Body, html appears repeatedly */
-html,
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
 }
 
 /* Check how login and signup handle background */
@@ -84,6 +73,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
+  /* RIC: this is what causes  WelcomePage to be unscrollable x */
 }
 
 .gradient .overlay {
@@ -100,7 +90,6 @@ body {
   position: relative;
   z-index: 1;
 }
-
 
 .gradient .background-overlay {
   position: absolute;
@@ -121,7 +110,6 @@ body {
   z-index: 1;
 }
 
-
 @keyframes gradientAnimation {
   0% {
     background-position: 0% 50%;
@@ -136,7 +124,7 @@ body {
   }
 }
 
-/* Universal */
+
 .magic-button {
   font-family: 'Cinzel Decorative', cursive;
   font-weight: bold;
@@ -160,25 +148,17 @@ body {
   border-color: #6e0f77;
 }
 
-
-/* Body, html appears repeatedly */
-html,
-body,
-#root {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+.magic-button:focus,
+.magic-button:focus-visible {
+  outline: 4px auto darkgreen;
 }
 
-/* Universal */
 .error-message {
   color: red;
   margin-top: 1rem;
 }
 
-/* Modals: universal? */
+
 .modal-overlay {
   z-index: 1000;
   position: fixed;
@@ -192,414 +172,41 @@ body,
 }
 
 .modal-content {
-  border: solid 3px black;
-  background-color: rgb(255, 255, 255);
-  padding: 24px;
+  border: solid 3px #d8b97a;
+  background-color: rgba(255, 253, 240, 0.95);
+  padding: 60px;
+  padding-top: 30px;
   border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 223, 110, .6);
 }
 
 .modal-buttons {
   display: flex;
-  gap: 24px;
-  justify-content: center;
+  justify-content: space-between;
+  margin-top: 8px;
 }
 
-
-.modal-content h3 {
-  color: red;
+.modal-content.del-skill-modal h2 {
+  color: rgb(203, 34, 34);
 }
 
-.modal-content p {
-  color: blue
+.modal-content.send-con-modal h2 {
+  color: rgb(138, 108, 59);
+}
+
+.modal-content h4 strong {
+  color: rgb(138, 108, 59);
+  font-size: larger;
 }
 
 .modal-textarea {
   width: 300px;
   height: 200px;
   resize: none;
-}
-
-
-/******* CSS CLEANUP *******/
-
-
-/*** Various? (Welcome and Login) ***/
-.centered-header,
-.login-form-container,
-.action-buttons-container {
-  position: relative;
-  z-index: 1;
-}
-
-
-/*** Welcome page only ***/
-.centered-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.welcome-logo {
-  display: block;
-  max-width: 175px;
-  height: auto;
-  margin: 25px auto 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
-}
-
-.welcome-logo:hover {
-  animation: shimmer 1.5s infinite;
-  box-shadow: 0 0 40px 10px rgba(255, 255, 255, 0.3);
-  transform: scale(1.03);
-  transition: all 0.3s ease-in-out;
-}
-
-.magic-title {
-  font-size: 3rem;
-  color: #f0e6d2;
-  font-family: 'Cinzel Decorative', cursive;
-  text-shadow: 0 0 5px #ffeb3b, 0 0 15px #ffc107, 0 0 30px #ff9800;
-  animation: pulseGlow 3s infinite;
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-h2.magic-title {
-  font-size: 1.8rem;
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-
-@keyframes pulseGlow {
-
-  0%,
-  100% {
-    text-shadow: 0 0 5px #ffeb3b, 0 0 15px #ffc107, 0 0 30px #ff9800;
-  }
-
-  50% {
-    text-shadow: 0 0 10px #fff176, 0 0 25px #ffca28, 0 0 50px #ff5722;
-  }
-}
-
-.action-buttons-container {
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-  max-width: 900px;
-  margin-top: 20px;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
-
-/* should refactor? */
-.left-button,
-.right-button {
-  font: 'Cinzel Decorative', cursive;
-  font-size: 14px;
-  padding: 8px 15px;
-  width: auto;
-  min-width: 160px;
-  margin: 0;
-}
-
-
-/*** Login & Signup page only (no Welcome) ***/
-.bb-logo {
-  display: block;
-  max-width: 140px;
-  height: auto;
-  margin: 25px auto 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
-}
-
-.bb-logo:hover {
-  animation: shimmer 1.5s infinite;
-  box-shadow: 0 0 40px 10px rgba(255, 255, 255, 0.3);
-  transform: scale(1.03);
-  transition: all 0.3s ease-in-out;
-}
-
-@keyframes shimmer {
-  0% {
-    filter: brightness(2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
-  }
-
-  50% {
-    filter: brightness(1.2) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
-  }
-
-  100% {
-    filter: brightness(2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
-  }
-}
-
-.login-redirect,
-.signup-redirect {
-  margin-top: 1.5rem;
-  align-items: center;
-}
-
-
-/*** Login page only ***/
-.login-page {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0);
-  color: rgb(255, 255, 255);
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
-  z-index: 10;
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-}
-
-.login-form-container {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.login-form .form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-.login-form label {
-  font-weight: bold;
-  margin-bottom: 0.3rem;
-}
-
-.login-form input {
   padding: 0.5rem;
-  font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 6px;
-}
-
-.login-button-group {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 1rem;
-}
-
-
-/*** Signup page only ***/
-.signup-page {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  background-color: rgba(0, 0, 0, 0);
-  /* black box with slight transparency */
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-}
-
-.signup-background {
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.signup-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.345);
-}
-
-.signup-container {
-  position: relative;
-  z-index: 2;
-  background: rgba(255, 255, 255, 0.020);
-  color: rgb(255, 255, 255);
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0);
-}
-
-.signup-form .form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-.signup-form label {
-  font-weight: bold;
-  margin-bottom: 0.3rem;
-}
-
-.signup-form input {
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-.signup-button-group {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-}
-
-
-/*** Other pages ***/
-/* Founders page */
-.founders-body {
-  font-family: monospace;
-  background-color: #0d0d0d;
-  color: #00ff99;
-  padding: 2em;
-}
-
-.devs-div {
-  margin-bottom: 1.5em;
-}
-
-/* Profile page */
-.connected-user-list {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-}
-
-
-/*** Unused? ***/
-/* Existing from React+Vite */
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-
-/* Existing from React+Vite */
-a:hover {
-  color: #535bf2;
-}
-
-/* Existing from React+Vite */
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-/* Existing from React+Vite */
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-/* Existing from React+Vite (no dark mode) */
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-.magic-input {
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: 16px;
-  padding: 10px 15px;
-  margin: 5px 0;
-  width: 260px;
-  border: 2px solid #ffcc00;
-  border-radius: 6px;
-  background-color: #1a1a1a;
-  color: #fff2d9;
-  box-shadow: inset 0 0 5px #000, 0 0 8px rgba(255, 204, 0, 0.4);
-  outline: none;
-  transition: all 0.3s ease;
-  text-align: center;
-}
-
-.magic-input:focus {
-  border-color: #ffe066;
-  box-shadow: 0 0 12px rgba(255, 204, 0, 0.8), inset 0 0 6px #333;
-  background-color: #2b2b2b;
-}
-
-.input-fields {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 15px;
-}
-
-.magic-input {
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: 16px;
-  padding: 10px 15px;
-  margin: 5px 0;
-  width: 260px;
-  border: 2px solid #ffcc00;
-  border-radius: 6px;
-  background-color: #1a1a1a;
-  color: #fff2d9;
-  box-shadow: inset 0 0 5px #000, 0 0 8px rgba(255, 204, 0, 0.4);
-  outline: none;
-  transition: all 0.3s ease;
-  text-align: center;
-}
-
-.magic-input:focus {
-  border-color: #ffe066;
-  box-shadow: 0 0 12px rgba(255, 204, 0, 0.8), inset 0 0 6px #333;
-  background-color: #2b2b2b;
-}
-
-.signup-button {
-  height: 50px;
-  width: 100px;
-  margin-top: 5px;
-}
-
-
-/*** Unknown (unused??) ***/
-.connected-user-card {
-  border: solid 3px black;
-  width: fit-content;
-  align-items: center;
-  display: flex;
+  font-family: system-ui;
 }
 
 /* === Wizard Theme === */

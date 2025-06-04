@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import background_signup from '../assets/background_signup.png';
 import logo from '../assets/bb_new.png';
+import '../styles/LoginSignup.css';
 
 export default function SignupPage() {
     const [newUsername, setNewUsername] = useState("");
@@ -134,6 +135,7 @@ export default function SignupPage() {
                                     onChange={(e) => setNewUsername(e.target.value)}
                                     required
                                     placeholder="username"
+                                    maxLength={16}
                                 />
                             </div>
                             <div className="form-group">
@@ -145,6 +147,7 @@ export default function SignupPage() {
                                     onChange={(e) => setNewEmail(e.target.value)}
                                     required
                                     placeholder="example@domain.com"
+                                    maxLength={32}
                                 />
                             </div>
                         </>
@@ -160,6 +163,7 @@ export default function SignupPage() {
                                     onChange={(e) => setNewPassword(e.target.value)}
                                     required
                                     placeholder="password"
+                                    maxLength={32}
                                 />
                             </div>
                             <div className="form-group">
@@ -171,6 +175,7 @@ export default function SignupPage() {
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                     required
                                     placeholder="confirm password"
+                                    maxLength={32}
                                 />
                             </div>
                         </>
@@ -186,6 +191,7 @@ export default function SignupPage() {
                                     onChange={(e) => setFirstName(e.target.value)}
                                     required
                                     placeholder="first name"
+                                    maxLength={16}
                                 />
                             </div>
                             <div className="form-group">
@@ -197,6 +203,7 @@ export default function SignupPage() {
                                     onChange={(e) => setLastName(e.target.value)}
                                     required
                                     placeholder="last name"
+                                    maxLength={16}
                                 />
                             </div>
                         </>

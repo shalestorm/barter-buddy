@@ -7,7 +7,6 @@ export function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [profilePicUrl, setProfilePicUrl] = useState("")
 
-    // Check if user is authenticated
     async function checkAuth() {
         try {
             const res = await fetch("http://localhost:8000/users/auth/me", {
@@ -35,7 +34,6 @@ export function AuthProvider({ children }) {
         }
     }
 
-    // Login function again keep it dry
     async function login(username, password) {
         try {
             const res = await fetch("http://localhost:8000/auth/login", {
@@ -49,8 +47,6 @@ export function AuthProvider({ children }) {
                 const errorData = await res.json();
                 throw new Error(errorData.detail || "Login failed");
             }
-
-            // After login update user state
             await checkAuth();
             return true;
         } catch (error) {
@@ -60,7 +56,7 @@ export function AuthProvider({ children }) {
         }
     }
 
-    // Logout function just dry coding this way can call this elsewhere
+
     async function logout() {
         try {
             const res = await fetch("http://localhost:8000/auth/logout", {
@@ -80,7 +76,6 @@ export function AuthProvider({ children }) {
         }
     }
 
-    // check if user session exists
     useEffect(() => {
         checkAuth();
     }, []);

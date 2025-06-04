@@ -14,15 +14,15 @@ const SendConnectionModal = ({ isOpen, onClose, onSend }) => {
 
     return (
         <div className="modal-overlay">
-            <div className="modal-content">
+            <div className="modal-content send-con-modal">
                 <h2>Send Connection Request</h2>
                 <textarea
+                    className="modal-textarea"
                     rows={4}
                     placeholder="Add an optional message..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     maxLength={255}
-                    style={{ width: "300px", height: "150px", resize: "none" }}
                 />
                 <div className="modal-buttons">
                     <button className="magic-button" onClick={handleSubmit}>Send</button>

@@ -22,6 +22,8 @@
     /* Center all items horizontally */
     overflow-x: hidden;
     /* ✅ prevent horizontal scroll */
+    font-family: monospace;
+    background-color: #0d0d0d;
 }
 
 /* Styling for the animated page title */

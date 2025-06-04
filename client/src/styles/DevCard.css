@@ -6,7 +6,6 @@
     margin: 10px;
     text-align: center;
     perspective: 1000px;
-    /* Enables 3D flip effect */
     cursor: pointer;
     transition: transform 0.4s;
 }
