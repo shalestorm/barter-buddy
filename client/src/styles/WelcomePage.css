@@ -1,8 +1,77 @@
+/* General (from index.css) */
+.centered-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.welcome-logo {
+  display: block;
+  max-width: 175px;
+  height: auto;
+  margin: 25px auto 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+}
+
+.welcome-logo:hover {
+  animation: shimmer 1.5s infinite;
+  box-shadow: 0 0 40px 10px rgba(255, 255, 255, 0.3);
+  transform: scale(1.03);
+  transition: all 0.3s ease-in-out;
+}
+
+.magic-title {
+  font-size: 3rem;
+  color: #f0e6d2;
+  font-family: 'Cinzel Decorative', cursive;
+  text-shadow: 0 0 5px #ffeb3b, 0 0 15px #ffc107, 0 0 30px #ff9800;
+  animation: pulseGlow 3s infinite;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+h2.magic-title {
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    text-shadow: 0 0 5px #ffeb3b, 0 0 15px #ffc107, 0 0 30px #ff9800;
+  }
+
+  50% {
+    text-shadow: 0 0 10px #fff176, 0 0 25px #ffca28, 0 0 50px #ff5722;
+  }
+}
+
+.welcome-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  max-width: 900px;
+  margin-top: 20px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.left-button,
+.right-button {
+  font: 'Cinzel Decorative', cursive;
+  font-size: 14px;
+  padding: 8px 15px;
+  width: auto;
+  margin: 0;
+}
+
 /* === Main wrapper for the carousel section === */
 .carousel-wrapper {
-    margin-top: 3rem;
+    margin-top: 1.5rem;
     /* Adds space above the carousel */
-    padding: 2rem 0;
+    padding: 1rem 0;
     /* Adds space above and below inside the section */
     width: 100%;
     /* Take up full width of the page */
@@ -108,6 +177,7 @@
 /* === Style for the user's name on the card === */
 .carousel-card h3 {
     font-size: 1.3rem;
+    margin-top: 0;
     margin-bottom: 0.75rem;
     color: #f0d27d;
     /* brighter, warmer gold */
@@ -126,6 +196,8 @@
     /* Slightly smaller font for details */
     line-height: 1.4;
     /* Line spacing for better readability */
+    margin-top: 0;
+    margin-bottom: 8px;
 }
 
 /* === Add a subtle shadow to both name and description for better visibility === */
@@ -144,7 +216,7 @@
     /* Makes the image a perfect circle */
     object-fit: cover;
     /* Ensures the image fills the space nicely */
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
     /* Space below the photo */
     border: 2px solid #d8b97a;
     /* Golden border to match the theme */

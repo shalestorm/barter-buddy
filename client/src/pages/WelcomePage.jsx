@@ -76,9 +76,9 @@ const WelcomePage = () => {
                 <h1 className="magic-title">Welcome to Barter Buddy!</h1>
                 <h2 className="magic-title">The Free Exchange of Knowledge</h2>
             </header>
-            <div className="action-buttons-container">
+            <div className="welcome-buttons-container">
                 <button className="magic-button left-button" onClick={handleSignupButton}>NEW TO BARTER BUDDY?</button>
-                <button className="magic-button login-button" onClick={handleLoginButton}>LOGIN</button>
+                <button className="magic-button right-button" onClick={handleLoginButton}>LOG IN</button>
             </div>
 
             <Carousel />
