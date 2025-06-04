@@ -15,9 +15,7 @@ function App() {
 
   return (
     <>
-      <div className="theme-toggle-wrapper">
-        <ThemeToggle />
-      </div>
+      <ThemeToggle />
       <div>
         <Routes>
           <Route path='/' element={<WelcomePage />} />
