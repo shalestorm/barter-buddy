@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import background_login from "../assets/background_login.png";
 import logo from '../assets/bb_new.png';
+import '../styles/LoginSignup.css';
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");

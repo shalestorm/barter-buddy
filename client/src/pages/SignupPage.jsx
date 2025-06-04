@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import background_signup from '../assets/background_signup.png';
 import logo from '../assets/bb_new.png';
+import '../styles/LoginSignup.css';
 
 export default function SignupPage() {
     const [newUsername, setNewUsername] = useState("");

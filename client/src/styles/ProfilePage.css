@@ -251,6 +251,9 @@ body {
     list-style: none;
     overflow-x: hidden;
     transition: overflow 0.2s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
 }
 
 .con-user-card {
