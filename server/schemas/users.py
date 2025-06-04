@@ -27,3 +27,8 @@ class UserOut(UserBase):
 
 class UpdateBio(BaseModel):
     bio: Optional[str]
+
+
+class UpdateNames(BaseModel):
+    first_name: str
+    last_name: str

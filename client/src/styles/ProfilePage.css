@@ -91,7 +91,7 @@
     font-size: 2rem;
     font-family: 'Cinzel Decorative';
     color: rgb(138, 108, 59);
-    margin-bottom: 0.5rem;
+    margin-bottom: 16px;
     overflow-wrap: anywhere;
 }
 
@@ -132,6 +132,7 @@
     margin-top: 1rem;
 }
 
+.edit-name-section input,
 .add-skill-section input,
 .add-skill-section select {
     width: 100%;
@@ -185,6 +186,12 @@
     transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
+.edit-name-inputs {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+
 .bio-text {
     overflow-wrap: anywhere;
     margin-bottom: 16px;
@@ -203,8 +210,10 @@
     border: 1px solid #ccc;
     border-radius: 6px;
     font-family: system-ui;
+    margin-bottom: 8px;
 }
 
+.name-btns,
 .bio-btns,
 .add-skill-btns {
     display: flex;

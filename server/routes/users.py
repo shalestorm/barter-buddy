@@ -5,7 +5,7 @@ from jose import jwt, JWTError
 from typing import List, Optional
 from server.db.database import SessionLocal
 from server.models.users import User
-from server.schemas.users import UserCreate, UserOut, UpdateBio
+from server.schemas.users import UserCreate, UserOut, UpdateBio, UpdateNames
 from passlib.context import CryptContext
 from datetime import date
 import shutil
@@ -33,26 +33,23 @@ def get_db():
 
 
 def get_current_user(
-    access_token: Optional[str] = Cookie(None),
-    db: Session = Depends(get_db)
+    access_token: Optional[str] = Cookie(None), db: Session = Depends(get_db)
 ) -> User:
     if not access_token:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Not authenticated"
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated"
         )
     try:
         payload = jwt.decode(access_token, SECRET_KEY, algorithms=[ALGORITHM])
         username: Optional[str] = payload.get("sub")
         if username is None:
             raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid Token"
+                status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid Token"
             )
     except JWTError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Could not validate credentials"
+            detail="Could not validate credentials",
         )
     user = db.query(User).filter(User.username == username).first()
     if user is None:
@@ -62,9 +59,11 @@ def get_current_user(
 
 @router.post("/", response_model=UserOut)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
-    existing_user = db.query(User).filter(
-        (User.username == user.username) | (User.email == user.email)
-    ).first()
+    existing_user = (
+        db.query(User)
+        .filter((User.username == user.username) | (User.email == user.email))
+        .first()
+    )
     if existing_user:
         raise HTTPException(
             status_code=400, detail="Username or email already registered"
@@ -103,7 +102,7 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
 async def update_user_profile_pic(
     profile_pic: UploadFile = File(...),
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     if not profile_pic.filename:
         raise HTTPException(status_code=400, detail="Invalid file upload.")
@@ -127,9 +126,22 @@ async def update_user_profile_pic(
 def update_user_bio(
     update: UpdateBio,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     current_user.bio = update.bio  # type: ignore
+    db.commit()
+    db.refresh(current_user)
+    return current_user
+
+
+@router.put("/me/names", response_model=UserOut)
+def update_user_names(
+    update: UpdateNames,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    current_user.first_name = update.first_name  # type: ignore
+    current_user.last_name = update.last_name  # type: ignore
     db.commit()
     db.refresh(current_user)
     return current_user

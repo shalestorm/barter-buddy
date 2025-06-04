@@ -81,6 +81,7 @@
     text-align: left;
     margin-top: 12px;
     margin-bottom: 8px;
+    overflow-wrap: anywhere;
 }
 
 .browse-buttons {
