@@ -18,10 +18,10 @@ const ProfilePage = () => {
     const [editingBio, setEditingBio] = useState(false);
     const [bioInput, setBioInput] = useState("");
     const fileInputRef = useRef();
-    const nameChangeRef = useRef(); // for name update
-    const [editingName, setEditingName] = useState(false); // for name update
-    const [firstNameInput, setFirstNameInput] = useState(""); // for name update
-    const [lastNameInput, setLastNameInput] = useState(""); // for name update
+    const nameChangeRef = useRef();
+    const [editingName, setEditingName] = useState(false);
+    const [firstNameInput, setFirstNameInput] = useState("");
+    const [lastNameInput, setLastNameInput] = useState("");
     const [skills, setSkills] = useState([]);
     const [newSkill, setNewSkill] = useState("");
     const [categories, setCategories] = useState([]);

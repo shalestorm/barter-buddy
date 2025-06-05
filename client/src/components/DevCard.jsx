@@ -1,19 +1,16 @@
 import React, { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import gsap from 'gsap';
-import '../styles/DevCard.css';  // CSS styles for the card
+import '../styles/DevCard.css';
 
-// This component creates a flip-style dev profile card with animation and hover effects
 const DevCard = ({ name, title, roleTitle, roleSubtitle, roleDescription, house, photo, cartoon }) => {
-    const [flipped, setFlipped] = useState(false); // Keeps track of whether the card is flipped
-    const textRef = useRef(); // Ref to animate the name/title text on hover flip
+    const [flipped, setFlipped] = useState(false);
+    const textRef = useRef();
 
-    // Toggles the card between front and back on hover
     const handleFlip = () => {
         setFlipped(!flipped);
     };
 
-    // GSAP animation to update the name/title text smoothly when flipped
     useEffect(() => {
         if (textRef.current) {
             gsap.to(textRef.current, {
@@ -26,20 +23,16 @@ const DevCard = ({ name, title, roleTitle, roleSubtitle, roleDescription, house,
 
 
     return (
-        // Card wrapper with house-specific class and flip trigger
         <div className={`dev-card ${house}`} onMouseEnter={handleFlip} onMouseLeave={handleFlip}>
             <div className={`card-inner ${flipped ? 'flipped' : ''}`}>
-                {/* Front side shows real photo */}
                 <div className="card-front">
                     <img src={photo} alt={name} />
                 </div>
-                {/* Back side shows cartoon version */}
                 <div className="card-back">
                     <img src={cartoon} alt={`${name} cartoon`} />
                 </div>
             </div>
 
-            {/* Text section below the card */}
             <div className="dev-text">
                 <p ref={textRef} className="title-flip-text">{`${name} - ${title}`}</p>
                 <p className="role-subtitle">{roleSubtitle}</p>

@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+import requests
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from server.db.database import engine, Base
@@ -17,6 +18,7 @@ import os
 
 app = FastAPI()
 
+
 Base.metadata.create_all(bind=engine)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_DIR = os.path.join(BASE_DIR, "static")
@@ -30,6 +32,17 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/api/quote")
+def get_quote():
+    try:
+        response = requests.get("https://zenquotes.io/api/today", timeout=5)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        return {"error": "Failed to fetch quote", "details": str(e)}
+
 
 app.include_router(users.router)
 app.include_router(skills.router)

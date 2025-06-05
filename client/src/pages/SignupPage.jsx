@@ -127,7 +127,7 @@ export default function SignupPage() {
                     {signupStep === 1 && (
                         <>
                             <div className="form-group">
-                                <label htmlFor="username">Username:</label>
+                                <label htmlFor="username"><h3>Username:</h3></label>
                                 <input
                                     id="username"
                                     type="text"
@@ -139,7 +139,7 @@ export default function SignupPage() {
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="email">Email:</label>
+                                <label htmlFor="email"><h3>Email:</h3></label>
                                 <input
                                     id="email"
                                     type="email"
@@ -155,7 +155,7 @@ export default function SignupPage() {
                     {signupStep === 2 && (
                         <>
                             <div className="form-group">
-                                <label htmlFor="password">Password:</label>
+                                <label htmlFor="password"><h3>Password:</h3></label>
                                 <input
                                     id="password"
                                     type="password"
@@ -167,7 +167,7 @@ export default function SignupPage() {
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="confirm-password">Confirm Password:</label>
+                                <label htmlFor="confirm-password"><h3>Confirm Password:</h3></label>
                                 <input
                                     id="confirm-password"
                                     type="password"
@@ -183,7 +183,7 @@ export default function SignupPage() {
                     {signupStep === 3 && (
                         <>
                             <div className="form-group">
-                                <label htmlFor="first-name">First Name:</label>
+                                <label htmlFor="first-name"><h3>First Name:</h3></label>
                                 <input
                                     id="first-name"
                                     type="text"
@@ -195,7 +195,7 @@ export default function SignupPage() {
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="last-name">Last Name:</label>
+                                <label htmlFor="last-name"><h3>Last Name:</h3></label>
                                 <input
                                     id="last-name"
                                     type="text"
