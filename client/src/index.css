@@ -190,7 +190,7 @@ h1 {
   color: rgb(138, 108, 59);
 }
 
-.modal-content h4 strong{
+.modal-content h4 strong {
   color: rgb(138, 108, 59);
   font-size: larger;
 }
@@ -205,4 +205,36 @@ h1 {
   color: #3e2e1c;
   font-family: 'Cinzel', serif;
   box-sizing: border-box;
+}
+
+/* Toggle Button */
+.global-theme-toggle {
+  position: fixed;
+  top: 1rem;
+  /* adjust as needed */
+  right: 2rem;
+  z-index: 3000;
+  font-family: 'Cinzel', serif;
+  background-color: #372e29;
+  color: #f5e1b9;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 2px solid #d8b97a;
+  box-shadow: 0 0 10px rgba(216, 185, 122, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.global-theme-toggle:hover {
+  background-color: #1e1e1e;
+  color: #fffbe6;
+  box-shadow: 0 0 15px 4px rgba(255, 204, 0, 0.5);
+}
+
+
+.global-theme-toggle:hover {
+  background-color: #1e1e1e;
+  color: #fffbe6;
+  box-shadow: 0 0 15px 4px rgba(255, 204, 0, 0.5);
 }

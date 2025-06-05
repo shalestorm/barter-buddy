@@ -1,7 +1,9 @@
 .founders-body {   min-height: 100vh;
     width: 100%;
     padding: 60px 20px 120px;
-    background: linear-gradient(to bottom, #1e1e1e, #000);
+    /* Top, side, and extra bottom padding */
+    background: linear-gradient(to bottom, #9e9797, #848080);
+    /* Dark background gradient */
     color: #fffbe6;
     text-align: center;
     box-sizing: border-box;
@@ -16,13 +18,188 @@
 .founders-header {   font-size: 2.4rem;
     font-family: 'Cinzel', serif;
     color: #ffe066;
-    text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffec99;
+    /* Warm yellow color */
+    transition: text-shadow 0.4s ease;
+    /* Glowing text effect */
     margin-bottom: 40px;
-    animation: pulseGlow 3s infinite ease-in-out;
+
+    /* Space below title */
+    /* Main container for the entire Founders Log page layout */
+    .founders-body {
+        min-height: 100vh;
+        /* Full screen height */
+        width: 100%;
+        /* Full width */
+        padding: 60px 20px 120px;
+        /* Top, side, and extra bottom padding */
+        background: linear-gradient(to bottom, #9e9797, #848080);
+        /* Dark background gradient */
+        color: #fffbe6;
+        /* Light cream text color for contrast */
+        text-align: center;
+        /* Center text alignment */
+        box-sizing: border-box;
+        /* Ensures padding is included in element width/height */
+        display: flex;
+        /* Flex layout */
+        flex-direction: column;
+        /* Stack children vertically */
+        align-items: center;
+        /* Center all items horizontally */
+        overflow-x: hidden;
+        /* ✅ prevent horizontal scroll */
+        font-family: monospace;
+        background-color: #0d0d0d;
+    }
+
+    /* Styling for the animated page title */
+    .founders-header {
+        font-size: 2.4rem;
+        /* Larger heading size */
+        font-family: 'Cinzel', serif;
+        /* Fancy serif font */
+        color: #ffe066;
+        /* Warm yellow color */
+        transition: text-shadow 0.4s ease;
+        /* Glowing text effect */
+        margin-bottom: 40px;
+        /* Space below title */
+        /* animation: pulseGlow 3s infinite ease-in-out; */
+        /* Glowing animation effect */
+    }
+
+
+    /* Glowing pulse animation used for title and outro text */
+    @keyframes pulseGlow {
+
+        0%,
+        100% {
+            text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffec99;
+        }
+
+        50% {
+            text-shadow: 0 0 15px #fff176, 0 0 30px #ffd700;
+        }
+    }
+
+    /* .devs-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    max-width: 100%;
+} */
+
+    /* Container for all developer cards */
+    .devs-container {
+        display: flex;
+        /* Use flex layout */
+        flex-wrap: wrap;
+        /* Wrap cards to new rows as needed */
+        justify-content: center;
+        /* Center them horizontally */
+        align-items: flex-start;
+        /* Align to the top vertically */
+        width: auto;
+        height: auto;
+        max-width: 1400px;
+        /* Prevents it from stretching too far */
+        margin: 0 auto;
+        /* Center the whole container */
+        gap: 10px;
+        /* Small space between cards */
+        padding: 0 20px;
+        /* Side padding */
+        box-sizing: border-box;
+    }
+
+
+    /* Used in case you want to set card height manually */
+    .dev-card {
+        height: 580px;
+    }
+
+    /* Outro text message at the bottom of the page */
+    .founders-outro {
+        margin-top: 60px;
+        font-size: 1.1rem;
+        font-style: italic;
+        transition: text-shadow 0.4s ease;
+        color: #ffeb99;
+
+        text-align: center;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+
+        animation: pulseGlow 4s infinite ease-in-out;
+        /* Uses same glow animation */
+    }
+
+    /* Wrapper around the dev cards and outro */
+    .founders-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+
+    /* Optional extra style for animated text areas like title flips */
+    .title-flip-text {
+        color: #000;
+        text-shadow: 0 0 8px rgba(246, 120, 2, 0.77);
+        animation: pulseGlow 4s infinite ease-in-out;
+    }
+
+    /* Wizard (light) theme */
+    [data-theme="wizard"] {
+        background: linear-gradient(to bottom, #fdf6e3, #e3dac9);
+        color: #1a1a1a;
+    }
+
+    /* Dark Lord (dark) theme */
+    [data-theme="dark-lord"] {
+        background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
+        color: #fffbe6;
+    }
+
+    /* Glowing effects for light mode (wizard) */
+    body[data-theme="wizard"] .founders-header,
+    body[data-theme="wizard"] .founders-outro {
+        text-shadow: 1px 1px 3px #000000, 0 0 8px #000000;
+    }
+
+    /* Glowing effects for dark mode (dark-lord) */
+    body[data-theme="dark-lord"] .founders-header,
+    body[data-theme="dark-lord"] .founders-outro {
+        text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffec99;
+    }
+
+
+    /* In the FoundersLogPage.css file, I styled the layout and look of our
+Founders Log page to match the magical theme of our app. First, the
+.founders-body is the main container — it fills the screen, uses a dark
+gradient background and centers all the content. Then I styled the page
+header with .founders-header, giving it a bold yellow color, a glowing
+text effect, and an animation that pulses to make it feel magical and
+alive. I created the glowing animation separately with a @keyframes rule
+called pulseGlow that both the title and outro share. Next, the .devs-container
+holds all of our team cards. I used flexbox to lay them out responsively,
+allowing them to wrap if needed and keeping them neatly centered on the page.
+The .founders-outro styles the thank-you message at the bottom with an elegant
+font, soft color, and another glowing animation to make it stand out gently.
+Lastly, the .founders-content wraps both the cards and the outro to keep
+everything aligned and organized vertically. This CSS adds the structure,
+glow effects, spacing, and colors that bring the magical feel of our Founders
+page to life. -CT */
+
+    /* Glowing animation effect */
 }
 
 
-@keyframes pulseGlow {
+/* Glowing pulse animation used for title and outro text */
+@keyframes pulseGlowDark {
 
     0%,
     100% {
@@ -34,7 +211,21 @@
     }
 }
 
-.devs-container {   display: flex;
+@keyframes pulseGlowLight {
+
+    0%,
+    100% {
+        text-shadow: 1px 1px 4px #000000, 0 0 6px #000000;
+    }
+
+    50% {
+        text-shadow: 2px 2px 6px #000000, 0 0 10px #000000;
+    }
+}
+
+
+/* .devs-container {
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
@@ -52,18 +243,21 @@
     height: 580px;
 }
 
-
+/* Outro text message at the bottom of the page */
 .founders-outro {
     margin-top: 60px;
     font-size: 1.1rem;
     font-style: italic;
+    transition: text-shadow 0.4s ease;
     color: #ffeb99;
+
     text-align: center;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    text-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
-    animation: pulseGlow 4s infinite ease-in-out;
+
+    /* animation: pulseGlow 4s infinite ease-in-out; */
+    /* Uses same glow animation */
 }
 
 .founders-content {
@@ -79,6 +273,49 @@
     text-shadow: 0 0 8px rgba(246, 120, 2, 0.77);
     animation: pulseGlow 4s infinite ease-in-out;
 }
+
+/* Wizard (light) theme */
+[data-theme="wizard"] {
+    background: linear-gradient(to bottom, #fdf6e3, #e3dac9);
+    color: #1a1a1a;
+}
+
+/* Dark Lord (dark) theme */
+[data-theme="dark-lord"] {
+    background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
+    color: #fffbe6;
+}
+
+/* Glowing effects for light mode (wizard) */
+body[data-theme="wizard"] .founders-header,
+body[data-theme="wizard"] .founders-outro {
+    text-shadow: 1px 1px 3px #000000, 0 0 8px #000000;
+}
+
+/* Glowing effects for dark mode (dark-lord) */
+body[data-theme="dark-lord"] .founders-header,
+body[data-theme="dark-lord"] .founders-outro {
+    text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffec99;
+}
+
+/* Theme-specific pulse glow animations */
+body[data-theme="dark-lord"] .founders-header,
+body[data-theme="dark-lord"] .founders-outro {
+    animation: pulseGlowDark 3s infinite ease-in-out;
+}
+
+body[data-theme="wizard"] .founders-header,
+body[data-theme="wizard"] .founders-outro {
+    animation: pulseGlowLight 3s infinite ease-in-out;
+}
+
+.floating-candle {
+    position: absolute;
+    top: -50px;
+    animation: drift 10s linear infinite;
+    opacity: 0.8;
+}
+
 
 
 /* In the FoundersLogPage.css file, I styled the layout and look of our

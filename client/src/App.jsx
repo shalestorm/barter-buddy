@@ -10,11 +10,11 @@ import WelcomePage from './pages/WelcomePage'
 import FoundersLogPage from './pages/FoundersLogPage'
 import ProtectedRoute from './components/ProtectedRoute'
 
-
 function App() {
 
   return (
     <>
+
       <div>
         <Routes>
           <Route path='/' element={<WelcomePage />} />
