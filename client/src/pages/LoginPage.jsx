@@ -44,7 +44,7 @@ export default function LoginPage() {
                     onSubmit={handleSubmit}
                 >
                     <div className="form-group">
-                        <label htmlFor="username">Username: </label>
+                        <label htmlFor="username"><h3>Username:</h3></label>
                         <input
                             id="username"
                             type="text"
@@ -57,7 +57,7 @@ export default function LoginPage() {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">Password: </label>
+                        <label htmlFor="password"><h3>Password:</h3></label>
                         <input
                             id="password"
                             type="password"

@@ -155,3 +155,19 @@
   justify-content: space-between;
   margin-top: 1rem;
 }
+
+h2 {
+  font-family: 'Cinzel Decorative', serif;
+  color: rgb(255, 235, 201);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+
+h3 {
+  font-family: 'Cinzel', serif;
+  margin-bottom: 4px;
+}
+
+h5 {
+  margin-bottom: 0;
+  color: lightgoldenrodyellow;
+}

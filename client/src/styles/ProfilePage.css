@@ -340,6 +340,7 @@ body {
 }
 
 .skill-info h5 {
+    color: rgb(138, 108, 59);
     flex: 1;
     word-break: break-word;
     margin: 0;
