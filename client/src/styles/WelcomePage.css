@@ -1,7 +1,23 @@
-/* General (from index.css) */
 .centered-header {
   text-align: center;
-  margin-bottom: 20px;
+}
+
+.daily-quote h2 {
+    font-size: 1rem;
+    color: #fffbe6;
+    text-shadow: 2px 2px 4px #000000;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    font-family: 'Cinzel Decorative', cursive;
+}
+
+.daily-quote h3 {
+    font-size: .75rem;
+    color: #fffbe6;
+    text-shadow: 2px 2px 4px #000000;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-family: 'Cinzel Decorative', cursive;
 }
 
 .welcome-logo {
