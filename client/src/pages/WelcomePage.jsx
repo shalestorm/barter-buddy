@@ -58,7 +58,7 @@ const WelcomePage = () => {
         };
 
         const fetchDailyQuote = () => {
-            fetch('https://zenquotes.io/api/today')
+            fetch('http://localhost:8000/api/quote')
                 .then(res => res.json())
                 .then(data => {
                     if (data && data[0]) {
@@ -89,8 +89,8 @@ const WelcomePage = () => {
             <div className="background-overlay"></div>
             <header className="centered-header">
                 <div className="daily-quote">
-                    <h2 className="quote-text">"{quote}"</h2>
-                    <h3 className="quote-author">— {author}</h3>
+                    <h2 className="carousel-heading">{quote ? `"${quote}"` : "Loading quote..."}</h2>
+                    <h3 className="carousel-heading">{author && `— ${author}`}</h3>
                 </div>
                 <img src={logo} alt="Barter Buddy Logo" className="welcome-logo" />
                 <br />
