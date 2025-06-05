@@ -34,7 +34,6 @@
   align-items: center;
 }
 
-/*** Login page ***/
 .login-page {
   position: absolute;
   top: 50%;
@@ -84,7 +83,6 @@
 }
 
 
-/*** Signup page ***/
 .signup-page {
   position: absolute;
   top: 50%;
@@ -92,7 +90,6 @@
   transform: translate(-50%, -50%);
   z-index: 10;
   background-color: rgba(0, 0, 0, 0);
-  /* black box with slight transparency */
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0);

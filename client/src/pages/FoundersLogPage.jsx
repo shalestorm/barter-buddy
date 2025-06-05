@@ -1,6 +1,3 @@
-// Cayla's Contribution
-
-
 import React, { useEffect, useRef } from 'react';
 import DevCard from '../components/DevCard';
 import '../styles/FoundersLogPage.css';
@@ -69,24 +66,19 @@ const FoundersLogPage = () => {
 
     return (
         <div className="founders-body">
-            {/* The animated title that appears at the top */}
             <h1 className="founders-header" ref={titleRef}>Loading title...</h1>
 
-            {/* NEW wrapper div for layout control */}      {/* Wrapper for all card content and outro message */}
             <div className="founders-content">
-                {/* Loops through each dev and renders a DevCard for them */}
                 <div className="devs-container">
                     {devs.map((dev, i) => (
                         <DevCard key={i} {...dev} />
                     ))}
                 </div>
-                {/* Closing message at the bottom of the page */}
                 <p className="founders-outro">
                     We hope you’ve enjoyed exploring Barter Buddy as much as we’ve loved building it.<br />
                     Thank you for stepping into our world of code, connection, and a little bit of magic. 🪄
                 </p>
             </div>
-            {/* Navigation link to return to dashboard */}
             <Link to='/dashboard' className='unstyled-link'>
                 <h5>--Barter Buddy--</h5>
             </Link>
