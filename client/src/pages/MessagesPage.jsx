@@ -359,8 +359,9 @@ export default function MessagesPage() {
 
         <main className="chat-window">
           {selectedConnection ? (
-            <>
+            <div className="conversation">
               <div className="chat-info">
+                <button className="magic-button close-button" onClick={() => setSelectedConnection(null)}>Close</button>
                 <p>Chatting with:</p>
                 <img
                   title="See profile"
@@ -439,9 +440,10 @@ export default function MessagesPage() {
                 </form>
 
               </div>
-            </>
+            </div>
           ) : selectedRequest ? (
             <div className="request-info">
+              <button className="magic-button close-button" onClick={() => setSelectedRequest(null)}>Close</button>
               <p>Pending connection request from:</p>
               <img
                 title="See profile"
