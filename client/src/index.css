@@ -209,48 +209,13 @@ h1 {
   font-family: system-ui;
 }
 
-/* === Wizard Theme === */
-body[data-theme="wizard"] {
-  background-color: #fff9e6;
-  color: #2d1c0b;
-}
-
-body[data-theme="wizard"] .magic-button {
-  background: linear-gradient(145deg, #8b5e3c, #3e2e1e);
-  color: #fff2d9;
-  border-color: #ffcc00;
-}
-
-body[data-theme="wizard"] .magic-button:hover {
-  background: linear-gradient(145deg, #a1704e, #5a422e);
-  color: #ffe066;
-}
-
-/* === Dark Lord Theme === */
-body[data-theme="dark-lord"] {
-  background-color: #121212;
-  color: #f5f5f5;
-}
-
-body[data-theme="dark-lord"] .magic-button {
-  background: linear-gradient(145deg, #3a0d0d, #000);
-  border-color: #8a0303;
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5), inset 0 0 5px #000;
-  color: #f5e1b9;
-}
-
-body[data-theme="dark-lord"] .magic-button:hover {
-  background: linear-gradient(145deg, #5a1a1a, #1a0000);
-  color: #ff6666;
-  border-color: #ff1a1a;
-}
-
 /* Toggle Button */
 .global-theme-toggle {
   position: fixed;
-  top: 4rem;
+  top: 1rem;
+  /* adjust as needed */
   right: 2rem;
-  z-index: 2000;
+  z-index: 3000;
   font-family: 'Cinzel', serif;
   background-color: #372e29;
   color: #f5e1b9;
@@ -260,8 +225,8 @@ body[data-theme="dark-lord"] .magic-button:hover {
   box-shadow: 0 0 10px rgba(216, 185, 122, 0.7);
   cursor: pointer;
   transition: all 0.3s ease;
-  position: fixed !important;
 }
+
 
 .global-theme-toggle:hover {
   background-color: #1e1e1e;

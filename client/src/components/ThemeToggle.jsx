@@ -9,7 +9,7 @@ const ThemeToggle = () => {
     return (
         // This button calls toggleTheme when clicked, and the text changes depending on the current theme
         <button onClick={toggleTheme} className="global-theme-toggle">
-            {theme === 'wizard' ? '🐍 Embrace the Dark Lord' : '⚡ Return to Wizardry'}
+            {theme === 'wizard' ? '💀 Avada the Glow' : '🪄 Accio Light'}
         </button>
     );
 };

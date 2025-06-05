@@ -7,6 +7,8 @@ import '../styles/FoundersLogPage.css';
 import gsap from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 import { Link } from 'react-router';
+import ThemeToggle from '../components/ThemeToggle';
+import { useTheme } from '../context/ThemeContext';
 
 
 
@@ -14,6 +16,8 @@ gsap.registerPlugin(TextPlugin);
 
 const FoundersLogPage = () => {
     const titleRef = useRef();
+
+    const { theme, toggleTheme } = useTheme();
 
     useEffect(() => {
         gsap.to(titleRef.current, {
@@ -68,7 +72,8 @@ const FoundersLogPage = () => {
     ];
 
     return (
-        <div className="founders-body">
+        <div className="founders-body" data-theme={theme}>
+            <ThemeToggle />
             {/* The animated title that appears at the top */}
             <h1 className="founders-header" ref={titleRef}>Loading title...</h1>
 
