@@ -454,7 +454,7 @@ export default function MessagesPage() {
                   : "unknown user"}
               </h2>
               <p className="request-message">
-                {selectedRequest.message}
+                {!selectedRequest.message ? "-- This user would like to connect! --" : selectedRequest.message}
               </p>
               <div className="request-buttons">
                 <button className="magic-button" onClick={() => handleAcceptRequest(selectedRequest)}>Accept</button>
