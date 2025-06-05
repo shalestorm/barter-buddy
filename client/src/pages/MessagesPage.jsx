@@ -460,7 +460,7 @@ export default function MessagesPage() {
               </p>
               <div className="request-buttons">
                 <button className="magic-button" onClick={() => handleAcceptRequest(selectedRequest)}>Accept</button>
-                <button className="magic-button" onClick={() => handleDenyRequest(selectedRequest)}>Deny</button>
+                <button className="magic-button" onClick={() => handleDenyRequest(selectedRequest)}>Ignore</button>
               </div>
             </div>
           ) : (
