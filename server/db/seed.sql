@@ -248,7 +248,7 @@ INSERT INTO messages (sender_id, receiver_id, content, timestamp, is_read, conne
 VALUES
     -- log examples for users 1 (blueeyed95) and 3 (emmaclark002) also set latest msg to unread
     (1, 3, 'Hey! How’s it going?', NOW(), TRUE, 2),
-    (3, 1, 'Good! fiddlin with my sick af guitar.', NOW(), TRUE, 2),
+    (3, 1, 'Good! fiddlin with my guitar.', NOW(), TRUE, 2),
     (1, 3, 'Awesome, lets boogie bro - mind teaching me?', NOW(), FALSE, 2),
 
     -- 2 (liamben001) and 4(noahg003)
