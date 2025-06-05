@@ -89,7 +89,7 @@
 
 .profile-name {
     font-size: 2rem;
-    font-family: 'Cinzel Decorative';
+    font-family: 'Cinzel', serif;
     color: rgb(138, 108, 59);
     margin-bottom: 16px;
     overflow-wrap: anywhere;
@@ -99,19 +99,6 @@
     font-style: italic;
     color: #3e2e1c;
     margin-bottom: 1.5rem;
-}
-
-.skill-entry {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fffef9;
-    border: 1px solid #d8b97a;
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    margin-bottom: 0.5rem;
-    color: #3e2e1c;
-    font-family: 'Cinzel', serif;
 }
 
 .skill-name {
@@ -133,15 +120,25 @@
 }
 
 .edit-name-section input,
-.add-skill-section input,
-.add-skill-section select {
+.add-skill-section input {
     width: 100%;
     max-width: 400px;
     margin-bottom: .6rem;
     padding: 0.5rem;
     border: 2px solid #d8b97a;
     border-radius: 8px;
-    background-color: #fffef9;
+    color: #3e2e1c;
+    font-family: 'Cinzel', serif;
+    box-sizing: border-box;
+}
+
+.add-skill-section select {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: .6rem;
+    padding: 0.5rem;
+    border: 1px solid #d8b97a;
+    border-radius: 8px;
     color: #3e2e1c;
     font-family: 'Cinzel', serif;
     box-sizing: border-box;
@@ -165,27 +162,6 @@
     opacity: 1;
 }
 
-.edit-form label {
-    display: block;
-    margin: 0.25rem 0 0.5rem;
-    color: #5c432d;
-    font-weight: bold;
-}
-
-.edit-form input,
-.edit-form textarea {
-    width: 100%;
-    margin-top: 0.25rem;
-    padding: 0.5rem;
-    border: 2px solid #d8b97a;
-    border-radius: 8px;
-    background-color: #fffef9;
-    color: #3e2e1c;
-    font-family: 'Cinzel', serif;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-    transition: border 0.3s ease, box-shadow 0.3s ease;
-}
-
 .edit-name-inputs {
     display: flex;
     flex-direction: column;
@@ -207,10 +183,20 @@
     box-sizing: border-box;
     resize: none;
     padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    border: 1px solid #d8b97a;
+    border-radius: 8px;
     font-family: system-ui;
     margin-bottom: 8px;
+
+
+
+
+
+
+    /* background-color: #fffef9; */
+    color: #3e2e1c;
+    font-family: 'Cinzel', serif;
+
 }
 
 .name-btns,
@@ -245,7 +231,7 @@ body {
     display: grid;
     height: 350px;
     width: 100%;
-    overflow-y: hidden;
+    overflow-y: auto;
     padding: 0;
     margin: 0;
     list-style: none;
@@ -374,7 +360,6 @@ body {
     border-radius: 50%;
     border: 3px solid #d8b97a;
     box-shadow: 0 0 10px rgba(255, 217, 102, 0.8);
-    margin-bottom: 1rem;
     transition: opacity 0.3s ease;
     cursor: pointer;
 }

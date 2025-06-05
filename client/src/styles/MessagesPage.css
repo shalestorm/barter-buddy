@@ -8,7 +8,7 @@
     padding: 2rem;
     min-height: 100vh;
     box-sizing: border-box;
-    font-family: 'Cinzel', cursive;
+    font-family: 'Cinzel', serif;
 }
 
 
@@ -27,6 +27,8 @@
 
 .chat-list h3 {
     color: rgb(138, 108, 59);
+    font-weight:700;
+    font-family: 'Cinzel Decorative';
 }
 
 .chat-window {
@@ -142,17 +144,23 @@
     overflow-wrap: anywhere;
 }
 
-.request-card:hover {
-    box-shadow: 0 0 16px rgba(255, 217, 102, 0.5);
-}
-
 .request-card p {
     margin-top: 0;
     margin-bottom: 4px;
+    font-weight: 700;
 }
 
 .request-card h6 {
     margin: 0;
+    color: rgb(138, 108, 59);
+}
+
+.request-card:hover {
+    box-shadow: 0 0 16px rgba(255, 217, 102, 0.5);
+}
+
+.request-card:hover h6 {
+    color: 	#374798;
 }
 
 .req-avatar {
