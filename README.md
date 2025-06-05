@@ -1,8 +1,20 @@
 # Barter-Buddy
 
-"A free web app that connects users who wish to exchange knowledge"
+"A free web app that connects users in the pursuit of exchanging knowledge"
 
-User stories:
+# Contributors
+
+- Skyler McLain: Architecture Owner, Debugging Support, Software Engineer; https://github.com/shalestorm
+- Ricardo Tizón: Product Owner, Team Lead, Software Engineer; https://github.com/rtizonc
+- Cayla Thompson: Full-Stack Support, Mediator, Mental Health Advocate, Software Engineer; https://github.com/caylaleann
+- Ti James: UI Owner, Software Engineer, UX/UI Designer; https://github.com/tiorionjames
+
+# Project Description and Purpose
+
+Barter Buddy is the culmination of ideas from four incredibly talented Software Engineers which posits the idea that knowledge can be shared
+and skills can be learned/taught in exchange for the same. For example let's say Sam wants to learn to change the oil in his car, and knows cake decorating. Sam could match up with another user Marcus who knows how to change oil in cars but wants to learn how to decorate cakes. The purpose is to share knowledge and connect with people.
+
+# User stories:
 
 - A user can create an account with a profile that lists the skills they are willing to teach, and what skills category they are interested in.
 - A user can view others users based on their skills (filter by skills category) or at random, and request to "connect".
@@ -14,9 +26,26 @@ User stories:
 - Users will be able to reset password (stretch).
 - Users will be able to filter others based on proximity, or choose online-only communication (stretch).
 
-## Setup
+# Screenshots
 
-### The database
+### Docs (/docs)
+
+This folder includes:
+
+- capstone.png :Initial Wireframes
+- ERDs for key models and relationships
+
+## ![Wireframe](docs/capstone.png)
+
+# List of Features Implemented
+
+# Tech used or utilized:
+
+# Setup:
+
+######
+
+# The database
 
 The included docker-compose file will run a Postgres database server. The
 following command will start the docker container and database server:
@@ -30,11 +59,11 @@ problems with previous docker containers, databases, etc, run the
 following commands **before** running the command above.
 
 ```bash
-# kill all running containers
-docker kill $(docker ps -q)
 
-# remove all artifacts for all stopped containers
-docker system prune -af
+docker kill $(docker ps -q) #kill all running containers
+
+
+docker system prune -af #remove all artifacts for all stopped containers
 ```
 
 To connect to the psql shell on the database server:
@@ -117,11 +146,12 @@ npm run preview
 
 This will start a local server that serves the files in the dist folder, and you can open your browser and go to http://localhost:4173 to see the app running in production mode.
 
-### Docs (/docs)
+######
 
-This folder includes:
+# Challenges Faced
 
-- capstone.png :Initial Wireframes
-- ERDs for key models and relationships
+# Lessons Learned and Team Workflow Notes
 
-## ![Wireframe](docs/capstone.png)
+# Future Feature Ideas:
+
+# Trello and commits link/s
