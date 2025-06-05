@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '../assets/bb_new.png';
 import backgroundcastle from '../assets/background.jpeg';
 import '../styles/WelcomePage.css';
@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router';
 
 const WelcomePage = () => {
     const navigate = useNavigate();
+    const [quote, setQuote] = useState('')
+    const [author, setAuthor] = useState('')
 
     useEffect(() => {
         const colors = [
@@ -55,8 +57,23 @@ const WelcomePage = () => {
             requestAnimationFrame(updateGradient);
         };
 
+        const fetchDailyQuote = () => {
+            fetch('http://localhost:8000/api/quote')
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data[0]) {
+                        setQuote(data[0].q);
+                        setAuthor(data[0].a);
+                    }
+                })
+                .catch(err => console.error("Failed to fetch quote:", err));
+        };
+
         updateGradient();
+        fetchDailyQuote();
     }, []);
+
+
 
     const handleSignupButton = () => {
         navigate('/signup');
@@ -71,6 +88,10 @@ const WelcomePage = () => {
         <div className="gradient">
             <div className="background-overlay"></div>
             <header className="centered-header">
+                <div className="daily-quote">
+                    <h2 className="carousel-heading">{quote ? `"${quote}"` : "Loading quote..."}</h2>
+                    <h3 className="carousel-heading">{author && `— ${author}`}</h3>
+                </div>
                 <img src={logo} alt="Barter Buddy Logo" className="welcome-logo" />
                 <br />
                 <h1 className="magic-title">Welcome to Barter Buddy!</h1>
