@@ -95,11 +95,6 @@
     overflow-wrap: anywhere;
 }
 
-.profile-bio {
-    font-style: italic;
-    color: #3e2e1c;
-    margin-bottom: 1.5rem;
-}
 
 .skill-name {
     flex-grow: 1;
@@ -127,7 +122,6 @@
     padding: 0.5rem;
     border: 2px solid #d8b97a;
     border-radius: 8px;
-    color: #3e2e1c;
     font-family: 'Cinzel', serif;
     box-sizing: border-box;
 }
@@ -139,7 +133,6 @@
     padding: 0.5rem;
     border: 1px solid #d8b97a;
     border-radius: 8px;
-    color: #3e2e1c;
     font-family: 'Cinzel', serif;
     box-sizing: border-box;
 }
@@ -186,7 +179,6 @@
     border: 1px solid #d8b97a;
     border-radius: 8px;
     margin-bottom: 8px;
-    color: #3e2e1c;
     font-family: 'Cinzel', serif;
 }
 
