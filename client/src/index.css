@@ -71,7 +71,7 @@ h1 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  overflow: hidden; /* RIC: this is what causes  WelcomePage to be unscrollable x */
+  overflow: auto;
 }
 
 .gradient .overlay {
@@ -202,7 +202,9 @@ h1 {
   height: 200px;
   resize: none;
   padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-family: system-ui;
+  border: 1px solid #d8b97a;
+  border-radius: 8px;
+  color: #3e2e1c;
+  font-family: 'Cinzel', serif;
+  box-sizing: border-box;
 }

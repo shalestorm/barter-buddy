@@ -77,8 +77,6 @@ h2.magic-title {
     /* Take up full width of the page */
     max-width: 100vw;
     /* Prevent going over screen width */
-    overflow-x: auto;
-    /* allows readjustment */
     overflow-y: visible;
     /* allows to grow downward if needed */
     position: relative;
