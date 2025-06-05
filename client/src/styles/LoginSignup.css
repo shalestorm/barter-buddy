@@ -30,7 +30,7 @@
 
 .login-redirect,
 .signup-redirect {
-  margin-top: 1.5rem;
+  margin-block: 24px;
   align-items: center;
 }
 
@@ -154,4 +154,22 @@
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
+}
+
+.signup-container h2,
+.login-page h2 {
+  font-family: 'Cinzel Decorative', serif;
+  color: rgb(255, 235, 201);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+
+.signup-container h3,
+.login-page h3 {
+  font-family: 'Cinzel', serif;
+  margin-bottom: 4px;
+}
+
+.signup-container h5 {
+  margin-bottom: 0;
+  color: lightgoldenrodyellow;
 }

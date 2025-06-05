@@ -63,6 +63,7 @@
     align-items: end;
     padding: 0.5rem;
     margin: 0.5rem;
+    margin-top: 16px;
     min-width: 180px;
     flex-shrink: 0;
     height: 100%;
@@ -107,9 +108,9 @@
 
 .greet {
     color: rgb(138, 108, 59);
-    font-family: 'Cinzel Decorative';
-    margin-top: 10px;
-    margin-bottom: 0;
+    font-family: 'Cinzel', serif;
+    margin-top: 16px;
+    margin-bottom: 4px;
     overflow-wrap: anywhere;
 }
 
