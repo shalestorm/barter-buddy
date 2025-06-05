@@ -108,7 +108,7 @@ h2.magic-title {
     /* Creamy white text */
     text-shadow: 2px 2px 4px #000000;
     /* Adds a subtle dark glow for readability */
-    margin-bottom: 1.5rem;
+    margin-bottom: .5rem;
     /* Space below the heading */
     font-family: 'Cinzel Decorative', cursive;
 }
@@ -159,7 +159,7 @@ h2.magic-title {
     /* Light gold border */
     border-radius: 12px;
     /* Rounded corners */
-    padding: 1.2rem;
+    padding: 12px;
     /* Padding inside the card */
     text-align: left;
     /* Align text to the left */
@@ -230,7 +230,7 @@ h2.magic-title {
     /* Makes the image a perfect circle */
     object-fit: cover;
     /* Ensures the image fills the space nicely */
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
     /* Space below the photo */
     border: 2px solid #d8b97a;
     /* Golden border to match the theme */
