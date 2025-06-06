@@ -93,7 +93,29 @@ docker kill $(docker ps -q) #kill all running containers
 docker system prune -af #remove all artifacts for all stopped containers
 ```
 
+**You may have to manually start the docker container**
+
 ### The FastAPI app (/server)
+
+Run the following command to activate the virtual environment:
+
+On Windows:
+
+```bash
+.\\venv\\Scripts\\activate
+```
+
+On macOS/Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+To install the required libraries for this project in the root directory:
+
+```bash
+pip install -r requirements.txt
+```
 
 Navigate to the /server directory:
 
@@ -101,19 +123,21 @@ Navigate to the /server directory:
 cd server
 ```
 
-This project requires these libraries:
-
-- "fastapi[standard]"
-- psycopg
-- sqlalchemy
-
 This command will run the FastAPI server:
 
 ```bash
 fastapi dev main.py
 ```
 
+Use Command + T to open new terminal (on a mac) or CTRL + T in Windows
+
 ### The React app (/client)
+
+Navigate out of the server directory back to root in the new terminal window:
+
+```bash
+cd ..
+```
 
 Navigate to the /client directory:
 

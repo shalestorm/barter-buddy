@@ -248,7 +248,7 @@ VALUES
     (9, 3, TRUE),   -- sophiaa008 + emmaclark002
     (1, 22, TRUE),  -- blueeyed95 + tiorion
     (1, 23, TRUE),  -- blueeyed95 + shale
-    (1, 23, TRUE),  -- blueeyed95 + pakoh
+    (1, 24, TRUE),  -- blueeyed95 + pakoh
     (22, 23, TRUE),  -- tiorion + shale
     (22, 24, TRUE),  -- tiorion + pakoh
     (23, 24, TRUE);  -- shale + pakoh
