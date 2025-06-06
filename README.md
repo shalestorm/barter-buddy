@@ -56,45 +56,45 @@ This folder includes:
 
 # Tech used or utilized:
 
-## ![git](docs/git.png)
-
 git
 
-## ![Python3](docs/python.png)
+## ![git](docs/git.png)
 
 Python3
 
-## ![FastAPI](docs/fastapi.png)
+## ![Python3](docs/python.png)
 
 FastAPI
 
-## ![PostgreSQL](docs/postgresql.png)
+## ![FastAPI](docs/fastapi.png)
 
 PostgreSQL
 
-## ![Docker](docs/docker.png)
+## ![PostgreSQL](docs/postgresql.png)
 
 Docker
 
-## ![JavaScript](docs/javascript.png)
+## ![Docker](docs/docker.png)
 
 JavaScript
 
-## ![React.js](docs/reactjs.png)
+## ![JavaScript](docs/javascript.png)
 
 React.js
 
-## ![React Router](docs/reactrouter.png)
+## ![React.js](docs/reactjs.png)
 
 React Router
 
-## ![HTML/CSS](docs/htmlcss.png)
+## ![React Router](docs/reactrouter.png)
 
 HTML/CSS
 
-## ![GSAP](docs/gsap.png)
+## ![HTML/CSS](docs/htmlcss.png)
 
 GSAP
+
+## ![GSAP](docs/gsap.png)
 
 ###
 
