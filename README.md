@@ -37,6 +37,16 @@ This folder includes:
 
 ## ![ERD](docs/Final-ERD.png)
 
+## ![BB-action1](docs/BB-action1.png)
+
+## ![BB-action2](docs/BB-action2.png)
+
+## ![BB-action3](docs/BB-action3.png)
+
+## ![Demo-1](docs/Demo-1.mov)
+
+## ![Demo-2](docs/Demo-2.mov)
+
 # List of Features Implemented
 
 - A user can create an account with a profile that lists the skills they are willing to teach, and what skills category they are interested in.
@@ -52,27 +62,47 @@ git
 
 ## ![Python3](docs/python.png)
 
+Python3
+
 ## ![FastAPI](docs/fastapi.png)
 
-## ![PostgresSQL](docs/postgresql.png)
+FastAPI
+
+## ![PostgreSQL](docs/postgresql.png)
+
+PostgreSQL
 
 ## ![Docker](docs/docker.png)
 
+Docker
+
 ## ![JavaScript](docs/javascript.png)
+
+JavaScript
 
 ## ![React.js](docs/reactjs.png)
 
+React.js
+
 ## ![React Router](docs/reactrouter.png)
+
+React Router
 
 ## ![HTML/CSS](docs/htmlcss.png)
 
-### gsap, others?
+HTML/CSS
+
+## ![GSAP](docs/gsap.png)
+
+GSAP
+
+###
 
 # Setup:
 
 ######
 
-# The database
+### The database
 
 The included docker-compose file will run a Postgres database server. The
 following command will start the docker container and database server:
@@ -98,6 +128,10 @@ docker system prune -af #remove all artifacts for all stopped containers
 ### The FastAPI app (/server)
 
 Run the following command to activate the virtual environment:
+
+```bash
+python3 -m venv .venv
+```
 
 On Windows:
 
@@ -183,7 +217,7 @@ This will start a local server that serves the files in the dist folder, and you
 
 - One lesson we learned is that class names are important, and specifying names with specific pages.
 - Time management. As a team we all feel that if we had more time, we could have implemented more features and deployed
-- Communication
+- Communication was a valuable skill that we all used effectively. We voted on most issues and had no problems with understanding roles.
 
 # Future Feature Ideas:
 
@@ -192,7 +226,8 @@ This will start a local server that serves the files in the dist folder, and you
 - Users will be able to specify availability (stretch?).
 - Users will be able to reset password (stretch).
 - Users will be able to filter others based on proximity, or choose online-only communication (stretch).
-- App will be hosted on a website and deployed so it is fully functional
+- App will be hosted on a website and deployed so it is fully functional (stretch)
+- App will have a 404 Error page
 
 # Trello and commits link/s
 
