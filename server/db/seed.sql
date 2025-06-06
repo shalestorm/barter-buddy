@@ -168,7 +168,7 @@ INSERT INTO user_skills (user_id, skill_id) VALUES
     (3, 1),
     (3, 15),
     (3, 34),
-    (3, 47)
+    (3, 47),
     (4, 7),
     (4, 9),
     (4, 10),
