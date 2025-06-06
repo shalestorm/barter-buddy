@@ -16,15 +16,13 @@ and skills can be learned/taught in exchange for the same. For example let's say
 
 # User stories:
 
-- A user can create an account with a profile that lists the skills they are willing to teach, and what skills category they are interested in.
-- A user can view others users based on their skills (filter by skills category) or at random, and request to "connect".
-- A user can see connect requests, which displays requester's offered skills, and choose to accept or decline the request.
-- Connected users can send each-other messages once connected (simple messaging, messages dashboard).
-- Users will be able to disconnect (one-way).
-- A user will be able to rate others (after being connected) (stretch).
-- Users will be able to specify availability (stretch?).
-- Users will be able to reset password (stretch).
-- Users will be able to filter others based on proximity, or choose online-only communication (stretch).
+- As a user, I want to create an account with a profile that lists the skills I am willing to teach, and what skills I am interested in.
+
+- As a user, I can view other users' profiles based on their skills filtering by skills category or at random, and request to connect with that user.
+
+- As a user, I want to be able to see connect requests, which displays requester's offered skills, and choose to accept or decline the request.
+
+- As a user, I want to connect to other users, and can send messages once connected using a simple messaging dashboard.
 
 # Screenshots
 
@@ -35,11 +33,38 @@ This folder includes:
 - capstone.png :Initial Wireframes
 - ERDs for key models and relationships
 
-## ![Wireframe](docs/capstone.png)
+## ![Wireframe](docs/capstone-v2.png)
+
+## ![ERD](docs/Final-ERD.png)
 
 # List of Features Implemented
 
+- A user can create an account with a profile that lists the skills they are willing to teach, and what skills category they are interested in.
+- A user can view others users based on their skills (filter by skills category) or at random, and request to "connect".
+- A user can see connect requests, which displays requester's offered skills, and choose to accept or decline the request.
+- Connected users can send each-other messages once connected (simple messaging, messages dashboard).
+
 # Tech used or utilized:
+
+## ![- git](docs/git.png)
+
+## ![Python3](docs/python.png)
+
+## ![FastAPI](docs/fastapi.png)
+
+## ![PostgresSQL](docs/postgresql.png)
+
+## ![Docker](docs/docker.png)
+
+## ![JavaScript](docs/javascript.png)
+
+## ![React.js](docs/reactjs.png)
+
+## ![React Router](docs/reactrouter.png)
+
+## ![HTML/CSS](docs/htmlcss.png)
+
+### gsap, others?
 
 # Setup:
 
@@ -150,8 +175,23 @@ This will start a local server that serves the files in the dist folder, and you
 
 # Challenges Faced
 
+- Initially out of the gate, and continually ongoing challenges is working with git. As a team, we've often had issues with merge conflicts, and random bugs that seemed to pop up out of nowhere.
+
 # Lessons Learned and Team Workflow Notes
+
+- One lesson we learned is that class names are important, and specifying names with specific pages.
+- Time management. As a team we all feel that if we had more time, we could have implemented more features and deployed
+- Communication
 
 # Future Feature Ideas:
 
+- A user will be able to rate others (after being connected) (stretch).
+- A user will be able to disconnect from other users at will.
+- Users will be able to specify availability (stretch?).
+- Users will be able to reset password (stretch).
+- Users will be able to filter others based on proximity, or choose online-only communication (stretch).
+- App will be hosted on a website and deployed so it is fully functional
+
 # Trello and commits link/s
+
+https://trello.com/b/gxOvvKTB/capstone-project
