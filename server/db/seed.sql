@@ -166,6 +166,9 @@ INSERT INTO user_skills (user_id, skill_id) VALUES
     (1, 52),
     (2, 1),
     (3, 1),
+    (3, 15),
+    (3, 34),
+    (3, 47)
     (4, 7),
     (4, 9),
     (4, 10),
@@ -189,6 +192,7 @@ INSERT INTO user_skills (user_id, skill_id) VALUES
     (8, 1),
     (9, 1),
     (9, 12),
+    (9, 50),
     (10, 2),
     (10, 15),
     (10, 25),
@@ -201,7 +205,9 @@ INSERT INTO user_skills (user_id, skill_id) VALUES
     (11, 26),
     (11, 35),
     (11, 51),
+    (12, 12),
     (14, 1),
+    (14, 33),
     (15, 8),
     (15, 12),
     (15, 23),
@@ -217,12 +223,18 @@ INSERT INTO user_skills (user_id, skill_id) VALUES
     (18, 52),
     (19, 5),
     (19, 1),
+    (19, 41),
+    (19, 49),
     (20, 5),
-    (22, 2),
-    (22, 3),
-    (22, 12),
+    (22, 6),
+    (22, 9),
+    (22, 47),
+    (23, 4),
     (23, 15),
-    (24, 10);
+    (23, 48),
+    (24, 2),
+    (24, 10),
+    (24, 23);
 
 INSERT INTO connections (user_a_id, user_b_id, is_active)
 VALUES
@@ -233,7 +245,13 @@ VALUES
     (2, 4, TRUE),   -- liamben001 + noahg003
     (2, 3, TRUE),   -- liamben001 + emmaclark002
     (6, 9, TRUE),   -- elijahlee005 + sophiaa008
-    (9, 3, TRUE);   -- sophiaa008 + emmaclark002
+    (9, 3, TRUE),   -- sophiaa008 + emmaclark002
+    (1, 22, TRUE),  -- blueeyed95 + tiorion
+    (1, 23, TRUE),  -- blueeyed95 + shale
+    (1, 23, TRUE),  -- blueeyed95 + pakoh
+    (22, 23, TRUE),  -- tiorion + shale
+    (22, 24, TRUE),  -- tiorion + pakoh
+    (23, 24, TRUE);  -- shale + pakoh
 
 INSERT INTO connection_requests (sender_id, receiver_id, message)
 VALUES
