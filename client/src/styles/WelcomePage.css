@@ -3,21 +3,21 @@
 }
 
 .daily-quote h2 {
-    font-size: 1rem;
-    color: #fffbe6;
-    text-shadow: 2px 2px 4px #000000;
-    margin-top: 24px;
-    margin-bottom: 8px;
-    font-family: 'Cinzel Decorative', cursive;
+  font-size: 1rem;
+  color: #fffbe6;
+  text-shadow: 2px 2px 4px #000000;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  font-family: 'Cinzel Decorative', cursive;
 }
 
 .daily-quote h3 {
-    font-size: .75rem;
-    color: #fffbe6;
-    text-shadow: 2px 2px 4px #000000;
-    margin-top: 0;
-    margin-bottom: 8px;
-    font-family: 'Cinzel Decorative', cursive;
+  font-size: .75rem;
+  color: #fffbe6;
+  text-shadow: 2px 2px 4px #000000;
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-family: 'Cinzel Decorative', cursive;
 }
 
 .welcome-logo {
@@ -84,93 +84,93 @@ h2.magic-title {
 }
 
 .carousel-wrapper {
-    margin-top: 1.5rem;
-    padding: 1rem 0;
-    width: 100%;
-    max-width: 100vw;
-    overflow-y: visible;
-    position: relative;
+  margin-top: 1.5rem;
+  padding: 1rem 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-y: visible;
+  position: relative;
 }
 
 .carousel-heading {
-    font-size: 1.5rem;
-    color: #fffbe6;
-    text-shadow: 2px 2px 4px #000000;
-    margin-bottom: .5rem;
-    font-family: 'Cinzel Decorative', cursive;
+  font-size: 1.5rem;
+  color: #fffbe6;
+  text-shadow: 2px 2px 4px #000000;
+  margin-bottom: .5rem;
+  font-family: 'Cinzel Decorative', cursive;
 }
 
 .carousel {
-    overflow: hidden;
-    width: 100%;
+  overflow: hidden;
+  width: 100%;
 }
 
 .carousel-track {
-    display: flex;
-    gap: 1rem;
-    white-space: nowrap;
-    scroll-behavior: smooth;
-    overflow-x: scroll;
-    scrollbar-width: none;
+  display: flex;
+  gap: 1rem;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  overflow-x: scroll;
+  scrollbar-width: none;
 }
 
 .carousel-track::-webkit-scrollbar {
-    display: none;
+  display: none;
 
 }
 
 
 .carousel-card {
-    display: inline-block;
-    min-width: 280px;
-    max-width: 280px;
-    backdrop-filter: blur(6px);
-    background-color: rgba(255, 253, 240, 0.25);
-    border: 2px solid #d8b97a;
-    border-radius: 12px;
-    padding: 12px;
-    text-align: left;
-    box-shadow: 0 0 15px rgba(255, 215, 110, 0.3);
-    font-family: 'Cinzel', serif;
-    color: #fffbe6;
-    flex-shrink: 0;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    white-space: normal;
+  display: inline-block;
+  min-width: 280px;
+  max-width: 280px;
+  backdrop-filter: blur(6px);
+  background-color: rgba(255, 253, 240, 0.25);
+  border: 2px solid #d8b97a;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: left;
+  box-shadow: 0 0 15px rgba(255, 215, 110, 0.3);
+  font-family: 'Cinzel', serif;
+  color: #fffbe6;
+  flex-shrink: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 .carousel-card h3 {
-    font-size: 1.3rem;
-    margin-top: 0;
-    margin-bottom: 0.75rem;
-    color: #f0d27d;
-    text-shadow:
-        0 0 4px rgba(0, 0, 0, 0.7),
-        0 0 8px rgba(255, 215, 100, 0.5);
-    font-weight: bold;
+  font-size: 1.3rem;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: #f0d27d;
+  text-shadow:
+    0 0 4px rgba(0, 0, 0, 0.7),
+    0 0 8px rgba(255, 215, 100, 0.5);
+  font-weight: bold;
 }
 
 .carousel-card p {
-    font-size: 0.95rem;
-    line-height: 1.4;
-    margin-top: 0;
-    margin-bottom: 8px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-top: 0;
+  margin-bottom: 8px;
 }
 
 .carousel-card h3,
 .carousel-card p {
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 
 .carousel-user-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 0;
-    border: 2px solid #d8b97a;
-    box-shadow: 0 0 6px rgba(255, 215, 110, 0.6);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0;
+  border: 2px solid #d8b97a;
+  box-shadow: 0 0 6px rgba(255, 215, 110, 0.6);
 }
 
 /* "In the CSS, I styled the carousel container to fit the page and look magical.
