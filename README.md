@@ -2,19 +2,19 @@
 
 "A free web app that connects users in the pursuit of exchanging knowledge"
 
-# Contributors
+## Contributors
 
 - Skyler McLain: Architecture Owner, Debugging Support, Software Engineer; https://github.com/shalestorm
 - Ricardo Tizón: Product Owner, Team Lead, Software Engineer; https://github.com/rtizonc
 - Cayla Thompson: Full-Stack Support, Mediator, Mental Health Advocate, Software Engineer; https://github.com/caylaleann
 - Ti James: UI Owner, Software Engineer, UX/UI Designer; https://github.com/tiorionjames
 
-# Project Description and Purpose
+## Project Description and Purpose
 
 Barter Buddy is the culmination of ideas from four incredibly talented Software Engineers which posits the idea that knowledge can be shared
 and skills can be learned/taught in exchange for the same. For example let's say Sam wants to learn to change the oil in his car, and knows cake decorating. Sam could match up with another user Marcus who knows how to change oil in cars but wants to learn how to decorate cakes. The purpose is to share knowledge and connect with people.
 
-# User stories:
+## User stories
 
 - As a user, I want to create an account with a profile that lists the skills I am willing to teach, and what skills I am interested in.
 
@@ -24,7 +24,7 @@ and skills can be learned/taught in exchange for the same. For example let's say
 
 - As a user, I want to connect to other users, and can send messages once connected using a simple messaging dashboard.
 
-# Screenshots
+## Screenshots & Videos
 
 ### Docs (/docs)
 
@@ -32,6 +32,7 @@ This folder includes:
 
 - capstone.png :Initial Wireframes
 - ERDs for key models and relationships
+- Screenshots and demo videos
 
 ## ![Wireframe](docs/capstone-v2.png)
 
@@ -47,14 +48,14 @@ This folder includes:
 
 ## ![Demo-2](docs/Demo-2.mov)
 
-# List of Features Implemented
+## List of Features Implemented
 
 - A user can create an account with a profile that lists the skills they are willing to teach, and what skills category they are interested in.
 - A user can view others users based on their skills (filter by skills category) or at random, and request to "connect".
 - A user can see connect requests, which displays requester's offered skills, and choose to accept or decline the request.
 - Connected users can send each-other messages once connected (simple messaging, messages dashboard).
 
-# Tech used or utilized:
+## Tech Stack
 
 git
 
@@ -98,14 +99,14 @@ GSAP
 
 ###
 
-# Setup:
+## Setup
 
 ######
 
 ### The database
 
 The included docker-compose file will run a Postgres database server. The
-following command will start the docker container and database server:
+following command will start the docker container and database server (in root):
 
 ```bash
 docker compose up -d
@@ -133,13 +134,15 @@ Run the following command to activate the virtual environment:
 python3 -m venv .venv
 ```
 
-On Windows:
+Run the following command to activate the virtual environment:
+
+-On Windows:
 
 ```bash
 .\\venv\\Scripts\\activate
 ```
 
-On macOS/Linux:
+-On macOS/Linux:
 
 ```bash
 source .venv/bin/activate
@@ -209,26 +212,26 @@ This will start a local server that serves the files in the dist folder, and you
 
 ######
 
-# Challenges Faced
+## Challenges Faced
 
 - Initially out of the gate, and continually ongoing challenges is working with git. As a team, we've often had issues with merge conflicts, and random bugs that seemed to pop up out of nowhere.
 
-# Lessons Learned and Team Workflow Notes
+## Lessons Learned and Team Workflow Notes
 
 - One lesson we learned is that class names are important, and specifying names with specific pages.
-- Time management. As a team we all feel that if we had more time, we could have implemented more features and deployed
+- Time management. As a team we all feel that if we had more time, we could have implemented more features and deployed.
 - Communication was a valuable skill that we all used effectively. We voted on most issues and had no problems with understanding roles.
 
-# Future Feature Ideas:
+## Future Feature Ideas
 
 - A user will be able to rate others (after being connected) (stretch).
 - A user will be able to disconnect from other users at will.
 - Users will be able to specify availability (stretch?).
 - Users will be able to reset password (stretch).
 - Users will be able to filter others based on proximity, or choose online-only communication (stretch).
-- App will be hosted on a website and deployed so it is fully functional (stretch)
-- App will have a 404 Error page
+- App will be hosted on a website and deployed so it is fully functional (stretch).
+- App will have a 404 Error page.
 
-# Trello and commits link/s
+## Trello Link:
 
 https://trello.com/b/gxOvvKTB/capstone-project
