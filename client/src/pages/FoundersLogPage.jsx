@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DevCard from '../components/DevCard';
 import '../styles/FoundersLogPage.css';
 import gsap from 'gsap';
@@ -15,6 +15,7 @@ const FoundersLogPage = () => {
     const titleRef = useRef();
 
     const { theme, toggleTheme } = useTheme();
+    const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
         gsap.to(titleRef.current, {
@@ -68,50 +69,79 @@ const FoundersLogPage = () => {
         },
     ];
 
+    //     return (
+    //         <div className="founders-body" data-theme={theme}>
+    //             <ThemeToggle />
+
+    //             <h1 className="founders-header" ref={titleRef}></h1>
+
+    //             <div className="founders-content">
+    //                 <div className="devs-container">
+    //                     {devs.map((dev, i) => (
+    //                         <DevCard key={i} {...dev} />
+    //                     ))}
+    //                 </div>
+    //                 <p className="founders-outro">
+    //                     We hope you’ve enjoyed exploring Barter Buddy as much as we’ve loved building it.<br />
+    //                     Thank you for stepping into our world of code, connection, and a little bit of magic. 🪄
+    //                 </p>
+    //             </div>
+    //             <Link to='/dashboard' className='unstyled-link'>
+    //                 <h5>--Barter Buddy--</h5>
+    //             </Link>
+    //         </div>
+    //     );
+
+
+
+    // };
+
+    // export default FoundersLogPage;
+
+    const nextCard = () => {
+        setActiveIndex((prev) => (prev + 1) % devs.length);
+    };
+
+    const prevCard = () => {
+        setActiveIndex((prev) => (prev - 1 + devs.length) % devs.length);
+    };
+
     return (
         <div className="founders-body" data-theme={theme}>
             <ThemeToggle />
-            {/* The animated title that appears at the top */}
             <h1 className="founders-header" ref={titleRef}>Loading title...</h1>
 
-            <div className="founders-content">
-                <div className="devs-container">
-                    {devs.map((dev, i) => (
-                        <DevCard key={i} {...dev} />
-                    ))}
-                </div>
-                <p className="founders-outro">
-                    We hope you’ve enjoyed exploring Barter Buddy as much as we’ve loved building it.<br />
-                    Thank you for stepping into our world of code, connection, and a little bit of magic. 🪄
-                </p>
+            <div className="carousel-container">
+                {devs.map((dev, index) => {
+                    let position = 'next';
+                    if (index === activeIndex) {
+                        position = 'active';
+                    } else if (
+                        index === (activeIndex - 1 + devs.length) % devs.length
+                    ) {
+                        position = 'prev';
+                    }
+
+                    return (
+                        <div className={`carousel-card ${position}`} key={index}>
+                            <DevCard {...dev} />
+                        </div>
+                    );
+                })}
+                <button onClick={prevCard} className="carousel-arrow left">←</button>
+                <button onClick={nextCard} className="carousel-arrow right">→</button>
             </div>
-            <Link to='/dashboard' className='unstyled-link'>
+
+            <p className="founders-outro">
+                We hope you’ve enjoyed exploring Barter Buddy as much as we’ve loved building it.<br />
+                Thank you for stepping into our world of code, connection, and a little bit of magic. 🪄
+            </p>
+
+            <Link to="/dashboard" className="unstyled-link">
                 <h5>--Barter Buddy--</h5>
             </Link>
         </div>
     );
-
-
-
 };
 
 export default FoundersLogPage;
-
-// In the FoundersLogPage.jsx file, I started by importing all the tools we need,
-// including React, the DevCard component for each team member, our CSS styling,
-// GSAP and its TextPlugin for animation, and React Router’s Link for navigation.
-// I used GSAP to animate our main title with a magical typewriter effect that
-// slowly reveals the phrase “✨ The Order of the Dev: Behind the Magic ✨” when
-// the page loads. To do that, I used a useRef to target the title element and a
-// useEffect to trigger the animation once the page mounts. Then I created a devs
-// array that includes an object for each team member. Each object holds info like
-// our name, our role on the project, a fun role subtitle, a brief description of
-// our contributions, our Hogwarts house, and both a real photo and a cartoon version.
-// This lets us create a fun, personalized experience for each teammate. In the return
-// block, I wrapped everything in a main founders-body div. At the top, the animated
-// header appears. Then, inside the founders-content, I used .map() to loop through
-// the devs array and display a DevCard for each of us using the data we defined above.
-// Under the cards, I added a short outro message thanking users for exploring our project,
-// and at the very bottom, there's a link that lets you return to the dashboard page.
-// Overall, this page is meant to show off our personalities, contributions, and teamwork
-// in a fun, magical way that reflects the heart of Barter Buddy. -CT
