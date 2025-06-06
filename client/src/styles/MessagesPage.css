@@ -27,7 +27,7 @@
 
 .chat-list h3 {
     color: rgb(138, 108, 59);
-    font-weight:700;
+    font-weight: 700;
     font-family: 'Cinzel Decorative';
 }
 
@@ -162,7 +162,7 @@
 }
 
 .request-card:hover h6 {
-    color: 	#374798;
+    color: #374798;
 }
 
 .req-avatar {

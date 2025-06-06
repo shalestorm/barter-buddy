@@ -111,19 +111,24 @@ const FoundersLogPage = () => {
             <ThemeToggle />
             <h1 className="founders-header" ref={titleRef}>Loading title...</h1>
 
-            <div className="carousel-container">
+            <div className="found-carousel-container">
                 {devs.map((dev, index) => {
-                    let position = 'next';
+                    let position = "hidden";
+
                     if (index === activeIndex) {
-                        position = 'active';
+                        position = "active";
                     } else if (
                         index === (activeIndex - 1 + devs.length) % devs.length
                     ) {
-                        position = 'prev';
+                        position = "prev";
+                    } else if (
+                        index === (activeIndex + 1) % devs.length
+                    ) {
+                        position = "next";
                     }
 
                     return (
-                        <div className={`carousel-card ${position}`} key={index}>
+                        <div className={`found-carousel-card ${position}`} key={index}>
                             <DevCard {...dev} />
                         </div>
                     );
