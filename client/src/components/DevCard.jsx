@@ -45,16 +45,3 @@ const DevCard = ({ name, title, roleTitle, roleSubtitle, roleDescription, house,
 };
 
 export default DevCard;
-
-
-// In the DevCard.jsx file, I built a reusable card component that shows
-// each developer’s real photo on the front and their cartoon image on the
-// back. When you hover over the card, it flips between the front and back
-// using a smooth GSAP animation. I also used GSAP to animate the text at
-// the bottom of the card — so it changes dynamically when the card flips,
-// showing either the person’s name and title or their special project role.
-// I used state to track whether the card is flipped or not, and I added a
-// hover event that triggers the flip when you mouse over it. Each card also
-// has a house-specific color class that ties in with our Harry Potter-inspired
-// theme. This component makes our team intro feel fun, interactive, and personalized
-// — with both professional and magical vibes. -CT
