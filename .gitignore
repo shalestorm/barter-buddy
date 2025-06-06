@@ -181,7 +181,7 @@ cython_debug/
 .cursorindexingignore
 
 .DS_Store
-
+node_modules
 #sanbox
 sandbox/node_modules/
 sandbox/
