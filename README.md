@@ -93,33 +93,9 @@ docker kill $(docker ps -q) #kill all running containers
 docker system prune -af #remove all artifacts for all stopped containers
 ```
 
-To connect to the psql shell on the database server:
+### The FastAPI app (/server)
 
-```bash
-docker exec -it capstone psql -U postgres
-```
-
-Create a new database for this project:
-
-```bash
-postgres=# create database barterbuddy;
-```
-
-Connect to our database:
-
-```bash
-postgres=# \c barterbuddy
-```
-
-Load the database schema:
-
-```bash
-barterbuddy=# \i server/db/schemas.sql;
-```
-
-### The FastAPI app (/backend)
-
-Navigate to the /backend directory:
+Navigate to the /server directory:
 
 ```bash
 cd server
@@ -137,9 +113,9 @@ This command will run the FastAPI server:
 fastapi dev main.py
 ```
 
-### The React app (/frontend)
+### The React app (/client)
 
-Navigate to the /frontend directory:
+Navigate to the /client directory:
 
 ```bash
 cd client
