@@ -529,7 +529,7 @@ const ProfilePage = () => {
                     </div>
 
                     <div className="connections-box">
-                        <h2>Connected Users</h2>
+                        <h2>Buddies</h2>
                         {connectedUsers.length === 0 ? (
                             <p>No connections yet.</p>
                         ) : (
