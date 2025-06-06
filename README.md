@@ -122,7 +122,7 @@ barterbuddy=# \i server/db/schemas.sql;
 Navigate to the /backend directory:
 
 ```bash
-cd backend
+cd server
 ```
 
 This project requires these libraries:
@@ -142,7 +142,7 @@ fastapi dev main.py
 Navigate to the /frontend directory:
 
 ```bash
-cd frontend
+cd client
 ```
 
 Install dependencies using the following command:
