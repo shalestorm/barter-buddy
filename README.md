@@ -46,7 +46,9 @@ This folder includes:
 
 # Tech used or utilized:
 
-## ![- git](docs/git.png)
+## ![git](docs/git.png)
+
+git
 
 ## ![Python3](docs/python.png)
 
