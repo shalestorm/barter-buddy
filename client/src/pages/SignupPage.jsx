@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import background_signup from '../assets/background_signup.png';
+import background_signup from '../assets/background_signup.jpg';
 import logo from '../assets/bb_new.png';
 import '../styles/LoginSignup.css';
 

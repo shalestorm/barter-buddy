@@ -4,7 +4,6 @@ import { useAuth } from "../context/AuthContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import EmojiPicker from 'emoji-picker-react';
-import magicalWandFile from '../assets/magicalWand.wav';
 import '../styles/MessagesPage.css'
 
 export default function MessagesPage() {
@@ -150,9 +149,7 @@ export default function MessagesPage() {
             if (isNew && chatRef.current) {
               const latest = msg[msg.length - 1];
               if (latest.sender_id !== currentUser.id) {
-                const receiveSound = new Audio(magicalWandFile);
-                receiveSound.volume = 0.08; // Keeps volume low
-                receiveSound.play().catch(err => console.error("Receive sound error:", err));
+
                 setTimeout(scrollToBottom, 0);
               }
             }
@@ -189,9 +186,6 @@ export default function MessagesPage() {
 
     if (!messageText.trim() || !selectedConnection) return;
 
-    const sendSound = new Audio(magicalWandFile);
-    sendSound.volume = 0.08;
-    sendSound.play().catch(err => console.error("Audio play error:", err));
 
     fetch(`${API_BASE}/messages`, {
       method: "POST",
@@ -347,7 +341,7 @@ export default function MessagesPage() {
                     {otherUser ? (
                       <p>
                         Chat with {otherUser.first_name} {otherUser.last_name}{" "}
-                        {hasUnread ? "🦉!" : ""}
+                        {hasUnread ? "💬!" : ""}
                       </p>
                     ) : (
                       <p>Loading user info...</p>
@@ -405,7 +399,7 @@ export default function MessagesPage() {
                     className="emoji-btn"
                     onClick={() => setShowEmojiPicker((prev) => !prev)}
                   >
-                    🪄
+                    😃
                   </button>
 
                   <button className="magic-button" type="submit">
@@ -472,16 +466,3 @@ export default function MessagesPage() {
     </>
   );
 }
-
-// In MessagesPage.jsx, I added two new interactive features to enhance
-// the user experience: emoji support and magical sound effects. First,
-// I integrated the emoji-picker-react library so users can click a magic
-// wand button to open a visual emoji picker. When you select an emoji, it
-// inserts directly where your cursor is in the message box. I used useRef
-// to keep track of the cursor position and make sure it doesn't jump after
-// adding an emoji. Second, I added a soft magical chime sound using a .wav
-// file that plays when a message is sent or when a new one is received. This
-// adds some whimsy and feedback for users, helping messages feel more magical
-// and alive. I added this using the Audio object and set a low volume to keep
-// it pleasant. Together, these upgrades make the chat experience feel more fun,
-// engaging, and on-brand with our magical theme. -CT

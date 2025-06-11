@@ -3,35 +3,26 @@
   max-width: 140px;
   height: auto;
   margin: 25px auto 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .bb-logo:hover {
-  animation: shimmer 1.5s infinite;
-  box-shadow: 0 0 40px 10px rgba(255, 255, 255, 0.3);
-  transform: scale(1.03);
-  transition: all 0.3s ease-in-out;
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-@keyframes shimmer {
-  0% {
-    filter: brightness(2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
-  }
-
-  50% {
-    filter: brightness(1.2) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
-  }
-
-  100% {
-    filter: brightness(2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
-  }
-}
+/* Removed shimmer keyframes as no glowing animation needed */
 
 .login-redirect,
 .signup-redirect {
   margin-block: 24px;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  color: #374151;
+  font-family: 'Inter', sans-serif;
 }
 
 .login-page {
@@ -39,15 +30,16 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0);
-  color: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.02);
+  color: #1f2937;
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 10;
   max-width: 400px;
   width: 90%;
   text-align: center;
+  font-family: 'Inter', sans-serif;
 }
 
 .login-form-container {
@@ -65,15 +57,26 @@
 }
 
 .login-form label {
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 0.3rem;
+  color: #374151;
 }
 
 .login-form input {
   padding: 0.5rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  color: #1f2937;
+  background-color: #f9fafb;
+  transition: border-color 0.3s ease;
+}
+
+.login-form input:focus {
+  border-color: #2563eb;
+  outline: none;
+  background-color: #fff;
 }
 
 .login-button-group {
@@ -82,20 +85,21 @@
   margin-top: 1rem;
 }
 
-
 .signup-page {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+  border-radius: 12px;
+  box-shadow: none;
   width: 90%;
   max-width: 400px;
   text-align: center;
+  font-family: 'Inter', sans-serif;
+  color: #1f2937;
 }
 
 .signup-background {
@@ -114,19 +118,22 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.345);
+  background: rgba(31, 41, 55, 0.5);
+  /* dark semi-transparent */
+  z-index: 1;
 }
 
 .signup-container {
   position: relative;
   z-index: 2;
-  background: rgba(255, 255, 255, 0.020);
-  color: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.04);
+  color: #1f2937;
   padding: 2rem;
   border-radius: 12px;
   max-width: 400px;
   width: 90%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Inter', sans-serif;
 }
 
 .signup-form .form-group {
@@ -136,15 +143,26 @@
 }
 
 .signup-form label {
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 0.3rem;
+  color: #374151;
 }
 
 .signup-form input {
   padding: 0.5rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  color: #1f2937;
+  background-color: #f9fafb;
+  transition: border-color 0.3s ease;
+}
+
+.signup-form input:focus {
+  border-color: #2563eb;
+  outline: none;
+  background-color: #fff;
 }
 
 .signup-button-group {
@@ -155,18 +173,22 @@
 
 .signup-container h2,
 .login-page h2 {
-  font-family: 'Cinzel Decorative', serif;
-  color: rgb(255, 235, 201);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: #d620cd;
+  margin-bottom: 0.5rem;
+  text-shadow: none;
 }
 
 .signup-container h3,
 .login-page h3 {
-  font-family: 'Cinzel', serif;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
   margin-bottom: 4px;
+  color: #faeb15;
 }
 
 .signup-container h5 {
   margin-bottom: 0;
-  color: lightgoldenrodyellow;
+  color: #000000;
 }
