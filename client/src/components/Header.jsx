@@ -83,8 +83,8 @@ export default function Header() {
                     >
                         {hasUnread
                             ? hasRequests
-                                ? "Messages 🦉! 🤝!"
-                                : "Messages 🦉!"
+                                ? "Messages 💬! 🤝!"
+                                : "Messages 💬!"
                             : hasRequests
                                 ? "Messages 🤝!"
                                 : "Messages"}
@@ -93,7 +93,7 @@ export default function Header() {
             </div>
             <div className="header-center">
                 <Link to='/dashboard'>
-                    <img src={logo} alt="Barter Buddy Logo" className="header-logo" title="Browse more Buddies!" />
+                    <img src={logo} alt="Skill Swap Logo" className="header-logo" title="Browse more Mentors!" />
                 </Link>
             </div>
             <div className="header-right">
