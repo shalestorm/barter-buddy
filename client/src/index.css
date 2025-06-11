@@ -1,23 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 body,
 button,
 select {
-  font-family: 'Cinzel Decorative', cursive;
-  font-weight: bold;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  /* bold */
+  color: #f5e1b9;
+  /* light gold text */
+  background-color: transparent;
+  /* buttons/select inherit */
 }
 
-
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif, 'Cinzel Decorative', cursive;
-  ;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(0, 0, 0, 0.870);
-  background-color: #ffffff7c;
+  color-scheme: dark;
+  color: #f5e1b9;
+  /* pale gold */
+  background-color: #1a132bdd;
+  /* translucent deep purple */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -37,8 +41,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #ffffff7b;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1a132bdd;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   overflow: hidden;
 }
 
@@ -55,6 +59,8 @@ body,
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: #e6d8a7;
+  /* soft gold */
 }
 
 .gradient {
@@ -64,96 +70,49 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #2c1a3d;
+  background-image: url('assets/learn_background.jpg');
   flex-direction: column;
-  background-image: url('assets/background.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   overflow: auto;
 }
 
-.gradient .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, 0.1);
-  z-index: 0;
-}
-
-.gradient>*:not(.overlay) {
-  position: relative;
-  z-index: 1;
-}
-
-.gradient .background-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(75deg,
-      rgba(174, 0, 1, 0.3),
-      rgba(255, 205, 0, 0.3),
-      rgba(25, 89, 5, 0.3),
-      rgba(192, 192, 192, 0.3),
-      rgba(0, 38, 84, 0.3));
-  background-size: 400% 400%;
-  animation: gradientAnimation 18s ease infinite;
-  z-index: 1;
-}
-
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-
 .magic-button {
-  font-family: 'Cinzel Decorative', cursive;
-  font-weight: bold;
-  font-size: 11px;
-  padding: 8px 10px;
-  color: #fff2d9;
-  background: linear-gradient(145deg, #8b5e3c, #3e2e1e);
-  border: 2px solid #ffcc00;
-  border-radius: 8px;
-  text-shadow: 1px 1px 2px #000;
-  box-shadow: 0 0 10px rgba(255, 204, 0, 0.5), inset 0 0 5px #000;
-  transition: all 0.3s ease;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 16px;
+  color: #fffbe6;
+  /* pale gold */
+  background-color: #6e0f77;
+  /* rich purple */
+  border: 2px solid #d8b97a;
+  /* gold-ish border */
+  border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .magic-button:hover {
-  background: linear-gradient(145deg, #a1704e, #5a422e);
-  color: #ffe066;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-  transform: translateY(-2px);
-  border-color: #6e0f77;
+  background-color: #8e2fb1;
+  /* lighter purple */
+  color: #fff;
+  border-color: #fffbe6;
 }
 
 .magic-button:focus,
 .magic-button:focus-visible {
-  outline: 4px auto darkgreen;
+  outline: 3px solid #d8b97a;
+  outline-offset: 3px;
 }
 
 .error-message {
-  color: red;
+  color: #ff6b6b;
+  /* red-ish error */
   margin-top: 1rem;
 }
-
 
 .modal-overlay {
   z-index: 1000;
@@ -165,15 +124,20 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgba(26, 19, 43, 0.85);
+  /* dark translucent overlay */
 }
 
 .modal-content {
   border: solid 3px #d8b97a;
-  background-color: rgba(255, 253, 240, 0.95);
+  background-color: rgba(58, 34, 80, 0.95);
+  /* dark purple translucent */
   padding: 60px;
   padding-top: 30px;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255, 223, 110, .6);
+  box-shadow: 0 0 20px rgba(216, 185, 122, 0.6);
+  /* gold glow */
+  color: #f5e1b9;
 }
 
 .modal-buttons {
@@ -183,15 +147,15 @@ h1 {
 }
 
 .modal-content.del-skill-modal h2 {
-  color: rgb(203, 34, 34);
+  color: #ff6b6b;
 }
 
 .modal-content.send-con-modal h2 {
-  color: rgb(138, 108, 59);
+  color: #d8b97a;
 }
 
 .modal-content h4 strong {
-  color: rgb(138, 108, 59);
+  color: #d8b97a;
   font-size: larger;
 }
 
@@ -202,18 +166,19 @@ h1 {
   padding: 0.5rem;
   border: 1px solid #d8b97a;
   border-radius: 8px;
-  font-family: 'Cinzel', serif;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   box-sizing: border-box;
+  background-color: #3a2250;
+  color: #f5e1b9;
 }
 
 /* Toggle Button */
 .global-theme-toggle {
   position: fixed;
   top: 1rem;
-  /* adjust as needed */
   right: 2rem;
   z-index: 3000;
-  font-family: 'Cinzel', serif;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   background-color: #372e29;
   color: #f5e1b9;
   padding: 0.5rem 1rem;
@@ -223,14 +188,6 @@ h1 {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
-
-.global-theme-toggle:hover {
-  background-color: #1e1e1e;
-  color: #fffbe6;
-  box-shadow: 0 0 15px 4px rgba(255, 204, 0, 0.5);
-}
-
 
 .global-theme-toggle:hover {
   background-color: #1e1e1e;

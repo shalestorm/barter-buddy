@@ -4,20 +4,24 @@
 
 .daily-quote h2 {
   font-size: 1rem;
-  color: #fffbe6;
-  text-shadow: 2px 2px 4px #000000;
+  color: #e6d8a7;
+  /* soft gold instead of gray */
   margin-top: 24px;
   margin-bottom: 8px;
-  font-family: 'Cinzel Decorative', cursive;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  text-shadow: none;
 }
 
 .daily-quote h3 {
-  font-size: .75rem;
-  color: #fffbe6;
-  text-shadow: 2px 2px 4px #000000;
+  font-size: 0.75rem;
+  color: #a09473;
+  /* muted goldish gray instead of medium gray */
   margin-top: 0;
   margin-bottom: 8px;
-  font-family: 'Cinzel Decorative', cursive;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  text-shadow: none;
 }
 
 .welcome-logo {
@@ -25,43 +29,33 @@
   max-width: 175px;
   height: auto;
   margin: 25px auto 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(255, 223, 110, 0.3);
+  /* subtle golden glow */
+  transition: transform 0.3s ease;
 }
 
 .welcome-logo:hover {
-  animation: shimmer 1.5s infinite;
-  box-shadow: 0 0 40px 10px rgba(255, 255, 255, 0.3);
-  transform: scale(1.03);
-  transition: all 0.3s ease-in-out;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(255, 223, 110, 0.5);
 }
 
 .magic-title {
-  font-size: 3rem;
-  color: #ffffff;
-  font-family: 'Cinzel Decorative', cursive;
-  text-shadow: 0 0 5px #ffeb3b, 0 0 15px #ffc107, 0 0 30px #ff9800;
-  animation: pulseGlow 3s infinite;
+  font-size: 2.5rem;
+  color: #f5e1b9;
+  /* pale gold */
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
   margin-top: 0;
   margin-bottom: 10px;
+  text-shadow: none;
+  animation: none;
 }
 
 h2.magic-title {
   font-size: 1.8rem;
   margin-top: 0;
   margin-bottom: 20px;
-}
-
-@keyframes pulseGlow {
-
-  0%,
-  100% {
-    text-shadow: 0 0 5px #ffeb3b, 0 0 15px #ffc107, 0 0 30px #ff9800;
-  }
-
-  50% {
-    text-shadow: 0 0 10px #fff176, 0 0 25px #ffca28, 0 0 50px #ff5722;
-  }
 }
 
 .welcome-buttons-container {
@@ -76,11 +70,23 @@ h2.magic-title {
 
 .left-button,
 .right-button {
-  font: 'Cinzel Decorative', cursive;
+  font-family: 'Inter', sans-serif;
   font-size: 14px;
-  padding: 8px 15px;
-  width: auto;
-  margin: 0;
+  padding: 10px 20px;
+  background-color: #6e0f77;
+  /* rich purple, matching your button */
+  border: none;
+  border-radius: 8px;
+  color: #fffbe6;
+  /* pale gold text */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.left-button:hover,
+.right-button:hover {
+  background-color: #8e2fb1;
+  /* lighter purple hover */
 }
 
 .carousel-wrapper {
@@ -94,10 +100,12 @@ h2.magic-title {
 
 .carousel-heading {
   font-size: 1.5rem;
-  color: #fffbe6;
-  text-shadow: 2px 2px 4px #000000;
-  margin-bottom: .5rem;
-  font-family: 'Cinzel Decorative', cursive;
+  color: #e6d8a7;
+  /* soft gold */
+  margin-bottom: 0.5rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  text-shadow: none;
 }
 
 .carousel {
@@ -116,23 +124,23 @@ h2.magic-title {
 
 .carousel-track::-webkit-scrollbar {
   display: none;
-
 }
-
 
 .carousel-card {
   display: inline-block;
   min-width: 280px;
   max-width: 280px;
-  backdrop-filter: blur(6px);
-  background-color: rgba(255, 253, 240, 0.25);
-  border: 2px solid #d8b97a;
+  background-color: #3a2250;
+  /* dark purple card background */
+  border: 1px solid #6e0f77;
+  /* purple border */
   border-radius: 12px;
-  padding: 12px;
+  padding: 16px;
   text-align: left;
-  box-shadow: 0 0 15px rgba(255, 215, 110, 0.3);
-  font-family: 'Cinzel', serif;
-  color: #fffbe6;
+  box-shadow: 0 4px 8px rgba(110, 15, 119, 0.2);
+  font-family: 'Inter', sans-serif;
+  color: #f5e1b9;
+  /* pale gold text */
   flex-shrink: 0;
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -140,14 +148,13 @@ h2.magic-title {
 }
 
 .carousel-card h3 {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   margin-top: 0;
   margin-bottom: 0.75rem;
-  color: #f0d27d;
-  text-shadow:
-    0 0 4px rgba(0, 0, 0, 0.7),
-    0 0 8px rgba(255, 215, 100, 0.5);
-  font-weight: bold;
+  color: #d8b97a;
+  /* gold-ish */
+  font-weight: 700;
+  text-shadow: none;
 }
 
 .carousel-card p {
@@ -155,13 +162,10 @@ h2.magic-title {
   line-height: 1.4;
   margin-top: 0;
   margin-bottom: 8px;
+  color: #a09473;
+  /* muted goldish gray */
+  text-shadow: none;
 }
-
-.carousel-card h3,
-.carousel-card p {
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-}
-
 
 .carousel-user-img {
   width: 80px;
@@ -169,12 +173,7 @@ h2.magic-title {
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 0;
-  border: 2px solid #d8b97a;
-  box-shadow: 0 0 6px rgba(255, 215, 110, 0.6);
+  border: 2px solid #6e0f77;
+  /* purple border */
+  box-shadow: 0 2px 6px rgba(110, 15, 119, 0.3);
 }
-
-/* "In the CSS, I styled the carousel container to fit the page and look magical.
-Each card uses a frosted glass effect with a glowing border. I also made the profile
-pictures circular, styled the text to glow for better visibility, and made sure the
-layout scrolls smoothly with no visible scrollbar. I added spacing, text shadows,
-and sizing that matches the magical theme and makes the info easy to read." -CT */

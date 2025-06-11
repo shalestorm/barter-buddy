@@ -105,7 +105,7 @@ export default function Carousel() {
 
     return (
         <div className="carousel-wrapper">
-            <h2 className="carousel-heading">✨ Meet Your Future Barter Buddies ✨</h2>
+            <h2 className="carousel-heading"> Discover Your Future </h2>
             <div className="carousel">
                 <div className="carousel-track" ref={trackRef}>
                     {carouselData.map((profile, index) => (
@@ -126,10 +126,3 @@ export default function Carousel() {
         </div>
     );
 }
-
-/* I created a carousel that scrolls through sample users who can trade skills.
-It uses fake data for now, like someone who knows photography and wants to learn
-painting. I added images, made it scroll on its own, and duplicated the content
-so it loops without stopping. Each card shows the user’s name, photo, what they
-can teach, and what they want to learn. I also styled the background and text to
-fit the magical theme. - CT */
