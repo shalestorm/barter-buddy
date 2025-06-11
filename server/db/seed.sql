@@ -64,7 +64,6 @@ CREATE TABLE messages (
 
 INSERT INTO users (first_name, last_name, username, email, password_hash, bio, rating, profile_pic, create_date)
 VALUES
-	('Cayla', 'Thompson', 'blueeyed95', 'caylaleann18@gmail.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Looking for piano lessons!', NULL, 'http://localhost:8000/static/profile_pics/cayla2.jpg', '2025-05-20'),
     ('Liam', 'Bennett', 'liamben001', 'liamben001@example.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Love teaching guitar!', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-29'),
     ('Emma', 'Clark', 'emmaclark002', 'emmaclark002@example.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'I would love to learn about photography and cooking!', NULL, 'http://localhost:8000/static/profile_pics/emma.png', '2025-05-29'),
     ('Noah', 'Garcia', 'noahg003', 'noahg003@example.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Learning jazz piano.', NULL, 'http://localhost:8000/static/profile_pics/noah.png', '2025-05-29'),
@@ -85,9 +84,8 @@ VALUES
     ('Evelyn', 'Roberts', 'evelynr018', 'evelynr018@example.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Underwater Basket Weaving instructor, want to learn yoga', NULL, 'http://localhost:8000/static/profile_pics/evelyn.png', '2025-05-29'),
     ('Matthew', 'Turner', 'mattt019', 'mattt019@example.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Gigging every weekend. Rock Climbing Nerd', NULL, 'http://localhost:8000/static/profile_pics/matthew.png', '2025-05-29'),
     ('Abigail', 'Phillips', 'abip020', 'abip020@example.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Coffee Snob, Drama coach', NULL, 'http://localhost:8000/static/profile_pics/default.png', '2025-05-29'),
-    ('Tiberius', 'James', 'tiorion', 'tjames@orionrising.dev', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'Can teach coding. Looking to learn how to read music.', NULL, 'http://localhost:8000/static/profile_pics/ti.png', '2025-05-30'),
     ('Skyler', 'McLain', 'shale', 'allhailtheshale@shale.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'I want to learn how to drive a tractor', NULL, 'http://localhost:8000/static/profile_pics/skyler.png', '2025-05-30'),
-    ('Ricardo', 'Tizón', 'pakoh', 'pakoh@pakoh.com', '$2b$12$gWJVTEyNpdQv.Gm4wQfHf.jhyLlt3gTfNtoLkHtvGM9cdKPx1YUCu', 'I can teach you Spanish.', NULL, 'http://localhost:8000/static/profile_pics/ric.png', '2025-05-30');
+
 
 INSERT INTO categories (name) VALUES
     ('Music & Performing Arts'), --1
@@ -226,15 +224,15 @@ INSERT INTO user_skills (user_id, skill_id) VALUES
     (19, 41),
     (19, 49),
     (20, 5),
-    (22, 6),
-    (22, 9),
-    (22, 47),
-    (23, 4),
-    (23, 15),
-    (23, 48),
-    (24, 2),
-    (24, 10),
-    (24, 23);
+
+
+
+
+
+
+
+
+
 
 INSERT INTO connections (user_a_id, user_b_id, is_active)
 VALUES
@@ -246,12 +244,12 @@ VALUES
     (2, 3, TRUE),   -- liamben001 + emmaclark002
     (6, 9, TRUE),   -- elijahlee005 + sophiaa008
     (9, 3, TRUE),   -- sophiaa008 + emmaclark002
-    (1, 22, TRUE),  -- blueeyed95 + tiorion
-    (1, 23, TRUE),  -- blueeyed95 + shale
-    (1, 24, TRUE),  -- blueeyed95 + pakoh
-    (22, 23, TRUE),  -- tiorion + shale
-    (22, 24, TRUE),  -- tiorion + pakoh
-    (23, 24, TRUE);  -- shale + pakoh
+
+
+
+
+
+
 
 INSERT INTO connection_requests (sender_id, receiver_id, message)
 VALUES
