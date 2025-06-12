@@ -61,6 +61,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
         httponly=True,
         secure=True,
         samesite="none",
+        domain=".shalestorm.net",
         max_age=int(expires.total_seconds()),
         path="/"
     )
