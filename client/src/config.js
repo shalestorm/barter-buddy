@@ -1,1 +1,1 @@
-export const API_BASE_URL = "https://skillswap.shalestorm.net";
+export const API_BASE_URL = "https://api.shalestorm.net";
