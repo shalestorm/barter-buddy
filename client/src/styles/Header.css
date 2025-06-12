@@ -5,16 +5,13 @@
     z-index: 1;
     overflow: hidden;
     border-bottom: 2px solid #d8b97a;
-    /* gold border */
     box-shadow: 0 2px 8px rgba(216, 185, 122, 0.3);
-    /* subtle gold glow */
     flex-wrap: wrap;
     flex-direction: row;
     flex-shrink: 0;
     min-height: 160px;
     position: relative;
     background-color: #2c1a3d;
-    /* dark purple */
 }
 
 .header::before {
@@ -90,7 +87,6 @@
     margin-inline: 50px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(216, 185, 122, 0.7);
-    /* gold glow */
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
@@ -113,7 +109,6 @@
 
 .greet {
     color: #f5e1b9;
-    /* pale gold */
     font-family: 'Inter', sans-serif;
     margin-top: 16px;
     margin-bottom: 4px;

@@ -1,6 +1,5 @@
 .dashboard-container {
     background-color: #1a132bdd;
-    /* translucent deep purple */
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -12,24 +11,19 @@
 
 .browse-container {
     background-color: rgba(58, 34, 80, 0.95);
-    /* dark purple translucent */
     border: 2px solid #d8b97a;
-    /* gold-ish border */
     border-radius: 16px;
     margin-bottom: 3rem;
     padding: 2rem 2rem 4rem;
     width: 100%;
     max-width: 90%;
     box-shadow: 0 0 20px rgba(216, 185, 122, 0.6);
-    /* subtle gold glow */
     font-family: 'Inter', sans-serif;
     color: #f5e1b9;
-    /* pale gold text */
 }
 
 .browse-container h2 {
     color: #e6d8a7;
-    /* soft gold */
     font-family: 'Inter', sans-serif;
     margin-top: 0;
 }
@@ -42,7 +36,6 @@
     justify-content: space-evenly;
     padding-block: 1rem;
     scrollbar-color: #d8b97a transparent;
-    /* gold scrollbar */
 }
 
 .card-scroll-container::-webkit-scrollbar {
@@ -66,9 +59,7 @@
     min-height: 205px;
     cursor: pointer;
     background-color: #2c1a3d;
-    /* dark purple */
     color: #f5e1b9;
-    /* pale gold */
     transition: box-shadow 0.3s ease;
 }
 

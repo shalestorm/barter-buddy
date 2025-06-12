@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/DashboardPage.css"
+import { API_BASE_URL } from "../config";
 
 const DashboardPage = () => {
     const { user, loading } = useAuth();
@@ -16,11 +17,9 @@ const DashboardPage = () => {
 
     const usersPerPage = 5;
 
-    const API_BASE = "http://localhost:8000";
-
     const fetchSkillCategories = async () => {
         try {
-            const categoriesRes = await fetch(`${API_BASE}/categories`);
+            const categoriesRes = await fetch(`${API_BASE_URL}/categories`);
 
             if (!categoriesRes.ok) {
                 throw new Error("Failed to fetch skill categories");
@@ -46,7 +45,7 @@ const DashboardPage = () => {
 
     const fetchUsersAndSkills = async () => {
         try {
-            const connectionsRes = await fetch(`${API_BASE}/connections/user/${user.id}`);
+            const connectionsRes = await fetch(`${API_BASE_URL}/connections/user/${user.id}`);
             const connectionsData = connectionsRes.ok ? await connectionsRes.json() : [];
 
             const connectedUserIds = new Set();
@@ -54,10 +53,10 @@ const DashboardPage = () => {
                 if (conn.user_a_id !== user.id) connectedUserIds.add(conn.user_a_id);
                 if (conn.user_b_id !== user.id) connectedUserIds.add(conn.user_b_id);
             });
-            const sentReqRes = await fetch(`${API_BASE}/connection_requests/sent/${user.id}`);
+            const sentReqRes = await fetch(`${API_BASE_URL}/connection_requests/sent/${user.id}`);
             const sentReqData = sentReqRes.ok ? await sentReqRes.json() : [];
             const sentRequestIds = new Set(sentReqData.map((req) => req.receiver_id));
-            const recReqRes = await fetch(`${API_BASE}/connection_requests/received/${user.id}`);
+            const recReqRes = await fetch(`${API_BASE_URL}/connection_requests/received/${user.id}`);
             const recReqData = recReqRes.ok ? await recReqRes.json() : [];
             const receivedRequestIds = new Set(recReqData.map((req) => req.sender_id));
             const allExcludedIds = new Set([
@@ -68,12 +67,12 @@ const DashboardPage = () => {
             ]);
             setExcludedUserIds(allExcludedIds);
 
-            const usersRes = await fetch(`${API_BASE}/users`);
+            const usersRes = await fetch(`${API_BASE_URL}/users`);
             if (!usersRes.ok) throw new Error("Failed to fetch users");
             const usersData = await usersRes.json();
             const usersWithSkills = await Promise.all(
                 usersData.map(async (u) => {
-                    const skillsRes = await fetch(`${API_BASE}/user-skills/user/${u.id}/skills`);
+                    const skillsRes = await fetch(`${API_BASE_URL}/user-skills/user/${u.id}/skills`);
                     if (!skillsRes.ok) {
                         console.error(`Failed to fetch skills for user ${u.id}`);
                         return { ...u, skills: [] };

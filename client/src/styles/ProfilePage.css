@@ -5,10 +5,8 @@
     gap: 3rem;
     padding: 3rem 4rem;
     background-color: #2c1a3d;
-    /* dark purple from header */
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
-    /* match header UI font */
     width: 100vw;
     box-sizing: border-box;
     max-width: 100%;
@@ -39,13 +37,10 @@
 .bio-box,
 .connections-box {
     background-color: #3b2a5a;
-    /* lighter purple for cards */
     border: 2px solid #d8b97a;
-    /* gold border */
     border-radius: 16px;
     padding: 1.5rem;
     box-shadow: 0 0 20px rgba(216, 185, 122, 0.3);
-    /* subtle gold glow */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -54,7 +49,6 @@
     min-height: 300px;
     overflow-x: hidden;
     color: #f5e1b9;
-    /* pale gold text */
 }
 
 .skills-box,
@@ -72,8 +66,7 @@
 .skills-box h2,
 .connections-box h2 {
     color: #d8b97a;
-    /* gold headings */
-    font-family: 'Cinzel Decorative', serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .profile-avatar {
@@ -81,9 +74,7 @@
     height: 100px;
     border-radius: 50%;
     border: 3px solid #d8b97a;
-    /* gold border */
     box-shadow: 0 0 10px rgba(216, 185, 122, 0.8);
-    /* gold glow */
     margin-bottom: 1rem;
 }
 
@@ -98,9 +89,8 @@
 
 .profile-name {
     font-size: 2rem;
-    font-family: 'Cinzel', serif;
+    font-family: 'Inter', sans-serif;
     color: #d8b97a;
-    /* gold text */
     margin-bottom: 16px;
     overflow-wrap: anywhere;
 }
@@ -109,7 +99,6 @@
     flex-grow: 1;
     text-align: left;
     color: #f5e1b9;
-    /* pale gold */
 }
 
 .skill-actions {
@@ -156,9 +145,7 @@
     width: fit-content;
     padding: 0.4rem 1rem;
     background-color: #d8b97a;
-    /* gold button */
     color: #2c1a3d;
-    /* dark purple text */
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -166,7 +153,6 @@
 
 .add-skill-section button:hover {
     background-color: #f5e1b9;
-    /* pale gold hover */
     color: #2c1a3d;
 }
 
@@ -178,7 +164,6 @@
     transition: opacity 0.3s ease;
     cursor: pointer;
     color: #d8b97a;
-    /* gold icon */
 }
 
 .profile-scroll-card:hover .edit-icon {
@@ -267,7 +252,6 @@ body {
     padding: 0.5rem;
     margin-inline: 0.2rem;
     background-color: #4b3a7a;
-    /* medium purple */
     border: 1px solid #d8b97a;
     border-radius: 8px;
     cursor: pointer;
@@ -316,13 +300,11 @@ body {
 
 .skill-list::-webkit-scrollbar-thumb {
     background-color: rgba(216, 185, 122, 0.5);
-    /* gold */
     border-radius: 4px;
 }
 
 .skill-list::-webkit-scrollbar-track {
     background: #2c1a3d;
-    /* dark purple */
 }
 
 .connected-user-list:hover {

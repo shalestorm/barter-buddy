@@ -9,31 +9,26 @@
     padding: 2rem;
     min-height: 100vh;
     box-sizing: border-box;
-    font-family: 'Cinzel', serif;
-    /* match profile font */
+    font-family: 'Inter', sans-serif;
 }
 
 .chat-list {
     display: flex;
     flex-direction: column;
     background-color: rgba(44, 26, 61, 0.9);
-    /* like profile-scroll-card */
     border: 2px solid #d8b97a;
-    /* gold border */
     border-radius: 16px;
     padding: 1rem;
     margin-right: 1rem;
     box-shadow: 0 0 20px rgba(216, 185, 122, 0.5);
-    /* soft gold glow */
     max-width: 300px;
     width: 100%;
 }
 
 .chat-list h3 {
     color: #f5e1b9;
-    /* dark gold text */
     font-weight: 600;
-    font-family: 'Cinzel Decorative', serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .chat-window {
@@ -81,9 +76,7 @@
 .my-message {
     align-self: flex-end;
     color: #f5e1b9;
-    /* deep gold/dark amber */
     background-color: #5b3a88;
-    /* pale warm gold */
     border-radius: 4px;
     margin-block: 4px;
     padding: 8px 16px;
@@ -93,9 +86,7 @@
 .their-message {
     align-self: flex-start;
     color: #5a3b00;
-    /* darker golden brown */
     background-color: #fffce6;
-    /* very light warm beige */
     border-radius: 4px;
     margin-block: 4px;
     padding: 8px 16px;
@@ -117,7 +108,7 @@
     font-size: 1rem;
     border: 1px solid #d8b97a;
     border-radius: 8px;
-    font-family: 'Cinzel', serif;
+    font-family: 'Inter', sans-serif;
     box-sizing: border-box;
     background-color: #3f2a62;
     color: #f5e1b9;
@@ -285,28 +276,21 @@
 
 .chat-page {
     background-color: #2c1a3d;
-    /* dark purple from header bg */
     color: #f5e1b9;
-    /* pale gold text base */
 }
 
 .chat-list {
     background-color: rgba(44, 26, 61, 0.9);
-    /* translucent dark purple */
     border: 2px solid #d8b97a;
-    /* gold border */
     box-shadow: 0 0 20px rgba(216, 185, 122, 0.5);
-    /* soft gold glow */
 }
 
 .chat-list h3 {
     color: #f5e1b9;
-    /* pale gold text */
 }
 
 .chat-window {
     background-color: rgba(44, 26, 61, 0.85);
-    /* slightly lighter translucent purple */
     border: 2px solid #d8b97a;
     box-shadow: 0 0 20px rgba(216, 185, 122, 0.5);
     color: #f5e1b9;
@@ -325,14 +309,11 @@
 
 .my-message {
     background-color: #3f2a62;
-    /* medium purple */
     color: #d8b97a;
-    /* gold text */
 }
 
 .their-message {
     background-color: #5b3a88;
-    /* lighter purple */
     color: #f5e1b9;
 }
 
@@ -340,7 +321,7 @@
     border: 1px solid #d8b97a;
     background-color: #3f2a62;
     color: #f5e1b9;
-    font-family: 'Cinzel', serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .emoji-btn {

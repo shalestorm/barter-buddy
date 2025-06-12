@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import EmojiPicker from 'emoji-picker-react';
 import '../styles/MessagesPage.css'
+import { API_BASE_URL } from "../config";
 
 export default function MessagesPage() {
   const [connections, setConnections] = useState([]);
@@ -23,21 +24,21 @@ export default function MessagesPage() {
   const prevMessagesLength = useRef(0);
 
 
-  const API_BASE = "http://localhost:8000";
+
 
 
   useEffect(() => {
     let connectionsData = [];
     let requestsData = [];
 
-    const fetchConnections = fetch(`${API_BASE}/connections/user/${currentUser.id}`)
+    const fetchConnections = fetch(`${API_BASE_URL}/connections/user/${currentUser.id}`)
       .then(res => res.json())
       .then(data => {
         connectionsData = data;
         setConnections(data);
       });
 
-    const fetchRequests = fetch(`${API_BASE}/connection_requests/received/${currentUser.id}`)
+    const fetchRequests = fetch(`${API_BASE_URL}/connection_requests/received/${currentUser.id}`)
       .then(res => res.json())
       .then(data => {
         requestsData = data;
@@ -55,7 +56,7 @@ export default function MessagesPage() {
 
         return Promise.all(
           allUserIds.map(id =>
-            fetch(`${API_BASE}/users/${id}`).then(res => res.json())
+            fetch(`${API_BASE_URL}/users/${id}`).then(res => res.json())
           )
         );
       })
@@ -74,7 +75,7 @@ export default function MessagesPage() {
   useEffect(() => {
     const intervalId = setInterval(() => {
 
-      fetch(`${API_BASE}/connection_requests/received/${currentUser.id}`)
+      fetch(`${API_BASE_URL}/connection_requests/received/${currentUser.id}`)
         .then((res) => res.json())
         .then((newRequests) => {
           if (newRequests.length !== requests.length) {
@@ -85,7 +86,7 @@ export default function MessagesPage() {
               .filter((id) => !(id in userDetails));
 
             if (newSenderIds.length > 0) {
-              Promise.all(newSenderIds.map((id) => fetch(`${API_BASE}/users/${id}`).then((res) => res.json()))).then(
+              Promise.all(newSenderIds.map((id) => fetch(`${API_BASE_URL}/users/${id}`).then((res) => res.json()))).then(
                 (newUsers) => {
                   setUserDetails((prev) => {
                     const updated = { ...prev };
@@ -102,7 +103,7 @@ export default function MessagesPage() {
         .catch(console.error);
 
 
-      fetch(`${API_BASE}/connections/user/${currentUser.id}`)
+      fetch(`${API_BASE_URL}/connections/user/${currentUser.id}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.length !== connections.length) {
@@ -114,7 +115,7 @@ export default function MessagesPage() {
 
             if (newConnectionUserIds.length > 0) {
               Promise.all(
-                newConnectionUserIds.map((id) => fetch(`${API_BASE}/users/${id}`).then((res) => res.json()))
+                newConnectionUserIds.map((id) => fetch(`${API_BASE_URL}/users/${id}`).then((res) => res.json()))
               ).then((newUsers) => {
                 setUserDetails((prev) => {
                   const updated = { ...prev };
@@ -137,7 +138,7 @@ export default function MessagesPage() {
   useEffect(() => {
     if (!selectedConnection) return
     const messageFetch = () => {
-      fetch(`${API_BASE}/messages/connection/${selectedConnection.id}`)
+      fetch(`${API_BASE_URL}/messages/connection/${selectedConnection.id}`)
         .then(res => {
           if (!res.ok) throw new Error("Failed to find messages");
           return res.json();
@@ -161,7 +162,7 @@ export default function MessagesPage() {
           msg.forEach(message => {
             console.log(message);
             if (message.sender_id !== currentUser.id) {
-              fetch(`${API_BASE}/messages/${message.id}/read`, {
+              fetch(`${API_BASE_URL}/messages/${message.id}/read`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(message.id)
@@ -187,7 +188,7 @@ export default function MessagesPage() {
     if (!messageText.trim() || !selectedConnection) return;
 
 
-    fetch(`${API_BASE}/messages`, {
+    fetch(`${API_BASE_URL}/messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -215,7 +216,7 @@ export default function MessagesPage() {
   };
 
   const handleAcceptRequest = (req) => {
-    fetch(`${API_BASE}/connections`, {
+    fetch(`${API_BASE_URL}/connections`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
@@ -226,7 +227,7 @@ export default function MessagesPage() {
     })
       .then(res => res.json())
       .then((newConnection) => {
-        return fetch(`${API_BASE}/connection_requests/${req.id}`, {
+        return fetch(`${API_BASE_URL}/connection_requests/${req.id}`, {
           method: "DELETE"
         }).then(() => newConnection);
       })
@@ -239,7 +240,7 @@ export default function MessagesPage() {
   };
 
   const handleDenyRequest = (req) => {
-    fetch(`${API_BASE}/connection_requests/${req.id}`, {
+    fetch(`${API_BASE_URL}/connection_requests/${req.id}`, {
       method: "DELETE"
     })
       .then(() => {
@@ -252,7 +253,7 @@ export default function MessagesPage() {
 
   useEffect(() => {
     const fetchUnread = () => {
-      fetch(`${API_BASE}/messages/user/${currentUser.id}/unread`)
+      fetch(`${API_BASE_URL}/messages/user/${currentUser.id}/unread`)
         .then(res => res.json())
         .then(unreadConnectionIds => {
           const unread = {};

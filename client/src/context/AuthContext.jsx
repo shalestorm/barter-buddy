@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
+import { API_BASE_URL } from "../config";
 
 export const AuthContext = createContext();
 
@@ -9,7 +10,7 @@ export function AuthProvider({ children }) {
 
     async function checkAuth() {
         try {
-            const res = await fetch("http://localhost:8000/users/auth/me", {
+            const res = await fetch(`${API_BASE_URL}/users/auth/me`, {
                 credentials: "include",
             });
 
@@ -36,7 +37,7 @@ export function AuthProvider({ children }) {
 
     async function login(username, password) {
         try {
-            const res = await fetch("http://localhost:8000/auth/login", {
+            const res = await fetch(`${API_BASE_URL}/auth/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 credentials: "include",
@@ -59,7 +60,7 @@ export function AuthProvider({ children }) {
 
     async function logout() {
         try {
-            const res = await fetch("http://localhost:8000/auth/logout", {
+            const res = await fetch(`${API_BASE_URL}/auth/logout`, {
                 method: "POST",
                 credentials: "include",
             });

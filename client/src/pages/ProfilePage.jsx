@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import SendConnectionModal from "../components/SendConnectionModal";
 import DeleteSkillModal from "../components/DeleteSkillModal";
 import pen from "../assets/edit-pen.png"
+import { API_BASE_URL } from "../config";
 
 const ProfilePage = () => {
     const { userId: viewedUserId } = useParams();
@@ -42,16 +43,16 @@ const ProfilePage = () => {
         const fetchProfileData = async () => {
             try {
                 setLoading(true);
-                const profileRes = await fetch(`/users/${viewedUserId}`);
+                const profileRes = await fetch(`${API_BASE_URL}/users/${viewedUserId}`);
                 if (!profileRes.ok) throw new Error("Failed to fetch user profile");
                 const profile = await profileRes.json();
                 setProfileData(profile);
 
                 if (!isSelf) {
                     const [connectionsRes, sentRes, receivedRes] = await Promise.all([
-                        fetch(`/connections/user/${currentIdNum}`),
-                        fetch(`/connection_requests/sent/${currentIdNum}`),
-                        fetch(`/connection_requests/received/${currentIdNum}`),
+                        fetch(`${API_BASE_URL}/connections/user/${currentIdNum}`),
+                        fetch(`${API_BASE_URL}/connection_requests/sent/${currentIdNum}`),
+                        fetch(`${API_BASE_URL}/connection_requests/received/${currentIdNum}`),
                     ]);
 
                     const [connections, sentRequests, receivedRequests] = await Promise.all([
@@ -98,7 +99,7 @@ const ProfilePage = () => {
     useEffect(() => {
         const fetchSkills = async () => {
             try {
-                const res = await fetch(`/user-skills/user/${viewedUserId}/skills`);
+                const res = await fetch(`${API_BASE_URL}/user-skills/user/${viewedUserId}/skills`);
                 if (!res.ok) throw new Error("Failed to fetch skills");
                 const skillData = await res.json();
                 setSkills(skillData);
@@ -115,7 +116,7 @@ const ProfilePage = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const res = await fetch("http://localhost:8000/categories/");
+                const res = await fetch(`${API_BASE_URL}/categories/`);
                 if (!res.ok) throw new Error("Failed to fetch categories");
                 const cats = await res.json();
                 setCategories(cats);
@@ -135,7 +136,7 @@ const ProfilePage = () => {
         formData.append("profile_pic", file);
 
         try {
-            const res = await fetch("http://localhost:8000/users/me/profile_pic", {
+            const res = await fetch(`${API_BASE_URL}/users/me/profile_pic`, {
                 method: "PUT",
                 body: formData,
                 credentials: "include",
@@ -151,7 +152,7 @@ const ProfilePage = () => {
             console.error("Failed to upload profile pic:", err);
         }
     };
-    // update name handler
+
     const handleNameUpdate = async () => {
         const nameUpdateData = {
             first_name: firstNameInput.trim(),
@@ -159,7 +160,7 @@ const ProfilePage = () => {
         };
 
         try {
-            const res = await fetch("/users/me/names", {
+            const res = await fetch(`${API_BASE_URL}/users/me/names`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -175,10 +176,10 @@ const ProfilePage = () => {
             console.error("Failed to update names:", err);
         }
     };
-    // update name handler end
+
     const handleBioSubmit = async () => {
         try {
-            const res = await fetch("/users/me/bio", {
+            const res = await fetch(`${API_BASE_URL}/users/me/bio`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -199,7 +200,7 @@ const ProfilePage = () => {
     useEffect(() => {
         const fetchConnectedUsersWithProfiles = async () => {
             try {
-                const res = await fetch(`/connections/user/${viewedUserId}`);
+                const res = await fetch(`${API_BASE_URL}/connections/user/${viewedUserId}`);
                 if (!res.ok) throw new Error("Failed to fetch connected users");
                 const connections = await res.json();
 
@@ -208,7 +209,7 @@ const ProfilePage = () => {
                 );
 
                 const userFetches = otherUserIds.map(id =>
-                    fetch(`/users/${id}`).then(res => res.json())
+                    fetch(`${API_BASE_URL}/users/${id}`).then(res => res.json())
                 );
 
                 const fullUserProfiles = await Promise.all(userFetches);
@@ -226,7 +227,7 @@ const ProfilePage = () => {
 
     const handleSendRequest = async (message) => {
         try {
-            const res = await fetch("/connection_requests/", {
+            const res = await fetch(`${API_BASE_URL}/connection_requests/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -245,7 +246,7 @@ const ProfilePage = () => {
 
     const handleDeleteSkill = async (skillId) => {
         try {
-            const res = await fetch(`/user-skills/user/${currentIdNum}/skill/${skillId}`, {
+            const res = await fetch(`${API_BASE_URL}/user-skills/user/${currentIdNum}/skill/${skillId}`, {
                 method: "DELETE",
             });
             if (!res.ok) throw new Error("Failed to delete skill");
@@ -412,7 +413,7 @@ const ProfilePage = () => {
                                                         return;
                                                     }
                                                     try {
-                                                        const createSkillRes = await fetch("http://localhost:8000/skills/", {
+                                                        const createSkillRes = await fetch(`${API_BASE_URL}/skills/`, {
                                                             method: "POST",
                                                             headers: { "Content-Type": "application/json" },
                                                             body: JSON.stringify({
@@ -423,7 +424,7 @@ const ProfilePage = () => {
                                                         if (!createSkillRes.ok) throw new Error("Skill creation failed");
                                                         const createdSkill = await createSkillRes.json();
 
-                                                        const assignRes = await fetch("/user-skills/", {
+                                                        const assignRes = await fetch(`${API_BASE_URL}/user-skills/`, {
                                                             method: "POST",
                                                             headers: { "Content-Type": "application/json" },
                                                             body: JSON.stringify({

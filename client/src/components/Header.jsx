@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from 'react-router';
 import '../styles/Header.css'
 import logo from '../assets/bb_new.png';
+import { API_BASE_URL } from "../config";
 
 export default function Header() {
     const [loading, setLoading] = useState(false);
@@ -21,11 +22,9 @@ export default function Header() {
         }
     };
 
-    const API_BASE = "http://localhost:8000";
-
     useEffect(() => {
         const newMessageFetch = () => {
-            fetch(`${API_BASE}/messages/user/${user.id}/unread`)
+            fetch(`${API_BASE_URL}/messages/user/${user.id}/unread`)
                 .then(res => {
                     if (!res.ok) throw new Error("Failed fetch unread messages.");
                     return res.json();
@@ -36,7 +35,7 @@ export default function Header() {
         newMessageFetch();
 
         const fetchRequests = () => {
-            fetch(`${API_BASE}/connection_requests/received/${user.id}`)
+            fetch(`${API_BASE_URL}/connection_requests/received/${user.id}`)
                 .then(res => {
                     if (!res.ok) throw new Error("Failed to fetch requests.");
                     return res.json();

@@ -3,6 +3,7 @@ import logo from '../assets/bb_new.png';
 import '../styles/WelcomePage.css';
 import Carousel from '../components/Carousel';
 import { useNavigate } from 'react-router';
+import { API_BASE_URL } from "../config";
 
 const WelcomePage = () => {
     const navigate = useNavigate();
@@ -57,7 +58,7 @@ const WelcomePage = () => {
         };
 
         const fetchDailyQuote = () => {
-            fetch('http://localhost:8000/api/quote')
+            fetch(`${API_BASE_URL}/api/quote`)
                 .then(res => res.json())
                 .then(data => {
                     if (data && data[0]) {

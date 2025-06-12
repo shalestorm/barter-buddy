@@ -13,8 +13,6 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Removed shimmer keyframes as no glowing animation needed */
-
 .login-redirect,
 .signup-redirect {
   margin-block: 24px;
@@ -119,7 +117,6 @@
   height: 100%;
   width: 100%;
   background: rgba(31, 41, 55, 0.5);
-  /* dark semi-transparent */
   z-index: 1;
 }
 

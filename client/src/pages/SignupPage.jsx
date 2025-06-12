@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import background_signup from '../assets/background_signup.jpg';
 import logo from '../assets/bb_new.png';
 import '../styles/LoginSignup.css';
+import { API_BASE_URL } from "../config";
 
 export default function SignupPage() {
     const [newUsername, setNewUsername] = useState("");
@@ -17,15 +18,13 @@ export default function SignupPage() {
 
     const navigate = useNavigate();
 
-    const API_BASE = "http://localhost:8000";
-
     const handleSignupStep1 = async (e) => {
         e.preventDefault();
         setError(null);
         setLoading(true);
 
         try {
-            const response = await fetch(`${API_BASE}/users`);
+            const response = await fetch(`${API_BASE_URL}/users`);
 
             if (!response.ok) {
                 throw new Error("Failed to fetch users");
@@ -86,7 +85,7 @@ export default function SignupPage() {
         };
 
         try {
-            const signupResponse = await fetch(`${API_BASE}/users/`, {
+            const signupResponse = await fetch(`${API_BASE_URL}/users/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
