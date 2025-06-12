@@ -59,8 +59,8 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
         key="access_token",
         value=access_token,
         httponly=True,
-        secure=False,
-        samesite="lax",
+        secure=True,
+        samesite="none",
         max_age=int(expires.total_seconds()),
         path="/"
     )

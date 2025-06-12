@@ -13,7 +13,9 @@ import os
 
 SECRET_KEY = "user_secret_key"
 ALGORITHM = "HS256"
-DEFAULT_PROFILE_PIC = "http://localhost:8000/static/profile_pics/default.png"
+
+BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000")
+DEFAULT_PROFILE_PIC = f"{BASE_URL}/static/profile_pics/default.png"
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
@@ -116,7 +118,7 @@ async def update_user_profile_pic(
     file_path = media_path / filename
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(profile_pic.file, buffer)
-    current_user.profile_pic = f"http://localhost:8000/static/profile_pics/{filename}"  # type: ignore
+    current_user.profile_pic = f"{BASE_URL}/static/profile_pics/{filename}"  # type: ignore
     db.commit()
     db.refresh(current_user)
     return current_user
