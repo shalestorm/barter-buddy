@@ -77,7 +77,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
         first_name=user.first_name,
         last_name=user.last_name,
         bio=user.bio,
-        profile_pic=DEFAULT_PROFILE_PIC,
+        profile_pic=f"{os.getenv('API_BASE_URL', 'http://localhost:8000')}/static/profile_pics/default.png",
         create_date=date.today(),
     )
     db.add(db_user)
