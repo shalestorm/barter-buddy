@@ -1,17 +1,10 @@
-# Barter-Buddy
+# Skill-Swap
 
 "A free web app that connects users in the pursuit of exchanging knowledge"
 
-## Contributors
-
-- Skyler McLain: Architecture Owner, Debugging Support, Software Engineer; https://github.com/shalestorm
-- Ricardo Tizón: Product Owner, Team Lead, Software Engineer; https://github.com/rtizonc
-- Cayla Thompson: Full-Stack Support, Mediator, Mental Health Advocate, Software Engineer; https://github.com/caylaleann
-- Ti James: UI Owner, Software Engineer, UX/UI Designer; https://github.com/tiorionjames
-
 ## Project Description and Purpose
 
-Barter Buddy is the culmination of ideas from four incredibly talented Software Engineers which posits the idea that knowledge can be shared
+Skill Swap is the culmination of ideas from four incredibly talented Software Engineers which posits the idea that knowledge can be shared
 and skills can be learned/taught in exchange for the same. For example let's say Sam wants to learn to change the oil in his car, and knows cake decorating. Sam could match up with another user Marcus who knows how to change oil in cars but wants to learn how to decorate cakes. The purpose is to share knowledge and connect with people.
 
 ## User stories
@@ -32,21 +25,12 @@ This folder includes:
 
 - capstone.png :Initial Wireframes
 - ERDs for key models and relationships
-- Screenshots and demo videos
+
 
 ## ![Wireframe](docs/capstone-v2.png)
 
 ## ![ERD](docs/Final-ERD.png)
 
-## ![BB-action1](docs/BB-action1.png)
-
-## ![BB-action2](docs/BB-action2.png)
-
-## ![BB-action3](docs/BB-action3.png)
-
-## ![Demo-1](docs/Demo-1.mov)
-
-## ![Demo-2](docs/Demo-2.mov)
 
 ## List of Features Implemented
 
@@ -210,28 +194,3 @@ npm run preview
 
 This will start a local server that serves the files in the dist folder, and you can open your browser and go to http://localhost:4173 to see the app running in production mode.
 
-######
-
-## Challenges Faced
-
-- Initially out of the gate, and continually ongoing challenges is working with git. As a team, we've often had issues with merge conflicts, and random bugs that seemed to pop up out of nowhere.
-
-## Lessons Learned and Team Workflow Notes
-
-- One lesson we learned is that class names are important, and specifying names with specific pages.
-- Time management. As a team we all feel that if we had more time, we could have implemented more features and deployed.
-- Communication was a valuable skill that we all used effectively. We voted on most issues and had no problems with understanding roles.
-
-## Future Feature Ideas
-
-- A user will be able to rate others (after being connected) (stretch).
-- A user will be able to disconnect from other users at will.
-- Users will be able to specify availability (stretch?).
-- Users will be able to reset password (stretch).
-- Users will be able to filter others based on proximity, or choose online-only communication (stretch).
-- App will be hosted on a website and deployed so it is fully functional (stretch).
-- App will have a 404 Error page.
-
-## Trello Link:
-
-https://trello.com/b/gxOvvKTB/capstone-project
