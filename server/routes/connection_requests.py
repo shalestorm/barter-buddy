@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-from server.db.database import SessionLocal
-from server.models.connection_request import ConnectionRequest
-from server.schemas.connection_requests import (
+from db.database import SessionLocal
+from models.connection_request import ConnectionRequest
+from schemas.connection_requests import (
     ConnectionRequestCreate,
     ConnectionRequestOut,
 )

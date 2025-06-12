@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from server.schemas.categories import CategoryOut
+from schemas.categories import CategoryOut
 
 
 class SkillBase(BaseModel):

@@ -3,9 +3,9 @@ from sqlalchemy.orm import Session
 import pathlib
 from jose import jwt, JWTError
 from typing import List, Optional
-from server.db.database import SessionLocal
-from server.models.users import User
-from server.schemas.users import UserCreate, UserOut, UpdateBio, UpdateNames
+from db.database import SessionLocal
+from models.users import User
+from schemas.users import UserCreate, UserOut, UpdateBio, UpdateNames
 from passlib.context import CryptContext
 from datetime import date
 import shutil

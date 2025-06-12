@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, Body, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-from server.db.database import SessionLocal
-from server.models.message import Message
-from server.schemas.messages import MessageCreate, MessageOut
+from db.database import SessionLocal
+from models.message import Message
+from schemas.messages import MessageCreate, MessageOut
 
 router = APIRouter(prefix="/messages", tags=["Messages"])
 

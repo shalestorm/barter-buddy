@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
-from server.db.database import SessionLocal
-from server.models.user_skill import UserSkill
-from server.schemas.user_skills import UserSkillCreate, UserSkillOut
-from server.models.skill import Skill
-from server.schemas.skills import SkillOut
+from db.database import SessionLocal
+from models.user_skill import UserSkill
+from schemas.user_skills import UserSkillCreate, UserSkillOut
+from models.skill import Skill
+from schemas.skills import SkillOut
 
 router = APIRouter(prefix="/user-skills", tags=["User Skill Links"])
 

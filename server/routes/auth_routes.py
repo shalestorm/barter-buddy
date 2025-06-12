@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
-from server.db.database import SessionLocal
-from server.models.users import User
+from db.database import SessionLocal
+from models.users import User
 from jose import jwt
 from passlib.context import CryptContext
 from datetime import datetime, timedelta, timezone

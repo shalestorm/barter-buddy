@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from typing import List
-from server.db.database import SessionLocal
-from server.models.skill import Skill
-from server.schemas.skills import SkillCreate, SkillOut
+from db.database import SessionLocal
+from models.skill import Skill
+from schemas.skills import SkillCreate, SkillOut
 
 
 router = APIRouter(prefix="/skills", tags=["Skills"])

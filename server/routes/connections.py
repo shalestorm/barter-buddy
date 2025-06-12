@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from typing import List
-from server.db.database import SessionLocal
-from server.models.connection import Connection
-from server.schemas.connections import ConnectionCreate, ConnectionOut
+from db.database import SessionLocal
+from models.connection import Connection
+from schemas.connections import ConnectionCreate, ConnectionOut
 
 router = APIRouter(prefix="/connections", tags=["connections"])
 

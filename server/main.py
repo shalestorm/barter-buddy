@@ -2,8 +2,8 @@ from fastapi import FastAPI
 import requests
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from server.db.database import engine, Base
-from server.routes import (
+from db.database import engine, Base
+from routes import (
     users,
     skills,
     connections,
